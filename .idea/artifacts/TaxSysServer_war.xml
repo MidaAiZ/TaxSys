@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TaxSysServer:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="TaxSysServer.war">
+      <element id="artifact" artifact-name="TaxSysServer:war exploded" />
+    </root>
+  </artifact>
+</component>
