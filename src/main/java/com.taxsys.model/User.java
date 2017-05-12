@@ -19,7 +19,7 @@ public class User {
 	@GeneratedValue(generator="sid")
 	@GenericGenerator(name="sid",strategy="assigned")
 	@Column(length = 32)
-	private String userId;
+	private String id;
 
 	// 用户性别.
 	@Column(length = 2)
@@ -30,8 +30,8 @@ public class User {
 	private String nickname;
 
 	// 用户头像
-	@Column(length = 100)
-	private String userIcon;
+	@Column(length = 255)
+	private String avatar;
 
 	// 用户手机
 	@Column(length = 15)
@@ -42,15 +42,15 @@ public class User {
 	private String password;
 
 	// 用户创建时间
-	@Column(length = 10)
+	@Column(length = 32)
 	private String createTime;
 
-	public String getUserId() {
-		return userId;
+	public String getid() {
+		return id;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setid(String id) {
+		this.id = id;
 	}
 
 	public int getGender() {
@@ -69,12 +69,12 @@ public class User {
 		this.nickname = nickname;
 	}
 
-	public String getUserIcon() {
-		return userIcon;
+	public String getavatar() {
+		return avatar;
 	}
 
-	public void setUserIcon(String userIcon) {
-		this.userIcon = userIcon;
+	public void setavatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public String getCellphone() {
@@ -104,10 +104,10 @@ public class User {
 	@Override
 	public String toString() {
 		return "User{" +
-				"userId='" + userId + '\'' +
+				"id='" + id + '\'' +
 				", gender=" + gender +
 				", nickname='" + nickname + '\'' +
-				", userIcon='" + userIcon + '\'' +
+				", avatar='" + avatar + '\'' +
 				", cellphone='" + cellphone + '\'' +
 				", password='" + password + '\'' +
 				", createTime='" + createTime + '\'' +

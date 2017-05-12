@@ -165,5 +165,13 @@
 
   <build>
     <finalName>TaxSysServer</finalName>
+    <!--<plugins>-->
+      <!--&lt;!&ndash;servlet容器 jetty插件&ndash;&gt;-->
+      <!--<plugin>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-maven-plugin</artifactId>-->
+        <!--<version>9.3.10.v20160621</version>-->
+      <!--</plugin>-->
+    <!--</plugins>-->
   </build>
 </project>
