@@ -16,7 +16,6 @@ public class UserController {
     UserServiceImpl userService;
 
     @RequestMapping(value="", method = RequestMethod.GET)
-
     public String getUsers() {
         return null;
     }
@@ -24,8 +23,9 @@ public class UserController {
     //新建用户
     @RequestMapping(value="", method = RequestMethod.POST)
     @ResponseBody
-    public User createUser(@RequestBody String request) {
-        return userService.createUser(request);
+    public String createUser(@RequestBody String request) {
+//        return userService.createUser(request);
+        return "users/new";
     }
 
     //新建用户表单
@@ -47,5 +47,4 @@ public class UserController {
     public User updateUser(@PathVariable("id") String id) {
         return null;
     }
-
 }
