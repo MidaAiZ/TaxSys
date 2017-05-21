@@ -9,15 +9,15 @@
 <form action="/users" method="POST">
     <div class="form-body">
         <div class="field">
-            <label for="nickname">用户名</label>
-            <input type="text" name="nickname" placeholder="请输入用户名">
+            <label for="number">账号</label>
+            <input type="text" name="number" placeholder="请输入用户名">
         </div>
         <div class="field">
             <label for="password">密码</label>
             <input type="text" name="password" placeholder="请输入密码">
         </div>
         <div class="field">
-            <label for="gender">手机号</label>
+            <label for="gender">性别</label>
             <input type="text" name="gender" placeholder="请输入性别">
         </div>
         <div class="field">
