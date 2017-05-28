@@ -49,6 +49,9 @@ public class User {
 	@Column(length = 32)
 	private String createTime;
 
+	public User() {
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -61,6 +64,10 @@ public class User {
 		return gender;
 	}
 
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+
 	public String getNumber() {
 		return number;
 	}
@@ -69,24 +76,20 @@ public class User {
 		this.number = number;
 	}
 
-	public String getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
-
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public String getCellphone() {
@@ -111,6 +114,23 @@ public class User {
 
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+
+	public User(String number, String cellphone, String password) {
+		this.number = number;
+		this.cellphone = cellphone;
+		this.password = password;
+	}
+
+	public User(String number, String password) {
+		this.number = number;
+		this.password = password;
+	}
+
+	public User(int gender, String nickname, String avatar) {
+		this.gender = gender;
+		this.nickname = nickname;
+		this.avatar = avatar;
 	}
 
 	@Override
