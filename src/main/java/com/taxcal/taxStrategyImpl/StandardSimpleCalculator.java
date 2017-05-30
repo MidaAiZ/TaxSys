@@ -5,14 +5,20 @@ import com.taxcal.taxStrategy.ICalculateMethod;
 /**
  * Created by ZZADD on 2017/5/14.
  */
+
+/**
+ * 简化的增值税计算方法
+ */
 public class StandardSimpleCalculator implements ICalculateMethod {
+
+    private double rate;
     /**
      * 设置主要税率参数
      *
      * @param rate 税率值
      */
     public void setVATRate(double rate) {
-
+        this.rate = rate;
     }
 
     /**
@@ -22,7 +28,7 @@ public class StandardSimpleCalculator implements ICalculateMethod {
      * @throws IllegalAccessException
      */
     public void setVATRateSecondary(double rate) throws IllegalAccessException {
-
+        throw new IllegalAccessException("No secondary tax rate needed");
     }
 
     /**
@@ -33,7 +39,7 @@ public class StandardSimpleCalculator implements ICalculateMethod {
      * @return
      */
     public double getVAT(double income, double outcome) {
-        return 0;
+        return income * rate;
     }
 
     /**
@@ -45,6 +51,6 @@ public class StandardSimpleCalculator implements ICalculateMethod {
      * @return
      */
     public double getVAT(double income, double outcome, boolean isTaxIncluded) {
-        return 0;
+        return income * rate;
     }
 }

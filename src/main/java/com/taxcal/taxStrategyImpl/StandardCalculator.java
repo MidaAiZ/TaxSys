@@ -5,6 +5,10 @@ import com.taxcal.taxStrategy.ICalculateMethod;
 /**
  * Created by ZZADD on 2017/5/14.
  */
+
+/**
+ * 标准增值税计算方法
+ */
 public class StandardCalculator implements ICalculateMethod {
     private double rate;
 

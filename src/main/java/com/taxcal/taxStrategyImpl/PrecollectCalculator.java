@@ -5,6 +5,10 @@ import com.taxcal.taxStrategy.ICalculateMethod;
 /**
  * Created by ZZADD on 2017/5/14.
  */
+
+/**
+ * 增值税预征计算方法
+ */
 public class PrecollectCalculator implements ICalculateMethod {
     /**
      * 设置主要税率参数
