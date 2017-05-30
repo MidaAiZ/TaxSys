@@ -110,6 +110,19 @@ public class UserController {
         return returnMap;
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Map<String, Object> logout( HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+
+        String sessionId = request.getSession().getId();
+        request.getSession().removeAttribute(sessionId);
+        Cookie cookie = new Cookie("sessionId", null);
+        response.addCookie(cookie);
+        returnMap.put("logout",true);
+        return returnMap;
+    }
+
     /**
      * 修改密码
      * @param id 用户id
