@@ -18,7 +18,6 @@
 <head>
 
     <title>企业增值税发票数据管理系统| 登录</title>
-    <script src="http://57ea237f1ddc0.t73.qifeiye.com/FeiEditor/bitSite/js/respond.min.js"></script>
     <link rel="stylesheet" href="image/d068214fb974cd02e0a547e672733d3a.css" type="text/css" media="all" /> <!-- Cache! -->
     <link rel='stylesheet' id='dt-main-css'  href='http://57ea237f1ddc0.t73.qifeiye.com/qfy-content/themes/qfy-01/css/main.css?ver=2.35' type='text/css' media='all' />
      <script type='text/javascript'>
@@ -31,7 +30,9 @@
         var dtLocal = {"passText":"\u67e5\u770b\u8fd9\u4e2a\u52a0\u5bc6\u8d44\u8baf\uff0c\u8bf7\u5728\u4e0b\u9762\u8f93\u5165\u5bc6\u7801\uff1a","moreButtonAllLoadedText":"\u5168\u90e8\u5df2\u52a0\u8f7d","postID":"15282","ajaxurl":"http:\/\/57ea237f1ddc0.t73.qifeiye.com\/admin\/admin-ajax.php","contactNonce":"3fbe733ea8","ajaxNonce":"ea2247c2c5","pageData":{"type":"page","template":"page","layout":null},"themeSettings":{"smoothScroll":"on"}};
         /* ]]> */
     </script>
-    <script type="text/javascript" src="image/b6c9d795e8af41c5b33c41ddb1426839.js">/*Cache!*/</script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js">/*Cache!*/</script>
+    <script type="text/javascript" src="js/common.js">/*Cache!*/</script>
+    <script type="text/javascript" src="js/login.js">/*Cache!*/</script>
 </head>
 
 <body class="page page-id-15282 page-child parent-pageid-15279 page-template-default image-blur mobilefloatmenu btn-flat content-fullwidth wpb-js-composer js-comp-ver-4.0.1 vc_responsive" data-pid="15282" data-pkey="f06d0229f9b9bfcacde0d527993b17f0" style="overflow: hidden">
@@ -300,13 +301,7 @@
                                                                                             <div class="qfyuser-clear"></div>
                                                                                         </div>
                                                                                         <div class="qfyuser-body">
-                                                                                            <form action="index.jsp" method="post" class="qfyuser_login" data-action="login">
-                                                                                                <input type="hidden" name="force_redirect_uri-313" id="force_redirect_uri-313" value=""/>
-                                                                                                <input type="hidden" name="redirect_uri-313" id="redirect_uri-313" value=""/>
-                                                                                                <input type="hidden" id="_myqfyuser_nonce" name="_myqfyuser_nonce" value="2bad84af56"/>
-                                                                                                <input type="hidden" name="_wp_http_referer" value="/?page_id=15282"/>
-                                                                                                <input type="hidden" name="unique_id" id="unique_id" value="313"/>
-
+                                                                                            <form method="post" id="login-form" class="qfyuser_login" data-action="login">
                                                                                                 <div class='qfyuser-field qfyuser-field-username_or_email ' data-key='username_or_email'>
                                                                                                     <div class='qfyuser-label'>
                                                                                                         <label for='username_or_email-313'>用户名或者邮箱</label>
@@ -316,7 +311,7 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class='qfyuser-input '>
-                                                                                                        <input type='text' name='username_or_email-313' id='username_or_email-313' value="" placeholder='' data-ajaxcheck='' data-help='' data-label='用户名或者邮箱' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='text' data-woo='0'/>
+                                                                                                        <input type='text' name='number' id='username_or_email-313' value="" placeholder='' data-ajaxcheck='' data-help='' data-label='用户名或者邮箱' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='text' data-woo='0'/>
 
                                                                                                         <div class='qfyuser-clear'></div>
                                                                                                     </div>
@@ -331,7 +326,7 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class='qfyuser-input '>
-                                                                                                        <input type='password' class='password' name='user_pass-313' id='user_pass-313' value='' placeholder='' data-ajaxcheck='' data-help='Your password must be 8 characters long at least.' data-label='密码' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='password' data-woo='0'/>
+                                                                                                        <input type='password' class='password' name='password' id='user_pass-313' value='' placeholder='' data-ajaxcheck='' data-help='Your password must be 8 characters long at least.' data-label='密码' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='password' data-woo='0'/>
 
                                                                                                         <div class='qfyuser-clear'></div>
                                                                                                     </div>
@@ -355,7 +350,7 @@
                                                                                                 </div>
                                                                                                 <div class="qfyuser-clear"></div>
                                                                                                 <div class="qfyuser-field qfyuser-submit qfyuser-column">
-                                                                                                    <input id="login_btn" type="submit" value="登录" class="qfyuser-button" onclick=location.href='index.jsp'/>
+                                                                                                    <input id="login_btn" type="button" value="登录" class="qfyuser-button"/>
                                                                                                     <input type="button" id="register_btn" value="注册" class="qfyuser-button secondary" data-template="register" onclick=
                                                                                                    "location.href='register.jsp'"/>
                                                                                                     <img src="//fast.qifeiye.com/qfy-content/plugins/qfyuser/skins/elegant/img/loading.gif" alt="" class="qfyuser-loading"/>

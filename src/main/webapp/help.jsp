@@ -16,6 +16,8 @@
 <!--<![endif]-->
 <head>
     <!-- for 360 -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/index.js"></script>
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
@@ -104,20 +106,20 @@
                 <div id="branding" class="wf-td bit-logo-bar" style="">
                     <a class="bitem logo small" style="display: table-cell;"
                        href="index.jsp"><span class="logospan"><img class="preload-me"
-                                                                                                src="image/Aisino_1.jpg"
-                                                                                                width="675" height="220"
-                                                                                                alt="图片"/></span></a>
+                                                                    src="image/Aisino_1.jpg"
+                                                                    width="675" height="220"
+                                                                    alt=""/></span></a>
 
                     <!-- <div id="site-title" class="assistive-text"></div>
                     <div id="site-description" class="assistive-text"></div> -->
                 </div>
                 <!-- !- Navigation -->
-                <nav style="" id="navigation" class="wf-td" bitDataAction="site_menu_container"
+                <nav style="0" id="navigation" class="wf-td" bitDataAction="site_menu_container"
                      bitDataLocation="primary">
                     <ul id="main-nav" data-st="1" data-sp="1" data-fh="0" data-mw="0" data-lh="40"
                         class="mainmenu fancy-rollovers wf-mobile-hidden bit-menu-default underline-hover"
                         data-bit-menu=underline-hover data-bit-float-menu=underline-hover>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page page-item-2160 current_page_item bit-menu-post-id-2160 menu-item-2319">
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-2160 current_page_item bit-menu-post-id-2160 menu-item-2319 ">
                             <a href="index.jsp"><span>首页</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-7010 menu-item-7011">
                             <a href="import.jsp"><span>导入</span></a></li>
@@ -127,7 +129,7 @@
                             <a href="count.jsp"><span>统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
                             <a href="chart.jsp"><span>报表</span></a></li>
-                        <li class=" current-menu-item act first page_item menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297 act first">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
 
@@ -148,10 +150,10 @@
                     </div>
                 </div>
 
-                <div class="wf-td assistive-info    " role="complementary" style="">
+                <div class="wf-td assistive-info " id="assistive-info-unlogin" role="complementary" style="">
                     <div class="top-bar-right right bit_widget_more" bitdatamarker="bitHeader-2"
                          bitdataaction="site_fix_container" bitdatacolor="white" style="">
-                        <div id="bit_postlist-6" style="margin-top:0px;margin-bottom:0px;"
+                        <div id="register" style="margin-top:0px;margin-bottom:0px; display: none;"
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
@@ -165,17 +167,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="bit_postlist-8" style="margin-top:0px;margin-bottom:0px;"
+                        <div id="login" style="margin-top:0px;margin-bottom:0px; display: none;"
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
                                      m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px" css_animation_delay="0"
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
-                                    <a onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
+                                    <a  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
+                                        onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
+                                        style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
+                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
+                                        href="login.jsp" target="_self">登录</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="logout" style="margin-top:0px;margin-bottom:0px; display: none;"
+                             class="mobileHidden headerWidget_1 widget_text site_tooler">
+                            <div class="bitWidgetFrame ">
+                                <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
+                                     m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px" css_animation_delay="0"
+                                     qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
+                                    <a id="logout_btn"  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
                                        onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
                                        style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                       href="login.jsp" target="">登录</a>
+                                    >退出</a>
                                 </div>
                             </div>
                         </div>
@@ -186,6 +202,7 @@
         </div>
         <!-- .wf-wrap -->
     </header>
+    <!-- #masthead -->
 </div>
 <section data-fixheight="" class="qfy-row-1-592134b61cca9274984 section    full   section-text-no-shadow section-inner-no-shadow section-normal" id="bit_hcbgh" style="margin-bottom:0px;border-radius:0px;color:transparent;">
     <div data-time="3" data-imagebgs="" class="background-media  " backgroundsize="true" style="background-image: url('http://static.qifeiye.com/caches/e9ef95eecba4dae95a41c96bc9c459e6/aHR0cDovLzU3ZWEyMzljZWNlYTQudDczLnFpZmVpeWUuY29tL3FmeS1jb250ZW50L3VwbG9hZHMvMjAxNi8wOS85YmEwNmU5MmI5YTZkMTc0ZTgyYTFkMTI5YzM4MmIxYy5qcGc_p_p100_p_3D.jpg'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:center center;">

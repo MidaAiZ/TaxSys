@@ -12,6 +12,9 @@
 <!--<![endif]-->
 <head>
     <title>企业增值税发票数据管理系统 | 注册</title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/register.js"></script>
     <link rel="stylesheet" href="image/d068214fb974cd02e0a547e672733d3a.css" type="text/css" media="all"/>
     <link rel='stylesheet' id='dt-main-css' href='http://57ea237f1ddc0.t73.qifeiye.com/qfy-content/themes/qfy-01/css/main.css?ver=2.35' type='text/css' media='all'/>
     <!-- Cache! 用于检验密码-->
@@ -62,7 +65,6 @@
 
         /* ]]> */
     </script>
-    <script type="text/javascript" src="image/b6c9d795e8af41c5b33c41ddb1426839.js">/*Cache!*/</script>
 </head>
 
 
@@ -188,15 +190,7 @@
                                                                                             <div class="qfyuser-body">
 
 
-                                                                                                <form action="login.jsp" method="post" class="qfyuser_register" data-action="login">
-
-                                                                                                    <input type="hidden" name="redirect_uri-910" id="redirect_uri-910" value=""/>
-
-                                                                                                    <input type="hidden" id="_myqfyuser_nonce" name="_myqfyuser_nonce" value="c2c9433868"/>
-                                                                                                    <input type="hidden" name="_wp_http_referer" value="/?page_id=15281"/>
-                                                                                                    <input type="hidden" name="unique_id" id="unique_id" value="910"/>
-
-
+                                                                                                <form id="register-form" class="qfyuser_register">
                                                                                                     <div class='qfyuser-section qfyuser-column qfyuser-collapsible-1 qfyuser-collapsed-0'>
                                                                                                         基本信息
                                                                                                     </div>
@@ -211,7 +205,7 @@
                                                                                                             <span class="qfyuser-tip" title="英文字母和数字"></span>
                                                                                                         </div>
                                                                                                         <div class='qfyuser-input '>
-                                                                                                            <input type='text' name='user_login-910' id='user_login-910' value="" placeholder='' data-ajaxcheck='username_exists' data-help='英文字母和数字' data-label='登录名' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='text' data-woo='0'/>
+                                                                                                            <input type='text' name='number' id='user_login-910' value="" placeholder='请输入帐号' data-ajaxcheck='username_exists' data-help='英文字母和数字' data-label='登录名' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='text' data-woo='0'/>
 
                                                                                                             <div class='qfyuser-clear'></div>
                                                                                                         </div>
@@ -221,11 +215,11 @@
                                                                                                     <div class='qfyuser-field qfyuser-field-user_email '
                                                                                                          data-key='user_email'>
                                                                                                         <div class='qfyuser-label'>
-                                                                                                            <label for='user_email-910'>电子邮箱</label>
+                                                                                                            <label for='user_email-910'>手机号</label>
 
                                                                                                         </div>
                                                                                                         <div class='qfyuser-input '>
-                                                                                                            <input type='text' name='user_email-910' id='user_email-910' value="" placeholder='' data-ajaxcheck='email_exists' data-help='' data-label='电子邮箱' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='text' data-woo='0'/>
+                                                                                                            <input type='text' name='cellphone' id='user_email-910' value="" placeholder='请输入手机号' data-ajaxcheck='email_exists' data-help='' data-label='手机号' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='text' data-woo='0'/>
 
                                                                                                             <div class='qfyuser-clear'></div>
                                                                                                         </div>
@@ -239,7 +233,7 @@
                                                                                                             <span class="qfyuser-tip" title="最少8位"></span>
                                                                                                         </div>
                                                                                                         <div class='qfyuser-input '>
-                                                                                                            <input autocomplete='new-password' type='password' class='password' name='user_pass-910' id='user_pass-910' value='' placeholder='' data-ajaxcheck='' data-help='最少8位' data-label='密码' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='password' data-woo='0'/>
+                                                                                                            <input autocomplete='new-password' type='password' class='password' name='password' id='user_pass-910' value='' placeholder='请输入密码' data-ajaxcheck='' data-help='最少8位' data-label='密码' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='password' data-woo='0'/>
 
                                                                                                             <div class='qfyuser-clear'></div>
                                                                                                         </div>
@@ -251,7 +245,7 @@
                                                                                                             <label for='user_pass_confirm-910'>再次输入密码</label>
                                                                                                         </div>
                                                                                                         <div class='qfyuser-input '>
-                                                                                                            <input autocomplete='new-password' type='password' class='password' name='user_pass_confirm-910' id='user_pass_confirm-910' value='' placeholder='' data-ajaxcheck='' data-help='' data-label='再次输入密码' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='0' data-type='password' data-woo='0'/>
+                                                                                                            <input autocomplete='new-password' type='password' class='password' name='user_pass_confirm-910' id='user_pass_confirm-910' value='' placeholder='请确认密码' data-ajaxcheck='' data-help='' data-label='再次输入密码' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='0' data-type='password' data-woo='0'/>
 
                                                                                                             <div class='qfyuser-clear'></div>
                                                                                                         </div>
@@ -294,9 +288,9 @@
 
 
                                                                                                     <div class="qfyuser-field qfyuser-submit qfyuser-column">
-                                                                                                            <input id="register_btn" type="submit" value="注册" class="qfyuser-button" onclick="location.href='login.jsp'"/>
+                                                                                                            <input id="register_btn" type="button" value="注册" class="qfyuser-button"/>
                                                                                                             <input type="button" style='float:right;' value="已经有帐号了？请登录" class="qfyuser-button secondary" data-template="login" onclick="location.href='login.jsp'"/>                                                                                           
-                                                                                                        <img src="//fast.qifeiye.com/qfy-content/plugins/qfyuser/skins/elegant/img/loading.gif" alt="" class="qfyuser-loading"/>
+                                                                                                        <%--<img src="//fast.qifeiye.com/qfy-content/plugins/qfyuser/skins/elegant/img/loading.gif" alt="" class="qfyuser-loading"/>--%>
 
                                                                                                         <div class="qfyuser-clear"></div>
 
