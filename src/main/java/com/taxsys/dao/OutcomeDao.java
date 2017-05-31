@@ -5,6 +5,7 @@ import com.taxsys.model.User;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Sinner on 2017/5/24.
@@ -35,11 +36,5 @@ public interface OutcomeDao {
      */
     boolean updateOutcomeInfo(Outcome outcome);
 
-    /**
-     * 分页获取销项
-     * @param offset 偏移量
-     * @param limit 一次获取的数据
-     * @return
-     */
-    List getOutcomeList(Integer offset, Integer limit);
+    List searchOutcomeList(Map<String, Object> params);
 }

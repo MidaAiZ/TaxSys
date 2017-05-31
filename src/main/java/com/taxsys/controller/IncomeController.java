@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.System.out;
+
 @Controller
 @RequestMapping(value = "incomes")
 public class IncomeController {
@@ -131,19 +133,37 @@ public class IncomeController {
     }
 
     /**
-     * 获取进项列表
-     * @param limit
+     * 传入条件搜索符合标准的进项
+     * @param: type, beginTime, endTime, taxId, minMoney, maxMoney
      * @return
      */
-    @RequestMapping(value = "/list/{offset}/{limit}", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getIncomeList(@PathVariable("offset") Integer offset,
-                                           @PathVariable("limit") Integer limit) {
+    public Map<String, Object> searchIncomeList(@RequestParam(required=false) String type,
+                                                @RequestParam(required=false) String beginTime,
+                                                @RequestParam(required=false) String endTime,
+                                                @RequestParam(required=false) String taxId,
+                                                @RequestParam(required=false) String minMoney,
+                                                @RequestParam(required=false) String maxMoney,
+                                                @RequestParam(required=false) String page,
+                                                @RequestParam(required=false) String limit
+                                                ) {
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
+        Map<String, Object> paramsMap = new HashMap<String, Object>();
+        if (page == null) { page = "1"; }
+        if (limit == null) { limit = "100"; }
+        paramsMap.put("type", type);
+        paramsMap.put("beginTime", beginTime);
+        paramsMap.put("endTime", endTime);
+        paramsMap.put("taxId", taxId);
+        paramsMap.put("minMoney", minMoney);
+        paramsMap.put("maxMoney", maxMoney);
+        paramsMap.put("page", page);
+        paramsMap.put("limit", limit);
 
-        List<String> incomeIdList = incomeService.getIncomeList(offset, limit);
-        returnMap.put("incomeIdList", incomeIdList);
+        List<String> incomeList = incomeService.searchIncomeList(paramsMap);
+        returnMap.put("incomeList", incomeList);
         return returnMap;
     }
 }

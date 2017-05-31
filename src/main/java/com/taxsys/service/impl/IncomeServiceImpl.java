@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class IncomeServiceImpl implements IncomeService {
@@ -36,7 +37,7 @@ public class IncomeServiceImpl implements IncomeService {
     public IncomeDto createIncome(Income income) {
         IncomeDto createIncomeDto;
 
-        // 检查用户账户查重
+        // 进项查重
         if (incomeDao.getIncomeByTaxId(income.getTaxId()) != null) {
             createIncomeDto = new IncomeDto(false, "进项已存在");
             return createIncomeDto;
@@ -75,7 +76,5 @@ public class IncomeServiceImpl implements IncomeService {
         }
         return new IncomeDto(true, oldIncome);    }
 
-    public List<String> getIncomeList(Integer offset, Integer limit) {
-        return incomeDao.getIncomeList(offset, limit);
+    public List<String> searchIncomeList(Map<String, Object> params){ return incomeDao.searchIncomeList(params); }
     }
-}

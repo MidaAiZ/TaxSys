@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OutcomeServiceImpl implements OutcomeService {
@@ -75,7 +76,6 @@ public class OutcomeServiceImpl implements OutcomeService {
         }
         return new OutcomeDto(true, oldOutcome);    }
 
-    public List<String> getOutcomeList(Integer offset, Integer limit) {
-        return outcomeDao.getOutcomeList(offset, limit);
-    }
+    public List<String> searchOutcomeList(Map<String, Object> params){ return outcomeDao.searchOutcomeList(params); }
+
 }
