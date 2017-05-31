@@ -2,12 +2,15 @@ package com.taxsys.service;
 
 import com.taxsys.dto.OutcomeDto;
 import com.taxsys.model.Outcome;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public interface OutcomeService {
 
+    List<Outcome> readExcelFile(MultipartFile file);
     OutcomeDto createOutcome(Outcome outcome);
     Outcome getOutcome(String id);
     Outcome getOutcomeByTaxId(String taxId);

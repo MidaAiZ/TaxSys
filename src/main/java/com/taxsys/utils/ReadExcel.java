@@ -2,6 +2,7 @@ package com.taxsys.utils;
 
 import com.taxsys.model.Income;
 
+import com.taxsys.model.Outcome;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -15,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ReadExcel {
@@ -39,9 +39,9 @@ public class ReadExcel {
      * @param: fielName
      * @return
      */
-    public List<Income> getExcelInfo(MultipartFile mFile) {
+    public List getExcelInfo(MultipartFile mFile, String type) {
         String fileName = mFile.getOriginalFilename();//获取文件名
-        List<Income> incomeList = null;
+        List list = null;
         try {
             if (!validateExcel(fileName)) {// 验证文件名是否合格
                 return null;
@@ -50,11 +50,11 @@ public class ReadExcel {
             if (isExcel2007(fileName)) {
                 isExcel2003 = false;
             }
-            incomeList = createExcel(mFile.getInputStream(), isExcel2003);
+            list = createExcel(mFile.getInputStream(), type, isExcel2003);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return incomeList;
+        return list;
     }
 
     /**
@@ -64,8 +64,9 @@ public class ReadExcel {
      * @return
      * @throws IOException
      */
-    public List<Income> createExcel(InputStream is, boolean isExcel2003) {
-        List<Income> incomeList = null;
+    public List createExcel(InputStream is, String type, boolean isExcel2003) {
+        List list = null;
+
         try{
             Workbook wb = null;
             if (isExcel2003) {// 当excel是2003时,创建excel2003
@@ -73,11 +74,16 @@ public class ReadExcel {
             } else {// 当excel是2007时,创建excel2007
                 wb = new XSSFWorkbook(is);
             }
-            incomeList = readExcelValue(wb);// 读取Excel里面客户的信息
+
+            if (type == "income") {
+                list = readIncomeExcelValue(wb);// 读取Excel里面客户的信息
+            } else {
+                list = readOutcomeExcelValue(wb);// 读取Excel里面客户的信息
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return incomeList;
+        return list;
     }
 
     /**
@@ -85,7 +91,8 @@ public class ReadExcel {
      * @param wb
      * @return
      */
-    private List<Income> readExcelValue(Workbook wb) {
+
+    private List<Income> readIncomeExcelValue(Workbook wb) {
         // 得到第一个shell
         Sheet sheet = wb.getSheetAt(0);
         // 得到Excel的行数
@@ -143,6 +150,67 @@ public class ReadExcel {
             incomeList.add(income);
         }
         return incomeList;
+    }
+
+
+    private List<Outcome> readOutcomeExcelValue(Workbook wb) {
+        // 得到第一个shell
+        Sheet sheet = wb.getSheetAt(0);
+        // 得到Excel的行数
+        this.totalRows = sheet.getPhysicalNumberOfRows();
+        // 得到Excel的列数(前提是有行数)
+        if (totalRows > 1 && sheet.getRow(0) != null) {
+            this.totalCells = sheet.getRow(0).getPhysicalNumberOfCells();
+        }
+        List<Outcome> outcomeList = new ArrayList<Outcome>();
+        // 初始化时设置 日期和时间模式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+        // 修改日期和时间模式
+        sdf.applyPattern("yyyy/MM/dd");
+        // 循环Excel行数
+        for (int r = 1; r < totalRows; r++) {
+            Row row = sheet.getRow(r);
+            if (row == null){
+                continue;
+            }
+            Outcome outcome = new Outcome();
+            // 循环Excel的列
+            for (int c = 0; c < this.totalCells; c++) {
+                Cell cell = row.getCell(c);
+                if (null != cell) {
+                    if (c == 0) {
+                        //如果是纯数字,比如你写的是25,cell.getNumericCellValue()获得是25.0,通过截取字符串去掉.0获得25
+                        if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
+                            String name = String.valueOf(cell.getNumericCellValue());
+                            outcome.setTaxId(name.substring(0, name.length()-2>0?name.length()-2:1));//名称
+                        }else{
+                            outcome.setTaxId(cell.getStringCellValue());//名称
+                        }
+                    } else if (c == 1) {
+                        if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
+                            String sex = String.valueOf(cell.getNumericCellValue());
+                            outcome.setOutType(sex.substring(0, sex.length()-2>0?sex.length()-2:1));
+                        }else{
+                            outcome.setOutType(cell.getStringCellValue());
+                        }
+                    } else if (c == 2){
+                        if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
+                            String age = String.valueOf(cell.getNumericCellValue());
+                            outcome.setMoney(Integer.parseInt(age.substring(0, age.length()-2>0?age.length()-2:1)));//年龄
+                        }else{
+                            outcome.setMoney(Integer.parseInt(cell.getStringCellValue()));
+                        }
+                    }else if (c == 3){
+                        String date = sdf.format(cell.getDateCellValue());
+                        outcome.setCreated_at(date);//年龄
+                    }
+                }
+            }
+            // 添加到list
+            outcomeList.add(outcome);
+        }
+        return outcomeList;
     }
 
     /**
