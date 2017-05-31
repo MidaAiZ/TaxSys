@@ -7,12 +7,12 @@ import com.taxsys.utils.UUIDGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import static java.lang.System.out;
 
@@ -22,6 +22,27 @@ public class IncomeController {
 
     @Autowired
     private IncomeServiceImpl incomeService;
+
+    @RequestMapping(value="upload", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> upload(@RequestParam(value="file",required = false)MultipartFile file, HttpServletRequest request, HttpServletResponse response){
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+
+        List<Income> incomeList = incomeService.readExcelFile(file);
+        if (incomeList != null) {
+            Iterator it = incomeList.iterator();
+            int index = 0;
+            HashSet hs = new HashSet();
+            while (it.hasNext()) {
+                index ++;
+                hs.add(it.next());
+            }
+            returnMap.put("incomes", hs.toArray());
+        } else {
+            returnMap.put("error", "导入失败！");
+        }
+        return returnMap;
+    }
 
     //新建进项表单
     @RequestMapping(value="new", method = RequestMethod.GET)

@@ -2,11 +2,15 @@ package com.taxsys.service;
 
 import com.taxsys.dto.IncomeDto;
 import com.taxsys.model.Income;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public interface IncomeService {
+
+    List<Income> readExcelFile( MultipartFile file);
 
     IncomeDto createIncome(Income income);
     Income getIncome(String id);

@@ -5,21 +5,51 @@ import com.taxsys.dto.IncomeDto;
 import com.taxsys.dto.IncomeDto;
 import com.taxsys.model.Income;
 import com.taxsys.model.Income;
+import com.taxsys.model.Income;
 import com.taxsys.service.IncomeService;
 import com.taxsys.utils.MD5Util;
+import com.taxsys.utils.ReadExcel;
+import com.taxsys.utils.UUIDGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.System.out;
 
 @Service
 public class IncomeServiceImpl implements IncomeService {
 
     @Autowired
     IncomeDaoImpl incomeDao;
+
+    public List<Income> readExcelFile(MultipartFile file) {
+        //创建处理EXCEL的类
+        ReadExcel readExcel=new ReadExcel();
+        //解析excel，获取上传的事件单
+        List<Income> incomeList = readExcel.getExcelInfo(file);
+        //至此已经将excel中的数据转换到list里面了,接下来就可以操作list,可以进行保存到数据库,或者其他操作,
+        if(incomeList != null && !incomeList.isEmpty()){
+            try{
+                for(Income i : incomeList) {
+                    String incomeId = UUIDGeneratorUtil.getUUID();
+                    i.setId(incomeId);
+                    out.println("输出income" + i.toString());
+                    incomeDao.createIncome(i);
+                };
+                return incomeList;
+            } catch (Exception e) {
+            }
+            return null;
+        }else{
+            return null;
+        }
+    }
 
     public Income getIncome(String id) {
         return incomeDao.getIncome(id);
