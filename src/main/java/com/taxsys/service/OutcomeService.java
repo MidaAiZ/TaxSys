@@ -4,6 +4,7 @@ import com.taxsys.dto.OutcomeDto;
 import com.taxsys.model.Outcome;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public interface OutcomeService {
 
@@ -25,5 +26,5 @@ public interface OutcomeService {
      * @param limit 一次获取的数据
      * @return
      */
-    List<String> getOutcomeList(Integer offset, Integer limit);
+    List<String> searchOutcomeList(Map<String, Object> params);
 }

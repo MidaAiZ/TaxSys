@@ -4,6 +4,7 @@ import com.taxsys.dto.IncomeDto;
 import com.taxsys.model.Income;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public interface IncomeService {
 
@@ -25,5 +26,5 @@ public interface IncomeService {
      * @param limit 一次获取的数据
      * @return
      */
-    List<String> getIncomeList(Integer offset, Integer limit);
+    List<String> searchIncomeList(Map<String, Object> params);
 }

@@ -5,6 +5,7 @@ import com.taxsys.model.User;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Sinner on 2017/5/24.
@@ -35,11 +36,5 @@ public interface IncomeDao {
      */
     boolean updateIncomeInfo(Income income);
 
-    /**
-     * 分页获取进项
-     * @param offset 偏移量
-     * @param limit 一次获取的数据
-     * @return
-     */
-    List getIncomeList(Integer offset, Integer limit);
+    List searchIncomeList(Map<String, Object> params);
 }
