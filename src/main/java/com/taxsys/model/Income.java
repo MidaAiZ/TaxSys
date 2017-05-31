@@ -3,6 +3,7 @@ package com.taxsys.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "income")
@@ -85,6 +86,6 @@ public class Income {
 
     @Override
     public String toString() {
-        return "商品：" + inType + "， 进项额： " + money + ", 日期： " + created_at + ", 发票号： " +  taxId + '\n';
+        return "商品：" + inType + "， 进项额： " + money + ", 日期： " + String.valueOf(created_at) + ", 发票号： " +  taxId + '\n';
     }
 }

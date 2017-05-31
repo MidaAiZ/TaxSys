@@ -3,23 +3,52 @@ package com.taxsys.service.impl;
 import com.taxsys.dao.impl.OutcomeDaoImpl;
 import com.taxsys.dto.OutcomeDto;
 import com.taxsys.dto.OutcomeDto;
+import com.taxsys.model.Income;
 import com.taxsys.model.Outcome;
 import com.taxsys.model.Outcome;
 import com.taxsys.service.OutcomeService;
 import com.taxsys.utils.MD5Util;
+import com.taxsys.utils.ReadExcel;
+import com.taxsys.utils.UUIDGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.System.out;
+
 @Service
 public class OutcomeServiceImpl implements OutcomeService {
 
     @Autowired
     OutcomeDaoImpl outcomeDao;
+
+    public List<Outcome> readExcelFile(MultipartFile file) {
+        //创建处理EXCEL的类
+        ReadExcel readExcel=new ReadExcel();
+        //解析excel，获取上传的事件单
+        List<Outcome> outcomeList = readExcel.getExcelInfo(file, "outcome");
+        //至此已经将excel中的数据转换到list里面了,接下来就可以操作list,可以进行保存到数据库,或者其他操作,
+        if(outcomeList != null){
+            try{
+                for(Outcome i : outcomeList) {
+                    String outcomeId = UUIDGeneratorUtil.getUUID();
+                    i.setId(outcomeId);
+                    outcomeDao.createOutcome(i);
+                };
+                return outcomeList;
+            } catch (Exception e) {
+            }
+            return null;
+        }else{
+            return null;
+        }
+    }
+
 
     public Outcome getOutcome(String id) {
         return outcomeDao.getOutcome(id);

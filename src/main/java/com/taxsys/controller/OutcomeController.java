@@ -1,18 +1,18 @@
 package com.taxsys.controller;
 
 import com.taxsys.dto.OutcomeDto;
+import com.taxsys.model.Income;
 import com.taxsys.model.Outcome;
 import com.taxsys.service.impl.OutcomeServiceImpl;
 import com.taxsys.utils.UUIDGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "outcomes")
@@ -20,6 +20,28 @@ public class OutcomeController {
 
     @Autowired
     private OutcomeServiceImpl outcomeService;
+
+    @RequestMapping(value="upload", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> upload(@RequestParam(value="file",required = false)MultipartFile file, HttpServletRequest request, HttpServletResponse response){
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+
+        List<Outcome> outcomeList = outcomeService.readExcelFile(file);
+        if (outcomeList != null) {
+            Iterator it = outcomeList.iterator();
+            int index = 0;
+            HashSet hs = new HashSet();
+            while (it.hasNext()) {
+                index ++;
+                hs.add(it.next());
+            }
+            returnMap.put("outcomes", hs.toArray());
+        } else {
+            returnMap.put("error", "导入失败！");
+        }
+        return returnMap;
+    }
+
 
     //新建销项表单
     @RequestMapping(value="new", method = RequestMethod.GET)
