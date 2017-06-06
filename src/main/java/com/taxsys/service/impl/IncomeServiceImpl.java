@@ -20,8 +20,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static java.lang.System.out;
-
 @Service
 public class IncomeServiceImpl implements IncomeService {
 
@@ -58,7 +56,7 @@ public class IncomeServiceImpl implements IncomeService {
         return incomeDao.getIncomeByTaxId(taxId);
     }
 
-    public LinkedList<Income> getIncomes() {
+    public List<Income> getIncomes() {
         return incomeDao.getIncomes();
     }
 

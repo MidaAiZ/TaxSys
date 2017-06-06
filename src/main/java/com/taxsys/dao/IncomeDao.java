@@ -13,7 +13,7 @@ import java.util.Map;
 public interface IncomeDao {
     Income getIncome(String id);
 
-    LinkedList<Income> getIncomes();
+    List<Income> getIncomes();
 
     /**
      * 创建进项

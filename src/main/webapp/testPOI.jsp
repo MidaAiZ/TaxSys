@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/testPOI.js"></script>
+    <script src="js/exportExcel.js"></script>
 </head>
 <body>
 <div  style="padding: 50px; text-align: center;">

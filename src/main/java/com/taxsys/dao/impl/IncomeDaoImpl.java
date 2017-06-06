@@ -24,8 +24,12 @@ public class IncomeDaoImpl implements IncomeDao{
         return (Income) query.uniqueResult();
     }
 
-    public LinkedList<Income> getIncomes(){
-        return null;
+    public List<Income> getIncomes(){
+        String hql = "FROM Income incomes order by incomes.created_at desc";
+
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        query.setMaxResults(1000);
+        return query.list();
     }
 
     public boolean createIncome(Income income){
@@ -91,7 +95,6 @@ public class IncomeDaoImpl implements IncomeDao{
         }
 
         String hql = "FROM Income incomes WHERE " + sql + " order by incomes.created_at desc";
-        out.println("输出结果：" + hql);
 
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         int page = Integer.parseInt((String)params.get("page"));

@@ -15,7 +15,7 @@ public interface IncomeService {
     IncomeDto createIncome(Income income);
     Income getIncome(String id);
     Income getIncomeByTaxId(String taxId);
-    LinkedList getIncomes();
+    List getIncomes();
 
    /**
      * 修改进项信息

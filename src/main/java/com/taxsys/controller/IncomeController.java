@@ -3,7 +3,9 @@ package com.taxsys.controller;
 import com.taxsys.dto.IncomeDto;
 import com.taxsys.model.Income;
 import com.taxsys.service.impl.IncomeServiceImpl;
+import com.taxsys.utils.ExportExcel;
 import com.taxsys.utils.UUIDGeneratorUtil;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -42,6 +45,36 @@ public class IncomeController {
             returnMap.put("error", "导入失败！");
         }
         return returnMap;
+    }
+
+    @RequestMapping(value="exportExcel", method = RequestMethod.POST)
+    @ResponseBody
+    public void exportLabType(HttpServletRequest request, HttpServletResponse response){
+        //以下是从前台获取参数
+        String typeId = request.getParameter("taxId");
+        String typeName = request.getParameter("inType");
+        String money = request.getParameter("money");
+        String created_at = request.getParameter("created_at");
+        //存成数组格式
+        //需要导出的excel表头
+        String[] col = { typeId, typeName, money, created_at };
+        String[] zd = col; //需要导出的字段
+        //下面用到上面的类，需要传递实体参数
+        ExportExcel<Income> ee = new ExportExcel<Income>();
+        //最后一个参数是数据集合
+        List list  = incomeService.getIncomes();
+        HSSFWorkbook wb = ee.exportExcel("进项", col, zd, list);
+//        response.setContentType("application/vnd.ms-excel");
+        response.setContentType("application/x-download");
+        response.setHeader("Content-disposition", "attachment;filename=student.xls");
+        try {
+            OutputStream ouputStream = response.getOutputStream();
+            wb.write(ouputStream);
+            ouputStream.flush();
+            ouputStream.close();
+        } catch (Exception e) {
+            response.setStatus(500);
+        }
     }
 
     //新建进项表单
