@@ -27,8 +27,8 @@
     <!-- start of customer header -->
     <!-- end of customer header -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="image/echarts.min.js"></script>
-    <title>企业增值税发票数据分析系统 | 统计</title>
+    <script src="js/echarts.min.js"></script>
+    <title>企业增值税发票数据分析系统 | 月度统计</title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php" />
     <!--[if lt IE 9]>
@@ -86,6 +86,7 @@
         dtGlobals.gallery_bgcolor = 'rgba(51,51,51,1)';dtGlobals.gallery_showthumbs = '0';dtGlobals.gallery_style = '';dtGlobals.gallery_autoplay = '0';dtGlobals.gallery_playspeed = '3';dtGlobals.gallery_imagesize = '100';dtGlobals.gallery_stopbutton = '';dtGlobals.gallery_thumbsposition = '';dtGlobals.gallery_tcolor = '#fff';dtGlobals.gallery_tsize = '16';dtGlobals.gallery_dcolor = '#fff';dtGlobals.gallery_dsize = '14';dtGlobals.gallery_tfamily = '';dtGlobals.gallery_dfamily = '';dtGlobals.gallery_blankclose = '0';dtGlobals.fm_showstyle = '';dtGlobals.fm_showspeed = '';dtGlobals.cdn_url = 'http://static.qifeiye.com';dtGlobals.qfymodel = "";dtGlobals.viewtemplate = "";
         var socail_back_url = '';
     </script>
+    <script src="js/count.js"></script>
 </head>
 
 
@@ -126,9 +127,9 @@
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097">
                             <a href="require.jsp"><span>查询</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-9556 menu-item-9557 act first">
-                            <a href="count.jsp"><span>统计</span></a></li>
+                            <a href="count.jsp"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
-                            <a href="chart.jsp"><span>报表</span></a></li>
+                            <a href="chart.jsp"><span>年度报表</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
@@ -207,7 +208,16 @@
 <div id="yuedu">
     <div class="count-box" style="text-align: center;margin-top: 50px">
         <form action="" method="post" enctype="multipart/form-data">
-            <select name="year">
+            <select name="year_one">
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
                 <option value="2015">2015</option>
                 <option value="2016">2016</option>
                 <option value="2017">2017</option>
@@ -226,112 +236,13 @@
                 <option value="11">11月份</option>
                 <option value="12">12月份</option>
             </select>
-            <input type="submit" name="submit" class="btn" value="确定" />
+            <%--<input type="submit" name="submit_one" class="btn" value="确定" />--%>
         </form><br><br>
+        <div id="main1" style="width: 600px;height:400px;margin-left:50px;float: left"></div>
+        <div id="main2" style="width: 600px;height:400px;margin-right:50px;float: right"></div>
         <div id="baobiao1" style="width:1000px;height:400px;text-align: center;margin-left: 50px;float: left"></div>
-        <script type="text/javascript">
-            // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('baobiao1'));
-
-            // 指定图表的配置项和数据
-            var option = {
-                title: {
-                    text: '金额'
-                },
-                tooltip: {},
-                legend: {
-                    data: ['进项','销项']
-                },
-                xAxis: {
-                    data: ["花生油", "鸡肉", "鱼肉", "玻璃", "铁皮", "纯净水","鸡肉罐头","鱼肉罐头","猪肉罐头"]
-                },
-                yAxis: {},
-                series: [{
-                    name: '进项',
-                    type: 'bar',
-                    data: [6.5, 0.8, 1.3, 0.15, 0.85, 1.2,0,0,0]
-                },{
-                    name: '销项',
-                    type: 'bar',
-                    data: [0,0,0,0,0,0,8,27,12]
-                }]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-
-            myChart.setOption(option);
-        </script>
         <div id="baobiao11" style="width:200px;height:400px;text-align: center;float: left"></div>
-        <script type="text/javascript">
-            // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('baobiao11'));
-
-            // 指定图表的配置项和数据
-            var option = {
-                title: {
-                    text: '金额'
-                },
-                tooltip: {},
-                legend: {
-                    data: ['总额']
-                },
-                xAxis: {
-                    data: ["进项","销项"]
-                },
-                yAxis: {},
-                series: [{
-                    name: '总额',
-                    type: 'bar',
-                    data: [10.8,47]
-                }]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-
-            myChart.setOption(option);
-        </script>
-    </div><br><br>
-</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<div id="niandu">
-    <div class="count-box" style="text-align: center;margin-top: 50px">
-        <form action="" method="post" enctype="multipart/form-data">
-            <select name="year">
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-            </select>
-            <input type="submit" name="submit" class="btn" value="确定" />
-        </form><br><br>
-        <div id="baobiao2" style="width:1000px;height:400px;text-align: center;margin-left: 150px;float: left"></div>
-        <script type="text/javascript">
-            // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('baobiao2'));
-
-            // 指定图表的配置项和数据
-            var option = {
-                title: {
-                    text: '金额'
-                },
-                tooltip: {},
-                legend: {
-                    data: ['进项','销项']
-                },
-                xAxis: {
-                    data: ["1月", "2月", "3月", "4月", "5月", "6月","7月","8月","9月","10月","11月","12月"]
-                },
-                yAxis: {},
-                series: [{
-                    name: '进项',
-                    type: 'bar',
-                    data: [10.8,10.8,10.8,10.8,10.8,10.8,10.8,10.8,10.8,10.8,10.8,10.8]
-                },{
-                    name: '销项',
-                    type: 'bar',
-                    data: [47,45.4,48.3,47.3,60.4,50.2,50.2,60.4,47.3,48.3,45.4,47]
-                }]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-
-            myChart.setOption(option);
-        </script>
+</div><br><br>
 </div>
 </body>
 </html>

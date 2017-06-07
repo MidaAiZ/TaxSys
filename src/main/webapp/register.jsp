@@ -15,7 +15,7 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/register.js"></script>
-    <link rel="stylesheet" href="image/d068214fb974cd02e0a547e672733d3a.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="css/d068214fb974cd02e0a547e672733d3a.css" type="text/css" media="all"/>
     <link rel='stylesheet' id='dt-main-css' href='http://57ea237f1ddc0.t73.qifeiye.com/qfy-content/themes/qfy-01/css/main.css?ver=2.35' type='text/css' media='all'/>
     <!-- Cache! 用于检验密码-->
     <script type='text/javascript'>

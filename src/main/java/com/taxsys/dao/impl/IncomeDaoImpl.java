@@ -77,7 +77,7 @@ public class IncomeDaoImpl implements IncomeDao{
         HashSet<String> set = new HashSet<String>();
         StringBuffer sql = new StringBuffer();
 
-        if(params.get("type") != null) { set.add(" type = '" + params.get("type") + "'"); }
+        if(params.get("type") != null) { set.add(" inType = '" + params.get("type") + "'"); }
         if(params.get("taxId") != null) { set.add(" taxId = '" + params.get("taxId") + "'"); }
         if(params.get("minMoney") != null) { set.add(" money >= " + params.get("minMoney")); }
         if(params.get("maxMoney") != null) { set.add(" money <= " + params.get("maxMoney")); }

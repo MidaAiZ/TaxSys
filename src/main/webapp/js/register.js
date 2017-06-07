@@ -17,7 +17,8 @@ $(document).ready(function() {
                 alert("注册失败！");
             }
         }).fail(function(err) {
-            alert("注册失败！");
+            alert("注册失败!" +
+                "请检查手机号是否正确!");
         });
         return false;
     })
