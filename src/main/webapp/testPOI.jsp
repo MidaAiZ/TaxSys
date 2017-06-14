@@ -44,6 +44,7 @@
 
     </table>
 </div>
+    <a id="download" class="btn btn-primary">下载</a>
 </div>
 </body>
 </html>
