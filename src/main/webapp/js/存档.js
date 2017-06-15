@@ -83,3 +83,37 @@ var option3 = {
     ]
 };
 myChart3.setOption(option3);
+
+
+
+var arr = ['白菜', '香蕉', '猪肉', '羊肉', '牛肉']
+for(var i in arr) {
+    console.log(arr[i]);
+    var $ele = $(".tbody")
+    $tr = $(
+        "<tr><td>" +
+        arr[i] +
+        "</td><td>" +
+        type        +
+        "</td><td>" +
+        arr[i] +
+        "</td><td>" +
+        arr[i] +
+        "</td><td>" +
+        arr[i] +
+        "</td></tr>"
+    );
+    console.log($tr);
+    $ele.append($tr);
+}
+$ele.on("click", "p", function() {
+    alert($(this).data("value"))
+})
+
+
+
+var page = $(".pagination");
+page.on("click", "a", function() {
+    alert(window.location.href + "&page=" + $(this).html());
+})
+

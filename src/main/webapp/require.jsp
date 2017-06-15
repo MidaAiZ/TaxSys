@@ -17,6 +17,7 @@
 <head>
     <!-- for 360 -->
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/json.js"></script>
     <script src="js/index.js"></script>
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
@@ -87,6 +88,7 @@
         var socail_back_url = '';
     </script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <%--<script src="js/require.js"></script>--%>
 </head>
 
 
@@ -207,13 +209,23 @@
 </div>
 <div class="require-box" style="text-align: center;margin-top: 100px">
     <form action="" method="post" enctype="multipart/form-data">
-        <input type="text" size="28"/>
         <select name="year">
+            <option value="0">-</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
             <option value="2015">2015</option>
             <option value="2016">2016</option>
             <option value="2017">2017</option>
         </select>
         <select name="month">
+            <option value="0">-</option>
             <option value="1">1月份</option>
             <option value="2">2月份</option>
             <option value="3">3月份</option>
@@ -227,14 +239,24 @@
             <option value="11">11月份</option>
             <option value="12">12月份</option>
         </select>
-        <select name="item">
-            <option value="in">进项</option>
-            <option value="out">销项</option>
+        <select name="type">
+            <option value="0">-</option>
+            <option value="1">鸡肉</option>
+            <option value="2">鱼肉</option>
+            <option value="3">玻璃</option>
+            <option value="4">铁皮</option>
+            <option value="5">纯净水</option>
+            <option value="6">花生油</option>
         </select>
-        <input type="submit" name="submit" class="btn" value="查询" />
+        <select name="item">
+            <option value="0">-</option>
+            <option value="1">进项</option>
+            <option value="2">销项</option>
+        </select>
+        <input type="button" name="submit" class="btn" value="查询" />
     </form>
 </div><br><br>
-<div class="container">
+<div class="container" id="result">
     <div class="content col-md-9 col-sm-7" style="margin-left: 150px">
         <div class="table-responsive" style="text-align: center">
             <table class="table table-bordered table-hover" style="text-align: center">
@@ -242,81 +264,19 @@
                 <tr style="text-align: center">
                     <th style="text-align: center">年份</th>
                     <th style="text-align: center">月份</th>
-                    <th style="text-align: center">商品名称</th>
-                    <th style="text-align: center">进销项</th>
+                    <th style="text-align: center">商品类型</th>
+                    <th style="text-align: center">进销项类型</th>
                     <th style="text-align: center">金额（万元）</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>2017年</td>
-                    <td>6月</td>
-                    <td>鸡肉</td>
-                    <td>进项</td>
-                    <td>0.8</td>
-                </tr>
-                <tr>
-                    <td>2017年</td>
-                    <td>6月</td>
-                    <td>鱼肉</td>
-                    <td>进项</td>
-                    <td>1.3</td>
-                </tr>
-                <tr>
-                    <td>2017年</td>
-                    <td>5月</td>
-                    <td>玻璃</td>
-                    <td>进项</td>
-                    <td>0.15</td>
-                </tr>
-                <tr>
-                    <td>2017年</td>
-                    <td>5月</td>
-                    <td>铁皮</td>
-                    <td>进项</td>
-                    <td>0.85</td>
-                </tr>
-                <tr>
-                    <td>2017年</td>
-                    <td>3月</td>
-                    <td>纯净水</td>
-                    <td>进项</td>
-                    <td>1.2</td>
-                </tr>
-                <tr>
-                    <td>2017年</td>
-                    <td>3月</td>
-                    <td>花生油</td>
-                    <td>进项</td>
-                    <td>6.5</td>
-                </tr>
-                <tr>
-                    <td>2016年</td>
-                    <td>12月</td>
-                    <td>鸡肉罐头</td>
-                    <td>销项</td>
-                    <td>1.0</td>
-                </tr>
+                <tbody class="tbody" id="content">
+
                 </tbody>
             </table>
             <nav class="pull-right">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
+                <ul class="pagination" id="pagelist"></ul>
             </nav>
+            <br><div id="total" style="float: left"></div>
         </div>
     </div>
 </div>

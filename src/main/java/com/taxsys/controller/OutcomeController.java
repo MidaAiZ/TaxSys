@@ -1,7 +1,6 @@
 package com.taxsys.controller;
 
 import com.taxsys.dto.OutcomeDto;
-import com.taxsys.model.Income;
 import com.taxsys.model.Outcome;
 import com.taxsys.service.impl.OutcomeServiceImpl;
 import com.taxsys.utils.UUIDGeneratorUtil;

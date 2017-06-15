@@ -1,10 +1,10 @@
-<!DOCTYPE html PUBdivC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<!DOCTYPE html PUBdivC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>js读取json数据分页显示</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
-<script type="text/javascript" src="js/site.js"></script>
+<script type="text/javascript" src="js/json.js"></script>
 </head>
 
 <body onload="OutputHtml();">
@@ -16,18 +16,8 @@
             <div id="pagelist"></div>
         </div>
     </div>
-    
-    <div class="detail">
-    	<ul>
-        	<li>URL:</li>
-        	<li id="siteurl" class="mt10"><a href="http://MYKITE.CN">http://MYKITE.CN</a></li>
-            <li>COMPANY:</li>
-            <li id="sitename" class="mt10">MYKITE.CN</li>
-            <li>DESCRIPTION:</li>
-            <li id="description">illustrates how to implement a nice animated menu using Mootools and some lines of CSS and HTML code ready to reuse in your project.
-</li>
-        </ul>
-    </div>
+
+
 </div>
 
 </body>
@@ -101,9 +91,8 @@ function OutputHtml(){
 	var html = "";
 		
 	for(var i = BeginNO - 1;i < EndNO;i ++){
-		html += "<div class='entry'>";
-		html +=  "<tr><td>" +
-                                sites[i].taxId +
+		html += "<div class='entry' style='width: 100%'>";
+		html +=  "<tr><td>" +   sites[i].taxId +
                                 "</td><td>" +
                                 sites[i].inType +
                                 "</td><td>" +
