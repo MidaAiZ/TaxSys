@@ -207,25 +207,23 @@
     </header>
     <!-- #masthead -->
 </div>
-<div class="require-box" style="text-align: center;margin-top: 100px">
+<div class="require-box" style="text-align: center;margin-top: 50px">
     <form action="" method="post" enctype="multipart/form-data">
         <select name="year">
-            <option value="0">-</option>
-            <option value="2006">2006</option>
-            <option value="2007">2007</option>
-            <option value="2008">2008</option>
-            <option value="2009">2009</option>
-            <option value="2010">2010</option>
-            <option value="2011">2011</option>
-            <option value="2012">2012</option>
-            <option value="2013">2013</option>
-            <option value="2014">2014</option>
-            <option value="2015">2015</option>
-            <option value="2016">2016</option>
             <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+            <option value="2007">2007</option>
+            <option value="2006">2006</option>
         </select>
         <select name="month">
-            <option value="0">-</option>
             <option value="1">1月份</option>
             <option value="2">2月份</option>
             <option value="3">3月份</option>
@@ -240,7 +238,6 @@
             <option value="12">12月份</option>
         </select>
         <select name="type">
-            <option value="0">-</option>
             <option value="1">鸡肉</option>
             <option value="2">鱼肉</option>
             <option value="3">玻璃</option>
@@ -249,15 +246,14 @@
             <option value="6">花生油</option>
         </select>
         <select name="item">
-            <option value="0">-</option>
             <option value="1">进项</option>
             <option value="2">销项</option>
         </select>
-        <input type="button" name="submit" class="btn" value="查询" />
+        <input type="button" name="submit" class="btn btn-primary" value="查询"  style="margin-bottom: 5px;"/>
     </form>
 </div><br><br>
 <div class="container" id="result">
-    <div class="content col-md-9 col-sm-7" style="margin-left: 150px">
+    <div class="content col-lg-8 col-lg-offset-2 col-md-12">
         <div class="table-responsive" style="text-align: center">
             <table class="table table-bordered table-hover" style="text-align: center">
                 <thead>
