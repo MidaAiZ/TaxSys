@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE 6]>
 <html id="ie6" class="ancient-ie old-ie no-js bit-html" dir="ltr" lang="zh-CN">
 <![endif]-->
@@ -18,7 +18,6 @@
     <!-- for 360 -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/chart.js"></script>
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
@@ -29,7 +28,7 @@
     <!-- end of customer header -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="js/echarts.min.js"></script>
-    <title>企业增值税发票数据分析系统 | 年度报表</title>
+    <title>企业增值税发票数据分析系统 | 查询</title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php" />
     <!--[if lt IE 9]>
@@ -87,7 +86,9 @@
         dtGlobals.gallery_bgcolor = 'rgba(51,51,51,1)';dtGlobals.gallery_showthumbs = '0';dtGlobals.gallery_style = '';dtGlobals.gallery_autoplay = '0';dtGlobals.gallery_playspeed = '3';dtGlobals.gallery_imagesize = '100';dtGlobals.gallery_stopbutton = '';dtGlobals.gallery_thumbsposition = '';dtGlobals.gallery_tcolor = '#fff';dtGlobals.gallery_tsize = '16';dtGlobals.gallery_dcolor = '#fff';dtGlobals.gallery_dsize = '14';dtGlobals.gallery_tfamily = '';dtGlobals.gallery_dfamily = '';dtGlobals.gallery_blankclose = '0';dtGlobals.fm_showstyle = '';dtGlobals.fm_showspeed = '';dtGlobals.cdn_url = 'http://static.qifeiye.com';dtGlobals.qfymodel = "";dtGlobals.viewtemplate = "";
         var socail_back_url = '';
     </script>
-
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <%--<script src="js/require.js"></script>--%>
+    <script type="text/javascript" src="js/json.js"></script>
 </head>
 
 
@@ -116,7 +117,7 @@
                     <div id="site-description" class="assistive-text"></div> -->
                 </div>
                 <!-- !- Navigation -->
-                <nav style="0" id="navigation" class="wf-td" bitDataAction="site_menu_container"
+                <nav style="" id="navigation" class="wf-td" bitDataAction="site_menu_container"
                      bitDataLocation="primary">
                     <ul id="main-nav" data-st="1" data-sp="1" data-fh="0" data-mw="0" data-lh="40"
                         class="mainmenu fancy-rollovers wf-mobile-hidden bit-menu-default underline-hover"
@@ -125,11 +126,11 @@
                             <a href="index.jsp"><span>首页</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-7010 menu-item-7011">
                             <a href="import.jsp"><span>导入</span></a></li>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097">
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097 act first">
                             <a href="require.jsp"><span>查询</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-9556 menu-item-9557">
                             <a href="count.jsp"><span>月度统计</span></a></li>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116 act first">
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
                             <a href="chart.jsp"><span>年度报表</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
@@ -206,27 +207,234 @@
     </header>
     <!-- #masthead -->
 </div>
-<div id="niandu">
-    <div class="count-box" style="text-align: center;margin-top: 50px">
-        <form action="" method="post" enctype="multipart/form-data">
-            <select name="year_two">
-                <option value="2006">2006</option>
-                <option value="2007">2007</option>
-                <option value="2008">2008</option>
-                <option value="2009">2009</option>
-                <option value="2010">2010</option>
-                <option value="2011">2011</option>
-                <option value="2012">2012</option>
-                <option value="2013">2013</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-            </select>
-            <%--<input type="submit" name="submit_two" class="btn" value="确定" />--%>
-        </form><br><br>
-        <div id="baobiao2" style="width:1000px;height:400px;text-align: center;margin-left: 150px;float: left"></div>
+<div class="require-box" style="text-align: center;margin-top: 100px">
+    <form action="" method="post" enctype="multipart/form-data">
+        <select name="year">
+            <option value="0">-</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+        </select>
+        <select name="month">
+            <option value="0">-</option>
+            <option value="1">1月份</option>
+            <option value="2">2月份</option>
+            <option value="3">3月份</option>
+            <option value="4">4月份</option>
+            <option value="5">5月份</option>
+            <option value="6">6月份</option>
+            <option value="7">7月份</option>
+            <option value="8">8月份</option>
+            <option value="9">9月份</option>
+            <option value="10">10月份</option>
+            <option value="11">11月份</option>
+            <option value="12">12月份</option>
+        </select>
+        <select name="type">
+            <option value="0">-</option>
+            <option value="1">鸡肉</option>
+            <option value="2">鱼肉</option>
+            <option value="3">玻璃</option>
+            <option value="4">铁皮</option>
+            <option value="5">纯净水</option>
+            <option value="6">花生油</option>
+        </select>
+        <select name="item">
+            <option value="0">-</option>
+            <option value="1">进项</option>
+            <option value="2">销项</option>
+        </select>
+        <input type="button" name="submit" class="btn" value="查询" />
+    </form>
+</div><br><br>
+<div class="container" id="result">
+    <div class="content col-md-9 col-sm-7" style="margin-left: 150px">
+        <div class="table-responsive" style="text-align: center">
+            <table class="table table-bordered table-hover" style="text-align: center">
+                <thead>
+                <tr style="text-align: center">
+                    <th style="text-align: center">年份</th>
+                    <th style="text-align: center">月份</th>
+                    <th style="text-align: center">商品类型</th>
+                    <th style="text-align: center">进销项类型</th>
+                    <th style="text-align: center">金额（万元）</th>
+                </tr>
+                </thead>
+                <tbody class="tbody" id="content">
+
+                </tbody>
+            </table>
+            <nav class="pull-right">
+                <ul class="pagination" id="pagelist">
+                </ul>
+            </nav>
+            <br><div id="total" style="float: left"></div>
+        </div>
     </div>
 </div>
+<script type="text/javascript">
+    <!--//
+    function $(id){return document.getElementById(id);} //定义获取ID的方法
+
+    function GotoPage(num){ //跳转页
+        Page = num;
+        OutputHtml();
+    }
+
+    var PageSize = 5; //每页个数
+    var Page = 1; //当前页码
+
+    function OutputHtml(){
+
+        var obj = eval(siteList);  //获取JSON
+        var sites = obj.sites;
+
+        //获取分页总数
+        var Pages = Math.floor((sites.length - 1) / PageSize) + 1;
+        if(Page < 1)Page = 1;  //如果当前页码小于1
+        if(Page > Pages)Page = Pages; //如果当前页码大于总数
+        var Temp = "";
+
+        var BeginNO = (Page - 1) * PageSize + 1; //开始编号
+        var EndNO = Page * PageSize; //结束编号
+        if(EndNO > sites.length) EndNO = sites.length;
+        if(EndNO == 0) BeginNO = 0;
+
+        if(!(Page <= Pages)) Page = Pages;
+        $("total").innerHTML = "Total:<strong class='f90'>" + sites.length + "</strong>&nbsp;&nbsp;Show:<strong class='f90'>" + BeginNO + "-" + EndNO + "</strong>";
+
+        //分页
+        if(Page > 1 && Page !== 1){Temp ="<a href='javascript:void(0)' onclick='GotoPage(1)'>&lt;&lt;Index</a> <a href='javascript:void(0)' onclick='GotoPage(" + (Page - 1) + ")'>Previous</a>&nbsp;"}else{Temp = "&lt;&lt;Index Previous&nbsp;"};
+
+        //完美的翻页列表
+        var PageFrontSum = 3; //当页前显示个数
+        var PageBackSum = 3; //当页后显示个数
+
+        var PageFront = PageFrontSum - (Page - 1);
+        var PageBack = PageBackSum - (Pages - Page);
+        if(PageFront > 0 && PageBack < 0)PageBackSum += PageFront; //前少后多，前剩余空位给后
+        if(PageBack > 0 && PageFront < 0)PageFrontSum += PageBack; //后少前多，后剩余空位给前
+        var PageFrontBegin = Page - PageFrontSum;
+        if(PageFrontBegin < 1)PageFrontBegin = 1;
+        var PageFrontEnd = Page + PageBackSum;
+        if(PageFrontEnd > Pages)PageFrontEnd = Pages;
+
+        if(PageFrontBegin != 1) Temp += '<a href="javascript:void(0)" onclick="GotoPage(' + (Page - 10) + ')" title="前10页">..</a>';
+        for(var i = PageFrontBegin;i < Page;i ++){
+            Temp += " <a href='javascript:void(0)' onclick='GotoPage(" + i + ")'>" + i + "</a>";
+        }
+        Temp += " <strong class='f90'>" + Page + "</strong>";
+        for(var i = Page + 1;i <= PageFrontEnd;i ++){
+            Temp += " <a href='javascript:void(0)' onclick='GotoPage(" + i + ")'>" + i + "</a>";
+        }
+        if(PageFrontEnd != Pages) Temp += " <a href='javascript:void(0)' onclick='GotoPage(" + (Page + 10) + ")' title='后10页'>..</a>";
+
+        if(Page != Pages){Temp += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='GotoPage(" + (Page + 1) + ");'>Next</a> <a href='javascript:void(0)' onclick='GotoPage(" + Pages + ")'>Last&gt;&gt;</a>"}else{Temp += "&nbsp;&nbsp;Next Last&gt;&gt;"}
+
+        $("pagelist").innerHTML = Temp;
+
+        //输出数据
+
+        if(EndNO == 0){ //如果为空
+            $("content").innerHTML += "<h1>No Images</h1>";
+            return;
+        }
+        var html = "";
+        var type = "进项";
+
+        for(var i = BeginNO - 1;i < EndNO;i ++){
+            html += "<div class='entry' style='width: 100%'>";
+            html +=  "<tr><td>" +
+                (sites[i].created_at).substring(0,4) +
+                "</td><td>" +
+                (sites[i].created_at).substring(5,7) +
+                "</td><td>" +
+                sites[i].inType+
+                "</td><td>" +
+                type  +
+                "</td><td>" +
+                sites[i].money +
+                "</td></tr>"
+            html += "</div>";
+
+        }
+        $("content").innerHTML = html;
+        clickShow(); //调用鼠标点击事件
+
+        //键盘左右键翻页
+        document.onkeydown=function(e){
+            var theEvent = window.event || e;
+            var code = theEvent.keyCode || theEvent.which;
+            if(code==37){
+                if(Page > 1 && Page !== 1){
+                    GotoPage(Page - 1);
+
+                }
+            }
+            if(code==39){
+                if(Page != Pages){
+                    GotoPage(Page + 1);
+                }
+            }
+        }
+
+
+        //鼠标滚轮翻页
+        function handle(delta){
+            if (delta > 0){
+                if(Page > 1 && Page !== 1){
+                    GotoPage(Page - 1);
+                }
+            }
+            else{
+                if(Page != Pages){
+                    GotoPage(Page + 1);
+                }
+            }
+        }
+
+        function wheel(event){
+            var delta = 0;
+            if (!event) /* For IE. */
+                event = window.event;
+            if (event.wheelDelta) { /* IE或者Opera. */
+                delta = event.wheelDelta / 120;
+                /** 在Opera9中，事件处理不同于IE
+                 */
+                if (window.opera)
+                    delta = -delta;
+            } else if (event.detail) { /** 兼容Mozilla. */
+                /** In Mozilla, sign of delta is different than in IE.
+                 * Also, delta is multiple of 3.
+                 */
+                delta = -event.detail / 3;
+            }
+            /** 如果 增量不等于0则触发
+             * 主要功能为测试滚轮向上滚或者是向下
+             */
+            if (delta)
+                handle(delta);
+        }
+
+        /** 初始化 */
+        if (window.addEventListener)
+            /** Mozilla的基于DOM的滚轮事件 **/
+            window.addEventListener("DOMMouseScroll", wheel, false);
+        /** IE/Opera. */
+        window.onmousewheel = document.onmousewheel = wheel;
+
+    }
+    OutputHtml();
+    //-->
+</script>
 </body>
 </html>

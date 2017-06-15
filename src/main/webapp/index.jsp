@@ -15,7 +15,7 @@
 <html class="no-js bit-html" dir="ltr" lang="zh-CN">
 <!--<![endif]-->
 <head>
-    <script src="image/echarts.min.js"></script>
+    <script src="js/echarts.min.js"></script>
     <title>企业增值税发票数据分析系统 | 主页</title>
     <link rel="profile" href="http://gmpg.org/xfn/11"/>
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php"/>
@@ -48,6 +48,7 @@
     </style>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/Jan_Income.js"></script>
     <link rel="stylesheet"
           href="http://57ea239cecea4.t73.qifeiye.com/qfy-content/cache/scripts/a635b3ad6691a30f641df40e4f4b28c9.css"
           type="text/css" media="all"/>
@@ -244,49 +245,13 @@
             background-attachment: scroll;
         }
     </style>
-    <script type="text/javascript">
-        dtGlobals.logoEnabled = 1;
-        dtGlobals.curr_id = 2160;
-        dtGlobals.logoURL = 'http://static.qifeiye.com/caches/e9ef95eecba4dae95a41c96bc9c459e6/aHR0cDovLzU3ZWEyMzljZWNlYTQudDczLnFpZmVpeWUuY29tL3FmeS1jb250ZW50L3VwbG9hZHMvMjAxNi8xMC9lNzc4Yjc5YmYwMTRkZWM1YzRhMjI5YmQwYzNlNmQ5My5wbmc_p_p100_p_3D.png';
-        dtGlobals.logoW = '675';
-        dtGlobals.logoH = '220';
-        dtGlobals.qfyname = '起飞页';
-        dtGlobals.id = '57ea239cecea4';
-        dtGlobals.language = '';
-        smartMenu = 1;
-        document.cookie = 'resolution=' + Math.max(screen.width, screen.height) + '; path=/';
-        dtGlobals.gallery_bgcolor = 'rgba(51,51,51,1)';
-        dtGlobals.gallery_showthumbs = '0';
-        dtGlobals.gallery_style = '';
-        dtGlobals.gallery_autoplay = '0';
-        dtGlobals.gallery_playspeed = '3';
-        dtGlobals.gallery_imagesize = '100';
-        dtGlobals.gallery_stopbutton = '';
-        dtGlobals.gallery_thumbsposition = '';
-        dtGlobals.gallery_tcolor = '#fff';
-        dtGlobals.gallery_tsize = '16';
-        dtGlobals.gallery_dcolor = '#fff';
-        dtGlobals.gallery_dsize = '14';
-        dtGlobals.gallery_tfamily = '';
-        dtGlobals.gallery_dfamily = '';
-        dtGlobals.gallery_blankclose = '0';
-        dtGlobals.fm_showstyle = '';
-        dtGlobals.fm_showspeed = '';
-        dtGlobals.cdn_url = 'http://static.qifeiye.com';
-        dtGlobals.qfymodel = "";
-        dtGlobals.viewtemplate = "";
-        var socail_back_url = '';
-    </script>
-
-
+    <script src="js/Year2016.js"></script>
 </head>
 
 
-<body class="home page page-id-2160 page-template-default image-blur btn-flat content-fullwidth wpb-js-composer js-comp-ver-4.0.1 vc_responsive"
-      backgroundSize='true' data-pid="2160" data-pkey="43696bcdc4f8022776101003c5671fe2">
+<body class="home page page-id-2160 page-template-default image-blur btn-flat content-fullwidth wpb-js-composer js-comp-ver-4.0.1 vc_responsive" backgroundSize='true' data-pid="2160" data-pkey="43696bcdc4f8022776101003c5671fe2">
 
 <div id="page" class=' breackall wide '>
-
 
     <!-- left, center, classical, classic-centered -->
     <!-- !Header -->
@@ -319,9 +284,9 @@
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097">
                             <a href="require.jsp"><span>查询</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-9556 menu-item-9557">
-                            <a href="count.jsp"><span>统计</span></a></li>
+                            <a href="count.jsp"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
-                            <a href="chart.jsp"><span>报表</span></a></li>
+                            <a href="chart.jsp"><span>年度报表</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
@@ -605,279 +570,258 @@
                                                                      qfyuuid="qfy_single_image_g8foe"
                                                                      class="qfy-element bitImageControlDiv">
                                                                     <div class="bitImageAhover ">
-                                                                        <div class="bitImageParentDiv wpb_single_image wpb_content_element vc_align_center"
-                                                                             style="text-align: center;">
-                                                                            <div class="wpb_wrapper"
-                                                                                 style="margin-top: -40px"><span></span>
-
-                                                                                <div id="baobiao1"
-                                                                                     style="width:600px;height:400px;float: left"></div>
-                                                                                <script type="text/javascript">
+                                                                        <div class="bitImageParentDiv wpb_single_image wpb_content_element vc_align_center" style="text-align: center;">
+                                                                            <div class="wpb_wrapper" style="margin-top: -40px"><span></span>
+                                                                                <div id="baobiao1" style="width:600px;height:400px;float: left"></div>
+                                                                                <div id="baobiao2" style="width: 600px;height: 400px;float: left"></div>
+                                                                                <script>
                                                                                     // 基于准备好的dom，初始化echarts实例
                                                                                     var myChart = echarts.init(document.getElementById('baobiao1'));
 
-                                                                                    // 指定图表的配置项和数据
-                                                                                    var option = {
-                                                                                        title: {
-                                                                                            text: '1月份进项数据'
-                                                                                        },
-                                                                                        tooltip: {},
-                                                                                        legend: {
-                                                                                            data: ['销量']
-                                                                                        },
-                                                                                        xAxis: {
-                                                                                            data: ["花生油", "鸡肉", "鱼肉", "玻璃", "铁皮", "纯净水"]
-                                                                                        },
-                                                                                        yAxis: {},
-                                                                                        series: [{
-                                                                                            name: '销量',
-                                                                                            type: 'bar',
-                                                                                            data: [6.5, 0.8, 1.3, 0.15, 0.85, 1.2]
-                                                                                        }]
-                                                                                    };
-                                                                                    // 使用刚指定的配置项和数据显示图表。
-                                                                                    myChart.setOption(option);
-                                                                                </script>
-
-
-                                                                                <div id="baobiao2"
-                                                                                     style="width: 600px;height: 400px;float: left"></div>
-                                                                                <script type="text/javascript">
-                                                                                    // 基于准备好的dom，初始化echarts实例
-                                                                                    var myChart = echarts.init(document.getElementById('baobiao2'));
-                                                                                    var xData = function () {
-                                                                                        var data = [];
-                                                                                        for (var i = 1; i < 13; i++) {
-                                                                                            data.push(i + "月份");
-                                                                                        }
-                                                                                        return data;
-                                                                                    }();
-
-                                                                                    var option = {
-                                                                                        "title": {
-                                                                                            "text": "2016年进销项数据对比",
-                                                                                            x: "4%",
-
-                                                                                            textStyle: {
-                                                                                                color: '#90979c',
-                                                                                                fontSize: '22'
-                                                                                            },
-                                                                                            subtextStyle: {
-                                                                                                color: '#90979c',
-                                                                                                fontSize: '16',
-
-                                                                                            },
-                                                                                        },
-                                                                                        "tooltip": {
-                                                                                            "trigger": "axis",
-                                                                                            "axisPointer": {
-                                                                                                "type": "shadow",
-                                                                                                textStyle: {
-                                                                                                    color: "#fff"
+                                                                                    var year_income = new Array(12);
+                                                                                    var year_outcome = new Array(12);
+                                                                                    var year_average= new Array(12);
+                                                                                    $.ajax({
+                                                                                        type: "get",
+                                                                                        url: "/incomes/list?beginTime=2016-01-01&endTime=2016-12-31",
+                                                                                        dataType: "json",
+                                                                                        success: function(data) {
+                                                                                            // 基于准备好的dom，初始化echarts实例
+                                                                                            var myChart1 = echarts.init(document.getElementById('baobiao2'));
+                                                                                            var xData = function () {
+                                                                                                var data = [];
+                                                                                                for (var i = 1; i < 13; i++) {
+                                                                                                    data.push(i + "月份");
                                                                                                 }
+                                                                                                return data;
+                                                                                            }();
 
-                                                                                            },
-                                                                                        },
-                                                                                        "grid": {
-                                                                                            "borderWidth": 0,
-                                                                                            "top": 110,
-                                                                                            "bottom": 95,
-                                                                                            textStyle: {
-                                                                                                color: "#fff"
-                                                                                            }
-                                                                                        },
-                                                                                        "legend": {
-                                                                                            x: '4%',
-                                                                                            top: '11%',
-                                                                                            textStyle: {
-                                                                                                color: '#90979c',
-                                                                                            },
-                                                                                            "data": ['进项', '销项', '平均']
-                                                                                        },
+                                                                                            var option = {
+                                                                                                "title": {
+                                                                                                    "text": "2016年进销项数据对比",
+                                                                                                    x: "4%",
 
+                                                                                                    textStyle: {
+                                                                                                        color: '#90979c',
+                                                                                                        fontSize: '22'
+                                                                                                    },
+                                                                                                    subtextStyle: {
+                                                                                                        color: '#90979c',
+                                                                                                        fontSize: '16',
 
-                                                                                        "calculable": true,
-                                                                                        "xAxis": [{
-                                                                                            "type": "category",
-                                                                                            "axisLine": {
-                                                                                                lineStyle: {
-                                                                                                    color: '#90979c'
-                                                                                                }
-                                                                                            },
-                                                                                            "splitLine": {
-                                                                                                "show": false
-                                                                                            },
-                                                                                            "axisTick": {
-                                                                                                "show": false
-                                                                                            },
-                                                                                            "splitArea": {
-                                                                                                "show": false
-                                                                                            },
-                                                                                            "axisLabel": {
-                                                                                                "interval": 0,
+                                                                                                    },
+                                                                                                },
+                                                                                                "tooltip": {
+                                                                                                    "trigger": "axis",
+                                                                                                    "axisPointer": {
+                                                                                                        "type": "shadow",
+                                                                                                        textStyle: {
+                                                                                                            color: "#fff"
+                                                                                                        }
 
-                                                                                            },
-                                                                                            "data": xData,
-                                                                                        }],
-                                                                                        "yAxis": [{
-                                                                                            "type": "value",
-                                                                                            "splitLine": {
-                                                                                                "show": false
-                                                                                            },
-                                                                                            "axisLine": {
-                                                                                                lineStyle: {
-                                                                                                    color: '#90979c'
-                                                                                                }
-                                                                                            },
-                                                                                            "axisTick": {
-                                                                                                "show": false
-                                                                                            },
-                                                                                            "axisLabel": {
-                                                                                                "interval": 0,
-
-                                                                                            },
-                                                                                            "splitArea": {
-                                                                                                "show": false
-                                                                                            },
-
-                                                                                        }],
-                                                                                        "dataZoom": [{
-                                                                                            "show": true,
-                                                                                            "height": 30,
-                                                                                            "xAxisIndex": [
-                                                                                                0
-                                                                                            ],
-                                                                                            bottom: 30,
-                                                                                            "start": 10,
-                                                                                            "end": 80,
-                                                                                            handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
-                                                                                            handleSize: '110%',
-                                                                                            handleStyle: {
-                                                                                                color: "#d3dee5",
-
-                                                                                            },
-                                                                                            textStyle: {
-                                                                                                color: "#fff"
-                                                                                            },
-                                                                                            borderColor: "#90979c"
+                                                                                                    },
+                                                                                                },
+                                                                                                "grid": {
+                                                                                                    "borderWidth": 0,
+                                                                                                    "top": 110,
+                                                                                                    "bottom": 95,
+                                                                                                    textStyle: {
+                                                                                                        color: "#fff"
+                                                                                                    }
+                                                                                                },
+                                                                                                "legend": {
+                                                                                                    x: '4%',
+                                                                                                    top: '11%',
+                                                                                                    textStyle: {
+                                                                                                        color: '#90979c',
+                                                                                                    },
+                                                                                                    "data": ['进项', '销项', '平均']
+                                                                                                },
 
 
-                                                                                        }, {
-                                                                                            "type": "inside",
-                                                                                            "show": true,
-                                                                                            "height": 15,
-                                                                                            "start": 1,
-                                                                                            "end": 35
-                                                                                        }],
-                                                                                        "series": [{
-                                                                                            "name": "进项",
-                                                                                            "type": "bar",
-                                                                                            "stack": "总金额",
-                                                                                            "barMaxWidth": 35,
-                                                                                            "barGap": "10%",
-                                                                                            "itemStyle": {
-                                                                                                "normal": {
-                                                                                                    "color": "rgba(255,144,128,1)",
-                                                                                                    "label": {
-                                                                                                        "show": true,
-                                                                                                        "textStyle": {
-                                                                                                            "color": "#fff"
+                                                                                                "calculable": true,
+                                                                                                "xAxis": [{
+                                                                                                    "type": "category",
+                                                                                                    "axisLine": {
+                                                                                                        lineStyle: {
+                                                                                                            color: '#90979c'
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "splitLine": {
+                                                                                                        "show": false
+                                                                                                    },
+                                                                                                    "axisTick": {
+                                                                                                        "show": false
+                                                                                                    },
+                                                                                                    "splitArea": {
+                                                                                                        "show": false
+                                                                                                    },
+                                                                                                    "axisLabel": {
+                                                                                                        "interval": 0,
+
+                                                                                                    },
+                                                                                                    "data": xData,
+                                                                                                }],
+                                                                                                "yAxis": [{
+                                                                                                    "type": "value",
+                                                                                                    "splitLine": {
+                                                                                                        "show": false
+                                                                                                    },
+                                                                                                    "axisLine": {
+                                                                                                        lineStyle: {
+                                                                                                            color: '#90979c'
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "axisTick": {
+                                                                                                        "show": false
+                                                                                                    },
+                                                                                                    "axisLabel": {
+                                                                                                        "interval": 0,
+
+                                                                                                    },
+                                                                                                    "splitArea": {
+                                                                                                        "show": false
+                                                                                                    },
+
+                                                                                                }],
+                                                                                                "dataZoom": [{
+                                                                                                    "show": true,
+                                                                                                    "height": 30,
+                                                                                                    "xAxisIndex": [
+                                                                                                        0
+                                                                                                    ],
+                                                                                                    bottom: 30,
+                                                                                                    "start": 10,
+                                                                                                    "end": 80,
+                                                                                                    handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+                                                                                                    handleSize: '110%',
+                                                                                                    handleStyle: {
+                                                                                                        color: "#d3dee5",
+
+                                                                                                    },
+                                                                                                    textStyle: {
+                                                                                                        color: "#fff"
+                                                                                                    },
+                                                                                                    borderColor: "#90979c"
+
+
+                                                                                                }, {
+                                                                                                    "type": "inside",
+                                                                                                    "show": true,
+                                                                                                    "height": 15,
+                                                                                                    "start": 1,
+                                                                                                    "end": 35
+                                                                                                }],
+                                                                                                "series": [{
+                                                                                                    "name": "进项",
+                                                                                                    "type": "bar",
+                                                                                                    "stack": "总金额",
+                                                                                                    "barMaxWidth": 35,
+                                                                                                    "barGap": "10%",
+                                                                                                    "itemStyle": {
+                                                                                                        "normal": {
+                                                                                                            "color": "rgba(255,144,128,1)",
+                                                                                                            "label": {
+                                                                                                                "show": true,
+                                                                                                                "textStyle": {
+                                                                                                                    "color": "#fff"
+                                                                                                                },
+                                                                                                                "position": "insideTop",
+                                                                                                                formatter: function (p) {
+                                                                                                                    return p.value > 0 ? (p.value) : '';
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "data": [
+                                                                                                        15.7,
+                                                                                                        19.7,
+                                                                                                        33.4,
+                                                                                                        42.7,
+                                                                                                        30.6,
+                                                                                                        55.5,
+                                                                                                        65.5,
+                                                                                                        76.9,
+                                                                                                        80.1,
+                                                                                                        65.5,
+                                                                                                        30.4,
+                                                                                                        22.4
+                                                                                                    ],
+                                                                                                },
+
+                                                                                                    {
+                                                                                                        "name": "销项",
+                                                                                                        "type": "bar",
+                                                                                                        "stack": "总金额",
+                                                                                                        "itemStyle": {
+                                                                                                            "normal": {
+                                                                                                                "color": "rgba(0,191,183,1)",
+                                                                                                                "barBorderRadius": 0,
+                                                                                                                "label": {
+                                                                                                                    "show": true,
+                                                                                                                    "position": "top",
+                                                                                                                    formatter: function (p) {
+                                                                                                                        return p.value > 0 ? (p.value) : '';
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
                                                                                                         },
-                                                                                                        "position": "insideTop",
-                                                                                                        formatter: function (p) {
-                                                                                                            return p.value > 0 ? (p.value) : '';
-                                                                                                        }
-                                                                                                    }
-                                                                                                }
-                                                                                            },
-                                                                                            "data": [
-                                                                                                15.7,
-                                                                                                19.7,
-                                                                                                33.4,
-                                                                                                42.7,
-                                                                                                30.6,
-                                                                                                55.5,
-                                                                                                65.5,
-                                                                                                76.9,
-                                                                                                80.1,
-                                                                                                65.5,
-                                                                                                30.4,
-                                                                                                22.4
-                                                                                            ],
-                                                                                        },
-
-                                                                                            {
-                                                                                                "name": "销项",
-                                                                                                "type": "bar",
-                                                                                                "stack": "总金额",
-                                                                                                "itemStyle": {
-                                                                                                    "normal": {
-                                                                                                        "color": "rgba(0,191,183,1)",
-                                                                                                        "barBorderRadius": 0,
-                                                                                                        "label": {
-                                                                                                            "show": true,
-                                                                                                            "position": "top",
-                                                                                                            formatter: function (p) {
-                                                                                                                return p.value > 0 ? (p.value) : '';
+                                                                                                        "data": [
+                                                                                                            19.7,
+                                                                                                            21.7,
+                                                                                                            40.4,
+                                                                                                            40.7,
+                                                                                                            45.6,
+                                                                                                            60.5,
+                                                                                                            71.5,
+                                                                                                            86.9,
+                                                                                                            81.1,
+                                                                                                            59.5,
+                                                                                                            32.4,
+                                                                                                            22.4
+                                                                                                        ]
+                                                                                                    }, {
+                                                                                                        "name": "成交总金额",
+                                                                                                        "type": "line",
+                                                                                                        "stack": "总金额",
+                                                                                                        symbolSize: 10,
+                                                                                                        symbol: 'circle',
+                                                                                                        "itemStyle": {
+                                                                                                            "normal": {
+                                                                                                                "color": "rgba(252,230,48,1)",
+                                                                                                                "barBorderRadius": 0,
+                                                                                                                "label": {
+                                                                                                                    "show": true,
+                                                                                                                    "position": "top",
+                                                                                                                    formatter: function (p) {
+                                                                                                                        return p.value > 0 ? (p.value) : '';
+                                                                                                                    }
+                                                                                                                }
                                                                                                             }
-                                                                                                        }
-                                                                                                    }
-                                                                                                },
-                                                                                                "data": [
-                                                                                                    19.7,
-                                                                                                    21.7,
-                                                                                                    40.4,
-                                                                                                    40.7,
-                                                                                                    45.6,
-                                                                                                    60.5,
-                                                                                                    71.5,
-                                                                                                    86.9,
-                                                                                                    81.1,
-                                                                                                    59.5,
-                                                                                                    32.4,
-                                                                                                    22.4
+                                                                                                        },
+                                                                                                        "data": [
+                                                                                                            35.4,
+                                                                                                            41.4,
+                                                                                                            73.8,
+                                                                                                            83.4,
+                                                                                                            76.2,
+                                                                                                            116,
+                                                                                                            137,
+                                                                                                            163.8,
+                                                                                                            161.2,
+                                                                                                            125,
+                                                                                                            62.8,
+                                                                                                            44.8
+                                                                                                        ]
+                                                                                                    },
                                                                                                 ]
-                                                                                            }, {
-                                                                                                "name": "成交总金额",
-                                                                                                "type": "line",
-                                                                                                "stack": "总金额",
-                                                                                                symbolSize: 10,
-                                                                                                symbol: 'circle',
-                                                                                                "itemStyle": {
-                                                                                                    "normal": {
-                                                                                                        "color": "rgba(252,230,48,1)",
-                                                                                                        "barBorderRadius": 0,
-                                                                                                        "label": {
-                                                                                                            "show": true,
-                                                                                                            "position": "top",
-                                                                                                            formatter: function (p) {
-                                                                                                                return p.value > 0 ? (p.value) : '';
-                                                                                                            }
-                                                                                                        }
-                                                                                                    }
-                                                                                                },
-                                                                                                "data": [
-                                                                                                    35.4,
-                                                                                                    41.4,
-                                                                                                    73.8,
-                                                                                                    83.4,
-                                                                                                    76.2,
-                                                                                                    116,
-                                                                                                    137,
-                                                                                                    163.8,
-                                                                                                    161.2,
-                                                                                                    125,
-                                                                                                    62.8,
-                                                                                                    44.8
-                                                                                                ]
-                                                                                            },
-                                                                                        ]
-                                                                                    }
+                                                                                            }
 
-                                                                                    // 使用刚指定的配置项和数据显示图表。
-                                                                                    myChart.setOption(option);
+// 使用刚指定的配置项和数据显示图表。
+                                                                                            myChart1.setOption(option);
+                                                                                        }
+                                                                                    })
                                                                                 </script>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>

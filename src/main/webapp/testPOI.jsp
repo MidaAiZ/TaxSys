@@ -13,6 +13,7 @@
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/testPOI.js"></script>
     <script src="js/exportExcel.js"></script>
+    <script src="js/Jan_Income.js"></script>
 </head>
 <body>
 <div  style="padding: 50px; text-align: center;">
@@ -20,7 +21,7 @@
     <button class="btn btn-success btn-xs" id="uploadEventBtn" style="height:26px;"  type="button" >选择文件</button>
     <br>
     <input type="file" name="file"  style="width:0px;height:0px;" id="uploadEventFile">
-    <input id="uploadEventPath"  disabled="disabled"  type="text" placeholder="请选择excel表" style="border: 1px solid #e6e6e6; height: 26px;width: 200px;margin-top: 10px;" >
+    <input id="uploadEventPath"  disabled="disabled" style="color: #2a86db"  type="text" placeholder="请选择excel表" style="border: 1px solid #e6e6e6; height: 26px;width: 200px;margin-top: 10px;" >
     <br>
     <label for="income">进项</label><input type="radio" name="type" id="income" value="income">
     <label for="outcome">销项</label><input type="radio" name="type" id="outcome" value="outcome">
