@@ -239,20 +239,6 @@
             <option value="11">11月份</option>
             <option value="12">12月份</option>
         </select>
-        <select name="type">
-            <option value="0">-</option>
-            <option value="1">鸡肉</option>
-            <option value="2">鱼肉</option>
-            <option value="3">玻璃</option>
-            <option value="4">铁皮</option>
-            <option value="5">纯净水</option>
-            <option value="6">花生油</option>
-        </select>
-        <select name="item">
-            <option value="0">-</option>
-            <option value="1">进项</option>
-            <option value="2">销项</option>
-        </select>
         <input type="button" name="submit" class="btn" value="查询" />
     </form>
 </div><br><br>

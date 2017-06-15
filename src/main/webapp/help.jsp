@@ -17,7 +17,6 @@
 <head>
     <!-- for 360 -->
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/index.js"></script>
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
@@ -87,6 +86,7 @@
         var socail_back_url = '';
     </script>
     <link rel="stylesheet" href="css/help.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
 
@@ -431,7 +431,7 @@
                                                     }</style>
                                                 <div class=" vc_icon_element-inner vc_icon_element-color- vc_icon_element-have-style-inner vc_icon_element-size-sm vc_icon_element-style-rounded-outline vc_icon_element-outline vc_icon_element-background-color-"
                                                      style="border-color:#adadad;border-width:1px;">
-                                                    <span class="vc_icon_element-icon glyphicon glyphicon-icon-signin"
+                                                    <span class="vc_icon_element-icon glyphicon glyphicon-signal"
                                                           style="color:#adadad;"></span>
                                                 </div>
 
@@ -644,7 +644,7 @@
                                                     }</style>
                                                 <div class=" vc_icon_element-inner vc_icon_element-color- vc_icon_element-have-style-inner vc_icon_element-size-sm vc_icon_element-style-rounded-outline vc_icon_element-outline vc_icon_element-background-color-"
                                                      style="border-color:#adadad;border-width:1px;">
-                                                    <span class="vc_icon_element-icon glyphicon glyphicon-icon-folder-open"
+                                                    <span class="vc_icon_element-icon glyphicon glyphicon-heart"
                                                           style="color:#adadad;"></span>
                                                 </div>
 
@@ -778,7 +778,7 @@
                                                     }</style>
                                                 <div class=" vc_icon_element-inner vc_icon_element-color- vc_icon_element-have-style-inner vc_icon_element-size-sm vc_icon_element-style-rounded-outline vc_icon_element-outline vc_icon_element-background-color-"
                                                      style="border-color:#adadad;border-width:1px;">
-                                                    <span class="vc_icon_element-icon glyphicon glyphicon-icon-link"
+                                                    <span class="vc_icon_element-icon glyphicon glyphicon-pencil"
                                                           style="color:#adadad;"></span>
                                                 </div>
 
