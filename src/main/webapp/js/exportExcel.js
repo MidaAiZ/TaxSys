@@ -3,7 +3,9 @@
  */
 $(document).ready(function() {
     //excel导出
-    exportLabType();
+    $("#download").click(function() {
+      exportLabType();
+    })
 })
 function exportLabType(){
     var $form = $("<form action='incomes/exportExcel' method='POST'></form>");

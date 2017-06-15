@@ -57,8 +57,9 @@ public class IncomeController {
         String created_at = request.getParameter("created_at");
         //存成数组格式
         //需要导出的excel表头
-        String[] col = { typeId, typeName, money, created_at };
-        String[] zd = col; //需要导出的字段
+        String[] zd = { typeId, typeName, money, created_at };
+//        String[] zd = col; //需要导出的字段
+        String[] col = { "发票号", "类型", "金额", "日期" };
         //下面用到上面的类，需要传递实体参数
         ExportExcel<Income> ee = new ExportExcel<Income>();
         //最后一个参数是数据集合
