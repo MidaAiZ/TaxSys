@@ -104,4 +104,9 @@ public class IncomeServiceImpl implements IncomeService {
         return new IncomeDto(true, oldIncome);    }
 
     public List<String> searchIncomeList(Map<String, Object> params){ return incomeDao.searchIncomeList(params); }
+
+    public List<String> typeList() {
+        return incomeDao.typeList();
+    };
+
     }
