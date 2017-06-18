@@ -226,7 +226,6 @@ public class IncomeController {
     @ResponseBody
     public Map getTypes() {
         Map<String, Object> returnMap = new HashMap();
-//        String[] types = {"牛肉", "猪肉", "羊肉", "玻璃", "铁皮", "香蕉", "鱼肉", "纯净水", "花生油"};
         List types = incomeService.typeList();
         returnMap.put("types", types);
         return returnMap;

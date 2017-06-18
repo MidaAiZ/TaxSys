@@ -37,4 +37,5 @@ public interface OutcomeDao {
     boolean updateOutcomeInfo(Outcome outcome);
 
     List searchOutcomeList(Map<String, Object> params);
+    List typeList();
 }

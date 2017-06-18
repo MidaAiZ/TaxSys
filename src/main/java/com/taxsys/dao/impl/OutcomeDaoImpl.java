@@ -100,5 +100,12 @@ public class OutcomeDaoImpl implements OutcomeDao{
         query.setMaxResults(limit);
         return query.list();
     }
+    public List typeList() {
+        String hql = "select distinct outType from Outcome outcome order by outcome.created_at desc";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+//        query.setFirstResult((offset - 1) * limit);
+//        query.setMaxResults(limit);
+        return query.list();
+    }
 
 }

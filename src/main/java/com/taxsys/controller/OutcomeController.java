@@ -186,5 +186,12 @@ public class OutcomeController {
         return returnMap;
     }
 
-
+    @RequestMapping(value = "/types", method = RequestMethod.POST)
+    @ResponseBody
+    public Map getTypes() {
+        Map<String, Object> returnMap = new HashMap();
+        List types = outcomeService.typeList();
+        returnMap.put("types", types);
+        return returnMap;
+    }
 }
