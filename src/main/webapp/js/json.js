@@ -1,25 +1,23 @@
 ﻿LIMIT = 10;
 
 $(document).ready(function() {
-    getJson(1, LIMIT, "beginTime=2010-09-09");
-    createdPre(1, LIMIT, "beginTime=2010-09-09");
+    getJson(1, LIMIT, "2010-09-09");
+    createdPre(1, LIMIT, "2010-09-09");
 })
 
 function getJson(page, limit,condition) {
     var siteList={"incomeList":[]};
     var page = page  ? page : 1;
     var limit = limit ? limit : 10;
-    var condition = arguments[2] ? "&" + arguments[2] : "";
-    // alert(condition)
     $.ajax({
         type: "get",
-        url: "/incomes/list?page="+ page +"&limit=" + limit + condition,
+        url: "/incomes/list?page="+ page +"&limit=" + limit + "&beginTime=" + condition,
         dataType: "json",
         success : function(data) {
+            var result = "select distinct inType from income"
             siteList = data.incomeList;
             var type = "进项";
             if (siteList) {
-                console.log(siteList);
                 OutputHtml(siteList);
             }
             else {  // 沒有插入数据
@@ -37,8 +35,7 @@ function getJson(page, limit,condition) {
     $(".pagination").on("click", "a", function() {
         $this = $(this)
         Gotopage($this.data("value"), LIMIT,condition);
-        $this.addClass("active");
-        $this.siblings.removeClass("active");
+        $(this).addClass('active').siblings().removeClass('active');
     })
 }
 
@@ -53,7 +50,6 @@ function createdPre(page,limit,condition) {
     if(!(page <= pages)) page = pages;
     // 分页
     if(page > 1 && page !== 1){Temp ="<a href='javascript:void(0)' onclick='Gotopage(1,LIMIT,condition)'>&lt;&lt;Index</a> <a href='javascript:void(0)' onclick='Gotopage(" + (page - 1) + " ," + LIMIT+ " ," + condition  +  ")'>previous</a>&nbsp;"}else{Temp = "&lt;&lt;Index previous&nbsp;"};
-
     // 完美的翻页列表
     var pageFrontSum = 3; //当页前显示个数
     var pageBackSum = 3; //当页后显示个数
@@ -68,17 +64,18 @@ function createdPre(page,limit,condition) {
     if(pageFrontEnd > pages)pageFrontEnd = pages;
 
     if(pageFrontBegin != 1) Temp += '<a href="javascript:void(0)" onclick="Gotopage(' + (page - 10) + " ," + LIMIT+ " ," + condition + ')" title="前10页">..</a>';
+
     for(var i = pageFrontBegin;i < page;i ++){
-        Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + i  + " ," + LIMIT+ " ," + condition  + ")'>" + i + "</a>";
+        Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + i  + ',' + LIMIT+ ',' + condition  + ")'>" + i + "</a>";
     }
+
     Temp += " <strong class='f90'>" + page + "</strong>";
     for(var i = page + 1;i <= pageFrontEnd;i ++){
-        Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + i  + " ," + LIMIT+ " ," + condition  + ")'>" + i + "</a>";
+        Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + i  + ',' + LIMIT+ ',' + condition  + ")'>" + i + "</a>";
     }
-    if(pageFrontEnd != pages) Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + (page + 10) + " ," + LIMIT + " ," + condition + ")' title='后10页'>..</a>";
 
-    if(page != pages){Temp += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='Gotopage(" + (page + 1) + " ," + LIMIT + " ," + condition  + ")'>Next</a> <a href='javascript:void(0)' onclick='Gotopage(" + pages + " ," + LIMIT+ " ," + condition  + ")'>Last&gt;&gt;</a>"}else{Temp += "&nbsp;&nbsp;Next Last&gt;&gt;"}
-
+    if(pageFrontEnd != pages) Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + (page + 10) + ',' + LIMIT + ',' + condition + ")' title='后10页'>..</a>";
+    if(page != pages){Temp += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='Gotopage(" + (page + 1) + ',' + LIMIT + ',' + condition  + ")'>Next</a> <a href='javascript:void(0)' onclick='Gotopage(" + pages + ',' + LIMIT+ ',' + condition  + ")'>Last&gt;&gt;</a>"}else{Temp += "&nbsp;&nbsp;Next Last&gt;&gt;"}
     $("#pagelist").append(Temp);
 }
 

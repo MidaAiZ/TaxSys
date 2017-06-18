@@ -219,13 +219,12 @@ $(document).ready(function() {
 
     var _select1 = $("select[name=year_one]");
     var _select2 = $("select[name=month]");
-    // var _select3 = $("select[name=year_two]")
+    var _select3 = $("select[name=year_two]");
+    var _select4 = $("select[name=month_two]");
     //年月图改变
     $(_select1).on("change", function(){
         myChart.showLoading({text: '正在努力的读取数据中...'  });
         myChart1.showLoading({text: '正在努力的读取数据中...'  });
-        myChart3.showLoading({text: '正在努力的读取数据中...'  });
-        myChart4.showLoading({text: '正在努力的读取数据中...'  });
         var str = $("select[name=year_one]").val();
         var strr= $("select[name=month]").val();
         var str1= str +"-"+ strr +"-" + "1";
@@ -295,6 +294,126 @@ $(document).ready(function() {
             success: function(data) {
                 myChart.hideLoading();
                 myChart1.hideLoading();
+
+                //月度进销项图
+                var option = {
+                    title: {
+                        text: '月度进销项统计图'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['进项','销项']
+                    },
+                    xAxis: {
+                        data: ["花生油", "鸡肉", "鱼肉", "玻璃", "铁皮", "纯净水","鸡肉罐头","鱼肉罐头","猪肉罐头"]
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '进项',
+                        type: 'bar',
+                        data: [oil, chicken,fish, glass, iron, water,0,0,0]
+                    },{
+                        name: '销项',
+                        type: 'bar',
+                        data: [0,0,0,0,0,0,chicken_can,fish_can,pork_can]
+                    }]
+                };
+                myChart.setOption(option);
+
+                //进销项总额
+                option1 = {
+                    title: {
+                        text: '总额'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['总额']
+                    },
+                    xAxis: {
+                        data: ["进项","销项"]
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '总额',
+                        type: 'bar',
+                        data: [chicken+oil+fish+glass+iron+water,chicken_can+fish_can+pork_can]
+                    }]
+                };
+                myChart1.setOption(option1);
+            }
+        })
+
+    })
+    $(_select3).on("change", function(){
+        myChart3.showLoading({text: '正在努力的读取数据中...'  });
+        myChart4.showLoading({text: '正在努力的读取数据中...'  });
+        var str = $("select[name=year_two]").val();
+        var strr= $("select[name=month_two]").val();
+        var str1= str +"-"+ strr +"-" + "1";
+        var str2= str +"-"+ strr +"-" + "31";
+        // var _date1 = new Date(str1.replace(/-/, "/"));
+        // var _date2 = new Date(str2.replace(/-/, "/"));
+        // alert(str1+str2);
+        $.ajax({
+            type: "get",
+            url: "/incomes/list?beginTime="+str1+"&endTime="+str2,
+            dataType: "json",
+            success: function(data) {
+                oil=0;chicken=0;fish=0;glass=0;iron=0;water=0;
+                var list = data.incomeList;
+                $.each(list,function(i,p){
+                    if(p.inType=="花生油"){
+                        oil += p.money;
+                        // console.log(oil);
+                    }
+                    else if(p.inType=="鸡肉"){
+                        chicken = chicken +p.money;
+                    }
+                    else if(p.inType=="鱼肉"){
+                        fish = fish +p.money;
+                    }
+                    else if(p.inType=="玻璃"){
+                        glass = glass +p.money;
+                    }
+                    else if(p.inType=="铁皮") {
+                        iron = iron + p.money;
+                    }
+                    else if(p.inType=="纯净水"){
+                        water = water +p.money;
+                    }
+                });
+            }
+        })
+
+        $.ajax({
+            type: "get",
+            url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
+            dataType: "json",
+            success: function(data) {
+                chicken_can=0;
+                fish_can=0;
+                pork_can=0;
+                var list = data.outcomeList;
+                $.each(list,function(i,p){
+                    if(p.outType=="鸡肉罐头"){
+                        chicken_can += p.money;
+                        // console.log(oil);
+                    }
+                    else if(p.outType=="鱼肉罐头"){
+                        fish_can += p.money;
+                    }
+                    else if(p.outType=="猪肉罐头"){
+                        pork_can += p.money;
+                    }
+                });
+            }
+        })
+
+        $.ajax({
+            type: "get",
+            url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
+            dataType: "json",
+            success: function(data) {
                 myChart3.hideLoading();
                 myChart4.hideLoading();
                 //月度进项扇形图
@@ -450,52 +569,6 @@ $(document).ready(function() {
                 };
                 myChart4.setOption(option4);
 
-
-                //月度进销项图
-                var option = {
-                    title: {
-                        text: '月度进销项统计图'
-                    },
-                    tooltip: {},
-                    legend: {
-                        data: ['进项','销项']
-                    },
-                    xAxis: {
-                        data: ["花生油", "鸡肉", "鱼肉", "玻璃", "铁皮", "纯净水","鸡肉罐头","鱼肉罐头","猪肉罐头"]
-                    },
-                    yAxis: {},
-                    series: [{
-                        name: '进项',
-                        type: 'bar',
-                        data: [oil, chicken,fish, glass, iron, water,0,0,0]
-                    },{
-                        name: '销项',
-                        type: 'bar',
-                        data: [0,0,0,0,0,0,chicken_can,fish_can,pork_can]
-                    }]
-                };
-                myChart.setOption(option);
-
-                //进销项总额
-                option1 = {
-                    title: {
-                        text: '总额'
-                    },
-                    tooltip: {},
-                    legend: {
-                        data: ['总额']
-                    },
-                    xAxis: {
-                        data: ["进项","销项"]
-                    },
-                    yAxis: {},
-                    series: [{
-                        name: '总额',
-                        type: 'bar',
-                        data: [chicken+oil+fish+glass+iron+water,chicken_can+fish_can+pork_can]
-                    }]
-                };
-                myChart1.setOption(option1);
             }
         })
 
@@ -503,8 +576,6 @@ $(document).ready(function() {
     $(_select2).on("change", function(){
         myChart.showLoading({text: '正在努力的读取数据中...'  });
         myChart1.showLoading({text: '正在努力的读取数据中...'  });
-        myChart3.showLoading({text: '正在努力的读取数据中...'  });
-        myChart4.showLoading({text: '正在努力的读取数据中...'  });
         var str = $("select[name=year_one]").val();
         var strr= $("select[name=month]").val();
         var str1= str +"-"+ strr +"-" + "1";
@@ -574,6 +645,126 @@ $(document).ready(function() {
             success: function(data) {
                 myChart.hideLoading();
                 myChart1.hideLoading();
+
+                //月度进销项图
+                var option = {
+                    title: {
+                        text: '月度进销项统计图'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['进项','销项']
+                    },
+                    xAxis: {
+                        data: ["花生油", "鸡肉", "鱼肉", "玻璃", "铁皮", "纯净水","鸡肉罐头","鱼肉罐头","猪肉罐头"]
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '进项',
+                        type: 'bar',
+                        data: [oil, chicken,fish, glass, iron, water,0,0,0]
+                    },{
+                        name: '销项',
+                        type: 'bar',
+                        data: [0,0,0,0,0,0,chicken_can,fish_can,pork_can]
+                    }]
+                };
+                myChart.setOption(option);
+
+                //进销项总额
+                option1 = {
+                    title: {
+                        text: '总额'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['总额']
+                    },
+                    xAxis: {
+                        data: ["进项","销项"]
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '总额',
+                        type: 'bar',
+                        data: [chicken+oil+fish+glass+iron+water,chicken_can+fish_can+pork_can]
+                    }]
+                };
+                myChart1.setOption(option1);
+            }
+        })
+
+    })
+    $(_select4).on("change", function(){
+        myChart3.showLoading({text: '正在努力的读取数据中...'  });
+        myChart4.showLoading({text: '正在努力的读取数据中...'  });
+        var str = $("select[name=year_two]").val();
+        var strr= $("select[name=month_two]").val();
+        var str1= str +"-"+ strr +"-" + "1";
+        var str2= str +"-"+ strr +"-" + "31";
+        // var _date1 = new Date(str1.replace(/-/, "/"));
+        // var _date2 = new Date(str2.replace(/-/, "/"));
+        // alert(str1+str2);
+        $.ajax({
+            type: "get",
+            url: "/incomes/list?beginTime="+str1+"&endTime="+str2,
+            dataType: "json",
+            success: function(data) {
+                oil=0;chicken=0;fish=0;glass=0;iron=0;water=0;
+                var list = data.incomeList;
+                $.each(list,function(i,p){
+                    if(p.inType=="花生油"){
+                        oil += p.money;
+                        // console.log(oil);
+                    }
+                    else if(p.inType=="鸡肉"){
+                        chicken = chicken +p.money;
+                    }
+                    else if(p.inType=="鱼肉"){
+                        fish = fish +p.money;
+                    }
+                    else if(p.inType=="玻璃"){
+                        glass = glass +p.money;
+                    }
+                    else if(p.inType=="铁皮") {
+                        iron = iron + p.money;
+                    }
+                    else if(p.inType=="纯净水"){
+                        water = water +p.money;
+                    }
+                });
+            }
+        })
+
+        $.ajax({
+            type: "get",
+            url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
+            dataType: "json",
+            success: function(data) {
+                chicken_can=0;
+                fish_can=0;
+                pork_can=0;
+                var list = data.outcomeList;
+                $.each(list,function(i,p){
+                    if(p.outType=="鸡肉罐头"){
+                        chicken_can += p.money;
+                        // console.log(oil);
+                    }
+                    else if(p.outType=="鱼肉罐头"){
+                        fish_can += p.money;
+                    }
+                    else if(p.outType=="猪肉罐头"){
+                        pork_can += p.money;
+                    }
+                });
+            }
+        })
+
+        $.ajax({
+            type: "get",
+            url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
+            dataType: "json",
+            success: function(data) {
                 myChart3.hideLoading();
                 myChart4.hideLoading();
                 //月度进项扇形图
@@ -729,57 +920,10 @@ $(document).ready(function() {
                 };
                 myChart4.setOption(option4);
 
-
-                //月度进销项图
-                var option = {
-                    title: {
-                        text: '月度进销项统计图'
-                    },
-                    tooltip: {},
-                    legend: {
-                        data: ['进项','销项']
-                    },
-                    xAxis: {
-                        data: ["花生油", "鸡肉", "鱼肉", "玻璃", "铁皮", "纯净水","鸡肉罐头","鱼肉罐头","猪肉罐头"]
-                    },
-                    yAxis: {},
-                    series: [{
-                        name: '进项',
-                        type: 'bar',
-                        data: [oil, chicken,fish, glass, iron, water,0,0,0]
-                    },{
-                        name: '销项',
-                        type: 'bar',
-                        data: [0,0,0,0,0,0,chicken_can,fish_can,pork_can]
-                    }]
-                };
-                myChart.setOption(option);
-
-                //进销项总额
-                option1 = {
-                    title: {
-                        text: '总额'
-                    },
-                    tooltip: {},
-                    legend: {
-                        data: ['总额']
-                    },
-                    xAxis: {
-                        data: ["进项","销项"]
-                    },
-                    yAxis: {},
-                    series: [{
-                        name: '总额',
-                        type: 'bar',
-                        data: [chicken+oil+fish+glass+iron+water,chicken_can+fish_can+pork_can]
-                    }]
-                };
-                myChart1.setOption(option1);
             }
         })
 
     })
-
 })
 
 

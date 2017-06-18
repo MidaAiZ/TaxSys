@@ -23,9 +23,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11"/>
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php"/>
     <!--[if lt IE 9]>
-    <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/html5shiv.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="/FeiEditor/bitSite/css/respond.css?ver=2.41" type="text/css" media="screen"/>
     <!--[if lt IE 9]>
     <style type="text/css" id="static-stylesheet"></style>
     <link rel="stylesheet"
@@ -50,9 +48,6 @@
         }
     </style>
     <script src="js/import.js"></script>
-    <link rel="stylesheet"
-          href="http://57ea239cecea4.t73.qifeiye.com/qfy-content/cache/scripts/a635b3ad6691a30f641df40e4f4b28c9.css"
-          type="text/css" media="all"/>
     <!-- Cache! -->
     <script type='text/javascript'>
         /* <![CDATA[ */
@@ -101,8 +96,6 @@
 
         /* ]]> */
     </script>
-    <script type="text/javascript"
-            src="http://57ea239cecea4.t73.qifeiye.com/qfy-content/cache/scripts/cd58c9a4a337ab56f72a3d05f4920d79.js">/*Cache!*/</script>
     <link rel="EditURI" type="application/rsd+xml" title="RSD"
           href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php?rsd"/>
     <link rel="wlwmanifest" type="application/wlwmanifest+xml"
