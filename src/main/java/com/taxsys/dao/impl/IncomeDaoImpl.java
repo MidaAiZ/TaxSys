@@ -89,18 +89,26 @@ public class IncomeDaoImpl implements IncomeDao{
         if(params.get("endTime") != null) { set.add(" created_at <= '" + params.get("endTime") + "'"); }
 
         Iterator<String> it = set.iterator();
-        if (it.hasNext()) { sql.append(it.next()); }
+        if (it.hasNext()) { sql.append(" WHERE ").append(it.next()); }
         while(it.hasNext()) {
             sql.append(" AND " + it.next());
         }
 
-        String hql = "FROM Income incomes WHERE " + sql + " order by incomes.created_at desc";
+        String hql = "FROM Income incomes " + sql + " order by incomes.created_at desc";
 
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         int page = Integer.parseInt((String)params.get("page"));
         int limit = Integer.parseInt((String)params.get("limit"));
         query.setFirstResult((page - 1) * limit);
         query.setMaxResults(limit);
+        return query.list();
+    }
+
+    public List typeList() {
+        String hql = "select distinct inType from Income income order by income.created_at desc";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+//        query.setFirstResult((offset - 1) * limit);
+//        query.setMaxResults(limit);
         return query.list();
     }
 

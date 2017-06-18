@@ -31,4 +31,6 @@ public interface IncomeService {
      * @return
      */
     List<String> searchIncomeList(Map<String, Object> params);
+
+    List<String> typeList();
 }

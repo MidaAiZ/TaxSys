@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.System.out;
+
 public class ReadExcel {
     //总行数
     private int totalRows = 0;
@@ -52,6 +54,7 @@ public class ReadExcel {
             list = createExcel(mFile.getInputStream(), type, isExcel2003);
         } catch (Exception e) {
             e.printStackTrace();
+            out.println("文件错误");
         }
         return list;
     }

@@ -221,4 +221,13 @@ public class IncomeController {
         returnMap.put("incomeList", incomeList);
         return returnMap;
     }
+
+    @RequestMapping(value = "/types", method = RequestMethod.POST)
+    @ResponseBody
+    public Map getTypes() {
+        Map<String, Object> returnMap = new HashMap();
+        List types = incomeService.typeList();
+        returnMap.put("types", types);
+        return returnMap;
+    }
 }

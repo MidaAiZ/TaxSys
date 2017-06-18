@@ -37,4 +37,6 @@ public interface IncomeDao {
     boolean updateIncomeInfo(Income income);
 
     List searchIncomeList(Map<String, Object> params);
+
+    List typeList();
 }

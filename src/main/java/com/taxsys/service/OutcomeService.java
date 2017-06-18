@@ -30,4 +30,5 @@ public interface OutcomeService {
      * @return
      */
     List<String> searchOutcomeList(Map<String, Object> params);
+    List<String> typeList();
 }

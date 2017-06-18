@@ -106,5 +106,7 @@ public class OutcomeServiceImpl implements OutcomeService {
         return new OutcomeDto(true, oldOutcome);    }
 
     public List<String> searchOutcomeList(Map<String, Object> params){ return outcomeDao.searchOutcomeList(params); }
-
+    public List<String> typeList() {
+        return outcomeDao.typeList();
+    };
 }
