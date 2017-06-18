@@ -26,7 +26,7 @@ $(document).ready(function () {
                         list[i].money +
                         "</td></tr>"
                     );
-                    console.log($tr);
+                    // console.log($tr);
                     $list.append($tr);
                 }
             } else {  // 沒有插入数据

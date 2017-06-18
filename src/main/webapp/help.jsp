@@ -38,7 +38,6 @@
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/respond.min.js"></script>
     <![endif]-->
     <style type="text/css" id="static-stylesheet"></style>
-    <link rel="stylesheet" href="http://57ea239cecea4.t73.qifeiye.com/qfy-content/cache/scripts/57ec8d9b352f33adc09c11ca94f4b7b0.css" type="text/css" media="all" />
     <link rel='stylesheet' id='dt-main-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/themes/qfy-01/css/main.css?ver=2.41' type='text/css' media='all' />
     <link rel='stylesheet' id='dt-custom-less-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/wp-less/qfy-01/css/custom-6a3391fc76.css?ver=2.41' type='text/css' media='all' />
     <link rel='stylesheet' id='dt-bit-custom-less-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/wp-less/qfy-01/css/bit-custom-6a3391fc76.css?ver=2.41' type='text/css' media='all' />
@@ -48,7 +47,6 @@
             background:transparent !important;
         }
     </style>
-    <link rel="stylesheet" href="http://57ea239cecea4.t73.qifeiye.com/qfy-content/cache/scripts/a635b3ad6691a30f641df40e4f4b28c9.css" type="text/css" media="all" />
     <script type='text/javascript'>
         /* <![CDATA[ */
         /* iphorm-plugin */
@@ -60,7 +58,6 @@
 
         /* ]]> */
     </script>
-    <script type="text/javascript" src="http://57ea239cecea4.t73.qifeiye.com/qfy-content/cache/scripts/cd58c9a4a337ab56f72a3d05f4920d79.js"></script>
     <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php?rsd" />
     <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://57ea239cecea4.t73.qifeiye.com/qfy-includes/wlwmanifest.xml" />
 
@@ -80,11 +77,6 @@
         body {background-color: #ffffff;background-position:center top;background-repeat:repeat;background-size: cover;background-attachment: fixed;}
         #page{background-color: #ffffff;background-position:center top;background-repeat:repeat;background-size: auto;background-attachment: scroll;}
     </style>
-    <script type="text/javascript">
-        dtGlobals.logoEnabled = 1;dtGlobals.curr_id = 2160;dtGlobals.logoURL = 'image/Aisino_1.jpg';dtGlobals.logoW = '675';dtGlobals.logoH = '220';dtGlobals.qfyname = '起飞页';dtGlobals.id = '57ea239cecea4';dtGlobals.language = '';smartMenu = 1;document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/';
-        dtGlobals.gallery_bgcolor = 'rgba(51,51,51,1)';dtGlobals.gallery_showthumbs = '0';dtGlobals.gallery_style = '';dtGlobals.gallery_autoplay = '0';dtGlobals.gallery_playspeed = '3';dtGlobals.gallery_imagesize = '100';dtGlobals.gallery_stopbutton = '';dtGlobals.gallery_thumbsposition = '';dtGlobals.gallery_tcolor = '#fff';dtGlobals.gallery_tsize = '16';dtGlobals.gallery_dcolor = '#fff';dtGlobals.gallery_dsize = '14';dtGlobals.gallery_tfamily = '';dtGlobals.gallery_dfamily = '';dtGlobals.gallery_blankclose = '0';dtGlobals.fm_showstyle = '';dtGlobals.fm_showspeed = '';dtGlobals.cdn_url = 'http://static.qifeiye.com';dtGlobals.qfymodel = "";dtGlobals.viewtemplate = "";
-        var socail_back_url = '';
-    </script>
     <link rel="stylesheet" href="css/help.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>

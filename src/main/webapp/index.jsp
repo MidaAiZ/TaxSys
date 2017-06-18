@@ -48,9 +48,6 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/Jan_Income.js"></script>
-    <link rel="stylesheet"
-          href="http://57ea239cecea4.t73.qifeiye.com/qfy-content/cache/scripts/a635b3ad6691a30f641df40e4f4b28c9.css"
-          type="text/css" media="all"/>
     <!-- Cache! -->
     <script type='text/javascript'>
         /* <![CDATA[ */
