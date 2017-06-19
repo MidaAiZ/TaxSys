@@ -8,18 +8,18 @@ $(document).ready(function () {
         type: "get",
         url: "/incomes/list?beginTime=2015-01-01",
         dataType: "json",
-        success : function(data) {
-            var sites = data.incomeList;
+        success: function (data) {
+            var list = data.incomeList;
             var type = "进项";
             if (list) {
-                for(var i in list) {
+                for (var i in list) {
                     $tr = $(
                         "<tr><td>" +
-                        (list[i].created_at).substring(0,4) +
+                        (list[i].created_at).substring(0, 4) +
                         "</td><td>" +
-                        (list[i].created_at).substring(5,7) +
+                        (list[i].created_at).substring(5, 7) +
                         "</td><td>" +
-                        list[i].inType+
+                        list[i].inType +
                         "</td><td>" +
                         type +
                         "</td><td>" +
@@ -27,69 +27,71 @@ $(document).ready(function () {
                         "</td></tr>"
                     );
                     // console.log($tr);
-                    $list.append($tr);
+                    $(list).append($tr);
                 }
             } else {  // 沒有插入数据
                 alert("没有导入任何数据！");
             }
         },
-        error : function() {
-            alert( result.error);
+        error: function () {
+            alert(result.error);
         },
-        cache : false,
-        contentType : false,
-        processData : false
-    });
-
-    $.ajax({
-        type: "get",
-        url: "/outcomes/list?beginTime=2015-01-01",
-        dataType: "json",
-        success : function(data) {
-            var $result = $("#result");
-            var $list = $result.find("tbody");
-            var list = data.outcomeList;
-            var type = "销项";
-            $result.show()
-            if (list) {
-                for(var i in list) {
-                    $tr = $(
-                        "<tr><td>" +
-                        (list[i].created_at).substring(0,4) +
-                        "</td><td>" +
-                        (list[i].created_at).substring(5,7) +
-                        "</td><td>" +
-                        list[i].inType+
-                        "</td><td>" +
-                        type +
-                        "</td><td>" +
-                        list[i].money +
-                        "</td></tr>"
-                    );
-                    console.log($tr);
-                    $list.append($tr);
-                }
-            } else {  // 沒有插入数据
-                alert("没有导入任何数据！");
-            }
-        },
-        error : function() {
-            alert( result.error);
-        },
-        cache : false,
-        contentType : false,
-        processData : false
-    });
-
-    $ele.on("click", "p", function() {
-        alert($(this).data("value"))
-    })
-
-    var page = $(".pagination");
-    page.on("click", "a", function() {
-        alert(window.location.href + "&page=" + $(this).html());
+        cache: false,
+        contentType: false,
+        processData: false
+        // });
     })
 })
+
+    // $.ajax({
+    //     type: "get",
+    //     url: "/outcomes/list?beginTime=2015-01-01",
+    //     dataType: "json",
+    //     success : function(data) {
+    //         var $result = $("#result");
+    //         var $list = $result.find("tbody");
+    //         var list = data.outcomeList;
+    //         var type = "销项";
+    //         $result.show()
+    //         if (list) {
+    //             for(var i in list) {
+    //                 $tr = $(
+    //                     "<tr><td>" +
+    //                     (list[i].created_at).substring(0,4) +
+    //                     "</td><td>" +
+    //                     (list[i].created_at).substring(5,7) +
+    //                     "</td><td>" +
+    //                     list[i].inType+
+    //                     "</td><td>" +
+    //                     type +
+    //                     "</td><td>" +
+    //                     list[i].money +
+    //                     "</td></tr>"
+    //                 );
+    //                 console.log($tr);
+    //                 $list.append($tr);
+    //             }
+    //         } else {  // 沒有插入数据
+    //             alert("没有导入任何数据！");
+    //         }
+    //     },
+    //     error : function() {
+    //         alert( result.error);
+    //     },
+    //     cache : false,
+    //     contentType : false,
+    //     processData : false
+    // });
+
+    // $ele.on("click", "p", function() {
+    //     alert($(this).data("value"))
+    // })
+
+    // var page = $(".pagination");
+    // page.on("click", "a", function() {
+    //     alert(window.location.href + "&page=" + $(this).html());
+    // })
+// })
 //
 //
 // var User1 = function(){

@@ -20,6 +20,8 @@
     <script src="js/json.js"></script>
     <script src="js/index.js"></script>
     <script src="js/require.js"></script>
+    <link href="css/alertify.css" media="screen" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery.alertify.js"></script>
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
@@ -29,7 +31,6 @@
     <!-- start of customer header -->
     <!-- end of customer header -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="js/echarts.min.js"></script>
     <title>企业增值税发票数据分析系统 | 查询</title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php" />
@@ -202,34 +203,6 @@
 </div>
 <div class="require-box" style="text-align: center;margin-top: 50px">
     <form action="" method="post" enctype="multipart/form-data">
-        <select name="year">
-            <option value="2017">2017</option>
-            <option value="2016">2016</option>
-            <option value="2015">2015</option>
-            <option value="2014">2014</option>
-            <option value="2013">2013</option>
-            <option value="2012">2012</option>
-            <option value="2011">2011</option>
-            <option value="2010">2010</option>
-            <option value="2009">2009</option>
-            <option value="2008">2008</option>
-            <option value="2007">2007</option>
-            <option value="2006">2006</option>
-        </select>
-        <select name="month">
-            <option value="1">1月份</option>
-            <option value="2">2月份</option>
-            <option value="3">3月份</option>
-            <option value="4">4月份</option>
-            <option value="5">5月份</option>
-            <option value="6">6月份</option>
-            <option value="7">7月份</option>
-            <option value="8">8月份</option>
-            <option value="9">9月份</option>
-            <option value="10">10月份</option>
-            <option value="11">11月份</option>
-            <option value="12">12月份</option>
-        </select>
         <select name="type">
             <option value="1">鸡肉</option>
             <option value="2">鱼肉</option>
@@ -238,11 +211,7 @@
             <option value="5">纯净水</option>
             <option value="6">花生油</option>
         </select>
-        <select name="item">
-            <option value="1">进项</option>
-            <option value="2">销项</option>
-        </select>
-        <input type="button" name="submit" class="btn btn-primary" value="查询"  style="margin-bottom: 5px;"/>
+        <input id="require-btn" type="button" name="submit" class="btn btn-primary" value="查询"  style="margin-bottom: 5px;"/>
     </form>
 </div><br><br>
 <div class="container" id="result">

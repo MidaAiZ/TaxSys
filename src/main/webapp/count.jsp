@@ -28,6 +28,11 @@
     <script src="js/echarts.min.js"></script>
     <script src="js/testPOI.js"></script>
     <script src="js/count.js"></script>
+    <script src="js/dataForm.js"></script>
+    <script src="js/jquery.alertify.js"></script>
+    <link rel="stylesheet" href="css/alertify.css">
+    <script src="js/jquery.fullPage.min.js"></script>
+    <link rel="stylesheet" href="css/jquery.fullPage.css">
     <title>企业增值税发票数据分析系统 | 导入</title>
     <link rel="profile" href="http://gmpg.org/xfn/11"/>
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php"/>
@@ -429,7 +434,140 @@
                 </div>
             </div>
             <div id="menu3" class="tab-pane fade in active">
+                <script>
+                    $(function(){
+                        $('#dowebok').fullpage({
+                        });
+                    });
+                </script>
+                <div id="dowebok">
+                    <div class="section">
+                        <div class="slide">
+                            <h3 style="float: left;margin-left: 13%">进项数据</h3>
+                            <div class="require-box" style="width:80%;text-align:center;margin-top: 50px;">
+                                <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
+                                    <select name="year_form">
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                    </select>
+                                    <select name="month_form">
+                                        <option value="1">1月份</option>
+                                        <option value="2">2月份</option>
+                                        <option value="3">3月份</option>
+                                        <option value="4">4月份</option>
+                                        <option value="5">5月份</option>
+                                        <option value="6">6月份</option>
+                                        <option value="7">7月份</option>
+                                        <option value="8">8月份</option>
+                                        <option value="9">9月份</option>
+                                        <option value="10">10月份</option>
+                                        <option value="11">11月份</option>
+                                        <option value="12">12月份</option>
+                                    </select>
+                                </form>
+                            </div><br>
+                            <div class="container" style="padding-left: 15px; " id="result">
+                                <div class="content col-lg-8 col-lg-offset-2 col-md-12">
+                                    <div class="table-responsive" style="text-align: center">
+                                        <table class="table table-bordered table-hover" style="text-align: center">
+                                            <thead>
+                                            <tr style="text-align: center">
+                                                <th style="text-align: center">年份</th>
+                                                <th style="text-align: center">月份</th>
+                                                <th style="text-align: center">商品类型</th>
+                                                <th style="text-align: center">进销项类型</th>
+                                                <th style="text-align: center">金额（万元）</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="tbody" id="content">
 
+                                            </tbody>
+                                        </table>
+                                        <nav class="pull-right">
+                                            <ul class="pagination" id="pagelist"></ul>
+                                        </nav>
+                                        <br><div id="total" style="float: left"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <h3 style="float: left;margin-left: 13%">销项数据</h3>
+                            <div class="require-box" style="width:80%;text-align:center;margin-top: 50px;">
+                                <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
+                                    <select name="year_form_outcome">
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                    </select>
+                                    <select name="month_form_outcome">
+                                        <option value="1">1月份</option>
+                                        <option value="2">2月份</option>
+                                        <option value="3">3月份</option>
+                                        <option value="4">4月份</option>
+                                        <option value="5">5月份</option>
+                                        <option value="6">6月份</option>
+                                        <option value="7">7月份</option>
+                                        <option value="8">8月份</option>
+                                        <option value="9">9月份</option>
+                                        <option value="10">10月份</option>
+                                        <option value="11">11月份</option>
+                                        <option value="12">12月份</option>
+                                    </select>
+                                </form>
+                            </div><br>
+                            <div class="container" style="padding-left: 15px; " id="result_two">
+                                <div class="content col-lg-8 col-lg-offset-2 col-md-12">
+                                    <div class="table-responsive" style="text-align: center">
+                                        <table class="table table-bordered table-hover" style="text-align: center">
+                                            <thead>
+                                            <tr style="text-align: center">
+                                                <th style="text-align: center">年份</th>
+                                                <th style="text-align: center">月份</th>
+                                                <th style="text-align: center">商品类型</th>
+                                                <th style="text-align: center">进销项类型</th>
+                                                <th style="text-align: center">金额（万元）</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="tbody" id="content_outcome">
+
+                                            </tbody>
+                                        </table>
+                                        <nav class="pull-right">
+                                            <ul class="pagination" id="pagelist_outcome"></ul>
+                                        </nav>
+                                        <br><div id="total_outcome" style="float: left"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    .fp-tableCell{
+                        padding-top: 0px;
+                        display: inline-block;
+                    }
+                </style>
             </div>
         </div>
     </div>
