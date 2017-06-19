@@ -28,7 +28,8 @@ $(document).ready(function() {
             }
         ).done(function(res) {
             if(res.income) {
-                alert("导入成功！");
+                var message = "<h3>导入成功！</h3><br/>";
+                    alertify.alert(message);
             } else {
                 alert("导入失败！");
             }
@@ -51,7 +52,8 @@ $(document).ready(function() {
             }
         ).done(function(res) {
             if(res.outcome) {
-                alert("导入成功！");
+                var message = "<h3>导入成功！</h3><br/>";
+                alertify.alert(message);
             } else {
                 alert("导入失败！");
             }

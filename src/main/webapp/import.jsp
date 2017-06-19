@@ -18,6 +18,9 @@
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/echarts.min.js"></script>
+    <link href="css/alertify.css" media="screen" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery.alertify.js"></script>
+    <script src="js/import.js"></script>
     <script src="js/testPOI.js"></script>
     <title>企业增值税发票数据分析系统 | 导入</title>
     <link rel="profile" href="http://gmpg.org/xfn/11"/>
@@ -47,7 +50,6 @@
             background: transparent !important;
         }
     </style>
-    <script src="js/import.js"></script>
     <!-- Cache! -->
     <script type='text/javascript'>
         /* <![CDATA[ */

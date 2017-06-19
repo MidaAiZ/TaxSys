@@ -347,12 +347,12 @@
 <div class="file-box" style="text-align: center;margin-top: 0px">
     <div class="container">
         <ul class="nav nav-tabs">
-            <li class="active" style="margin-left: 18%"><a data-toggle="tab" href="#menu1">条形统计</a></li>
+            <li class="active" style="margin-left: 18%"><a data-toggle="tab" href="#menu3">数据表格</a></li>
+            <li style="margin-left: 18%"><a data-toggle="tab" href="#menu1">柱状统计</a></li>
             <li style="margin-left: 20%"><a data-toggle="tab" href="#menu2">扇形统计</a></li>
-            <li style="margin-left: 18%"><a data-toggle="tab" href="#menu3">数据表格</a></li>
         </ul>
         <div class="tab-content">
-            <div id="menu1" class="tab-pane fade in active">
+            <div id="menu1" class="tab-pane fade ">
                 <div class="require-box">
                     <div class="count-box" style="text-align: center;margin-top: 20px">
                         <form action="" method="post" enctype="multipart/form-data">
@@ -428,7 +428,7 @@
                     <div id="main2" style="width: 500px;height:400px;margin-right:0px;float: right"></div>
                 </div>
             </div>
-            <div id="menu3" class="tab-pane fade">
+            <div id="menu3" class="tab-pane fade in active">
 
             </div>
         </div>

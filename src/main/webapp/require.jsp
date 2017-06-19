@@ -19,6 +19,7 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/json.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/require.js"></script>
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->

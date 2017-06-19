@@ -81,7 +81,6 @@ $(document).ready(function () {
         processData : false
     });
 
-
     $ele.on("click", "p", function() {
         alert($(this).data("value"))
     })
