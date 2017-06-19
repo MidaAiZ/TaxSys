@@ -25,6 +25,17 @@ public class SeasonDataAnalysis {
             throw new IllegalArgumentException("销售分季不统一,已导入模型的每年月数和将要导入模型的月数不一致");
     }
 
+    public double GetR2()
+    {
+        double s = 1;
+        for(RegressionLine i : lines)
+        {
+            s *= i.getR();
+        }
+        s = Math.pow(s,1.0/ lines.size());
+        return s;
+    }
+
     /**
      * 预测未来年份的各月销售额
      * @param year 指定预测未来第几年的数据，最后一组数据的年份为第0年
