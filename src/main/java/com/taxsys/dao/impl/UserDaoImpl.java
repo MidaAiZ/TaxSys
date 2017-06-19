@@ -2,6 +2,7 @@ package com.taxsys.dao.impl;
 
 import com.taxsys.dao.UserDao;
 import com.taxsys.model.User;
+import com.taxsys.utils.TimeUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -57,10 +58,12 @@ public class UserDaoImpl implements UserDao {
 
     public boolean updatePassword(String id, String md5NewPassword) {
         Session session = sessionFactory.getCurrentSession();
-        String hql = "update User u set u.password = ? where u.id = ?";
+        String hql = "update User u set u.password = ? u.updated_at = ? where u.id = ?";
         Query query = session.createQuery(hql);
         query.setString(0, md5NewPassword);
-        query.setString(1, id);
+        query.setString(1, TimeUtil.now());
+        query.setString(2, id);
+
         if(query.executeUpdate() == 1) {
             return true;
         } else {
@@ -71,12 +74,13 @@ public class UserDaoImpl implements UserDao {
 
     public boolean updateUserInfo(User user) {
         Session session = sessionFactory.getCurrentSession();
-        String hql = "update User u set u.gender = ?, u.nickname = ?, u.avatar = ? where u.id = ?";
+        String hql = "update User u set u.gender = ?, u.avatar = ?, u.updated_at = ? where u.id = ?";
         Query query = session.createQuery(hql);
         query.setInteger(0, user.getGender());
-        query.setString(1, user.getNickname());
-        query.setString(2, user.getAvatar());
+        query.setString(1, user.getAvatar());
+        query.setString(2, TimeUtil.now());
         query.setString(3, user.getId());
+
         if(query.executeUpdate() == 1) {
             return true;
         } else {

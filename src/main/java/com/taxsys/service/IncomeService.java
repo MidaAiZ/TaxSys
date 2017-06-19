@@ -2,6 +2,7 @@ package com.taxsys.service;
 
 import com.taxsys.dto.IncomeDto;
 import com.taxsys.model.Income;
+import com.taxsys.model.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.LinkedList;
@@ -10,9 +11,10 @@ import java.util.Map;
 
 public interface IncomeService {
 
-    List<Income> readExcelFile( MultipartFile file);
+    Map<String, Object> readExcelFile( MultipartFile file, User user);
 
     IncomeDto createIncome(Income income);
+    IncomeDto createIncomeForce(Income income, User user);
     Income getIncome(String id);
     Income getIncomeByTaxId(String taxId);
     List getIncomes();

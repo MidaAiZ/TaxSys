@@ -52,10 +52,6 @@ public class UserController {
         Map<String, Object> returnMap = new HashMap<String, Object>();
 
         User user = new User(number, cellphone, password);
-        String userId = UUIDGeneratorUtil.getUUID();
-        user.setId(userId);
-
-        out.println("输出用户信息\n  账号：  " + user.getNumber() + ",  ID： " + user.getId() + ",  手机号： " + user.getCellphone());
 
         UserDto userDto = userService.register(user);
         if(userDto.isSuccess()){
@@ -100,8 +96,11 @@ public class UserController {
             Cookie cookie = new Cookie("sessionId", sessionId);
             // 设置cookie超时为一天
             cookie.setMaxAge(24 * 60 * 60);
-
             response.addCookie(cookie);
+
+            // 将UserId 保存至session
+            request.getSession().setAttribute("userId", userDto.getUser().getId());
+
             // 将密码去除
             userDto.getUser().setPassword("");
             returnMap.put("user", userDto.getUser());
@@ -118,6 +117,7 @@ public class UserController {
 
         String sessionId = request.getSession().getId();
         request.getSession().removeAttribute(sessionId);
+        request.getSession().removeAttribute("userId");
         Cookie cookie = new Cookie("sessionId", null);
         response.addCookie(cookie);
         returnMap.put("logout",true);
@@ -168,7 +168,6 @@ public class UserController {
      * 修改用户信息
      * @param id 用户id
      * @param gender 用户性别
-     * @param nickname 用户昵称
      * @param avatar 用户头像
      * @return
      */
@@ -182,7 +181,7 @@ public class UserController {
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
 
-        User user = new User(gender, nickname, avatar);
+        User user = new User(gender, avatar);
         user.setId(id);
         UserDto userDto = userService.modifyUserInfo(user);
         if(userDto.isSuccess()){

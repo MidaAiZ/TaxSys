@@ -2,6 +2,7 @@ package com.taxsys.dao.impl;
 
 import com.taxsys.dao.OutcomeDao;
 import com.taxsys.model.Outcome;
+import com.taxsys.utils.TimeUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,7 +19,7 @@ public class OutcomeDaoImpl implements OutcomeDao{
     private SessionFactory sessionFactory;
 
     public Outcome getOutcome(String id){
-        String hql = "from outcome outcome where outcome.id=?";
+        String hql = "from Outcome outcome where outcome.id=?";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         query.setString(0, id);
         return (Outcome) query.uniqueResult();
@@ -60,12 +61,15 @@ public class OutcomeDaoImpl implements OutcomeDao{
      */
     public boolean updateOutcomeInfo(Outcome outcome){
         Session session = sessionFactory.getCurrentSession();
-        String hql = "update Outcome outcome set outcome.outType = ?, outcome.money = ?, outcome.taxId = ?, outcome.created_at = ?where  outcome.id = ?";
+        String hql = "update Outcome outcome set outcome.outType = ?, outcome.money = ?, outcome.taxId = ?, outcome.taxDate = ?, outcome.updated_at = ? where  outcome.id = ?";
         Query query = session.createQuery(hql);
         query.setString(0, outcome.getOutType());
         query.setFloat(1, outcome.getMoney());
         query.setString(2, outcome.getTaxId());
-        query.setString(3, outcome.getCreated_at());
+        query.setString(3, outcome.getTaxDate());
+        query.setString(4, TimeUtil.now());
+        query.setString(5, outcome.getId());
+
         if(query.executeUpdate() == 1) {
             return true;
         } else {

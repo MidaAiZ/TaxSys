@@ -26,22 +26,31 @@ public class Income {
     private float money;
 
     @Column(length = 16)
+    private String taxDate;
+
+    @Column(length = 32)
+    private String uid;
+
+    @Column(length = 16)
     private String created_at;
+
+    @Column(length = 16)
+    private String updated_at;
 
     public Income() {
     }
 
-    public Income(String taxId, String inType, float money, String created_at) {
+    public Income(String taxId, String inType, float money, String taxDate) {
         this.taxId = taxId;
         this.inType = inType;
         this.money = money;
-        this.created_at = created_at;
+        this.taxDate = taxDate;
     }
 
-    public Income(String taxId, String inType, float money) {
-        this.taxId = taxId;
+    public Income(String inType, float money, String taxDate) {
         this.inType = inType;
         this.money = money;
+        this.taxDate = taxDate;
     }
 
     public String getId() {
@@ -74,6 +83,30 @@ public class Income {
 
     public void setMoney(float money) {
         this.money = money;
+    }
+
+    public String getTaxDate() {
+        return taxDate;
+    }
+
+    public void setTaxDate(String taxDate) {
+        this.taxDate = taxDate;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
 
     public String getCreated_at() {

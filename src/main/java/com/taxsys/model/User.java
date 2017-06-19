@@ -29,13 +29,9 @@ public class User {
 	@Column(length = 16)
 	private String number;
 
-	// 用户昵称
-	@Column(length = 32)
-	private String nickname;
-
-	// 用户头像
-	@Column(length = 255)
-	private String avatar;
+	// 用户账号
+	@Column(length = 16)
+	private String role;
 
 	// 用户手机
 	@Column(length = 15)
@@ -45,9 +41,17 @@ public class User {
 	@Column(length = 32)
 	private String password;
 
+	// 用户头像
+	@Column(length = 255)
+	private String avatar;
+
 	// 用户创建时间
 	@Column(length = 32)
-	private String createTime;
+	private String created_at;
+
+	// 用户信息修改时间
+	@Column(length = 32)
+	private String updated_at;
 
 	public User() {
 	}
@@ -58,6 +62,31 @@ public class User {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
+	}
+
+	public String getUpdated_at() {
+		return updated_at;
+	}
+
+	public void setUpdated_at(String updated_at) {
+		this.updated_at = updated_at;
 	}
 
 	public int getGender() {
@@ -74,14 +103,6 @@ public class User {
 
 	public void setNumber(String number) {
 		this.number = number;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
 	}
 
 	public String getAvatar() {
@@ -108,14 +129,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-
 	public User(String number, String cellphone, String password) {
 		this.number = number;
 		this.cellphone = cellphone;
@@ -127,9 +140,8 @@ public class User {
 		this.password = password;
 	}
 
-	public User(int gender, String nickname, String avatar) {
+	public User(int gender, String avatar) {
 		this.gender = gender;
-		this.nickname = nickname;
 		this.avatar = avatar;
 	}
 
@@ -137,12 +149,13 @@ public class User {
 	public String toString() {
 		return "User{" +
 				"id='" + id + '\'' +
+				", number='" + number + '\'' +
+				", role='" + role + '\'' +
 				", gender=" + gender +
-				", nickname='" + nickname + '\'' +
-				", avatar='" + avatar + '\'' +
 				", cellphone='" + cellphone + '\'' +
-				", password='" + password + '\'' +
-				", createTime='" + createTime + '\'' +
+				", avatar='" + avatar + '\'' +
+				", createTime='" + created_at + '\'' +
+				", updateTime='" + updated_at + '\'' +
 				'}';
 	}
 }

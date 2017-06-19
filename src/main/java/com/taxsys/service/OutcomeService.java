@@ -2,6 +2,7 @@ package com.taxsys.service;
 
 import com.taxsys.dto.OutcomeDto;
 import com.taxsys.model.Outcome;
+import com.taxsys.model.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.LinkedList;
@@ -10,8 +11,9 @@ import java.util.Map;
 
 public interface OutcomeService {
 
-    List<Outcome> readExcelFile(MultipartFile file);
+    Map<String, Object> readExcelFile(MultipartFile file, User user);
     OutcomeDto createOutcome(Outcome outcome);
+    OutcomeDto createOutcomeForce(Outcome outcome, User user);
     Outcome getOutcome(String id);
     Outcome getOutcomeByTaxId(String taxId);
     LinkedList getOutcomes();
