@@ -86,6 +86,7 @@ public class IncomeServiceImpl implements IncomeService {
                             }
                         } catch (Exception e) {
                             Map failMap = new HashMap<String, Object>();
+                            out.println(e);
                             failMap.put("error", "数据错误！");
                             failMap.put("income", i);
                             failList.add(failMap);
@@ -123,7 +124,7 @@ public class IncomeServiceImpl implements IncomeService {
         IncomeDto createIncomeDto;
 
         // 进项查重
-        if (income.getTaxId().length() != 0 && incomeDao.getIncomeByTaxId(income.getTaxId()) != null) {
+        if (income.getTaxId() != null && income.getTaxId().length() != 0 && incomeDao.getIncomeByTaxId(income.getTaxId()) != null) {
             createIncomeDto = new IncomeDto(false, "进项已存在");
             return createIncomeDto;
         }
@@ -135,6 +136,7 @@ public class IncomeServiceImpl implements IncomeService {
         String now = TimeUtil.now();
         income.setCreated_at(now);
         income.setUpdated_at(now);
+        if(income.getTaxId() != null && income.getTaxId().length() == 0) { income.setTaxId(null); }
 
         // 插入数据库失败
         if (!incomeDao.createIncome(income)) {
@@ -184,17 +186,26 @@ public class IncomeServiceImpl implements IncomeService {
         String limit = request.getParameter("limit");
         if (page == null) { page = "1"; }
         if (limit == null) { limit = "100"; }
-        paramsMap.put("type", request.getParameter("type"));
-        paramsMap.put("beginTime", request.getParameter("beginTime"));
-        paramsMap.put("endTime", request.getParameter("endTime"));
-        paramsMap.put("taxId", request.getParameter("taxId"));
-        paramsMap.put("minMoney", request.getParameter("minMoney"));
-        paramsMap.put("maxMoney", request.getParameter("maxMoney"));
-        paramsMap.put("userId", request.getParameter("userId"));
-        paramsMap.put("page", page);
-        paramsMap.put("limit", limit);
+        try {
+            if (request.getParameter("type") != null) {
+                paramsMap.put("type", new String(request.getParameter("type").getBytes("ISO-8859-1"), "UTF-8"));
+            }
+            paramsMap.put("beginTime", request.getParameter("beginTime"));
+            paramsMap.put("endTime", request.getParameter("endTime"));
+            paramsMap.put("taxId", request.getParameter("taxId"));
+            paramsMap.put("minMoney", request.getParameter("minMoney"));
+            paramsMap.put("maxMoney", request.getParameter("maxMoney"));
+            paramsMap.put("createdBegin", request.getParameter("createdBegin"));
+            paramsMap.put("createdEnd", request.getParameter("createdEnd"));
+            paramsMap.put("userId", request.getParameter("userId"));
+            paramsMap.put("orderBy", request.getParameter("orderBy"));
+            paramsMap.put("page", page);
+            paramsMap.put("limit", limit);
+        } catch(Exception e) {
 
-        return incomeDao.searchIncomeList(paramsMap);
+        } finally {
+            return incomeDao.searchIncomeList(paramsMap);
+        }
     }
 
     public List<String> typeList() {

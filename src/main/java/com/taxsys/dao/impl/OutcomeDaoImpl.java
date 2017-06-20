@@ -87,7 +87,11 @@ public class OutcomeDaoImpl implements OutcomeDao{
         if(params.get("maxMoney") != null) { set.add(" money <= " + params.get("maxMoney")); }
         if(params.get("beginTime") != null) { set.add(" taxDate >= '" + params.get("beginTime") +"'"); }
         if(params.get("endTime") != null) { set.add(" taxDate <= '" + params.get("endTime") + "'"); }
+        if(params.get("createdBegin") != null) { set.add(" created_at >= '" + params.get("createdBegin") + "'"); }
+        if(params.get("createdEnd") != null) { set.add(" created_at <= '" + params.get("createdEnd") + "'"); }
         if(params.get("userId") != null) { set.add(" uid = '" + params.get("userId") + "'"); }
+        String order = "created_at";
+        if(params.get("orderBy") != null) { order = (String)params.get("orderBy"); }
 
         Iterator<String> it = set.iterator();
         if (it.hasNext()) { sql.append(" WHERE ").append(it.next()); }
@@ -95,7 +99,7 @@ public class OutcomeDaoImpl implements OutcomeDao{
             sql.append(" AND " + it.next());
         }
 
-        String hqlCount = "select COUNT(1) FROM Outcome outcomes " + sql + " order by outcomes.created_at desc";
+        String hqlCount = "select COUNT(1) FROM Outcome outcomes " + sql + " order by outcomes." + order + " desc";
         String hql = "FROM Outcome outcomes " + sql + " order by outcomes.created_at desc";
 
         Query countQuery = sessionFactory.getCurrentSession().createQuery(hqlCount);

@@ -62,7 +62,7 @@ public class OutcomeServiceImpl implements OutcomeService {
                             }
                         } catch (Exception e) {
                             Map failMap = new HashMap<String, Object>();
-                            failMap.put("error", e.toString());
+                            failMap.put("error", "数据错误！");
                             failMap.put("outcome", i);
                             failList.add(failMap);
                         }
@@ -70,7 +70,7 @@ public class OutcomeServiceImpl implements OutcomeService {
                     resultMap.put("successList", successList);
                     resultMap.put("failList", failList);
                 } catch (Exception e) {
-                    resultMap.put("error", e.toString());
+                    resultMap.put("error", "文件格式错误！");
                 }
             }else{
                 resultMap.put("error", "没有导入任何数据！");
@@ -128,7 +128,7 @@ public class OutcomeServiceImpl implements OutcomeService {
         OutcomeDto createOutcomeDto;
 
         // 销项查重
-        if (outcome.getTaxId().length() != 0 && outcomeDao.getOutcomeByTaxId(outcome.getTaxId()) != null) {
+        if (outcome.getTaxId() != null && outcome.getTaxId().length() != 0 && outcomeDao.getOutcomeByTaxId(outcome.getTaxId()) != null) {
             createOutcomeDto = new OutcomeDto(false, "销项已存在");
             return createOutcomeDto;
         }
@@ -140,6 +140,7 @@ public class OutcomeServiceImpl implements OutcomeService {
         String now = TimeUtil.now();
         outcome.setCreated_at(now);
         outcome.setUpdated_at(now);
+        if(outcome.getTaxId() != null && outcome.getTaxId().length() == 0) { outcome.setTaxId(null); }
 
         // 插入数据库失败
         if (!outcomeDao.createOutcome(outcome)) {
@@ -189,18 +190,26 @@ public class OutcomeServiceImpl implements OutcomeService {
         String limit = request.getParameter("limit");
         if (page == null) { page = "1"; }
         if (limit == null) { limit = "100"; }
-        paramsMap.put("type", request.getParameter("type"));
-        paramsMap.put("beginTime", request.getParameter("beginTime"));
-        paramsMap.put("endTime", request.getParameter("endTime"));
-        paramsMap.put("taxId", request.getParameter("taxId"));
-        paramsMap.put("minMoney", request.getParameter("minMoney"));
-        paramsMap.put("maxMoney", request.getParameter("maxMoney"));
-        paramsMap.put("userId", request.getParameter("userId"));
-        paramsMap.put("page", page);
-        paramsMap.put("limit", limit);
+        try{
+            if (request.getParameter("type") != null) {
+                paramsMap.put("type", new String(request.getParameter("type").getBytes("ISO-8859-1"), "UTF-8"));
+            }
+            paramsMap.put("beginTime", request.getParameter("beginTime"));
+            paramsMap.put("endTime", request.getParameter("endTime"));
+            paramsMap.put("taxId", request.getParameter("taxId"));
+            paramsMap.put("minMoney", request.getParameter("minMoney"));
+            paramsMap.put("maxMoney", request.getParameter("maxMoney"));
+            paramsMap.put("createdBegin", request.getParameter("createdBegin"));
+            paramsMap.put("createdEnd", request.getParameter("createdEnd"));
+            paramsMap.put("userId", request.getParameter("userId"));
+            paramsMap.put("orderBy", request.getParameter("orderBy"));
+            paramsMap.put("page", page);
+            paramsMap.put("limit", limit);
+        } catch (Exception e) {
 
-        return outcomeDao.searchOutcomeList(paramsMap);
-
+        } finally {
+            return outcomeDao.searchOutcomeList(paramsMap);
+        }
     }
     public List<String> typeList() {
         return outcomeDao.typeList();

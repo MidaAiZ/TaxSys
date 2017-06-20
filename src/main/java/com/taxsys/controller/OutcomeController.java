@@ -232,6 +232,7 @@ public class OutcomeController {
         Map<String, Object> returnMap = new HashMap<String, Object>();
 
         try {
+            request.setCharacterEncoding("UTF-8");
             List<String> outcomeList = outcomeService.searchOutcomeList(request);
             returnMap.put("count", outcomeList.get(0));
             outcomeList.remove(0);

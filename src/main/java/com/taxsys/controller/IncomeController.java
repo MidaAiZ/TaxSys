@@ -228,6 +228,7 @@ public class IncomeController {
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
         try{
+            request.setCharacterEncoding("UTF-8");
             List<String> incomeList = incomeService.searchIncomeList(request);
             returnMap.put("count", incomeList.get(0));
             incomeList.remove(0);

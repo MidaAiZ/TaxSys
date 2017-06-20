@@ -65,7 +65,8 @@ function errorHandle(error, $list) {
     $('#uploadModal').modal('show');
 }
 
-function successHandle(successList, $list) {
+function successHandle(successList, $list, text) {
+    var text = text || '导入成功';
     for(var i in successList) {
         var type = successList[i].inType || successList[i].outType;
         var $tr = $(
@@ -78,7 +79,7 @@ function successHandle(successList, $list) {
             "</td><td>" +
             successList[i].taxDate +
             "</td><td style='color: green'>" +
-            "<span class='glyphicon glyphicon-ok-sign'>导入成功</span>" +
+            "<span class='glyphicon glyphicon-ok-sign'>" + text + "</span>" +
             "</td><td data-role='opt'>" +
             "</td></tr>"
         );
