@@ -5,10 +5,10 @@ import com.taxsys.dto.UserDto;
 import com.taxsys.model.User;
 import com.taxsys.service.UserService;
 import com.taxsys.utils.MD5Util;
-import com.taxsys.utils.ReadExcel;
+import com.taxsys.utils.TimeUtil;
+import com.taxsys.utils.UUIDGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.LinkedList;
@@ -41,6 +41,16 @@ public class UserServiceImpl implements UserService {
             createUserDto = new UserDto(false, "用户已存在");
             return createUserDto;
         }
+
+        // 完善用户信息
+        String userId = UUIDGeneratorUtil.getUUID();
+        user.setId(userId);
+
+        user.setRole("admin");
+
+        String now = TimeUtil.now();
+        user.setCreated_at(now);
+        user.setUpdated_at(now);
 
         // 插入数据库失败
         if (!userDao.createUser(user)) {
@@ -116,9 +126,6 @@ public class UserServiceImpl implements UserService {
         }
         if(oldUser.getGender() != user.getGender()) {
             oldUser.setGender(user.getGender());
-        }
-        if(oldUser.getNickname() != null && !oldUser.getNickname().equals(user.getNickname())) {
-            oldUser.setNickname(user.getNickname());
         }
         if(oldUser.getAvatar() != null && !oldUser.getAvatar().equals(user.getAvatar())) {
             oldUser.setAvatar(user.getAvatar());

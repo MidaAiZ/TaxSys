@@ -2,6 +2,7 @@ package com.taxsys.dao.impl;
 
 import com.taxsys.dao.IncomeDao;
 import com.taxsys.model.Income;
+import com.taxsys.utils.TimeUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,7 +19,7 @@ public class IncomeDaoImpl implements IncomeDao{
     private SessionFactory sessionFactory;
 
     public Income getIncome(String id){
-        String hql = "from income income where income.id=?";
+        String hql = "from Income income where income.id=?";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         query.setString(0, id);
         return (Income) query.uniqueResult();
@@ -35,6 +36,7 @@ public class IncomeDaoImpl implements IncomeDao{
     public boolean createIncome(Income income){
         Session session = sessionFactory.getCurrentSession();
         String result = (String) session.save(income);
+
         session.flush();
         if(result !=  ""){
             return true;
@@ -64,12 +66,17 @@ public class IncomeDaoImpl implements IncomeDao{
      */
     public boolean updateIncomeInfo(Income income){
         Session session = sessionFactory.getCurrentSession();
-        String hql = "update Income income set income.inType = ?, income.money = ?, income.taxId = ?, income.created_at = ?where  income.id = ?";
+        String hql = "update Income income set income.inType = ?, income.money = ?, income.taxId = ?, income.taxDate = ?, income.created_at = ?, income.updated_at = ? where  income.id = ?";
         Query query = session.createQuery(hql);
         query.setString(0, income.getInType());
         query.setFloat(1, income.getMoney());
         query.setString(2, income.getTaxId());
-        query.setString(3, income.getCreated_at());
+        query.setString(3, income.getTaxDate());
+        query.setString(4, TimeUtil.now());
+        query.setString(5, TimeUtil.now());
+        query.setString(6, income.getId());
+
+        out.println("我要跟新啦！");
         if(query.executeUpdate() == 1) {
             return true;
         } else {
@@ -85,8 +92,9 @@ public class IncomeDaoImpl implements IncomeDao{
         if(params.get("taxId") != null) { set.add(" taxId = '" + params.get("taxId") + "'"); }
         if(params.get("minMoney") != null) { set.add(" money >= " + params.get("minMoney")); }
         if(params.get("maxMoney") != null) { set.add(" money <= " + params.get("maxMoney")); }
-        if(params.get("beginTime") != null) { set.add(" created_at >= '" + params.get("beginTime") +"'"); }
-        if(params.get("endTime") != null) { set.add(" created_at <= '" + params.get("endTime") + "'"); }
+        if(params.get("beginTime") != null) { set.add(" taxDate >= '" + params.get("beginTime") +"'"); }
+        if(params.get("endTime") != null) { set.add(" taxDate <= '" + params.get("endTime") + "'"); }
+        if(params.get("userId") != null) { set.add(" uid = '" + params.get("userId") + "'"); }
 
         Iterator<String> it = set.iterator();
         if (it.hasNext()) { sql.append(" WHERE ").append(it.next()); }
@@ -94,14 +102,21 @@ public class IncomeDaoImpl implements IncomeDao{
             sql.append(" AND " + it.next());
         }
 
-        String hql = "FROM Income incomes " + sql + " order by incomes.created_at desc";
+        String hqlCount = "select COUNT(1) FROM Income incomes " + sql + " order by incomes.created_at desc";
+        String hql =  "FROM Income incomes " + sql + " order by incomes.created_at desc";
 
+        Query countQuery = sessionFactory.getCurrentSession().createQuery(hqlCount);
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         int page = Integer.parseInt((String)params.get("page"));
         int limit = Integer.parseInt((String)params.get("limit"));
         query.setFirstResult((page - 1) * limit);
         query.setMaxResults(limit);
-        return query.list();
+
+        List list= query.list();
+        int count= ((Number)countQuery.list().iterator().next()).intValue();
+        // 注意这里的类型转化
+        list.add(0, count);
+        return list;
     }
 
     public List typeList() {

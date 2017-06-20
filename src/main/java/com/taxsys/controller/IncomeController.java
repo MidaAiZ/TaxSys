@@ -2,8 +2,11 @@ package com.taxsys.controller;
 
 import com.taxsys.dto.IncomeDto;
 import com.taxsys.model.Income;
+import com.taxsys.model.User;
 import com.taxsys.service.impl.IncomeServiceImpl;
+import com.taxsys.service.impl.UserServiceImpl;
 import com.taxsys.utils.ExportExcel;
+import com.taxsys.utils.TimeUtil;
 import com.taxsys.utils.UUIDGeneratorUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,54 +29,38 @@ public class IncomeController {
     @Autowired
     private IncomeServiceImpl incomeService;
 
+    @Autowired
+    private UserServiceImpl userService;
+
     @RequestMapping(value="upload", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> upload(@RequestParam(value="file",required = false)MultipartFile file, HttpServletRequest request, HttpServletResponse response){
+    public Map<String, Object> uploadExcel(@RequestParam(value="file",required = false)MultipartFile file, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> returnMap = new HashMap<String, Object>();
 
-        List<Income> incomeList = incomeService.readExcelFile(file);
-        if (incomeList != null) {
-            Iterator it = incomeList.iterator();
-            int index = 0;
-            HashSet hs = new HashSet();
-            while (it.hasNext()) {
-                index ++;
-                hs.add(it.next());
-            }
-            returnMap.put("incomes", hs.toArray());
-        } else {
-            returnMap.put("error", "导入失败！");
+        String userId = (String)request.getSession().getAttribute("userId");
+        User user = userService.getUser(userId);
+        if(user == null) {
+            returnMap.put("error", "用户未登录");
+            return returnMap;
         }
+        returnMap = incomeService.readExcelFile(file, user);
         return returnMap;
     }
 
     @RequestMapping(value="exportExcel", method = RequestMethod.POST)
     @ResponseBody
-    public void exportLabType(HttpServletRequest request, HttpServletResponse response){
-        //以下是从前台获取参数
-        String typeId = request.getParameter("taxId");
-        String typeName = request.getParameter("inType");
-        String money = request.getParameter("money");
-        String created_at = request.getParameter("created_at");
-        //存成数组格式
-        //需要导出的excel表头
-        String[] zd = { typeId, typeName, money, created_at };
-//        String[] zd = col; //需要导出的字段
-        String[] col = { "发票号", "类型", "金额", "日期" };
-        //下面用到上面的类，需要传递实体参数
-        ExportExcel<Income> ee = new ExportExcel<Income>();
-        //最后一个参数是数据集合
-        List list  = incomeService.getIncomes();
-        HSSFWorkbook wb = ee.exportExcel("进项", col, zd, list);
-//        response.setContentType("application/vnd.ms-excel");
+    public void exportExcel(HttpServletRequest request, HttpServletResponse response){
+
+        HSSFWorkbook wb = incomeService.exportExcel(request);
         response.setContentType("application/x-download");
-        response.setHeader("Content-disposition", "attachment;filename=student.xls");
+        response.setHeader("Content-disposition", "attachment;filename=进项统计表.xls");
         try {
             OutputStream ouputStream = response.getOutputStream();
             wb.write(ouputStream);
             ouputStream.flush();
             ouputStream.close();
         } catch (Exception e) {
+            out.println(e);
             response.setStatus(500);
         }
     }
@@ -89,7 +76,7 @@ public class IncomeController {
      * @param taxId 进项发票号
      * @param money 进项额
      * @param inType 进项类型
-     * @param created_at 进项日期
+     * @param taxDate 进项日期
      * @return
      */
     @RequestMapping(value="createIncome", method = RequestMethod.POST)
@@ -97,16 +84,23 @@ public class IncomeController {
     public Map<String, Object> createIncome(@RequestParam String taxId,
                                         @RequestParam String inType,
                                         @RequestParam Float money,
-                                        @RequestParam String created_at,
+                                        @RequestParam String taxDate,
                                         HttpServletRequest request,
                                         HttpServletResponse response) {
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
 
-        Income income = new Income(taxId, inType, money, created_at);
-        String incomeId = UUIDGeneratorUtil.getUUID();
-        income.setId(incomeId);
+        Income income = new Income(taxId, inType, money, taxDate);
+        String userId = (String)request.getSession().getAttribute("userId");
+        User user = userService.getUser(userId);
+        if(user == null) {
+            returnMap.put("error", "用户未登录");
+            return returnMap;
+        }
 
+        // 设置income的uid
+        income.setUid(userId);
+        // 插入数据库
         IncomeDto incomeDto = incomeService.createIncome(income);
         if(incomeDto.isSuccess()){
             returnMap.put("income", incomeDto.getIncome());
@@ -115,7 +109,43 @@ public class IncomeController {
         }
         return returnMap;
     }
-    
+
+    /**
+     * 强行创建新进项，覆盖旧进项
+     * @param taxId 进项发票号
+     * @param money 进项额
+     * @param type 进项类型
+     * @param taxDate 进项日期
+     * @return
+     */
+    @RequestMapping(value="createIncomeForce", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> createIncomeForce(@RequestParam String taxId,
+                                            @RequestParam String type,
+                                            @RequestParam Float money,
+                                            @RequestParam String taxDate,
+                                            HttpServletRequest request,
+                                            HttpServletResponse response) {
+        // response返回的json内容
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+
+        String userId = (String)request.getSession().getAttribute("userId");
+        User user = userService.getUser(userId);
+        if(user == null) {
+            returnMap.put("error", "用户未登录");
+            return returnMap;
+        }
+        Income income = new Income(taxId, type, money, taxDate);
+        IncomeDto incomeDto = incomeService.createIncomeForce(income, user);
+        if(incomeDto.isSuccess()){
+            returnMap.put("income", incomeDto.getIncome());
+        } else {
+            returnMap.put("error", incomeDto.getMessage());
+        }
+        return returnMap;
+    }
+
+
     /**
      * 修改进项信息
      * @param taxId 进项发票ID
@@ -194,32 +224,19 @@ public class IncomeController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> searchIncomeList(@RequestParam(required=false) String type,
-                                                @RequestParam(required=false) String beginTime,
-                                                @RequestParam(required=false) String endTime,
-                                                @RequestParam(required=false) String taxId,
-                                                @RequestParam(required=false) String minMoney,
-                                                @RequestParam(required=false) String maxMoney,
-                                                @RequestParam(required=false) String page,
-                                                @RequestParam(required=false) String limit
-                                                ) {
+    public Map<String, Object> searchIncomeList(HttpServletRequest request) {
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
-        Map<String, Object> paramsMap = new HashMap<String, Object>();
-        if (page == null) { page = "1"; }
-        if (limit == null) { limit = "100"; }
-        paramsMap.put("type", type);
-        paramsMap.put("beginTime", beginTime);
-        paramsMap.put("endTime", endTime);
-        paramsMap.put("taxId", taxId);
-        paramsMap.put("minMoney", minMoney);
-        paramsMap.put("maxMoney", maxMoney);
-        paramsMap.put("page", page);
-        paramsMap.put("limit", limit);
-
-        List<String> incomeList = incomeService.searchIncomeList(paramsMap);
-        returnMap.put("incomeList", incomeList);
-        return returnMap;
+        try{
+            List<String> incomeList = incomeService.searchIncomeList(request);
+            returnMap.put("count", incomeList.get(0));
+            incomeList.remove(0);
+            returnMap.put("incomeList", incomeList);
+        } catch (Exception e) {
+            returnMap.put("error", e);
+        } finally {
+            return returnMap;
+        }
     }
 
     @RequestMapping(value = "/types", method = RequestMethod.POST)
