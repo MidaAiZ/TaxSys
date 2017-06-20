@@ -53,7 +53,7 @@ public class IncomeController {
 
         HSSFWorkbook wb = incomeService.exportExcel(request);
         response.setContentType("application/x-download");
-        response.setHeader("Content-disposition", "attachment;filename=进项统计表.xls");
+        response.setHeader("Content-disposition", "attachment;filename=incomes.xls");
         try {
             OutputStream ouputStream = response.getOutputStream();
             wb.write(ouputStream);

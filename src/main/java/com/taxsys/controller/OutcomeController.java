@@ -7,11 +7,7 @@ import com.taxsys.model.Outcome;
 import com.taxsys.model.User;
 import com.taxsys.service.impl.OutcomeServiceImpl;
 import com.taxsys.service.impl.UserServiceImpl;
-<<<<<<< HEAD
-import com.taxsys.utils.TimeUtil;
-import com.taxsys.utils.UUIDGeneratorUtil;
-=======
->>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +46,26 @@ public class OutcomeController {
         returnMap = outcomeService.readExcelFile(file, user);
         return returnMap;
     }
+
+    @RequestMapping(value="exportExcel", method = RequestMethod.POST)
+    @ResponseBody
+    public void exportExcel(HttpServletRequest request, HttpServletResponse response){
+
+        HSSFWorkbook wb = outcomeService.exportExcel(request);
+        response.setContentType("application/x-download");
+        response.setHeader("Content-disposition", "attachment;filename=outcomes.xls");
+        try {
+            OutputStream ouputStream = response.getOutputStream();
+            wb.write(ouputStream);
+            ouputStream.flush();
+            ouputStream.close();
+        } catch (Exception e) {
+            out.println(e);
+            response.setStatus(500);
+        }
+    }
+
+
 
     //新建销项表单
     @RequestMapping(value="new", method = RequestMethod.GET)
@@ -84,7 +101,7 @@ public class OutcomeController {
             return returnMap;
         }
 
-        // 设置income的uid
+        // 设置outcome的uid
         outcome.setUid(userId);
 
 
@@ -210,39 +227,20 @@ public class OutcomeController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> searchOutcomeList(@RequestParam(required=false) String type,
-                                                @RequestParam(required=false) String beginTime,
-                                                @RequestParam(required=false) String endTime,
-                                                @RequestParam(required=false) String taxId,
-                                                @RequestParam(required=false) String minMoney,
-                                                @RequestParam(required=false) String maxMoney,
-                                                @RequestParam(required=false) String page,
-                                                @RequestParam(required=false) String limit
-    ) {
+    public Map<String, Object> searchOutcomeList(HttpServletRequest request) {
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
-        Map<String, Object> paramsMap = new HashMap<String, Object>();
-        if (page == null) { page = "1"; }
-        if (limit == null) { limit = "100"; }
-        paramsMap.put("type", type);
-        paramsMap.put("beginTime", beginTime);
-        paramsMap.put("endTime", endTime);
-        paramsMap.put("taxId", taxId);
-        paramsMap.put("minMoney", minMoney);
-        paramsMap.put("maxMoney", maxMoney);
-        paramsMap.put("page", page);
-        paramsMap.put("limit", limit);
 
-//        try {
-            List<String> outcomeList = outcomeService.searchOutcomeList(paramsMap);
+        try {
+            List<String> outcomeList = outcomeService.searchOutcomeList(request);
             returnMap.put("count", outcomeList.get(0));
             outcomeList.remove(0);
             returnMap.put("outcomeList", outcomeList);
-//        }catch(Exception e) {
-//            returnMap.put("error", e);
-//        } finally {
+        }catch(Exception e) {
+            returnMap.put("error", e);
+        } finally {
             return returnMap;
-//        }
+        }
     }
 
     @RequestMapping(value = "/types", method = RequestMethod.POST)

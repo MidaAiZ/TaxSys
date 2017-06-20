@@ -382,11 +382,7 @@
                         <div class='qfyuser-field qfyuser-field-user_pass ' data-key='user_pass'>
                             <div class='qfyuser-label'>
                                 <label for='time1-1'>日期：</label>
-<<<<<<< HEAD
-                                <input id="time1-1"  class="form-control" name="created_at" type="date" value="2017-01-01"/>
-=======
                                 <input id="time1-1"  class="form-control" name="taxDate" type="date" value="2017-01-01"/>
->>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
                             </div>
                         </div><br>
                         <input id="import-1_btn" class="btn-xs btn-primary form-control" type="submit" value="提交"/>
@@ -462,11 +458,7 @@
                         <div class='qfyuser-field qfyuser-field-user_pass ' data-key='user_pass'>
                             <div class='qfyuser-label'>
                                 <label for='time2-1'>日期：</label>
-<<<<<<< HEAD
-                                <input id="time2-1" class="form-control" name="created_at" type="date" value="2017-01-01"/>
-=======
                                 <input id="time2-1" class="form-control" name="taxDate" type="date" value="2017-01-01"/>
->>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
                             </div>
                         </div><br>
                         <input id="import-2_btn" class="btn-xs btn-primary form-control" type="submit" value="提交"/>

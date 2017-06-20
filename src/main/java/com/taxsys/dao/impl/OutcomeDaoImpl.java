@@ -87,6 +87,7 @@ public class OutcomeDaoImpl implements OutcomeDao{
         if(params.get("maxMoney") != null) { set.add(" money <= " + params.get("maxMoney")); }
         if(params.get("beginTime") != null) { set.add(" taxDate >= '" + params.get("beginTime") +"'"); }
         if(params.get("endTime") != null) { set.add(" taxDate <= '" + params.get("endTime") + "'"); }
+        if(params.get("userId") != null) { set.add(" uid = '" + params.get("userId") + "'"); }
 
         Iterator<String> it = set.iterator();
         if (it.hasNext()) { sql.append(" WHERE ").append(it.next()); }

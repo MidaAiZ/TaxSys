@@ -3,8 +3,10 @@ package com.taxsys.service;
 import com.taxsys.dto.OutcomeDto;
 import com.taxsys.model.Outcome;
 import com.taxsys.model.User;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,7 @@ import java.util.Map;
 public interface OutcomeService {
 
     Map<String, Object> readExcelFile(MultipartFile file, User user);
+    HSSFWorkbook exportExcel(HttpServletRequest request);
     OutcomeDto createOutcome(Outcome outcome);
     OutcomeDto createOutcomeForce(Outcome outcome, User user);
     Outcome getOutcome(String id);
@@ -27,10 +30,10 @@ public interface OutcomeService {
 
     /**
      * 分页获取销项
-     * @param offset 偏移量
-     * @param limit 一次获取的数据
+     * @param request
      * @return
      */
-    List<String> searchOutcomeList(Map<String, Object> params);
+    List<String> searchOutcomeList(HttpServletRequest request);
+
     List<String> typeList();
 }

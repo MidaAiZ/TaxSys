@@ -2,21 +2,27 @@ package com.taxsys.service.impl;
 
 import com.taxsys.dao.impl.OutcomeDaoImpl;
 import com.taxsys.dto.OutcomeDto;
+import com.taxsys.model.Income;
 import com.taxsys.model.Outcome;
 import com.taxsys.model.User;
 import com.taxsys.service.OutcomeService;
+import com.taxsys.utils.ExportExcel;
 import com.taxsys.utils.ReadExcel;
 import com.taxsys.utils.TimeUtil;
 import com.taxsys.utils.UUIDGeneratorUtil;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.System.out;
 
 @Service
 public class OutcomeServiceImpl implements OutcomeService {
@@ -36,8 +42,8 @@ public class OutcomeServiceImpl implements OutcomeService {
             if (outcomeList.size() == 1 && outcomeList.get(0).equals("ERROR FILE")) {
                 resultMap.put("error", "文件格式错误！");
             } else if (outcomeList != null){
-                List successList = new LinkedList(); // 添加成功的进项
-                List failList = new LinkedList(); // 添加失败的进项
+                List successList = new LinkedList(); // 添加成功的销项
+                List failList = new LinkedList(); // 添加失败的销项
 
                 try{
                     String now = TimeUtil.now();
@@ -76,6 +82,34 @@ public class OutcomeServiceImpl implements OutcomeService {
         }
     }
 
+    public HSSFWorkbook exportExcel(HttpServletRequest request) {
+        //以下是从前台获取参数
+        int len = 0;
+        if(request.getParameter("getTaxId") != null) { len ++; }
+        if(request.getParameter("getType") != null) { len ++; }
+        if(request.getParameter("getMoney") != null) { len ++; }
+        if(request.getParameter("getTaxDate") != null) { len ++; }
+
+        String[] zd = new String[len], col = new String[len];
+        int i = 0;
+        if(request.getParameter("getTaxId") != null) { zd[i] = "taxId"; col[i] = "销项发票"; i ++; }
+        if(request.getParameter("getType") != null) { zd[i] = "outType"; col[i] = "销项类型"; i ++; }
+        if(request.getParameter("getMoney") != null) { zd[i] = "money"; col[i] = "金额"; i ++; }
+        if(request.getParameter("getTaxDate") != null) { zd[i] = "taxDate"; col[i] = "日期"; }
+        try{
+            // 获取数据
+            List list = searchOutcomeList(request);
+            list.remove(0); //总条数信息
+            //下面用到上面的类，需要传递实体参数
+            ExportExcel<Income> ee = new ExportExcel<Income>();
+            //最后一个参数是数据集合
+            HSSFWorkbook wb = ee.exportExcel("销项", col, zd, list);
+            return wb;
+        } catch (Exception e) {
+            out.println(e);
+            return null;
+        }
+    }
 
     public Outcome getOutcome(String id) {
         return outcomeDao.getOutcome(id);
@@ -136,10 +170,6 @@ public class OutcomeServiceImpl implements OutcomeService {
         return new OutcomeDto(true, oldOutcome);    }
 
     public OutcomeDto createOutcomeForce(Outcome outcome, User user) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
         String now = TimeUtil.now();
         outcome.setCreated_at(now);
         outcome.setUpdated_at(now);
@@ -153,7 +183,25 @@ public class OutcomeServiceImpl implements OutcomeService {
         }
     }
 
-    public List<String> searchOutcomeList(Map<String, Object> params){ return outcomeDao.searchOutcomeList(params); }
+    public List<String> searchOutcomeList(HttpServletRequest request){
+        Map<String, Object> paramsMap = new HashMap<String, Object>();
+        String page = request.getParameter("page");
+        String limit = request.getParameter("limit");
+        if (page == null) { page = "1"; }
+        if (limit == null) { limit = "100"; }
+        paramsMap.put("type", request.getParameter("type"));
+        paramsMap.put("beginTime", request.getParameter("beginTime"));
+        paramsMap.put("endTime", request.getParameter("endTime"));
+        paramsMap.put("taxId", request.getParameter("taxId"));
+        paramsMap.put("minMoney", request.getParameter("minMoney"));
+        paramsMap.put("maxMoney", request.getParameter("maxMoney"));
+        paramsMap.put("userId", request.getParameter("userId"));
+        paramsMap.put("page", page);
+        paramsMap.put("limit", limit);
+
+        return outcomeDao.searchOutcomeList(paramsMap);
+
+    }
     public List<String> typeList() {
         return outcomeDao.typeList();
     };

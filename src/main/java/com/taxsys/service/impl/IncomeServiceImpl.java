@@ -16,11 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-<<<<<<< HEAD
-=======
-import java.io.OutputStream;
-import java.lang.reflect.Array;
->>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
 import java.util.*;
 
 import static java.lang.System.out;
@@ -31,8 +26,6 @@ public class IncomeServiceImpl implements IncomeService {
     @Autowired
     IncomeDaoImpl incomeDao;
 
-<<<<<<< HEAD
-=======
     public HSSFWorkbook exportExcel(HttpServletRequest request) {
         //以下是从前台获取参数
         int len = 0;
@@ -62,7 +55,6 @@ public class IncomeServiceImpl implements IncomeService {
         }
     }
 
->>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
     public Map<String, Object> readExcelFile(MultipartFile file, User user) {
         //创建处理EXCEL的类
         ReadExcel readExcel=new ReadExcel();
@@ -171,23 +163,6 @@ public class IncomeServiceImpl implements IncomeService {
         }
         return new IncomeDto(true, oldIncome);
     }
-<<<<<<< HEAD
-
-    public IncomeDto createIncomeForce(Income income, User user) {
-        String now = TimeUtil.now();
-        income.setCreated_at(now);
-        income.setUpdated_at(now);
-        income.setUid(user.getId());
-        Income oldIncome = incomeDao.getIncomeByTaxId(income.getTaxId());
-        if(oldIncome != null) {
-            income.setId(oldIncome.getId());
-            return modifyIncomeInfo(income);
-        } else {
-            return createIncome(income);
-        }
-    }
-=======
->>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
 
     public IncomeDto createIncomeForce(Income income, User user) {
         String now = TimeUtil.now();
