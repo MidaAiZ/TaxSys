@@ -6,6 +6,7 @@ function getJson(page, limit,CONDITION) {
     var siteList={"incomeList":[]};
     var page = page  ? page : 1;
     var limit = limit ? limit : 10;
+
     $.ajax({
         type: "get",
         url: "/incomes/list?page="+ page +"&limit=" + limit + "&beginTime=" + CONDITION,
