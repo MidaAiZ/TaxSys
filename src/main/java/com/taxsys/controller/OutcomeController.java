@@ -1,14 +1,10 @@
 package com.taxsys.controller;
 
-import com.taxsys.dto.IncomeDto;
 import com.taxsys.dto.OutcomeDto;
-import com.taxsys.model.Income;
 import com.taxsys.model.Outcome;
 import com.taxsys.model.User;
 import com.taxsys.service.impl.OutcomeServiceImpl;
 import com.taxsys.service.impl.UserServiceImpl;
-import com.taxsys.utils.TimeUtil;
-import com.taxsys.utils.UUIDGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
-
-import static java.lang.System.out;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "outcomes")

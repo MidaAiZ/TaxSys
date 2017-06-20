@@ -2,21 +2,22 @@ package com.taxsys.service.impl;
 
 import com.taxsys.dao.impl.IncomeDaoImpl;
 import com.taxsys.dto.IncomeDto;
-import com.taxsys.dto.IncomeDto;
-import com.taxsys.model.Income;
-import com.taxsys.model.Income;
 import com.taxsys.model.Income;
 import com.taxsys.model.User;
 import com.taxsys.service.IncomeService;
-import com.taxsys.utils.MD5Util;
+import com.taxsys.utils.ExportExcel;
 import com.taxsys.utils.ReadExcel;
 import com.taxsys.utils.TimeUtil;
 import com.taxsys.utils.UUIDGeneratorUtil;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.util.*;
 
 import static java.lang.System.out;
@@ -26,6 +27,35 @@ public class IncomeServiceImpl implements IncomeService {
 
     @Autowired
     IncomeDaoImpl incomeDao;
+
+    public HSSFWorkbook exportExcel(HttpServletRequest request) {
+        //以下是从前台获取参数
+        int len = 0;
+        if(request.getParameter("getTaxId") != null) { len ++; }
+        if(request.getParameter("getType") != null) { len ++; }
+        if(request.getParameter("getMoney") != null) { len ++; }
+        if(request.getParameter("getTaxDate") != null) { len ++; }
+
+        String[] zd = new String[len], col = new String[len];
+        int i = 0;
+        if(request.getParameter("getTaxId") != null) { zd[i] = "taxId"; col[i] = "进项发票"; i ++; }
+        if(request.getParameter("getType") != null) { zd[i] = "inType"; col[i] = "进项类型"; i ++; }
+        if(request.getParameter("getMoney") != null) { zd[i] = "money"; col[i] = "金额"; i ++; }
+        if(request.getParameter("getTaxDate") != null) { zd[i] = "taxDate"; col[i] = "日期"; }
+        try{
+            // 获取数据
+            List list = searchIncomeList(request);
+            list.remove(0); //总条数信息
+            //下面用到上面的类，需要传递实体参数
+            ExportExcel<Income> ee = new ExportExcel<Income>();
+            //最后一个参数是数据集合
+            HSSFWorkbook wb = ee.exportExcel("进项", col, zd, list);
+            return wb;
+        } catch (Exception e) {
+            out.println(e);
+            return null;
+        }
+    }
 
     public Map<String, Object> readExcelFile(MultipartFile file, User user) {
         //创建处理EXCEL的类
@@ -150,7 +180,24 @@ public class IncomeServiceImpl implements IncomeService {
         }
     }
 
-    public List<String> searchIncomeList(Map<String, Object> params){ return incomeDao.searchIncomeList(params); }
+    public List<String> searchIncomeList(HttpServletRequest request){
+        Map<String, Object> paramsMap = new HashMap<String, Object>();
+        String page = request.getParameter("page");
+        String limit = request.getParameter("limit");
+        if (page == null) { page = "1"; }
+        if (limit == null) { limit = "100"; }
+        paramsMap.put("type", request.getParameter("type"));
+        paramsMap.put("beginTime", request.getParameter("beginTime"));
+        paramsMap.put("endTime", request.getParameter("endTime"));
+        paramsMap.put("taxId", request.getParameter("taxId"));
+        paramsMap.put("minMoney", request.getParameter("minMoney"));
+        paramsMap.put("maxMoney", request.getParameter("maxMoney"));
+        paramsMap.put("userId", request.getParameter("userId"));
+        paramsMap.put("page", page);
+        paramsMap.put("limit", limit);
+
+        return incomeDao.searchIncomeList(paramsMap);
+    }
 
     public List<String> typeList() {
         return incomeDao.typeList();

@@ -5,20 +5,14 @@ import com.taxsys.dto.UserDto;
 import com.taxsys.model.User;
 import com.taxsys.service.UserService;
 import com.taxsys.utils.MD5Util;
-import com.taxsys.utils.ReadExcel;
 import com.taxsys.utils.TimeUtil;
 import com.taxsys.utils.UUIDGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Timer;
 
 @Service
 public class UserServiceImpl implements UserService {

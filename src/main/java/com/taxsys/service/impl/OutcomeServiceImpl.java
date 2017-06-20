@@ -136,6 +136,7 @@ public class OutcomeServiceImpl implements OutcomeService {
         return new OutcomeDto(true, oldOutcome);    }
 
     public OutcomeDto createOutcomeForce(Outcome outcome, User user) {
+
         String now = TimeUtil.now();
         outcome.setCreated_at(now);
         outcome.setUpdated_at(now);
