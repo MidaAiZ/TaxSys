@@ -8,7 +8,8 @@ var User1 = function(){
         //模拟上传excel
         $("#uploadEventBtn1").unbind("click").bind("click",function(){
             $("#uploadEventFile1").click();
-        });
+        })
+        ;
         $("#uploadEventFile1").bind("change",function(){
             $("#uploadEventPath1").attr("value",$("#uploadEventFile1").val());
         });
@@ -18,9 +19,11 @@ var User1 = function(){
     this.uploadBtn = function(){
         var uploadEventFile = $("#uploadEventFile1").val();
         if(uploadEventFile == ''){
-            alert("请选择excel,再上传");
+            var message = "<h3>请选择excel,再上传!</h3><br/>";
+            alertify.alert(message);
         }else if(uploadEventFile.lastIndexOf(".xls")<0){//可判断以.xls和.xlsx结尾的excel
-            alert("只能上传Excel文件");
+            var message = "<h3>只能上传Excel文件!</h3><br/>";
+            alertify.alert(message);
         }else{
             var url = '/incomes/upload/';
             var formData = new FormData($('#form1-2')[0]);
@@ -63,7 +66,8 @@ var User1 = function(){
                         $list.append($tr);
                     }
                 } else {  // 沒有插入数据
-                    alert("没有导入任何数据！");
+                    var message = "<h3>没有导入任何数据！</h3><br/>";
+                    alertify.alert(message);
                 }
             },
             error : function() {
@@ -93,9 +97,11 @@ var User2 = function(){
     this.uploadBtn = function(){
         var uploadEventFile = $("#uploadEventFile2").val();
         if(uploadEventFile == ''){
-            alert("请选择excel,再上传");
+            var message = "<h3>请选择excel,再上传!</h3><br/>";
+            alertify.alert(message);
         }else if(uploadEventFile.lastIndexOf(".xls")<0){//可判断以.xls和.xlsx结尾的excel
-            alert("只能上传Excel文件");
+            var message = "<h3>只能上传Excel文件!</h3><br/>";
+            alertify.alert(message);
         }else{
             var url = '/outcomes/upload/';
             var formData = new FormData($('#form2-2')[0]);
@@ -138,7 +144,8 @@ var User2 = function(){
                         $list.append($tr);
                     }
                 } else {  // 沒有插入数据
-                    alert("没有导入任何数据！");
+                    var message = "<h3>没有导入任何数据！</h3><br/>";
+                    alertify.alert(message);
                 }
             },
             error : function() {

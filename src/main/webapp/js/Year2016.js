@@ -3,25 +3,24 @@
  */
 $(document).ready(function() {
     // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('baobiao2'));
-    myChart.showLoading({text: '正在努力的读取数据中...'  });
-    var Jan_income=0,Jan_outcome=0,
-        Feb_income=0,Feb_outcome=0,
-        Mar_income=0,Mar_outcome=0,
-        Apr_income=0,Apr_outcome=0,
-        May_income=0,May_outcome=0,
-        June_income=0,June_outcome=0,
-        July_income=0,July_outcome=0,
-        Aug_income=0,Aug_outcome=0,
-        Sep_income=0,Sep_outcome=0,
-        Oct_income=0,Oct_outcome=0,
-        Nov_income=0,Nov_outcome=0,
-        Dec_income=0,Dec_outcome=0;
+    var myChart1 = echarts.init(document.getElementById('baobiao2'));
+    myChart1.showLoading({text: '正在努力的读取数据中...'  });
+    var incomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
+    var outcomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
+    var date=new Date;
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var endTime = year +"-"+ month +"-31";
+    var startTime;
+    if(month==12)startTime = year +"-01-01";
+    else startTime = (year-1) + "-" + (month+1) + "-01";
     $.ajax({
         type: "get",
-        url: "/incomes/list?beginTime=2016-01-01&endTime=2016-12-31",
+        url: "/incomes/list?beginTime="+startTime+"&endTime="+endTime,
         dataType: "json",
         success: function(data) {
+            incomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
+            outcomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
             var list = data.incomeList;
             $.each(list,function(i,p){
                 // console.log(p.created_at);
@@ -29,63 +28,13 @@ $(document).ready(function() {
                 var  d   = new Date(str.replace(/-/, "/"));
                 // console.log(d.getMonth());
                 var  mm  = d.getMonth();
-                switch(mm){
-                    case 0:{
-                        Jan_income += p.money;
-                        break;
-                    }
-                    case 1:{
-                        Feb_income += p.money;
-                        break;
-                    }
-                    case 2:{
-                        Mar_income += p.money;
-                        break;
-                    }
-                    case 3:{
-                        Apr_income += p.money;
-                        break;
-                    }
-                    case 4:{
-                        May_income += p.money;
-                        break;
-                    }
-                    case 5:{
-                        June_income += p.money;
-                        break;
-                    }
-                    case 6:{
-                        July_income += p.money;
-                        break;
-                    }
-                    case 7:{
-                        Oct_income += p.money;
-                        break;
-                    }
-                    case 8:{
-                        Sep_income += p.money;
-                        break;
-                    }
-                    case 9:{
-                        Oct_income += p.money;
-                        break;
-                    }
-                    case 10:{
-                        Nov_income += p.money;
-                        break;
-                    }
-                    case 11:{
-                        Dec_income += p.money;
-                        break;
-                    }
-                    default:break;
-                }
+                incomeArray[mm]+=p.money;
             });
         }
     })
     $.ajax({
         type: "get",
-        url: "/outcomes/list?beginTime=2016-01-01&endTime=2016-12-31",
+        url: "/outcomes/list?beginTime="+startTime+"&endTime="+endTime,
         dataType: "json",
         success: function(data) {
             var list = data.outcomeList;
@@ -95,89 +44,46 @@ $(document).ready(function() {
                 var  d   = new Date(str.replace(/-/, "/"));
                 // console.log(d.getMonth());
                 var  mm  = d.getMonth();
-                switch(mm){
-                    case 0:{
-                        Jan_outcome += p.money;
-                        break;
-                    }
-                    case 1:{
-                        Feb_outcome += p.money;
-                        break;
-                    }
-                    case 2:{
-                        Mar_outcome += p.money;
-                        break;
-                    }
-                    case 3:{
-                        Apr_outcome += p.money;
-                        break;
-                    }
-                    case 4:{
-                        May_outcome += p.money;
-                        break;
-                    }
-                    case 5:{
-                        June_outcome += p.money;
-                        break;
-                    }
-                    case 6:{
-                        July_outcome += p.money;
-                        break;
-                    }
-                    case 7:{
-                        Oct_outcome += p.money;
-                        break;
-                    }
-                    case 8:{
-                        Sep_outcome += p.money;
-                        break;
-                    }
-                    case 9:{
-                        Oct_outcome += p.money;
-                        break;
-                    }
-                    case 10:{
-                        Nov_outcome += p.money;
-                        break;
-                    }
-                    case 11:{
-                        Dec_outcome += p.money;
-                        break;
-                    }
-                    default:break;
-                }
+                outcomeArray[mm]+=p.money;
             });
         }
     })
     $.ajax({
         type: "get",
-        url: "/outcomes/list?beginTime=2016-01-01&endTime=2016-12-31",
+        url: "/outcomes/list?beginTime="+startTime+"&endTime="+endTime,
         dataType: "json",
         success: function(data) {
-            // 基于准备好的dom，初始化echarts实例
+
+            var dataArr = new Array(12);//总额
+            var dataArr_1 = new Array(12);//进项
+            var dataArr_2 = new Array(12);//销项
+            for (var i = 11;i >=0; i--) {
+                if((((month-i)+12)%12)!=0){
+                    dataArr[11-i]=incomeArray[(((month-i)+12)%12)-1]+outcomeArray[(((month-i)+12)%12)-1];
+                    dataArr_1[11-i]=incomeArray[(((month-i)+12)%12)-1];
+                    dataArr_2[11-i]=outcomeArray[(((month-i)+12)%12)-1];
+                }
+                else{
+                    dataArr[11-i] = incomeArray[11]+outcomeArray[11];
+                    dataArr_1[11-i] = incomeArray[11];
+                    dataArr_2[11-i] = outcomeArray[11];
+                }
+            }
+
             var myChart1 = echarts.init(document.getElementById('baobiao2'));
             var xData = function () {
                 var data = [];
-                for (var i = 1; i < 13; i++) {
-                    data.push(i + "月份");
+                for (var i = 11;i >=0; i--) {
+                    if(((month-i)+12)%12!=0) data.push(((month-i)+12)%12+ "月份");
+                    else data.push(12+ "月份");
                 }
                 return data;
-            }();
-            myChart.hideLoading();
+            }()
             var option = {
                 "title": {
-                    "text": "2016年进销项数据对比",
+                    "text": "近12月份进销项数据对比",
                     x: "4%",
 
-                    textStyle: {
-                        color: '#90979c',
-                        fontSize: '22'
-                    },
-                    subtextStyle: {
-                        color: '#90979c',
-                        fontSize: '16',
-
-                    },
                 },
                 "tooltip": {
                     "trigger": "axis",
@@ -301,20 +207,7 @@ $(document).ready(function() {
                             }
                         }
                     },
-                    "data": [
-                        Jan_income,
-                        Feb_income,
-                        Mar_income,
-                        Apr_income,
-                        May_income,
-                        June_income,
-                        July_income,
-                        Aug_income,
-                        Sep_income,
-                        Oct_income,
-                        Nov_income,
-                        Dec_income
-                    ],
+                    "data": dataArr_1
                 },
 
                     {
@@ -334,20 +227,7 @@ $(document).ready(function() {
                                 }
                             }
                         },
-                        "data": [
-                            Jan_outcome,
-                            Feb_outcome,
-                            Mar_outcome,
-                            Apr_outcome,
-                            May_outcome,
-                            June_outcome,
-                            July_outcome,
-                            Aug_outcome,
-                            Sep_outcome,
-                            Oct_outcome,
-                            Nov_outcome,
-                            Dec_outcome
-                        ]
+                        "data":dataArr_2
                     }, {
                         "name": "成交总金额",
                         "type": "line",
@@ -367,25 +247,11 @@ $(document).ready(function() {
                                 }
                             }
                         },
-                        "data": [
-                            Jan_income+Jan_outcome,
-                            Feb_income+Feb_outcome,
-                            Mar_income+Mar_outcome,
-                            Apr_income+Apr_outcome,
-                            May_income+May_outcome,
-                            June_income+June_outcome,
-                            July_income+July_outcome,
-                            Aug_income+Aug_outcome,
-                            Sep_income+Sep_outcome,
-                            Oct_income+Oct_outcome,
-                            Nov_income+Nov_outcome,
-                            Dec_income+Dec_outcome
-                        ]
+                        "data": dataArr,
                     },
                 ]
             }
-
-// 使用刚指定的配置项和数据显示图表。
+            myChart1.hideLoading();
             myChart1.setOption(option);
         }
     })

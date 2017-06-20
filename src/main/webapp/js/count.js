@@ -8,7 +8,7 @@ $(document).ready(function() {
     var option3 = {
         backgroundColor: '',
         title: {
-            text: '进项数据扇形图'
+            text: '单月进项数据统计'
         },
         tooltip: {
             trigger: 'item',
@@ -22,7 +22,7 @@ $(document).ready(function() {
             itemHeight: 14,
             align: 'left',
 
-            data:['花生油','鸡肉','鱼肉','玻璃','铁皮 ','纯净水'],
+            data:[],
             textStyle: {
                 color: '#424956'
             }
@@ -93,7 +93,7 @@ $(document).ready(function() {
     var option4 = {
         backgroundColor: '',
         title: {
-            text: '销项数据扇形图'
+            text: '单月销项数据统计'
         },
         tooltip: {
             trigger: 'item',
@@ -107,7 +107,7 @@ $(document).ready(function() {
             itemHeight: 14,
             align: 'left',
 
-            data:['鸡肉罐头','鱼肉罐头','猪肉罐头'],
+            data:[],
             textStyle: {
                 color: '#424956'
             }
@@ -177,7 +177,7 @@ $(document).ready(function() {
             data: ['进项','销项']
         },
         xAxis: {
-            data: ["花生油", "鸡肉", "鱼肉", "玻璃", "铁皮", "纯净水","鸡肉罐头","鱼肉罐头","猪肉罐头"]
+            data: []
         },
         yAxis: {},
         series: [{
@@ -205,7 +205,7 @@ $(document).ready(function() {
             data: ['总额']
         },
         xAxis: {
-            data: ["进项","销项"]
+            data: []
         },
         yAxis: {},
         series: [{
@@ -222,6 +222,7 @@ $(document).ready(function() {
     var _select3 = $("select[name=year_two]");
     var _select4 = $("select[name=month_two]");
     //年月图改变
+    //柱状年份改变
     $(_select1).on("change", function(){
         myChart.showLoading({text: '正在努力的读取数据中...'  });
         myChart1.showLoading({text: '正在努力的读取数据中...'  });
@@ -232,68 +233,81 @@ $(document).ready(function() {
         // var _date1 = new Date(str1.replace(/-/, "/"));
         // var _date2 = new Date(str2.replace(/-/, "/"));
         // alert(str1+str2);
+
+        //进项
+        var types = new Set;
+        var incomeArray
+        var incomeData;
         $.ajax({
             type: "get",
             url: "/incomes/list?beginTime="+str1+"&endTime="+str2,
             dataType: "json",
             success: function(data) {
-                oil=0;chicken=0;fish=0;glass=0;iron=0;water=0;
                 var list = data.incomeList;
                 $.each(list,function(i,p){
-                    if(p.inType=="花生油"){
-                        oil += p.money;
-                        // console.log(oil);
-                    }
-                    else if(p.inType=="鸡肉"){
-                        chicken = chicken +p.money;
-                    }
-                    else if(p.inType=="鱼肉"){
-                        fish = fish +p.money;
-                    }
-                    else if(p.inType=="玻璃"){
-                        glass = glass +p.money;
-                    }
-                    else if(p.inType=="铁皮") {
-                        iron = iron + p.money;
-                    }
-                    else if(p.inType=="纯净水"){
-                        water = water +p.money;
+                    types.add(p.inType);
+                });
+                incomeArray  = Array.from(types);
+                incomeData = new Array(incomeArray.length);
+                for(var i=0;i<incomeData.length;i++){
+                    incomeData[i]=0;
+                }
+                $.each(list,function(i,p){
+                    for(var i=0;i<incomeArray.length;i++){
+                        if(p.inType==incomeArray[i]){
+                            incomeData[i]+=p.money;
+                            break;
+                        }
                     }
                 });
             }
         })
 
+        //销项
+        var typess = new Set;
+        var outcomeArray
+        var outcomeData;
         $.ajax({
             type: "get",
             url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
             dataType: "json",
             success: function(data) {
-                chicken_can=0;
-                fish_can=0;
-                pork_can=0;
                 var list = data.outcomeList;
                 $.each(list,function(i,p){
-                    if(p.outType=="鸡肉罐头"){
-                        chicken_can += p.money;
-                        // console.log(oil);
-                    }
-                    else if(p.outType=="鱼肉罐头"){
-                        fish_can += p.money;
-                    }
-                    else if(p.outType=="猪肉罐头"){
-                        pork_can += p.money;
+                    typess.add(p.outType);
+                });
+                outcomeArray  = Array.from(typess);
+                outcomeData = new Array(outcomeArray.length);
+                for(var i=0;i<outcomeData.length;i++){
+                    outcomeData[i]=0;
+                }
+                $.each(list,function(i,p){
+                    for(var i=0;i<outcomeArray.length;i++){
+                        if(p.outType==outcomeArray[i]){
+                            outcomeData[i]+=p.money;
+                            break;
+                        }
                     }
                 });
             }
         })
 
+
+        //合并展示
         $.ajax({
             type: "get",
             url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
             dataType: "json",
             success: function(data) {
-                myChart.hideLoading();
-                myChart1.hideLoading();
+                var totalArray = incomeArray.concat(outcomeArray)
+                var totalData_1 = new Array();
+                var totalData_2 = new Array();
+                for(var i=0;i<incomeData.length;i++)totalData_1[i]=incomeData[i];
+                for(var i=0;i<outcomeData.length;i++)totalData_1[i+incomeData.length]=0;
+                for(var i=0;i<incomeData.length;i++)totalData_2[i]=0;
+                for(var i=0;i<outcomeData.length;i++)totalData_2[i+incomeData.length]=outcomeData[i];
+
+                // console.log("income:"+incomeArray,"ouutcome"+outcomeArray,"total"+totalArray)
 
                 //月度进销项图
                 var option = {
@@ -305,20 +319,27 @@ $(document).ready(function() {
                         data: ['进项','销项']
                     },
                     xAxis: {
-                        data: ["花生油", "鸡肉", "鱼肉", "玻璃", "铁皮", "纯净水","鸡肉罐头","鱼肉罐头","猪肉罐头"]
+                        data: totalArray
                     },
                     yAxis: {},
                     series: [{
                         name: '进项',
                         type: 'bar',
-                        data: [oil, chicken,fish, glass, iron, water,0,0,0]
+                        data: totalData_1
                     },{
                         name: '销项',
                         type: 'bar',
-                        data: [0,0,0,0,0,0,chicken_can,fish_can,pork_can]
+                        data: totalData_2
                     }]
                 };
+                myChart.hideLoading();
                 myChart.setOption(option);
+
+                var res_1 =0;
+                for(var i=0;i<incomeData.length;i++)res_1+=incomeData[i];
+
+                var res_2 =0;
+                for(var i=0;i<outcomeData.length;i++)res_2+=outcomeData[i];
 
                 //进销项总额
                 option1 = {
@@ -336,14 +357,16 @@ $(document).ready(function() {
                     series: [{
                         name: '总额',
                         type: 'bar',
-                        data: [chicken+oil+fish+glass+iron+water,chicken_can+fish_can+pork_can]
+                        data: [res_1,res_2]
                     }]
                 };
+                myChart1.hideLoading();
                 myChart1.setOption(option1);
             }
         })
 
     })
+    //扇形年份改变
     $(_select3).on("change", function(){
         myChart3.showLoading({text: '正在努力的读取数据中...'  });
         myChart4.showLoading({text: '正在努力的读取数据中...'  });
@@ -354,37 +377,43 @@ $(document).ready(function() {
         // var _date1 = new Date(str1.replace(/-/, "/"));
         // var _date2 = new Date(str2.replace(/-/, "/"));
         // alert(str1+str2);
+
+        //进项
+        var types = new Set;
+        var incomeArray
+        var incomeData;
+        var flag=1;
         $.ajax({
             type: "get",
             url: "/incomes/list?beginTime="+str1+"&endTime="+str2,
             dataType: "json",
             success: function(data) {
-                oil=0;chicken=0;fish=0;glass=0;iron=0;water=0;
                 var list = data.incomeList;
                 $.each(list,function(i,p){
-                    if(p.inType=="花生油"){
-                        oil += p.money;
-                        // console.log(oil);
-                    }
-                    else if(p.inType=="鸡肉"){
-                        chicken = chicken +p.money;
-                    }
-                    else if(p.inType=="鱼肉"){
-                        fish = fish +p.money;
-                    }
-                    else if(p.inType=="玻璃"){
-                        glass = glass +p.money;
-                    }
-                    else if(p.inType=="铁皮") {
-                        iron = iron + p.money;
-                    }
-                    else if(p.inType=="纯净水"){
-                        water = water +p.money;
+                    types.add(p.inType);
+                });
+                incomeArray  = Array.from(types);
+                incomeData = new Array(incomeArray.length);
+                for(var i=0;i<incomeData.length;i++){
+                    incomeData[i]=0;
+                }
+                $.each(list,function(i,p){
+                    for(var i=0;i<incomeArray.length;i++){
+                        if(p.inType==incomeArray[i]){
+                            incomeData[i]+=p.money;
+                            break;
+                        }
                     }
                 });
+                if(incomeArray.length==0)flag=0;
             }
         })
 
+
+        //销项
+        var typess = new Set;
+        var outcomeArray
+        var outcomeData;
         $.ajax({
             type: "get",
             url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
@@ -395,184 +424,317 @@ $(document).ready(function() {
                 pork_can=0;
                 var list = data.outcomeList;
                 $.each(list,function(i,p){
-                    if(p.outType=="鸡肉罐头"){
-                        chicken_can += p.money;
-                        // console.log(oil);
-                    }
-                    else if(p.outType=="鱼肉罐头"){
-                        fish_can += p.money;
-                    }
-                    else if(p.outType=="猪肉罐头"){
-                        pork_can += p.money;
+                    typess.add(p.outType);
+                });
+                outcomeArray  = Array.from(typess);
+                outcomeData = new Array(outcomeArray.length);
+                for(var i=0;i<outcomeData.length;i++){
+                    outcomeData[i]=0;
+                }
+                $.each(list,function(i,p){
+                    for(var i=0;i<outcomeArray.length;i++){
+                        if(p.outType==outcomeArray[i]){
+                            outcomeData[i]+=p.money;
+                            break;
+                        }
                     }
                 });
             }
         })
 
+
+        //合并展示
         $.ajax({
             type: "get",
             url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
             dataType: "json",
             success: function(data) {
-                myChart3.hideLoading();
-                myChart4.hideLoading();
+
                 //月度进项扇形图
-                option3 = {
-                    backgroundColor: '',
-                    title: {
-                        text: '进项数据扇形图'
-                    },
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
-                    },
-                    legend: {
-
-                        orient: 'vertical',
-                        x: 'right',
-                        itemWidth: 14,
-                        itemHeight: 14,
-                        align: 'left',
-
-                        data:['花生油','鸡肉','鱼肉','玻璃','铁皮 ','纯净水'],
-                        textStyle: {
-                            color: '#424956'
-                        }
-                    },
-                    series: [
-                        {
-                            name:'进项金额',
-                            type:'pie',
-                            hoverAnimation: false,
-                            legendHoverLink:false,
-                            radius: ['40%', '42%'],
-                            color: ['#ffffff','#ffffff','#ffffff','#ffffff','#ffffff'],
-                            label: {
-                                normal: {
-                                    position: 'inner'
-                                }
-                            },
-                            labelLine: {
-                                normal: {
-                                    show: false
-                                }
-                            },
-                            tooltip: {
-                                show:false,
-                            },
-
-                            data:[
-                                {value:oil, name:''},
-                                {value:chicken, name:''},
-                                {value:fish, name:''},
-                                {value:glass, name:''},
-                                {value:iron, name:''},
-                                {value:water, name:''},
-                            ]
+                var ObjectArray = new Array();
+                for(var i=0;i<incomeArray.length;i++){
+                    ObjectArray[i]={value:incomeData[i],name:incomeArray[i]}
+                }
+                if(ObjectArray.length==0){
+                    option3 = {
+                        backgroundColor: '',
+                        title: {
+                            text: '单月进项数据统计'
                         },
-                        {
-                            name:'进项金额',
-                            type:'pie',
-                            radius: ['42%', '55%'],
-                            color: [ '#d74e67', '#0092ff', '#eba954', '#21b6b9','#d74e67'],
-                            label: {
-                                normal: {
-                                    formatter: '{b}\n{d}%'
-                                }
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+
+                            orient: 'vertical',
+                            x: 'right',
+                            itemWidth: 14,
+                            itemHeight: 14,
+                            align: 'left',
+
+                            data:[{value:0,name:'无数据'}],
+                            textStyle: {
+                                color: '#424956'
+                            }
+                        },
+                        series: [
+                            {
+                                name:'进项金额',
+                                type:'pie',
+                                hoverAnimation: false,
+                                legendHoverLink:false,
+                                radius: ['40%', '42%'],
+                                color: ['#ffffff','#ffffff','#ffffff','#ffffff','#ffffff'],
+                                label: {
+                                    normal: {
+                                        position: 'inner'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                tooltip: {
+                                    show:false,
+                                },
+
+                                data:[]
                             },
-                            data:[
-                                {value:oil, name:'花生油'},
-                                {value:chicken, name:'鸡肉'},
-                                {value:fish, name:'鱼肉'},
-                                {value:glass, name:'玻璃'},
-                                {value:iron, name:'铁皮'},
-                                {value:water, name:'纯净水'},
-                            ]
-                        }
-                    ]
-                };
+                            {
+                                name:'进项金额',
+                                type:'pie',
+                                radius: ['42%', '55%'],
+                                color: [ '#d74e67', '#0092ff', '#eba954', '#21b6b9','#d74e67'],
+                                label: {
+                                    normal: {
+                                        formatter: '{b}\n{d}%'
+                                    }
+                                },
+                                data:[{value:0,name:'无数据'}],
+                            }
+                        ]
+                    };
+                }
+                else{
+                    option3 = {
+                        backgroundColor: '',
+                        title: {
+                            text: '单月进项数据统计'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+
+                            orient: 'vertical',
+                            x: 'right',
+                            itemWidth: 14,
+                            itemHeight: 14,
+                            align: 'left',
+
+                            data:incomeArray,
+                            textStyle: {
+                                color: '#424956'
+                            }
+                        },
+                        series: [
+                            {
+                                name:'进项金额',
+                                type:'pie',
+                                hoverAnimation: false,
+                                legendHoverLink:false,
+                                radius: ['40%', '42%'],
+                                color: ['#ffffff','#ffffff','#ffffff','#ffffff','#ffffff'],
+                                label: {
+                                    normal: {
+                                        position: 'inner'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                tooltip: {
+                                    show:false,
+                                },
+
+                                data:[]
+                            },
+                            {
+                                name:'进项金额',
+                                type:'pie',
+                                radius: ['42%', '55%'],
+                                color: [ '#d74e67', '#0092ff', '#eba954', '#21b6b9','#d74e67'],
+                                label: {
+                                    normal: {
+                                        formatter: '{b}\n{d}%'
+                                    }
+                                },
+                                data:ObjectArray
+                            }
+                        ]
+                    };
+                }
+                myChart3.hideLoading();
                 myChart3.setOption(option3);
 
 
                 //月度销项扇形图
-                option4 = {
-                    backgroundColor: '',
-                    title: {
-                        text: '销项数据扇形图'
-                    },
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
-                    },
-                    legend: {
-
-                        orient: 'vertical',
-                        x: 'right',
-                        itemWidth: 14,
-                        itemHeight: 14,
-                        align: 'left',
-
-                        data:['鸡肉罐头','鱼肉罐头','猪肉罐头'],
-                        textStyle: {
-                            color: '#424956'
-                        }
-                    },
-                    series: [
-                        {
-                            name:'销项金额',
-                            type:'pie',
-                            hoverAnimation: false,
-                            legendHoverLink:false,
-                            radius: ['40%', '42%'],
-                            color: ['#915872', '#3077b7', '#9a8169'],
-                            label: {
-                                normal: {
-                                    position: 'inner'
-                                }
-                            },
-                            labelLine: {
-                                normal: {
-                                    show: false
-                                }
-
-                            },
-                            tooltip: {
-                                show:false,
-
-
-                            },
-
-                            data:[
-                                // {value:435, name:''},
-                                // {value:679, name:''},
-                                // {value:848, name:''},
-                            ]
+                var ObjectArray = new Array();
+                for(var i=0;i<outcomeArray.length;i++){
+                    ObjectArray[i]={value:outcomeData[i],name:outcomeArray[i]}
+                }
+                if(ObjectArray.length==0){
+                    option4 = {
+                        backgroundColor: '',
+                        title: {
+                            text: '单月销项数据统计'
                         },
-                        {
-                            name:'销项金额',
-                            type:'pie',
-                            radius: ['42%', '55%'],
-                            color: ['#d74e67', '#0092ff', '#eba954'],
-                            label: {
-                                normal: {
-                                    formatter: '{b}\n{d}%'
-                                }
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
 
+                            orient: 'vertical',
+                            x: 'right',
+                            itemWidth: 14,
+                            itemHeight: 14,
+                            align: 'left',
+
+                            data:outcomeArray,
+                            textStyle: {
+                                color: '#424956'
+                            }
+                        },
+                        series: [
+                            {
+                                name:'销项金额',
+                                type:'pie',
+                                hoverAnimation: false,
+                                legendHoverLink:false,
+                                radius: ['40%', '42%'],
+                                color: ['#915872', '#3077b7', '#9a8169'],
+                                label: {
+                                    normal: {
+                                        position: 'inner'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+
+                                },
+                                tooltip: {
+                                    show:false,
+
+
+                                },
+
+                                data:[
+                                    // {value:435, name:''},
+                                    // {value:679, name:''},
+                                    // {value:848, name:''},
+                                ]
                             },
-                            data:[
-                                {value:chicken_can, name:'鸡肉罐头'},
-                                {value:fish_can, name:'鱼肉罐头'},
-                                {value:pork_can, name:'猪肉罐头'},
-                            ]
-                        }
-                    ]
-                };
-                myChart4.setOption(option4);
+                            {
+                                name:'销项金额',
+                                type:'pie',
+                                radius: ['42%', '55%'],
+                                color: ['#d74e67', '#0092ff', '#eba954'],
+                                label: {
+                                    normal: {
+                                        formatter: '{b}\n{d}%'
+                                    }
 
+                                },
+                                data:[{value:0,name:'无数据'}]
+                            }
+                        ]
+                    };
+                }
+                else{
+                    option4 = {
+                        backgroundColor: '',
+                        title: {
+                            text: '单月销项数据统计'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+
+                            orient: 'vertical',
+                            x: 'right',
+                            itemWidth: 14,
+                            itemHeight: 14,
+                            align: 'left',
+
+                            data:outcomeArray,
+                            textStyle: {
+                                color: '#424956'
+                            }
+                        },
+                        series: [
+                            {
+                                name:'销项金额',
+                                type:'pie',
+                                hoverAnimation: false,
+                                legendHoverLink:false,
+                                radius: ['40%', '42%'],
+                                color: ['#915872', '#3077b7', '#9a8169'],
+                                label: {
+                                    normal: {
+                                        position: 'inner'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+
+                                },
+                                tooltip: {
+                                    show:false,
+
+
+                                },
+
+                                data:[
+                                    // {value:435, name:''},
+                                    // {value:679, name:''},
+                                    // {value:848, name:''},
+                                ]
+                            },
+                            {
+                                name:'销项金额',
+                                type:'pie',
+                                radius: ['42%', '55%'],
+                                color: ['#d74e67', '#0092ff', '#eba954'],
+                                label: {
+                                    normal: {
+                                        formatter: '{b}\n{d}%'
+                                    }
+
+                                },
+                                data:ObjectArray
+                            }
+                        ]
+                    };
+                }
+                myChart4.hideLoading();
+                myChart4.setOption(option4);
             }
         })
 
     })
+    //柱状月份改变
     $(_select2).on("change", function(){
         myChart.showLoading({text: '正在努力的读取数据中...'  });
         myChart1.showLoading({text: '正在努力的读取数据中...'  });
@@ -583,68 +745,81 @@ $(document).ready(function() {
         // var _date1 = new Date(str1.replace(/-/, "/"));
         // var _date2 = new Date(str2.replace(/-/, "/"));
         // alert(str1+str2);
+
+        //进项
+        var types = new Set;
+        var incomeArray
+        var incomeData;
         $.ajax({
             type: "get",
             url: "/incomes/list?beginTime="+str1+"&endTime="+str2,
             dataType: "json",
             success: function(data) {
-                oil=0;chicken=0;fish=0;glass=0;iron=0;water=0;
                 var list = data.incomeList;
                 $.each(list,function(i,p){
-                    if(p.inType=="花生油"){
-                        oil += p.money;
-                        // console.log(oil);
-                    }
-                    else if(p.inType=="鸡肉"){
-                        chicken = chicken +p.money;
-                    }
-                    else if(p.inType=="鱼肉"){
-                        fish = fish +p.money;
-                    }
-                    else if(p.inType=="玻璃"){
-                        glass = glass +p.money;
-                    }
-                    else if(p.inType=="铁皮") {
-                        iron = iron + p.money;
-                    }
-                    else if(p.inType=="纯净水"){
-                        water = water +p.money;
+                    types.add(p.inType);
+                });
+                incomeArray  = Array.from(types);
+                incomeData = new Array(incomeArray.length);
+                for(var i=0;i<incomeData.length;i++){
+                    incomeData[i]=0;
+                }
+                $.each(list,function(i,p){
+                    for(var i=0;i<incomeArray.length;i++){
+                        if(p.inType==incomeArray[i]){
+                            incomeData[i]+=p.money;
+                            break;
+                        }
                     }
                 });
             }
         })
 
+        //销项
+        var typess = new Set;
+        var outcomeArray
+        var outcomeData;
         $.ajax({
             type: "get",
             url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
             dataType: "json",
             success: function(data) {
-                chicken_can=0;
-                fish_can=0;
-                pork_can=0;
                 var list = data.outcomeList;
                 $.each(list,function(i,p){
-                    if(p.outType=="鸡肉罐头"){
-                        chicken_can += p.money;
-                        // console.log(oil);
-                    }
-                    else if(p.outType=="鱼肉罐头"){
-                        fish_can += p.money;
-                    }
-                    else if(p.outType=="猪肉罐头"){
-                        pork_can += p.money;
+                    typess.add(p.outType);
+                });
+                outcomeArray  = Array.from(typess);
+                outcomeData = new Array(outcomeArray.length);
+                for(var i=0;i<outcomeData.length;i++){
+                    outcomeData[i]=0;
+                }
+                $.each(list,function(i,p){
+                    for(var i=0;i<outcomeArray.length;i++){
+                        if(p.outType==outcomeArray[i]){
+                            outcomeData[i]+=p.money;
+                            break;
+                        }
                     }
                 });
             }
         })
 
+
+        //合并展示
         $.ajax({
             type: "get",
             url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
             dataType: "json",
             success: function(data) {
-                myChart.hideLoading();
-                myChart1.hideLoading();
+                var totalArray = incomeArray.concat(outcomeArray)
+                var totalData_1 = new Array();
+                var totalData_2 = new Array();
+                for(var i=0;i<incomeData.length;i++)totalData_1[i]=incomeData[i];
+                for(var i=0;i<outcomeData.length;i++)totalData_1[i+incomeData.length]=0;
+                for(var i=0;i<incomeData.length;i++)totalData_2[i]=0;
+                for(var i=0;i<outcomeData.length;i++)totalData_2[i+incomeData.length]=outcomeData[i];
+
+                // console.log("income:"+incomeArray,"ouutcome"+outcomeArray,"total"+totalArray)
 
                 //月度进销项图
                 var option = {
@@ -656,20 +831,27 @@ $(document).ready(function() {
                         data: ['进项','销项']
                     },
                     xAxis: {
-                        data: ["花生油", "鸡肉", "鱼肉", "玻璃", "铁皮", "纯净水","鸡肉罐头","鱼肉罐头","猪肉罐头"]
+                        data: totalArray
                     },
                     yAxis: {},
                     series: [{
                         name: '进项',
                         type: 'bar',
-                        data: [oil, chicken,fish, glass, iron, water,0,0,0]
+                        data: totalData_1
                     },{
                         name: '销项',
                         type: 'bar',
-                        data: [0,0,0,0,0,0,chicken_can,fish_can,pork_can]
+                        data: totalData_2
                     }]
                 };
+                myChart.hideLoading();
                 myChart.setOption(option);
+
+                var res_1 =0;
+                for(var i=0;i<incomeData.length;i++)res_1+=incomeData[i];
+
+                var res_2 =0;
+                for(var i=0;i<outcomeData.length;i++)res_2+=outcomeData[i];
 
                 //进销项总额
                 option1 = {
@@ -687,14 +869,16 @@ $(document).ready(function() {
                     series: [{
                         name: '总额',
                         type: 'bar',
-                        data: [chicken+oil+fish+glass+iron+water,chicken_can+fish_can+pork_can]
+                        data: [res_1,res_2]
                     }]
                 };
+                myChart1.hideLoading();
                 myChart1.setOption(option1);
             }
         })
 
     })
+    //扇形月份改变
     $(_select4).on("change", function(){
         myChart3.showLoading({text: '正在努力的读取数据中...'  });
         myChart4.showLoading({text: '正在努力的读取数据中...'  });
@@ -705,37 +889,43 @@ $(document).ready(function() {
         // var _date1 = new Date(str1.replace(/-/, "/"));
         // var _date2 = new Date(str2.replace(/-/, "/"));
         // alert(str1+str2);
+
+        //进项
+        var types = new Set;
+        var incomeArray
+        var incomeData;
+        var flag=1;
         $.ajax({
             type: "get",
             url: "/incomes/list?beginTime="+str1+"&endTime="+str2,
             dataType: "json",
             success: function(data) {
-                oil=0;chicken=0;fish=0;glass=0;iron=0;water=0;
                 var list = data.incomeList;
                 $.each(list,function(i,p){
-                    if(p.inType=="花生油"){
-                        oil += p.money;
-                        // console.log(oil);
-                    }
-                    else if(p.inType=="鸡肉"){
-                        chicken = chicken +p.money;
-                    }
-                    else if(p.inType=="鱼肉"){
-                        fish = fish +p.money;
-                    }
-                    else if(p.inType=="玻璃"){
-                        glass = glass +p.money;
-                    }
-                    else if(p.inType=="铁皮") {
-                        iron = iron + p.money;
-                    }
-                    else if(p.inType=="纯净水"){
-                        water = water +p.money;
+                    types.add(p.inType);
+                });
+                incomeArray  = Array.from(types);
+                incomeData = new Array(incomeArray.length);
+                for(var i=0;i<incomeData.length;i++){
+                    incomeData[i]=0;
+                }
+                $.each(list,function(i,p){
+                    for(var i=0;i<incomeArray.length;i++){
+                        if(p.inType==incomeArray[i]){
+                            incomeData[i]+=p.money;
+                            break;
+                        }
                     }
                 });
+                if(incomeArray.length==0)flag=0;
             }
         })
 
+
+        //销项
+        var typess = new Set;
+        var outcomeArray
+        var outcomeData;
         $.ajax({
             type: "get",
             url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
@@ -746,180 +936,312 @@ $(document).ready(function() {
                 pork_can=0;
                 var list = data.outcomeList;
                 $.each(list,function(i,p){
-                    if(p.outType=="鸡肉罐头"){
-                        chicken_can += p.money;
-                        // console.log(oil);
-                    }
-                    else if(p.outType=="鱼肉罐头"){
-                        fish_can += p.money;
-                    }
-                    else if(p.outType=="猪肉罐头"){
-                        pork_can += p.money;
+                    typess.add(p.outType);
+                });
+                outcomeArray  = Array.from(typess);
+                outcomeData = new Array(outcomeArray.length);
+                for(var i=0;i<outcomeData.length;i++){
+                    outcomeData[i]=0;
+                }
+                $.each(list,function(i,p){
+                    for(var i=0;i<outcomeArray.length;i++){
+                        if(p.outType==outcomeArray[i]){
+                            outcomeData[i]+=p.money;
+                            break;
+                        }
                     }
                 });
             }
         })
 
+
+        //合并展示
         $.ajax({
             type: "get",
             url: "/outcomes/list?beginTime="+str1+"&endTime="+str2,
             dataType: "json",
             success: function(data) {
-                myChart3.hideLoading();
-                myChart4.hideLoading();
+
                 //月度进项扇形图
-                option3 = {
-                    backgroundColor: '',
-                    title: {
-                        text: '进项数据扇形图'
-                    },
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
-                    },
-                    legend: {
-
-                        orient: 'vertical',
-                        x: 'right',
-                        itemWidth: 14,
-                        itemHeight: 14,
-                        align: 'left',
-
-                        data:['花生油','鸡肉','鱼肉','玻璃','铁皮 ','纯净水'],
-                        textStyle: {
-                            color: '#424956'
-                        }
-                    },
-                    series: [
-                        {
-                            name:'进项金额',
-                            type:'pie',
-                            hoverAnimation: false,
-                            legendHoverLink:false,
-                            radius: ['40%', '42%'],
-                            color: ['#ffffff','#ffffff','#ffffff','#ffffff','#ffffff'],
-                            label: {
-                                normal: {
-                                    position: 'inner'
-                                }
-                            },
-                            labelLine: {
-                                normal: {
-                                    show: false
-                                }
-                            },
-                            tooltip: {
-                                show:false,
-                            },
-
-                            data:[
-                                {value:oil, name:''},
-                                {value:chicken, name:''},
-                                {value:fish, name:''},
-                                {value:glass, name:''},
-                                {value:iron, name:''},
-                                {value:water, name:''},
-                            ]
+                var ObjectArray = new Array();
+                for(var i=0;i<incomeArray.length;i++){
+                    ObjectArray[i]={value:incomeData[i],name:incomeArray[i]}
+                }
+                if(ObjectArray.length==0){
+                    option3 = {
+                        backgroundColor: '',
+                        title: {
+                            text: '单月进项数据统计'
                         },
-                        {
-                            name:'进项金额',
-                            type:'pie',
-                            radius: ['42%', '55%'],
-                            color: [ '#d74e67', '#0092ff', '#eba954', '#21b6b9','#d74e67'],
-                            label: {
-                                normal: {
-                                    formatter: '{b}\n{d}%'
-                                }
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+
+                            orient: 'vertical',
+                            x: 'right',
+                            itemWidth: 14,
+                            itemHeight: 14,
+                            align: 'left',
+
+                            data:[{value:0,name:'无数据'}],
+                            textStyle: {
+                                color: '#424956'
+                            }
+                        },
+                        series: [
+                            {
+                                name:'进项金额',
+                                type:'pie',
+                                hoverAnimation: false,
+                                legendHoverLink:false,
+                                radius: ['40%', '42%'],
+                                color: ['#ffffff','#ffffff','#ffffff','#ffffff','#ffffff'],
+                                label: {
+                                    normal: {
+                                        position: 'inner'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                tooltip: {
+                                    show:false,
+                                },
+
+                                data:[]
                             },
-                            data:[
-                                {value:oil, name:'花生油'},
-                                {value:chicken, name:'鸡肉'},
-                                {value:fish, name:'鱼肉'},
-                                {value:glass, name:'玻璃'},
-                                {value:iron, name:'铁皮'},
-                                {value:water, name:'纯净水'},
-                            ]
-                        }
-                    ]
-                };
+                            {
+                                name:'进项金额',
+                                type:'pie',
+                                radius: ['42%', '55%'],
+                                color: [ '#d74e67', '#0092ff', '#eba954', '#21b6b9','#d74e67'],
+                                label: {
+                                    normal: {
+                                        formatter: '{b}\n{d}%'
+                                    }
+                                },
+                                data:[{value:0,name:'无数据'}],
+                            }
+                        ]
+                    };
+                }
+                else{
+                    option3 = {
+                        backgroundColor: '',
+                        title: {
+                            text: '单月进项数据统计'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+
+                            orient: 'vertical',
+                            x: 'right',
+                            itemWidth: 14,
+                            itemHeight: 14,
+                            align: 'left',
+
+                            data:incomeArray,
+                            textStyle: {
+                                color: '#424956'
+                            }
+                        },
+                        series: [
+                            {
+                                name:'进项金额',
+                                type:'pie',
+                                hoverAnimation: false,
+                                legendHoverLink:false,
+                                radius: ['40%', '42%'],
+                                color: ['#ffffff','#ffffff','#ffffff','#ffffff','#ffffff'],
+                                label: {
+                                    normal: {
+                                        position: 'inner'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                tooltip: {
+                                    show:false,
+                                },
+
+                                data:[]
+                            },
+                            {
+                                name:'进项金额',
+                                type:'pie',
+                                radius: ['42%', '55%'],
+                                color: [ '#d74e67', '#0092ff', '#eba954', '#21b6b9','#d74e67'],
+                                label: {
+                                    normal: {
+                                        formatter: '{b}\n{d}%'
+                                    }
+                                },
+                                data:ObjectArray
+                            }
+                        ]
+                    };
+                }
+                myChart3.hideLoading();
                 myChart3.setOption(option3);
 
 
                 //月度销项扇形图
-                option4 = {
-                    backgroundColor: '',
-                    title: {
-                        text: '销项数据扇形图'
-                    },
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
-                    },
-                    legend: {
-
-                        orient: 'vertical',
-                        x: 'right',
-                        itemWidth: 14,
-                        itemHeight: 14,
-                        align: 'left',
-
-                        data:['鸡肉罐头','鱼肉罐头','猪肉罐头'],
-                        textStyle: {
-                            color: '#424956'
-                        }
-                    },
-                    series: [
-                        {
-                            name:'销项金额',
-                            type:'pie',
-                            hoverAnimation: false,
-                            legendHoverLink:false,
-                            radius: ['40%', '42%'],
-                            color: ['#915872', '#3077b7', '#9a8169'],
-                            label: {
-                                normal: {
-                                    position: 'inner'
-                                }
-                            },
-                            labelLine: {
-                                normal: {
-                                    show: false
-                                }
-
-                            },
-                            tooltip: {
-                                show:false,
-
-
-                            },
-
-                            data:[
-                                // {value:435, name:''},
-                                // {value:679, name:''},
-                                // {value:848, name:''},
-                            ]
+                var ObjectArray = new Array();
+                for(var i=0;i<outcomeArray.length;i++){
+                    ObjectArray[i]={value:outcomeData[i],name:outcomeArray[i]}
+                }
+                if(ObjectArray.length==0){
+                    option4 = {
+                        backgroundColor: '',
+                        title: {
+                            text: '单月销项数据统计'
                         },
-                        {
-                            name:'销项金额',
-                            type:'pie',
-                            radius: ['42%', '55%'],
-                            color: ['#d74e67', '#0092ff', '#eba954'],
-                            label: {
-                                normal: {
-                                    formatter: '{b}\n{d}%'
-                                }
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
 
+                            orient: 'vertical',
+                            x: 'right',
+                            itemWidth: 14,
+                            itemHeight: 14,
+                            align: 'left',
+
+                            data:outcomeArray,
+                            textStyle: {
+                                color: '#424956'
+                            }
+                        },
+                        series: [
+                            {
+                                name:'销项金额',
+                                type:'pie',
+                                hoverAnimation: false,
+                                legendHoverLink:false,
+                                radius: ['40%', '42%'],
+                                color: ['#915872', '#3077b7', '#9a8169'],
+                                label: {
+                                    normal: {
+                                        position: 'inner'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+
+                                },
+                                tooltip: {
+                                    show:false,
+
+
+                                },
+
+                                data:[
+                                    // {value:435, name:''},
+                                    // {value:679, name:''},
+                                    // {value:848, name:''},
+                                ]
                             },
-                            data:[
-                                {value:chicken_can, name:'鸡肉罐头'},
-                                {value:fish_can, name:'鱼肉罐头'},
-                                {value:pork_can, name:'猪肉罐头'},
-                            ]
-                        }
-                    ]
-                };
-                myChart4.setOption(option4);
+                            {
+                                name:'销项金额',
+                                type:'pie',
+                                radius: ['42%', '55%'],
+                                color: ['#d74e67', '#0092ff', '#eba954'],
+                                label: {
+                                    normal: {
+                                        formatter: '{b}\n{d}%'
+                                    }
 
+                                },
+                                data:[{value:0,name:'无数据'}]
+                            }
+                        ]
+                    };
+                }
+                else{
+                    option4 = {
+                        backgroundColor: '',
+                        title: {
+                            text: '单月销项数据统计'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+
+                            orient: 'vertical',
+                            x: 'right',
+                            itemWidth: 14,
+                            itemHeight: 14,
+                            align: 'left',
+
+                            data:outcomeArray,
+                            textStyle: {
+                                color: '#424956'
+                            }
+                        },
+                        series: [
+                            {
+                                name:'销项金额',
+                                type:'pie',
+                                hoverAnimation: false,
+                                legendHoverLink:false,
+                                radius: ['40%', '42%'],
+                                color: ['#915872', '#3077b7', '#9a8169'],
+                                label: {
+                                    normal: {
+                                        position: 'inner'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+
+                                },
+                                tooltip: {
+                                    show:false,
+
+
+                                },
+
+                                data:[
+                                    // {value:435, name:''},
+                                    // {value:679, name:''},
+                                    // {value:848, name:''},
+                                ]
+                            },
+                            {
+                                name:'销项金额',
+                                type:'pie',
+                                radius: ['42%', '55%'],
+                                color: ['#d74e67', '#0092ff', '#eba954'],
+                                label: {
+                                    normal: {
+                                        formatter: '{b}\n{d}%'
+                                    }
+
+                                },
+                                data:ObjectArray
+                            }
+                        ]
+                    };
+                }
+                myChart4.hideLoading();
+                myChart4.setOption(option4);
             }
         })
 
