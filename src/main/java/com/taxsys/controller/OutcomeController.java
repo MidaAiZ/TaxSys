@@ -228,9 +228,16 @@ public class OutcomeController {
         paramsMap.put("page", page);
         paramsMap.put("limit", limit);
 
-        List<String> outcomeList = outcomeService.searchOutcomeList(paramsMap);
-        returnMap.put("outcomeList", outcomeList);
-        return returnMap;
+//        try {
+            List<String> outcomeList = outcomeService.searchOutcomeList(paramsMap);
+            returnMap.put("count", outcomeList.get(0));
+            outcomeList.remove(0);
+            returnMap.put("outcomeList", outcomeList);
+//        }catch(Exception e) {
+//            returnMap.put("error", e);
+//        } finally {
+            return returnMap;
+//        }
     }
 
     @RequestMapping(value = "/types", method = RequestMethod.POST)

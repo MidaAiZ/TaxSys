@@ -260,9 +260,16 @@ public class IncomeController {
         paramsMap.put("page", page);
         paramsMap.put("limit", limit);
 
-        List<String> incomeList = incomeService.searchIncomeList(paramsMap);
-        returnMap.put("incomeList", incomeList);
-        return returnMap;
+        try{
+            List<String> incomeList = incomeService.searchIncomeList(paramsMap);
+            returnMap.put("count", incomeList.get(0));
+            incomeList.remove(0);
+            returnMap.put("incomeList", incomeList);
+        } catch (Exception e) {
+            returnMap.put("error", e);
+        } finally {
+            return returnMap;
+        }
     }
 
     @RequestMapping(value = "/types", method = RequestMethod.POST)
