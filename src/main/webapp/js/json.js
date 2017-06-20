@@ -92,8 +92,8 @@ function OutputHtml(sites) {
     $("td").remove()
     for (var i in sites ) {
         $content.append("<tr>" +
-            "<td>" + sites[i].created_at.substring(0, 4) + "</td>"
-            + "<td>" + sites[i].created_at.substring(5, 7) + "</td>"
+            "<td>" + sites[i].taxDate.substring(0, 4) + "</td>"
+            + "<td>" + sites[i].taxDate.substring(5, 7) + "</td>"
             + "<td>" + sites[i].inType + "</td>"
             + "<td>" + "进项" + "</td>"
             + "<td>" + sites[i].money + "</td>"
@@ -181,9 +181,9 @@ $(document).ready(function() {
     // for(var i = BeginNO - 1;i < EndNO;i ++){
     //     html += "<div class='entry' style='width: 100%'>";
     //     html +=  "<tr><td>" +
-    //         (sites[i].created_at).substring(0,4) +
+    //         (sites[i].taxDate).substring(0,4) +
     //         "</td><td>" +
-    //         (sites[i].created_at).substring(5,7) +
+    //         (sites[i].taxDate).substring(5,7) +
     //         "</td><td>" +
     //         sites[i].inType+
     //         "</td><td>" +
@@ -262,32 +262,32 @@ $(document).ready(function() {
 
 //
 // var siteList = {"incomeList":[
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"},
-//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "created_at": "2017-01-31"},
-//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"created_at":"2017-01-23"}
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"},
+//     {"id": "E5619E478E9E41AA", "taxId": "42432", "inType": "纯净水", "money": 4324.0, "taxDate": "2017-01-31"},
+//     {"id":"4731D0DCD2DD41EA","taxId":"123123","inType":"花生油","money":123324.0,"taxDate":"2017-01-23"}
 // ]}
