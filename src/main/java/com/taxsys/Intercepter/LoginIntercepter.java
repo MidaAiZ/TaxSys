@@ -7,9 +7,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Created by 刘华鑫 on 2017/5/22.
- */
 public class LoginIntercepter implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
@@ -26,11 +23,9 @@ public class LoginIntercepter implements HandlerInterceptor {
                     }
                 }
             }
-
         }
         //没有登陆，转向登陆界面
-        // httpServletResponse.sendRedirect("/login.html");
-//         return false;
+        httpServletResponse.sendRedirect("/login.html");
         return true;
     }
 

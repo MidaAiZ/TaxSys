@@ -25,10 +25,10 @@
 		<property name="user" value="${jdbc.user}"></property>
 		<property name="password" value="${jdbc.password}"></property>
 		<property name="driverClass" value="${jdbc.driverClass}"></property>
-		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
-
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}?useUnicode=true&amp;characterEncoding=UTF-8"></property>
 		<property name="initialPoolSize" value="${jdbc.initPoolSize}"></property>
 		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
+		<!--<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/taxsys?useUnicode=true&amp;characterEncoding=UTF8"></property>-->
 	</bean>
 	
 	<!-- 配置SessionFactory -->
@@ -51,5 +51,4 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
-</beans>  
+</beans>

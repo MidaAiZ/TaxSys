@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static java.lang.System.out;
@@ -54,9 +55,11 @@ public class ReadExcel {
             list = createExcel(mFile.getInputStream(), type, isExcel2003);
         } catch (Exception e) {
             e.printStackTrace();
-            out.println("文件错误");
+            list = new LinkedList();
+            list.add("ERROR FILE");
+        } finally {
+            return list;
         }
-        return list;
     }
 
     /**
@@ -84,8 +87,11 @@ public class ReadExcel {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        return list;
+            list = new LinkedList();
+            list.add("ERROR FILE");
+        } finally {
+            return list;
+       }
     }
 
     /**
@@ -104,11 +110,6 @@ public class ReadExcel {
             this.totalCells = sheet.getRow(0).getPhysicalNumberOfCells();
         }
         List<Income> incomeList = new ArrayList<Income>();
-        // 初始化时设置 日期和时间模式
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-
-        // 修改日期和时间模式
-        sdf.applyPattern("yyyy/MM/dd");
         // 循环Excel行数
         for (int r = 1; r < totalRows; r++) {
             Row row = sheet.getRow(r);
@@ -124,9 +125,9 @@ public class ReadExcel {
                         //如果是纯数字,比如你写的是25,cell.getNumericCellValue()获得是25.0,通过截取字符串去掉.0获得25
                         if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
                             String name = String.valueOf(cell.getNumericCellValue());
-                            income.setTaxId(name.substring(0, name.length()-2>0?name.length()-2:1));//名称
+                            income.setTaxId(name.substring(0, name.length()-2>0?name.length()-2:1));
                         }else{
-                            income.setTaxId(cell.getStringCellValue());//名称
+                            income.setTaxId(cell.getStringCellValue());
                         }
                     } else if (c == 1) {
                         if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
@@ -138,13 +139,13 @@ public class ReadExcel {
                     } else if (c == 2){
                         if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
                             String age = String.valueOf(cell.getNumericCellValue());
-                            income.setMoney(Integer.parseInt(age.substring(0, age.length()-2>0?age.length()-2:1)));//年龄
+                            income.setMoney(Integer.parseInt(age.substring(0, age.length()-2>0?age.length()-2:1)));
                         }else{
                             income.setMoney(Integer.parseInt(cell.getStringCellValue()));
                         }
                     }else if (c == 3){
-                        String date = sdf.format(cell.getDateCellValue());
-                        income.setCreated_at(date);//年龄
+                        String date = TimeUtil.formatDate(cell.getDateCellValue());
+                        income.setTaxDate(date);
                     }
                 }
             }
@@ -165,11 +166,6 @@ public class ReadExcel {
             this.totalCells = sheet.getRow(0).getPhysicalNumberOfCells();
         }
         List<Outcome> outcomeList = new ArrayList<Outcome>();
-        // 初始化时设置 日期和时间模式
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-
-        // 修改日期和时间模式
-        sdf.applyPattern("yyyy/MM/dd");
         // 循环Excel行数
         for (int r = 1; r < totalRows; r++) {
             Row row = sheet.getRow(r);
@@ -185,9 +181,9 @@ public class ReadExcel {
                         //如果是纯数字,比如你写的是25,cell.getNumericCellValue()获得是25.0,通过截取字符串去掉.0获得25
                         if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
                             String name = String.valueOf(cell.getNumericCellValue());
-                            outcome.setTaxId(name.substring(0, name.length()-2>0?name.length()-2:1));//名称
+                            outcome.setTaxId(name.substring(0, name.length()-2>0?name.length()-2:1));
                         }else{
-                            outcome.setTaxId(cell.getStringCellValue());//名称
+                            outcome.setTaxId(cell.getStringCellValue());
                         }
                     } else if (c == 1) {
                         if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
@@ -199,13 +195,13 @@ public class ReadExcel {
                     } else if (c == 2){
                         if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
                             String age = String.valueOf(cell.getNumericCellValue());
-                            outcome.setMoney(Integer.parseInt(age.substring(0, age.length()-2>0?age.length()-2:1)));//年龄
+                            outcome.setMoney(Integer.parseInt(age.substring(0, age.length()-2>0?age.length()-2:1)));
                         }else{
                             outcome.setMoney(Integer.parseInt(cell.getStringCellValue()));
                         }
                     }else if (c == 3){
-                        String date = sdf.format(cell.getDateCellValue());
-                        outcome.setCreated_at(date);//年龄
+                        String date = TimeUtil.formatDate(cell.getDateCellValue());
+                        outcome.setTaxDate(date);
                     }
                 }
             }
