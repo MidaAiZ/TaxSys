@@ -1,16 +1,6 @@
 $(document).ready(function() {
-    var Jan_income = 0, Jan_outcome = 0,
-        Feb_income = 0, Feb_outcome = 0,
-        Mar_income = 0, Mar_outcome = 0,
-        Apr_income = 0, Apr_outcome = 0,
-        May_income = 0, May_outcome = 0,
-        June_income = 0, June_outcome = 0,
-        July_income = 0, July_outcome = 0,
-        Aug_income = 0, Aug_outcome = 0,
-        Sep_income = 0, Sep_outcome = 0,
-        Oct_income = 0, Oct_outcome = 0,
-        Nov_income = 0, Nov_outcome = 0,
-        Dec_income = 0, Dec_outcome = 0;
+    var incomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
+    var outcomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
 
     //
     //
@@ -423,30 +413,8 @@ $(document).ready(function() {
         // var _date1 = new Date(str1.replace(/-/, "/"));
         // var _date2 = new Date(str2.replace(/-/, "/"));
         // alert(_date1 + _date2);
-        Jan_income = 0;
-        Jan_outcome = 0;
-        Feb_income = 0;
-        Feb_outcome = 0;
-        Mar_income = 0;
-        Mar_outcome = 0;
-        Apr_income = 0;
-        Apr_outcome = 0;
-        May_income = 0;
-        May_outcome = 0;
-        June_income = 0;
-        June_outcome = 0;
-        July_income = 0;
-        July_outcome = 0;
-        Aug_income = 0;
-        Aug_outcome = 0;
-        Sep_income = 0;
-        Sep_outcome = 0;
-        Oct_income = 0;
-        Oct_outcome = 0;
-        Nov_income = 0;
-        Nov_outcome = 0;
-        Dec_income = 0;
-        Dec_outcome = 0;
+        incomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
+        outcomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
 
         $.ajax({
             type: "get",
@@ -460,58 +428,7 @@ $(document).ready(function() {
                     var d = new Date(str.replace(/-/, "/"));
                     // console.log(d.getMonth());
                     var mm = d.getMonth();
-                    switch (mm) {
-                        case 0: {
-                            Jan_income += p.money;
-                            break;
-                        }
-                        case 1: {
-                            Feb_income += p.money;
-                            break;
-                        }
-                        case 2: {
-                            Mar_income += p.money;
-                            break;
-                        }
-                        case 3: {
-                            Apr_income += p.money;
-                            break;
-                        }
-                        case 4: {
-                            May_income += p.money;
-                            break;
-                        }
-                        case 5: {
-                            June_income += p.money;
-                            break;
-                        }
-                        case 6: {
-                            July_income += p.money;
-                            break;
-                        }
-                        case 7: {
-                            Oct_income += p.money;
-                            break;
-                        }
-                        case 8: {
-                            Sep_income += p.money;
-                            break;
-                        }
-                        case 9: {
-                            Oct_income += p.money;
-                            break;
-                        }
-                        case 10: {
-                            Nov_income += p.money;
-                            break;
-                        }
-                        case 11: {
-                            Dec_income += p.money;
-                            break;
-                        }
-                        default:
-                            break;
-                    }
+                    incomeArray[mm]+=p.money;
                 });
             }
         })
@@ -527,58 +444,7 @@ $(document).ready(function() {
                     var d = new Date(str.replace(/-/, "/"));
                     // console.log(d.getMonth());
                     var mm = d.getMonth();
-                    switch (mm) {
-                        case 0: {
-                            Jan_outcome += p.money;
-                            break;
-                        }
-                        case 1: {
-                            Feb_outcome += p.money;
-                            break;
-                        }
-                        case 2: {
-                            Mar_outcome += p.money;
-                            break;
-                        }
-                        case 3: {
-                            Apr_outcome += p.money;
-                            break;
-                        }
-                        case 4: {
-                            May_outcome += p.money;
-                            break;
-                        }
-                        case 5: {
-                            June_outcome += p.money;
-                            break;
-                        }
-                        case 6: {
-                            July_outcome += p.money;
-                            break;
-                        }
-                        case 7: {
-                            Oct_outcome += p.money;
-                            break;
-                        }
-                        case 8: {
-                            Sep_outcome += p.money;
-                            break;
-                        }
-                        case 9: {
-                            Oct_outcome += p.money;
-                            break;
-                        }
-                        case 10: {
-                            Nov_outcome += p.money;
-                            break;
-                        }
-                        case 11: {
-                            Dec_outcome += p.money;
-                            break;
-                        }
-                        default:
-                            break;
-                    }
+                    outcomeArray[mm]+=p.money;
                 });
             }
         })
@@ -587,7 +453,6 @@ $(document).ready(function() {
             url: "/outcomes/list?beginTime=" + str1 + "&endTime=" + str2,
             dataType: "json",
             success: function (data) {
-                myChart2.hideLoading();
                 option2 = {
                     title: {
                         text: '年度进销项数据报表'
@@ -603,52 +468,32 @@ $(document).ready(function() {
                     series: [{
                         name: '进项',
                         type: 'bar',
-                        data: [Jan_income,
-                            Feb_income,
-                            Mar_income,
-                            Apr_income,
-                            May_income,
-                            June_income,
-                            July_income,
-                            Aug_income,
-                            Sep_income,
-                            Oct_income,
-                            Nov_income,
-                            Dec_income]
+                        data: incomeArray,
                     }, {
                         name: '销项',
                         type: 'bar',
-                        data: [Jan_outcome,
-                            Feb_outcome,
-                            Mar_outcome,
-                            Apr_outcome,
-                            May_outcome,
-                            June_outcome,
-                            July_outcome,
-                            Aug_outcome,
-                            Sep_outcome,
-                            Oct_outcome,
-                            Nov_outcome,
-                            Dec_outcome]
+                        data: outcomeArray,
                     },
                     {
                         name:'利润',
                         type:'line',
-                        data:[  Jan_income-Jan_outcome,
-                            Feb_income-Feb_outcome,
-                            Mar_income-Mar_outcome,
-                            Apr_income-Apr_outcome,
-                            May_income-May_outcome,
-                            June_income-June_outcome,
-                            July_income-July_outcome,
-                            Aug_income-Aug_outcome,
-                            Sep_income-Sep_outcome,
-                            Oct_income-Oct_outcome,
-                            Nov_income-Nov_outcome,
-                            Dec_income-Dec_outcome
+                        data:[
+                            outcomeArray[0] -incomeArray[0],
+                            outcomeArray[1] -incomeArray[1],
+                            outcomeArray[2] -incomeArray[2],
+                            outcomeArray[3] -incomeArray[3],
+                            outcomeArray[4] -incomeArray[4],
+                            outcomeArray[5] -incomeArray[5],
+                            outcomeArray[6] -incomeArray[6],
+                            outcomeArray[7] -incomeArray[7],
+                            outcomeArray[8] -incomeArray[8],
+                            outcomeArray[9] -incomeArray[9],
+                            outcomeArray[10]-incomeArray[10],
+                            outcomeArray[11]-incomeArray[11]
                         ]
                     }]
                 };
+                myChart2.hideLoading();
                 myChart2.setOption(option2);
             }
         })

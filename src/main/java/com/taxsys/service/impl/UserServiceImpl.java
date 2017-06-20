@@ -5,12 +5,14 @@ import com.taxsys.dto.UserDto;
 import com.taxsys.model.User;
 import com.taxsys.service.UserService;
 import com.taxsys.utils.MD5Util;
+<<<<<<< HEAD
 import com.taxsys.utils.ReadExcel;
+=======
+>>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
 import com.taxsys.utils.TimeUtil;
 import com.taxsys.utils.UUIDGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.sql.Time;

@@ -136,6 +136,10 @@ public class OutcomeServiceImpl implements OutcomeService {
         return new OutcomeDto(true, oldOutcome);    }
 
     public OutcomeDto createOutcomeForce(Outcome outcome, User user) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
         String now = TimeUtil.now();
         outcome.setCreated_at(now);
         outcome.setUpdated_at(now);

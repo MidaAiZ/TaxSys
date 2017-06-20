@@ -85,24 +85,31 @@ public class OutcomeDaoImpl implements OutcomeDao{
         if(params.get("taxId") != null) { set.add(" taxId = '" + params.get("taxId") + "'"); }
         if(params.get("minMoney") != null) { set.add(" money >= " + params.get("minMoney")); }
         if(params.get("maxMoney") != null) { set.add(" money <= " + params.get("maxMoney")); }
-        if(params.get("beginTime") != null) { set.add(" created_at >= '" + params.get("beginTime") +"'"); }
-        if(params.get("endTime") != null) { set.add(" created_at <= '" + params.get("endTime") + "'"); }
+        if(params.get("beginTime") != null) { set.add(" taxDate >= '" + params.get("beginTime") +"'"); }
+        if(params.get("endTime") != null) { set.add(" taxDate <= '" + params.get("endTime") + "'"); }
 
         Iterator<String> it = set.iterator();
-        if (it.hasNext()) { sql.append(it.next()); }
+        if (it.hasNext()) { sql.append(" WHERE ").append(it.next()); }
         while(it.hasNext()) {
             sql.append(" AND " + it.next());
         }
 
-        String hql = "FROM Outcome outcomes WHERE " + sql + " order by outcomes.created_at desc";
-        out.println("输出结果：" + hql);
+        String hqlCount = "select COUNT(1) FROM Outcome outcomes " + sql + " order by outcomes.created_at desc";
+        String hql = "FROM Outcome outcomes " + sql + " order by outcomes.created_at desc";
 
+        Query countQuery = sessionFactory.getCurrentSession().createQuery(hqlCount);
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
         int page = Integer.parseInt((String)params.get("page"));
         int limit = Integer.parseInt((String)params.get("limit"));
         query.setFirstResult((page - 1) * limit);
         query.setMaxResults(limit);
-        return query.list();
+
+        List list= query.list();
+        int count= ((Number)countQuery.list().iterator().next()).intValue();
+        // 注意这里的类型转化
+        list.add(0, count);
+        return list;
     }
     public List typeList() {
         String hql = "select distinct outType from Outcome outcome order by outcome.created_at desc";

@@ -7,8 +7,11 @@ import com.taxsys.model.Outcome;
 import com.taxsys.model.User;
 import com.taxsys.service.impl.OutcomeServiceImpl;
 import com.taxsys.service.impl.UserServiceImpl;
+<<<<<<< HEAD
 import com.taxsys.utils.TimeUtil;
 import com.taxsys.utils.UUIDGeneratorUtil;
+=======
+>>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.lang.System.out;
 
@@ -228,9 +233,16 @@ public class OutcomeController {
         paramsMap.put("page", page);
         paramsMap.put("limit", limit);
 
-        List<String> outcomeList = outcomeService.searchOutcomeList(paramsMap);
-        returnMap.put("outcomeList", outcomeList);
-        return returnMap;
+//        try {
+            List<String> outcomeList = outcomeService.searchOutcomeList(paramsMap);
+            returnMap.put("count", outcomeList.get(0));
+            outcomeList.remove(0);
+            returnMap.put("outcomeList", outcomeList);
+//        }catch(Exception e) {
+//            returnMap.put("error", e);
+//        } finally {
+            return returnMap;
+//        }
     }
 
     @RequestMapping(value = "/types", method = RequestMethod.POST)

@@ -28,12 +28,12 @@ $(document).ready(function() {
             }
         ).done(function(res) {
             if(res.income) {
-                alert("导入成功！");
+                $("#uploadModal").find("#upload-tip").text("导入成功！").siblings("#f-loading").hide().end().end().modal("show");
             } else {
-                alert("导入失败！");
+                $("#uploadModal").find("#upload-tip").text(res.error).siblings("#f-loading").hide().end().end().modal("show");
             }
         }).fail(function(err) {
-            alert("导入失败!");
+            $("#uploadModal").find("#upload-tip").text("导入失败！").siblings("#f-loading").hide().end().end().modal("show");
         });
         return false;
     })
@@ -51,12 +51,12 @@ $(document).ready(function() {
             }
         ).done(function(res) {
             if(res.outcome) {
-                alert("导入成功！");
+                $("#uploadModal").find("#upload-tip").text("导入成功！").siblings("#f-loading").hide().end().end().modal("show");
             } else {
-                alert("导入失败！");
+                $("#uploadModal").find("#upload-tip").text(res.error).siblings("#f-loading").hide().end().end().modal("show");
             }
         }).fail(function(err) {
-            alert("导入失败!");
+            $("#uploadModal").find("#upload-tip").text("导入失败！").siblings("#f-loading").hide().end().end().modal("show");
         });
         return false;
     })

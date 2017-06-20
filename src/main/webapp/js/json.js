@@ -1,17 +1,14 @@
 ﻿LIMIT = 10;
+CONDITION = "2010-09-09"
 
-$(document).ready(function() {
-    getJson(1, LIMIT, "2010-09-09");
-    createdPre(1, LIMIT, "2010-09-09");
-})
-
-function getJson(page, limit,condition) {
+//获取json数据
+function getJson(page, limit,CONDITION) {
     var siteList={"incomeList":[]};
     var page = page  ? page : 1;
     var limit = limit ? limit : 10;
     $.ajax({
         type: "get",
-        url: "/incomes/list?page="+ page +"&limit=" + limit + "&beginTime=" + condition,
+        url: "/incomes/list?page="+ page +"&limit=" + limit + "&beginTime=" + CONDITION,
         dataType: "json",
         success : function(data) {
             var result = "select distinct inType from income"
@@ -34,22 +31,22 @@ function getJson(page, limit,condition) {
 
     $(".pagination").on("click", "a", function() {
         $this = $(this)
-        Gotopage($this.data("value"), LIMIT,condition);
+        Gotopage($this.data("value"), LIMIT,CONDITION);
         $(this).addClass('active').siblings().removeClass('active');
     })
 }
 
+//生成翻页表
+function createdPre(page,limit,CONDITION) {
 
-function createdPre(page,limit,condition) {
-
-    var count = 12;
-    var pages = (count/limit) + 1;
+    var count =26;
+    var pages = Math.ceil(count/limit);
     if(page < 1)page = 1;  //如果当前页码小于1
     if(page > pages)page = pages; //如果当前页码大于总数
 
     if(!(page <= pages)) page = pages;
     // 分页
-    if(page > 1 && page !== 1){Temp ="<a href='javascript:void(0)' onclick='Gotopage(1,LIMIT,condition)'>&lt;&lt;Index</a> <a href='javascript:void(0)' onclick='Gotopage(" + (page - 1) + " ," + LIMIT+ " ," + condition  +  ")'>previous</a>&nbsp;"}else{Temp = "&lt;&lt;Index previous&nbsp;"};
+    if(page > 1 && page !== 1){Temp ="<a href='javascript:void(0)' onclick='Gotopage(1,LIMIT,CONDITION)'>&lt;&lt;Index</a> <a href='javascript:void(0)' onclick='Gotopage(" + Math.ceil((page - 1)) + " ," + LIMIT+ " ," + CONDITION  +  ")'>previous</a>&nbsp;"}else{Temp = "&lt;&lt;Index previous&nbsp;"};
     // 完美的翻页列表
     var pageFrontSum = 3; //当页前显示个数
     var pageBackSum = 3; //当页后显示个数
@@ -63,42 +60,65 @@ function createdPre(page,limit,condition) {
     var pageFrontEnd = page + pageBackSum;
     if(pageFrontEnd > pages)pageFrontEnd = pages;
 
-    if(pageFrontBegin != 1) Temp += '<a href="javascript:void(0)" onclick="Gotopage(' + (page - 10) + " ," + LIMIT+ " ," + condition + ')" title="前10页">..</a>';
+    if(pageFrontBegin != 1) Temp += '<a href="javascript:void(0)" onclick="Gotopage(' + Math.ceil((page - 10)) + " ," + LIMIT+ " ," + CONDITION + ')" title="前10页">..</a>';
 
     for(var i = pageFrontBegin;i < page;i ++){
-        Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + i  + ',' + LIMIT+ ',' + condition  + ")'>" + i + "</a>";
+        Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + Math.ceil(i)  + ',' + LIMIT+ ',' + CONDITION  + ")'>" + i + "</a>";
     }
 
     Temp += " <strong class='f90'>" + page + "</strong>";
     for(var i = page + 1;i <= pageFrontEnd;i ++){
-        Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + i  + ',' + LIMIT+ ',' + condition  + ")'>" + i + "</a>";
+        Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + Math.ceil(i)  + ',' + LIMIT+ ',' + CONDITION  + ")'>" + i + "</a>";
     }
 
-    if(pageFrontEnd != pages) Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + (page + 10) + ',' + LIMIT + ',' + condition + ")' title='后10页'>..</a>";
-    if(page != pages){Temp += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='Gotopage(" + (page + 1) + ',' + LIMIT + ',' + condition  + ")'>Next</a> <a href='javascript:void(0)' onclick='Gotopage(" + pages + ',' + LIMIT+ ',' + condition  + ")'>Last&gt;&gt;</a>"}else{Temp += "&nbsp;&nbsp;Next Last&gt;&gt;"}
+    if(pageFrontEnd != pages) Temp += " <a href='javascript:void(0)' onclick='Gotopage(" + Math.ceil((page + 10)) + ',' + LIMIT + ',' + CONDITION + ")' title='后10页'>..</a>";
+    if(page != pages){Temp += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='Gotopage(" + Math.ceil((page + 1)) + ',' + LIMIT + ',' + CONDITION  + ")'>Next</a> <a href='javascript:void(0)' onclick='Gotopage(" + Math.ceil(pages) + ',' + LIMIT+ ',' + CONDITION  + ")'>Last&gt;&gt;</a>"}else{Temp += "&nbsp;&nbsp;Next Last&gt;&gt;"}
     $("#pagelist").append(Temp);
+
 }
 
-
-function Gotopage(num, limit ,condition ){ //跳转页
+//翻页
+function Gotopage(num, limit ,CONDITION ){ //跳转页
     page = num;
-    getJson(page, limit,condition)
+    $("#pagelist").empty();
+    getJson(page, limit,CONDITION)
+    createdPre(page, limit, CONDITION);
 }
 
+//增加表格数据
 function OutputHtml(sites) {
 
     $content = $("#content");
     $("td").remove()
-    for (var i in sites) {
+    for (var i in sites ) {
         $content.append("<tr>" +
             "<td>" + sites[i].created_at.substring(0, 4) + "</td>"
             + "<td>" + sites[i].created_at.substring(5, 7) + "</td>"
-            + "<td>" + "进项" + "</td>"
             + "<td>" + sites[i].inType + "</td>"
+            + "<td>" + "进项" + "</td>"
             + "<td>" + sites[i].money + "</td>"
             + "</tr>")
     }
 }
+
+
+$(document).ready(function() {
+    getJson(1, LIMIT, "2010-09-09");
+    createdPre(1, LIMIT, "2010-09-09");
+
+    //ajax获取下拉表商品类型
+
+
+
+    $("#require-btn").on("click",function () {
+        $("#pagelist").empty();
+        getJson(1, LIMIT, "2010-09-09");
+        createdPre(1, LIMIT, "2010-09-09");
+        var message = "<h3>导入成功！</h3><br/>";
+        alertify.alert(message);
+    })
+})
+
 
 
     // var obj = eval(siteList);  //获取JSON

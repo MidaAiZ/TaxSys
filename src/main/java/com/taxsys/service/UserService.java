@@ -2,7 +2,6 @@ package com.taxsys.service;
 
 import com.taxsys.dto.UserDto;
 import com.taxsys.model.User;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.LinkedList;
 import java.util.List;

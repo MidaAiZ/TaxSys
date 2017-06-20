@@ -48,7 +48,6 @@
             background: transparent !important;
         }
     </style>
-    <script src="js/import.js"></script>
     <!-- Cache! -->
     <script type='text/javascript'>
         /* <![CDATA[ */
@@ -342,8 +341,8 @@
 <div class="file-box" style="text-align: center;margin-top: 0px">
     <div class="container">
         <ul class="nav nav-tabs">
-            <li class="active" style="margin-left: 25%"><a data-toggle="tab" href="#home">导入进项数据</a></li>
-            <li style="margin-left: 25%"><a data-toggle="tab" href="#menu3">导入销项数据</a></li>
+            <li class="active"><a data-toggle="tab" href="#home">导入进项数据</a></li>
+            <li><a data-toggle="tab" href="#menu3">导入销项数据</a></li>
         </ul>
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active"><br>
@@ -383,7 +382,11 @@
                         <div class='qfyuser-field qfyuser-field-user_pass ' data-key='user_pass'>
                             <div class='qfyuser-label'>
                                 <label for='time1-1'>日期：</label>
+<<<<<<< HEAD
                                 <input id="time1-1"  class="form-control" name="created_at" type="date" value="2017-01-01"/>
+=======
+                                <input id="time1-1"  class="form-control" name="taxDate" type="date" value="2017-01-01"/>
+>>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
                             </div>
                         </div><br>
                         <input id="import-1_btn" class="btn-xs btn-primary form-control" type="submit" value="提交"/>
@@ -459,7 +462,11 @@
                         <div class='qfyuser-field qfyuser-field-user_pass ' data-key='user_pass'>
                             <div class='qfyuser-label'>
                                 <label for='time2-1'>日期：</label>
+<<<<<<< HEAD
                                 <input id="time2-1" class="form-control" name="created_at" type="date" value="2017-01-01"/>
+=======
+                                <input id="time2-1" class="form-control" name="taxDate" type="date" value="2017-01-01"/>
+>>>>>>> 95345fa58af419a1ccd99dbfcf9ab14dd8cf6e6c
                             </div>
                         </div><br>
                         <input id="import-2_btn" class="btn-xs btn-primary form-control" type="submit" value="提交"/>
