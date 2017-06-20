@@ -16,14 +16,14 @@ var Export = function(id){
         var uploadEventFile = $("#uploadEventFile" + id).val();
         var $tipEle = $("#upload-tip");
         if(uploadEventFile == ''){
-            $tipEle.text("请选择excel,再上传").siblings("#f-loading").hide();
+            $tipEle.html("<span class='glyphicon glyphicon-alert' style='color: red;'>请选择excel,再上传</span>").siblings("#f-loading").hide();
         }else if(uploadEventFile.lastIndexOf(".xls")<0){//可判断以.xls和.xlsx结尾的excel
-            $tipEle.text("只能上传Excel文件").siblings("#f-loading").hide();
+            $tipEle.html("<span class='glyphicon glyphicon-floppy-remove' style='color: red;'>只能上传Excel文件</span>").siblings("#f-loading").hide();
         }else{
             var url = id == 2 ? '/outcomes/upload/' : 'incomes/upload';
             var formData = new FormData($("#form" + id + "-" + 2)[0]);
             sendAjaxRequest(url,'POST',formData, id);
-            $tipEle.text("上传中...").siblings("#f-loading").show();
+            $tipEle.html("<span class='glyphicon glyphicon-cloud-upload' style='color: green;'>上传中...</span>").siblings("#f-loading").show();
         }
         $('#uploadModal').modal('show');
     };
@@ -61,7 +61,7 @@ function sendAjaxRequest(url, type, data, id){
 };
 
 function errorHandle(error, $list) {
-    $("#upload-tip").text(error).siblings("#f-loading").hide();
+    $("#upload-tip").html("<span class='glyphicon glyphicon-exclamation-sign' style='color: red;'>" + error +"</span>").siblings("#f-loading").hide();
     $('#uploadModal').modal('show');
 }
 
@@ -78,7 +78,7 @@ function successHandle(successList, $list) {
             "</td><td>" +
             successList[i].taxDate +
             "</td><td style='color: green'>" +
-            "导入成功" +
+            "<span class='glyphicon glyphicon-ok-sign'>导入成功</span>" +
             "</td><td data-role='opt'>" +
             "</td></tr>"
         );
@@ -92,7 +92,8 @@ function failHandle(failList, $list) {
         $(".operator").hide();
         return true;
     } else {
-        $list.siblings("thead").find("tr").append("<td width='10%'' data-role='opt'>操作<input type='checkbox' data-role='all'></td>");
+        $list.siblings("thead").find("tr").find("[data-role=opt]").remove()
+             .end().append("<td width='10%'' data-role='opt'>操作<input type='checkbox' data-role='all'></td>");
         $(".operator").show();
         $list.parents(".result").find("[data-role=force-btn]").show();
     }
@@ -110,7 +111,7 @@ function failHandle(failList, $list) {
             "</td><td data-c='taxDate'>" +
             item.taxDate +
             "</td><td data-role='result'>" +
-            "失败：" + failList[i].error +
+            "<span class='glyphicon glyphicon-exclamation-sign'></span>" + failList[i].error +
             "</td><td data-role='opt'>" +
             "</td></tr>"
         ).css("color", "red");
@@ -162,8 +163,8 @@ $(function(){
                async: false,
                error: function() {
                    $table.find("tr[data-id=" + window.ForceFailList[i].id +"]")
-                         .find("[data-role=result]").text("强制上传失败！");
-                   $('#uploadModal').find("#upload-tip").text("强制上传失败，系统错误！")
+                         .find("[data-role=result]").html("<span class='glyphicon glyphicon-exclamation-sign'>导入失败</span>");
+                   $('#uploadModal').find("#upload-tip").html("<span class='glyphicon glyphicon-exclamation-sign'>系统错误</span>")
                        .end().find("#f-loading").hide()
                        .end().modal('show');
                },
@@ -172,10 +173,10 @@ $(function(){
                        $table.find("tr[data-id=" + window.ForceFailList[current].id +"]").css("color", "#8d9095")
                              .attr("data-res", "suc")
                              .find("input").remove()
-                             .end().find("[data-role=result]").text("强制上传成功！").css("color", "#f9e403");
+                             .end().find("[data-role=result]").html("<span class='glyphicon glyphicon-ok-sign'>导入成功</span>").css("color", "#f9e403");
                    } else {
                        $table.find("tr[data-id=" + window.ForceFailList[i].id +"]")
-                             .find("[data-role=result]").text("强制上传失败！");
+                             .find("[data-role=result]").html("<span class='glyphicon glyphicon-exclamation-sign'>导入失败</span>");
                    }
                    if($table.find("tr[data-res='fail']").length == 0) {
                        $table.find("td[data-role=opt]").remove();

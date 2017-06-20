@@ -28,12 +28,12 @@ $(document).ready(function() {
             }
         ).done(function(res) {
             if(res.income) {
-                $("#uploadModal").find("#upload-tip").text("导入成功！").siblings("#f-loading").hide().end().end().modal("show");
+                $("#uploadModal").find("#upload-tip").html("<span class='glyphicon glyphicon-ok-sign' style='color: green;'>导入成功！</span>").siblings("#f-loading").hide().end().end().modal("show");
             } else {
-                $("#uploadModal").find("#upload-tip").text(res.error).siblings("#f-loading").hide().end().end().modal("show");
+                $("#uploadModal").find("#upload-tip").html("<span class='glyphicon glyphicon-alert' style='color: red;'>" + res.error + "</span>").siblings("#f-loading").hide().end().end().modal("show");
             }
         }).fail(function(err) {
-            $("#uploadModal").find("#upload-tip").text("导入失败！").siblings("#f-loading").hide().end().end().modal("show");
+            $("#uploadModal").find("#upload-tip").html("<span class='glyphicon glyphicon-exclamation-sign' style='color: red;'>导入失败！</span>").siblings("#f-loading").hide().end().end().modal("show");
         });
         return false;
     })
@@ -51,12 +51,12 @@ $(document).ready(function() {
             }
         ).done(function(res) {
             if(res.outcome) {
-                $("#uploadModal").find("#upload-tip").text("导入成功！").siblings("#f-loading").hide().end().end().modal("show");
+                $("#uploadModal").find("#upload-tip").html("<span class='glyphicon glyphicon-ok-sign' style='color: green;'>导入成功！</span>").siblings("#f-loading").hide().end().end().modal("show");
             } else {
-                $("#uploadModal").find("#upload-tip").text(res.error).siblings("#f-loading").hide().end().end().modal("show");
+                $("#uploadModal").find("#upload-tip").html("<span class='glyphicon glyphicon-alert' style='color: red;'>" + res.error + "</span>").siblings("#f-loading").hide().end().end().modal("show");
             }
         }).fail(function(err) {
-            $("#uploadModal").find("#upload-tip").text("导入失败！").siblings("#f-loading").hide().end().end().modal("show");
+            $("#uploadModal").find("#upload-tip").html("<span class='glyphicon glyphicon-exclamation-sign' style='color: red;'>导入失败！ </span>").siblings("#f-loading").hide().end().end().modal("show");
         });
         return false;
     })

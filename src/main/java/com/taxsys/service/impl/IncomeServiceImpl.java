@@ -86,7 +86,7 @@ public class IncomeServiceImpl implements IncomeService {
                             }
                         } catch (Exception e) {
                             Map failMap = new HashMap<String, Object>();
-                            failMap.put("error", e.toString());
+                            failMap.put("error", "数据错误！");
                             failMap.put("income", i);
                             failList.add(failMap);
                         }
@@ -94,7 +94,7 @@ public class IncomeServiceImpl implements IncomeService {
                     resultMap.put("successList", successList);
                     resultMap.put("failList", failList);
                 } catch (Exception e) {
-                    resultMap.put("error", e.toString());
+                    resultMap.put("error", "表格格式错误！");
                 }
             } else {
                 resultMap.put("error", "没有导入任何数据！");
