@@ -93,6 +93,70 @@ function setFormtwo(_ele) {
     }
 }
 
+// 分页以及近期数据
+$(function() {
+    var limit = 12;
+    var incomeUrl = '/incomes/list?orderBy=created_at&createdBegin=' + (new Date).toLocaleDateString() + "&";
+    var outcomeUrl = '/outcomes/list?orderBy=created_at&createdBegin=' + (new Date).toLocaleDateString() +"&";
+    var inPage = new myPaginate(limit, incomeUrl, incomeCK, "#in-page");
+    var outPage = new myPaginate(limit, outcomeUrl, outcomeCK, "#out-page");
+    inPage.init();
+    outPage.init();
 
+    $("a[href=#incomeList], a[href=#home]").on("click", inPage.update)
+    $("a[href=#outcomeList]").on("click", outPage.update)
+});
+
+function incomeCK(res) {
+    var list = res.incomeList
+    if (!list) {
+        return true;
+    }
+    var $tbody = $("#recent-table-in").find("tbody");
+    $tbody.empty();
+    for (var i in list) {
+        var type = list[i].inType;
+        var $tr = $(
+            "<tr><td>" +
+            (list[i].taxId || "无") +
+            "</td><td>" +
+            type +
+            "</td><td>" +
+            list[i].money +
+            "</td><td>" +
+            list[i].taxDate +
+            "</td><td style='color: green'>" +
+            list[i].created_at.substr(0, 19) +
+            "</td></tr>"
+        );
+        $tbody.append($tr);
+    }
+}
+
+function outcomeCK(res) {
+    var list = res.outcomeList
+    if (!list) {
+        return true;
+    }
+    var $tbody = $("#recent-table-out").find("tbody");
+    $tbody.empty();
+    for (var i in list) {
+        var type = list[i].outType;
+        var $tr = $(
+            "<tr><td>" +
+            (list[i].taxId || "无") +
+            "</td><td>" +
+            type +
+            "</td><td>" +
+            list[i].money +
+            "</td><td>" +
+            list[i].taxDate +
+            "</td><td style='color: green'>" +
+            list[i].created_at.substr(0, 19) +
+            "</td></tr>"
+        );
+        $tbody.append($tr);
+    }
+}
 
 

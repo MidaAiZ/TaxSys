@@ -23,14 +23,14 @@
 <html class="no-js bit-html" dir="ltr" lang="zh-CN">
 <!--<![endif]-->
 <head>
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/echarts.min.js"></script>
     <script src="js/testPOI.js"></script>
+    <script src="js/testPOI.js"></script>
+    <script src="js/paginate.js"></script>
     <script src="js/count.js"></script>
     <script src="js/dataForm.js"></script>
-    <script src="js/jquery.alertify.js"></script>
-    <link rel="stylesheet" href="css/alertify.css">
     <script src="js/jquery.fullPage.min.js"></script>
     <link rel="stylesheet" href="css/jquery.fullPage.css">
     <title>企业增值税发票数据分析系统 | 导入</title>
@@ -434,12 +434,6 @@
                 </div>
             </div>
             <div id="menu3" class="tab-pane fade in active">
-                <script>
-                    $(function(){
-                        $('#dowebok').fullpage({
-                        });
-                    });
-                </script>
                 <div id="dowebok">
                     <div class="section">
                         <div class="slide">
@@ -562,6 +556,12 @@
                         </div>
                     </div>
                 </div>
+                <script>
+                    $(function(){
+                        $('#dowebok').fullpage({
+                        });
+                    });
+                </script>
                 <style>
                     .fp-tableCell{
                         padding-top: 0px;

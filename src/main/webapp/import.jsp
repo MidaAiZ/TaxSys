@@ -20,9 +20,8 @@
     <script src="js/echarts.min.js"></script>
     <script src="js/exportPOI.js"></script>
     <script src="js/import.js"></script>
+    <script src="js/paginate.js"></script>
     <title>企业增值税发票数据分析系统 | 导入</title>
-    <link rel="profile" href="http://gmpg.org/xfn/11"/>
-    <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php"/>
     <!--[if lt IE 9]>
     <![endif]-->
     <!--[if lt IE 9]>
@@ -44,210 +43,35 @@
           href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/qfy-custom-style.css?m=1489546564?ver=2.41'
           type='text/css' media='all'/>
     <link rel="stylesheet" href="css/uploader.css">
-    <style type='text/css'>
-        .ppstart {
-            background: transparent !important;
+    <!-- Cache! -->
+    <style>
+        .qfyuser-label label {
+            float: left;
+            margin-top: 5px;
+        }
+        .list-tabs li.active {
+            background: #eee;
         }
     </style>
-    <!-- Cache! -->
-    <script type='text/javascript'>
-        /* <![CDATA[ */
-        /* iphorm-plugin */
-        var iphormL10n = {
-            "error_submitting_form": "\u5728\u63d0\u4ea4\u8868\u5355\u65f6\u6709\u9519\u8bef",
-            "swfupload_flash_url": "http:\/\/57ea239cecea4.t73.qifeiye.com\/qfy-includes\/js\/swfupload\/swfupload.swf",
-            "swfupload_upload_url": "http:\/\/57ea239cecea4.t73.qifeiye.com\/?iphorm_swfupload=1",
-            "swfupload_too_many": "\u961f\u5217\u4e2d\u7684\u6587\u4ef6\u592a\u591a\u4e86",
-            "swfupload_file_too_big": "\u6587\u4ef6\u592a\u5927\u4e86",
-            "swfupload_file_empty": "\u4e0d\u80fd\u4e0a\u4f20\u7a7a\u6587\u4ef6",
-            "swfupload_file_type_not_allowed": "\u8be5\u6587\u4ef6\u7684\u7c7b\u578b\u662f\u4e0d\u5141\u8bb8\u4e0a\u4f20\u7684",
-            "swfupload_unknown_queue_error": "\u672a\u77e5\u961f\u5217\u9519\u8bef\uff0c\u8bf7\u7a0d\u5019\u518d\u8bd5",
-            "swfupload_upload_error": "\u4e0a\u4f20\u9519\u8bef",
-            "swfupload_upload_failed": "\u4e0a\u4f20\u5931\u8d25",
-            "swfupload_server_io": "\u670d\u52a1\u5668IO\u9519\u8bef",
-            "swfupload_security_error": "\u5b89\u5168\u9519\u8bef",
-            "swfupload_limit_exceeded": "\u4e0a\u4f20\u8d85\u8fc7\u9650\u5236",
-            "swfupload_validation_failed": "\u9a8c\u8bc1\u5931\u8d25",
-            "swfupload_upload_stopped": "\u4e0a\u4f20\u88ab\u7ec8\u6b62",
-            "swfupload_unknown_upload_error": "\u6587\u4ef6\u4e0a\u4f20\u88ab\u610f\u5916\u7ec8\u6b62",
-            "plugin_url": "http:\/\/57ea239cecea4.t73.qifeiye.com\/qfy-content\/plugins\/qfy_form",
-            "preview_no_submit": "\u5728\u9884\u89c8\u6a21\u5f0f\u4e0b\u4e0d\u80fd\u63d0\u4ea4\u8868\u5355"
-        };
-        /* dt-plugins */
-        var dtLocal = {
-            "passText": "\u67e5\u770b\u8fd9\u4e2a\u52a0\u5bc6\u8d44\u8baf\uff0c\u8bf7\u5728\u4e0b\u9762\u8f93\u5165\u5bc6\u7801\uff1a",
-            "moreButtonAllLoadedText": "\u5168\u90e8\u5df2\u52a0\u8f7d",
-            "postID": "2160",
-            "ajaxurl": "http:\/\/57ea239cecea4.t73.qifeiye.com\/admin\/admin-ajax.php",
-            "contactNonce": "c79e4671dd",
-            "ajaxNonce": "8b312cf267",
-            "pageData": {"type": "page", "template": "page", "layout": null},
-            "themeSettings": {"smoothScroll": "on"}
-        };
-        /* thickbox */
-        var thickboxL10n = {
-            "next": "\u4e0b\u4e00\u5f20 >",
-            "prev": "< \u4e0a\u4e00\u5f20",
-            "image": "\u56fe\u7247",
-            "of": "\/",
-            "close": "\u5173\u95ed",
-            "noiframes": "\u8fd9\u4e2a\u529f\u80fd\u9700\u8981iframe\u7684\u652f\u6301\u3002\u60a8\u53ef\u80fd\u7981\u6b62\u4e86iframe\u7684\u663e\u793a\uff0c\u6216\u60a8\u7684\u6d4f\u89c8\u5668\u4e0d\u652f\u6301\u6b64\u529f\u80fd\u3002",
-            "loadingAnimation": "\/\/fast.qifeiye.com\/FeiEditor\/bitSite\/images\/preloader.gif"
-        };
-
-        /* ]]> */
-    </script>
-    <link rel="EditURI" type="application/rsd+xml" title="RSD"
-          href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php?rsd"/>
-    <link rel="wlwmanifest" type="application/wlwmanifest+xml"
-          href="http://57ea239cecea4.t73.qifeiye.com/qfy-includes/wlwmanifest.xml"/>
-
-    <link rel='canonical' href='http://57ea239cecea4.t73.qifeiye.com/'/>
-    <link rel='shortlink' href='http://57ea239cecea4.t73.qifeiye.com/?p=2160'/>
-    <style class='style_0'>.bitRightSider .widget-title, .bitLeftSider .widget-title {
-        padding: 0 0 0 10px;
-        height: 28px;
-        line-height: 28px;
-        background-color: #024886;
-        margin: 0px;
-        font-family:;
-        font-size: px;
-        font-weight: normal;
-        font-style: normal;
-        text-decoration: none;
-        color: #fff;
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 0;
-        /*background-image: url(//fast.qifeiye.com/qfy-content/plugins//bit-plugin/assets/frame/header_bg/1/bg.png);*/
-        background-repeat: repeat;
-        -webkit-border-top-left-radius: 0;
-        -webkit-border-top-right-radius: 0;
-        -moz-border-radius-topleft: 0;
-        -moz-border-radius-topright: 0;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-
-    .bitRightSider .bitWidgetFrame, .bitLeftSider .bitWidgetFrame {
-        border-top: 0;
-        border-bottom: 1px solid #bababa;
-        border-left: 1px solid #bababa;
-        border-right: 1px solid #bababa;
-        padding: 4px 10px 4px 10px;
-        -webkit-border-bottom-left-radius: 0;
-        -webkit-border-bottom-right-radius: 0;
-        -moz-border-radius-bottomleft: 0;
-        -moz-border-radius-bottomright: 0;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    .bitRightSider .site_tooler, .bitLeftSider .site_tooler {
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
-
-    .bitRightLeftSiderWidget.site_tooler .bitWidgetFrame, .bitRightLeftSiderWidget.site_tooler .bitWidgetFrame {
-        background-color: transparent;
-        background-image: none;
-        -webkit-border-bottom-left-radius: 0px;
-        border-bottom-left-radius: 0px;
-        -webkit-border-bottom-right-radius: 0px;
-        border-bottom-right-radius: 0px;
-    }</style>
-    <style class='style_0'>.footer .widget-title {
-        padding: 0 0 0 10px;
-        height: 28px;
-        line-height: 28px;
-        background-color: #024886;
-        margin: 0px;
-        font-family:;
-        font-size: px;
-        font-weight: normal;
-        font-style: normal;
-        text-decoration: none;
-        color: #fff;
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 0;
-        background-image: none;
-        -webkit-border-top-left-radius: 4px;
-        -webkit-border-top-right-radius: 4px;
-        -moz-border-radius-topleft: 4px;
-        -moz-border-radius-topright: 4px;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-    }
-
-    .footer .widget-title {
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-    }
-
-    .footer .bitWidgetFrame {
-        border-bottom: 0;
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-        padding: 4px 10px 4px 10px;
-    }
-
-    .footer .site_tooler {
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
-
-    .footer .site_tooler .bitWidgetFrame {
-        background-color: transparent;
-        background-image: none;
-        -webkit-border-bottom-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-        -webkit-border-bottom-right-radius: 4px;
-        border-bottom-right-radius: 4px;
-    }
-    .qfyuser-label label{
-       float: left;
-       margin-top: 5px;
-    }
-    </style>
-    <link rel="icon"
-          href="http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/2016/10/e6dd361961920299bdf281049f45ca2a.png"
-          type="image/png"/>
-    <link rel="apple-touch-icon-precomposed"
-          href="http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/2016/10/e6dd361961920299bdf281049f45ca2a.png"/>
-    <link rel="apple-touch-icon"
-          href="http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/2016/10/e6dd361961920299bdf281049f45ca2a.png"/>
-    <meta name="robots" content="index, follow"/>
 </head>
 
-<body class="home page page-id-2160 page-template-default image-blur btn-flat content-fullwidth wpb-js-composer js-comp-ver-4.0.1 vc_responsive" backgroundSize='true' data-pid="2160" data-pkey="43696bcdc4f8022776101003c5671fe2" >
+<body>
 <div id="page" class=' breackall wide '>
-
-
     <!-- left, center, classical, classic-centered -->
     <!-- !Header -->
     <header id="header" class="logo-left-right headerPM menuPosition transparent" role="banner">
         <!-- class="overlap"; class="logo-left", class="logo-center", class="logo-classic" -->
         <div class="wf-wrap">
             <div class="wf-table">
-
-
                 <div id="branding" class="wf-td bit-logo-bar" style="">
-                    <a class="bitem logo small" style="display: table-cell;"
-                       href="index.jsp"><span class="logospan"><img class="preload-me"
-                                                                    src="image/Aisino_1.jpg"
-                                                                    width="675" height="220"
-                                                                    alt=""/></span></a>
-
-                    <!-- <div id="site-title" class="assistive-text"></div>
-                    <div id="site-description" class="assistive-text"></div> -->
+                    <a class="bitem logo small" style="display: table-cell;" href="index.jsp">
+                        <span class="logospan">
+                            <img class="preload-me" src="image/Aisino_1.jpg" width="675" height="220" alt=""/>
+                        </span>
+                    </a>
                 </div>
                 <!-- !- Navigation -->
-                <nav style="0" id="navigation" class="wf-td" bitDataAction="site_menu_container"
+                <nav id="navigation" class="wf-td" bitDataAction="site_menu_container"
                      bitDataLocation="primary">
                     <ul id="main-nav" data-st="1" data-sp="1" data-fh="0" data-mw="0" data-lh="40"
                         class="mainmenu fancy-rollovers wf-mobile-hidden bit-menu-default underline-hover"
@@ -342,11 +166,82 @@
 <div class="file-box" style="text-align: center;margin-top: 0px">
     <div class="container">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">导入进项数据</a></li>
-            <li><a data-toggle="tab" href="#menu3">导入销项数据</a></li>
+            <li class="active"><a data-toggle="tab" href="#home">最近导入的数据</a></li>
+            <li><a data-toggle="tab" href="#up-income">导入进项数据</a></li>
+            <li><a data-toggle="tab" href="#up-outcome">导入销项数据</a></li>
         </ul>
         <div class="tab-content">
-            <div id="home" class="tab-pane fade in active"><br>
+            <div id="home" class="tab-pane fade in active">
+                <div class="inner-tab">
+                    <ul class="nav list-tabs">
+                        <li style="float: right;"><a data-toggle="tab" href="#outcomeList" style="float: right;">近期销项数据</a></li>
+                        <li class="active" style="float: right;"><a data-toggle="tab" href="#incomeList">近期进项数据</a></li>
+                    </ul>
+                    <div class="list-tab-content">
+                        <div id="incomeList">
+                            <div class="row">
+                                <div class="col-lg-8 col-lg-offset-2 col-md-12">
+                                    <br>
+                                    <table class="table table-condensed table-striped" data-role="recent-list" id="recent-table-in">
+                                        <thead>
+                                            <tr>
+                                                <td width="20%">发票号</td>
+                                                <td width="20%">类型</td>
+                                                <td width="20%">金额</td>
+                                                <td width="20%">进项日期</td>
+                                                <td width="20%">导入时间</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination pagination-sm" id="in-page">
+
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="outcomeList" style="display: none;">
+                            <div class="row">
+                                <div class="col-lg-8 col-lg-offset-2 col-md-12">
+                                    <br>
+                                    <table class="table table-condensed table-striped" data-role="recent-list" id="recent-table-out">
+                                        <thead>
+                                        <tr>
+                                            <td width="20%">发票号</td>
+                                            <td width="20%">类型</td>
+                                            <td width="20%">金额</td>
+                                            <td width="20%">进项日期</td>
+                                            <td width="20%">导入时间</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination pagination-sm" id="out-page">
+
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(function() {
+                    $(".list-tabs").on("click", "a", function() {
+                        var _this = $(this);
+                        _this.toggleClass("active").siblings().toggleClass("active");
+                        $(_this.attr("href")).show().siblings().hide();
+                    })
+                })
+            </script>
+            <div id="up-income" class="tab-pane fade in"><br>
                 <div class="require-box" style="text-align: center; margin: auto; display: inline-block; float: right;">
                     <form action="" method="post" enctype="multipart/form-data" style=";float:left">
                         <label style="display: block">请选择导入方式</label>
@@ -358,7 +253,7 @@
                 </div>
                 <div>
                     <%--手动上传--%>
-                    <form  id="form1-1" action="/incomes/createIncome" method="post" enctype="multipart/form-data">
+                    <form  id="form1-1" action="/incomes/createIncome" method="post" style="margin: auto; max-width: 400px">
                         <div class='qfyuser-field qfyuser-field-username_or_email ' data-key='username_or_email'>
                             <div class='qfyuser-label'>
                                 <label for='tax1-1'>发票号:</label>
@@ -397,7 +292,7 @@
                                 <input id="uploadEventPath1"  disabled="disabled"  type="text" placeholder="请选择excel表" style="border: 1px solid #e6e6e6; height: 35px;width: 200px;margin-top: 10px;" >
                             </div>
                             <br>
-                            <button type="button" style="width: 95%;" class="btn btn-success btn-sm"  onclick="exportIn.uploadBtn()" >上传</button>
+                            <button type="button" style="width: 100%;" class="btn btn-success btn-sm"  onclick="exportIn.uploadBtn()" >上传</button>
                         </form>
                     </div>
                 </div>
@@ -417,12 +312,12 @@
                     </table>
                     <div class="operator" style="display: none;">
                         <div class="field" style="float: right;">
-                            <a href="javascript: void(0)" data-role="force-btn" data-type="income" data-url="incomes/createIncomeForce" class="btn-danger btn-sm" style="display: none;">强制上传</a>
+                            <a href="javascript: void(0)" data-role="force-btn" data-type="income" data-url="incomes/createIncomeForce" class="btn-danger btn-sm" style="display: none;">覆盖原进项</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="menu3" class="tab-pane fade"><br>
+            <div id="up-outcome" class="tab-pane fade"><br>
                 <div class="require-box" style="text-align: center; margin: auto; display: inline-block; float: right;">
                     <form action="" method="post" enctype="multipart/form-data" style=";float:left">
                         <label style="display: block">请选择导入方式</label>
@@ -434,7 +329,7 @@
                 </div>
                 <div>
                     <%--手动上传--%>
-                    <form  id="form2-1" action="/incomes/createIncome" method="post" enctype="multipart/form-data">
+                    <form  id="form2-1" action="/incomes/createIncome" method="post" style="margin: auto; max-width: 400px;">
                         <div class='qfyuser-field qfyuser-field-username_or_email ' data-key='username_or_email'>
                             <div class='qfyuser-label'>
                                 <label for='tax2-1'>发票号:</label>
@@ -473,7 +368,7 @@
                                     <input id="uploadEventPath2"  disabled="disabled"  type="text" placeholder="请选择excel表" style="border: 1px solid #e6e6e6; height: 35px;width: 200px;margin-top: 10px;" >
                                 </div>
                                 <br>
-                                <button type="button" style="width: 95%;" class="btn btn-success btn-sm"  onclick="exportOut.uploadBtn()" >上传</button>
+                                <button type="button" style="width: 100%;" class="btn btn-success btn-sm"  onclick="exportOut.uploadBtn()" >上传</button>
                             </form>
                         </div>
                 </div>
@@ -493,7 +388,7 @@
                     </table>
                     <div class="operator" style="display: none;">
                         <div class="field" style="float: right;">
-                            <a href="javascript: void(0)" data-role="force-btn" data-type="outcome"  data-url="outcomes/createOutcomeForce" class="btn-danger btn-sm"  style="display: none;">强制上传</a>
+                            <a href="javascript: void(0)" data-role="force-btn" data-type="outcome"  data-url="outcomes/createOutcomeForce" class="btn-danger btn-sm"  style="display: none;">覆盖原销项</a>
                         </div>
                     </div>
                 </div>
