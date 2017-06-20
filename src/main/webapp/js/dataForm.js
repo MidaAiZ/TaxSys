@@ -3,8 +3,37 @@
  */
 LIMIT = 6;
 CONDITION = "2010-09-09"
+COUNT_income = 1;
+COUNT_outcome = 1;
 
 //进项
+function getCount_income(page, limit,CONDITION) {
+    var siteList={"incomeList":[]};
+    var page = page  ? page : 1;
+    var limit = limit ? limit : 10;
+    $.ajax({
+        type: "get",
+        url: "/incomes/list?beginTime=" + CONDITION,
+        dataType: "json",
+        async : false,
+        success : function(data) {
+            COUNT_income = data.count;
+        },
+        error : function() {
+            alert( result.error);
+        },
+        cache : false,
+        contentType : false,
+        processData : false
+    });
+
+    $(".pagination").on("click", "a", function() {
+        $this = $(this)
+        Gotopage_income($this.data("value"), LIMIT,CONDITION);
+        $(this).addClass('active').siblings().removeClass('active');
+    })
+}
+
 function getJson_income(page, limit,CONDITION) {
     var siteList={"incomeList":[]};
     var page = page  ? page : 1;
@@ -41,8 +70,7 @@ function getJson_income(page, limit,CONDITION) {
 
 function createdPre_income(page,limit,CONDITION) {
 
-    var count =26;
-    var pages = Math.ceil(count/limit);
+    var pages = Math.ceil(COUNT_income/limit);
     if(page < 1)page = 1;  //如果当前页码小于1
     if(page > pages)page = pages; //如果当前页码大于总数
 
@@ -92,8 +120,8 @@ function OutputHtml_income(sites) {
     $("#content td").remove()
     for (var i in sites ) {
         $content.append("<tr>" +
-            "<td>" + sites[i].created_at.substring(0, 4) + "</td>"
-            + "<td>" + sites[i].created_at.substring(5, 7) + "</td>"
+            "<td>" + sites[i].taxDate.substring(0, 4) + "</td>"
+            + "<td>" + sites[i].taxDate.substring(5, 7) + "</td>"
             + "<td>" + sites[i].inType + "</td>"
             + "<td>" + "进项" + "</td>"
             + "<td>" + sites[i].money + "</td>"
@@ -108,11 +136,39 @@ function ChangeHtml_income() {
     var str1= str +"-"+ strr +"-" + "1";
     var str2= str +"-"+ strr +"-" + "31";
     CONDITION = str1+"&endTime="+str2
+    getCount_income(1, LIMIT, CONDITION);
     getJson_income(1, LIMIT, CONDITION);
     createdPre_income(1, LIMIT, CONDITION);
 }
 
 //销项
+function getCount_outcome(page, limit,CONDITION) {
+    var siteList={"outcomeList":[]};
+    var page = page  ? page : 1;
+    var limit = limit ? limit : 10;
+    $.ajax({
+        type: "get",
+        url: "/outcomes/list?beginTime=" + CONDITION,
+        dataType: "json",
+        async : false,
+        success : function(data) {
+            COUNT_outcome = data.count;
+        },
+        error : function() {
+            alert( result.error);
+        },
+        cache : false,
+        contentType : false,
+        processData : false
+    });
+
+    $(".pagination").on("click", "a", function() {
+        $this = $(this)
+        Gotopage_outcome($this.data("value"), LIMIT,CONDITION);
+        $(this).addClass('active').siblings().removeClass('active');
+    })
+}
+
 function getJson_outcome(page, limit,CONDITION) {
     var siteList={"outcomeList":[]};
     var page = page  ? page : 1;
@@ -149,8 +205,7 @@ function getJson_outcome(page, limit,CONDITION) {
 
 function createdPre_outcome(page,limit,CONDITION) {
 
-    var count =6;
-    var pages = Math.ceil(count/limit);
+    var pages = Math.ceil(COUNT_outcome/limit);
     if(page < 1)page = 1;  //如果当前页码小于1
     if(page > pages)page = pages; //如果当前页码大于总数
 
@@ -200,8 +255,8 @@ function OutputHtml_outcome(sites) {
     $("#content_outcome td").remove()
     for (var i in sites ) {
         $content.append("<tr>" +
-            "<td>" + sites[i].created_at.substring(0, 4) + "</td>"
-            + "<td>" + sites[i].created_at.substring(5, 7) + "</td>"
+            "<td>" + sites[i].taxDate.substring(0, 4) + "</td>"
+            + "<td>" + sites[i].taxDate.substring(5, 7) + "</td>"
             + "<td>" + sites[i].outType + "</td>"
             + "<td>" + "销项" + "</td>"
             + "<td>" + sites[i].money + "</td>"
@@ -216,6 +271,7 @@ function ChangeHtml_outcome() {
     var str1= str +"-"+ strr +"-" + "1";
     var str2= str +"-"+ strr +"-" + "31";
     CONDITION = str1+"&endTime="+str2
+    getCount_outcome(1, LIMIT, CONDITION);
     getJson_outcome(1, LIMIT, CONDITION);
     createdPre_outcome(1, LIMIT, CONDITION);
 }
@@ -223,6 +279,8 @@ function ChangeHtml_outcome() {
 
 
 $(document).ready(function() {
+    getCount_income(1, LIMIT, "2010-09-09");
+    getCount_outcome(1, LIMIT, "2010-09-09");
     getJson_income(1, LIMIT, "2010-09-09");
     createdPre_income(1, LIMIT, "2010-09-09");
     getJson_outcome(1, LIMIT, "2010-09-09");
