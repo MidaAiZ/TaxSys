@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static java.lang.System.out;
-
 @Service
 public class OutcomeDaoImpl implements OutcomeDao{
     @Autowired
@@ -76,6 +74,14 @@ public class OutcomeDaoImpl implements OutcomeDao{
             return false;
         }
     }
+
+    public boolean deleteOutcome(Outcome outcome) {
+        String hql = "delete Outcome outcome where outcome.id = ?";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        query.setString(0, outcome.getId());
+        return (query.executeUpdate() > 0);
+    }
+
 
     public List searchOutcomeList(Map<String, Object> params){
         HashSet<String> set = new HashSet<String>();

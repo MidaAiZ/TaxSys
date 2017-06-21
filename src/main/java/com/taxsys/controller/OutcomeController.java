@@ -1,8 +1,6 @@
 package com.taxsys.controller;
 
-import com.taxsys.dto.IncomeDto;
 import com.taxsys.dto.OutcomeDto;
-import com.taxsys.model.Income;
 import com.taxsys.model.Outcome;
 import com.taxsys.model.User;
 import com.taxsys.service.impl.OutcomeServiceImpl;
@@ -19,8 +17,6 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.lang.System.out;
 
 @Controller
 @RequestMapping(value = "outcomes")
@@ -60,7 +56,6 @@ public class OutcomeController {
             ouputStream.flush();
             ouputStream.close();
         } catch (Exception e) {
-            out.println(e);
             response.setStatus(500);
         }
     }
@@ -97,7 +92,7 @@ public class OutcomeController {
         String userId = (String)request.getSession().getAttribute("userId");
         User user = userService.getUser(userId);
         if(user == null) {
-            returnMap.put("error", "UserUnLoggedIn");
+            returnMap.put("error", "用户未登录");
             return returnMap;
         }
 
@@ -151,34 +146,57 @@ public class OutcomeController {
 
     /**
      * 修改销项信息
-     * @param taxId 销项发票ID
-     * @param  outType 销项类型
-     * @param money 销项额
-     * @param created_at 销项日期
      * @return
      */
-    @RequestMapping(value = "/{id}/info", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Map<String, Object> modifyOutcomeInfo(@PathVariable("id") String id,
-                                                 @RequestParam String taxId,
-                                                 @RequestParam String outType,
-                                                 @RequestParam Float money,
-                                                 @RequestParam String created_at) {
+    public Map<String, Object> modify(@PathVariable("id") String id,
+                                       HttpServletRequest request) {
 
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
 
-        Outcome outcome = new Outcome(taxId, outType, money, created_at);
-        outcome.setId(id);
-        OutcomeDto outcomeDto = outcomeService.modifyOutcomeInfo(outcome);
-        if(outcomeDto.isSuccess()){
-            returnMap.put("success", outcomeDto.getOutcome());
-        } else {
-            returnMap.put("error", outcomeDto.getMessage());
-        }
+        try {
+            request.setCharacterEncoding("UTF-8");
+            String taxId = request.getParameter("taxId");
+            if(taxId != null && taxId.length() == 0) { taxId = null; }
+            String type = new String(request.getParameter("type").getBytes("ISO-8859-1"), "UTF-8");
+            Float money = Float.parseFloat(request.getParameter("money"));
+            String taxDate = request.getParameter("taxDate");
+            Outcome outcome = new Outcome(taxId, type, money, taxDate);
 
+            outcome.setId(id);
+            OutcomeDto outcomeDto = outcomeService.modifyOutcomeInfo(outcome);
+            if(outcomeDto.isSuccess()){
+                returnMap.put("outcome", outcomeDto.getOutcome());
+            } else {
+                returnMap.put("error", outcomeDto.getMessage());
+            }
+        } catch (Exception e) {
+            returnMap.put("error", "数据错误！");
+        } finally {
+            return returnMap;
+        }
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Map delete(@PathVariable("id") String id,
+                      HttpServletRequest request) {
+        Map returnMap = new HashMap();
+        Outcome outcome = outcomeService.getOutcome(id);
+        if(outcome == null) {
+            returnMap.put("error", "找不到记录！");
+        } else {
+            if (outcomeService.deleteOutcome(outcome)) {
+                returnMap.put("success", true);
+            } else {
+                returnMap.put("error", "删除失败！");
+            };
+        }
         return returnMap;
     }
+
 
     /**
      * 得到销项信息

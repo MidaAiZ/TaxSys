@@ -20,6 +20,7 @@ public interface OutcomeService {
     Outcome getOutcome(String id);
     Outcome getOutcomeByTaxId(String taxId);
     LinkedList getOutcomes();
+    boolean deleteOutcome(Outcome outcome);
 
     /**
      * 修改销项信息

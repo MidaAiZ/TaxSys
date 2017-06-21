@@ -162,8 +162,7 @@ public class OutcomeServiceImpl implements OutcomeService {
         oldOutcome.setOutType(outcome.getOutType());
         oldOutcome.setMoney(outcome.getMoney());
         oldOutcome.setTaxDate(outcome.getTaxDate());
-        oldOutcome.setCreated_at(outcome.getCreated_at());
-        oldOutcome.setUpdated_at(outcome.getUpdated_at());
+        oldOutcome.setUpdated_at(TimeUtil.now());
 
         if(!outcomeDao.updateOutcomeInfo(oldOutcome)) {
             return new OutcomeDto(false, "更新销项信息失败");
@@ -178,10 +177,16 @@ public class OutcomeServiceImpl implements OutcomeService {
         Outcome oldOutcome = outcomeDao.getOutcomeByTaxId(outcome.getTaxId());
         if(oldOutcome != null) {
             outcome.setId(oldOutcome.getId());
+            outcome.setCreated_at(TimeUtil.now());
             return modifyOutcomeInfo(outcome);
         } else {
             return createOutcome(outcome);
         }
+    }
+
+
+    public boolean deleteOutcome(Outcome outcome) {
+        return outcomeDao.deleteOutcome(outcome);
     }
 
     public List<String> searchOutcomeList(HttpServletRequest request){

@@ -35,8 +35,10 @@ public interface IncomeDao {
      * @return
      */
     boolean updateIncomeInfo(Income income);
+    boolean deleteIncome(Income income);
 
-    List searchIncomeList(Map<String, Object> params);
+
+        List searchIncomeList(Map<String, Object> params);
 
     List typeList();
 }

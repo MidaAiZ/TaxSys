@@ -19,6 +19,7 @@ public interface IncomeService {
     Income getIncome(String id);
     Income getIncomeByTaxId(String taxId);
     List getIncomes();
+    boolean deleteIncome(Income income);
 
    /**
      * 修改进项信息

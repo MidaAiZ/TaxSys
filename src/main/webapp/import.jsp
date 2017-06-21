@@ -15,12 +15,6 @@
 <html class="no-js bit-html" dir="ltr" lang="zh-CN">
 <!--<![endif]-->
 <head>
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/echarts.min.js"></script>
-    <script src="js/exportPOI.js"></script>
-    <script src="js/import.js"></script>
-    <script src="js/paginate.js"></script>
     <title>企业增值税发票数据分析系统 | 导入</title>
     <!--[if lt IE 9]>
     <![endif]-->
@@ -43,6 +37,7 @@
           href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/qfy-custom-style.css?m=1489546564?ver=2.41'
           type='text/css' media='all'/>
     <link rel="stylesheet" href="css/uploader.css">
+    <link rel="stylesheet" href="css/context.css">
     <!-- Cache! -->
     <style>
         .qfyuser-label label {
@@ -53,6 +48,15 @@
             background: #eee;
         }
     </style>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/exportPOI.js"></script>
+    <script src="js/import.js"></script>
+    <script src="js/dataOpt.js"></script>
+    <script src="js/paginate.js"></script>
+    <script src="js/context.js"></script>
+
 </head>
 
 <body>
@@ -166,7 +170,7 @@
 <div class="file-box" style="text-align: center;margin-top: 0px">
     <div class="container">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">最近导入的数据</a></li>
+            <li class="active"><a data-toggle="tab" href="#home">近期导入的数据</a></li>
             <li><a data-toggle="tab" href="#up-income">导入进项数据</a></li>
             <li><a data-toggle="tab" href="#up-outcome">导入销项数据</a></li>
         </ul>
@@ -180,13 +184,13 @@
                     <div class="list-tab-content">
                         <div id="incomeList">
                             <div class="row">
-                                <div class="col-lg-8 col-lg-offset-2 col-md-12">
+                                <div class="col-lg-10 col-lg-offset-1 col-md-12">
                                     <br>
                                     <table class="table table-condensed table-striped" data-role="recent-list" id="recent-table-in">
                                         <thead>
                                             <tr>
                                                 <td width="20%">发票号</td>
-                                                <td width="20%">类型</td>
+                                                <td width="20%">进项类型</td>
                                                 <td width="20%">金额</td>
                                                 <td width="20%">进项日期</td>
                                                 <td width="20%">导入时间</td>
@@ -196,7 +200,7 @@
                                         </tbody>
                                     </table>
                                     <nav aria-label="Page navigation">
-                                        <ul class="pagination pagination-sm" id="in-page">
+                                        <ul class="pagination pagination-sm incomes" id="in-page">
 
                                         </ul>
                                     </nav>
@@ -205,13 +209,13 @@
                         </div>
                         <div id="outcomeList" style="display: none;">
                             <div class="row">
-                                <div class="col-lg-8 col-lg-offset-2 col-md-12">
+                                <div class="col-lg-10 col-lg-offset-1 col-md-12">
                                     <br>
                                     <table class="table table-condensed table-striped" data-role="recent-list" id="recent-table-out">
                                         <thead>
                                         <tr>
                                             <td width="20%">发票号</td>
-                                            <td width="20%">类型</td>
+                                            <td width="20%">销项类型</td>
                                             <td width="20%">金额</td>
                                             <td width="20%">进项日期</td>
                                             <td width="20%">导入时间</td>
@@ -222,7 +226,7 @@
                                         </tbody>
                                     </table>
                                     <nav aria-label="Page navigation">
-                                        <ul class="pagination pagination-sm" id="out-page">
+                                        <ul class="pagination pagination-sm outcomes" id="out-page">
 
                                         </ul>
                                     </nav>
@@ -397,25 +401,24 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <p id="upload-tip">上传中...</p>
-                <div id="f-loading">
-                    <div class="spinner">
-                        <div class="rect1"></div>
-                        <div class="rect2"></div>
-                        <div class="rect3"></div>
-                        <div class="rect4"></div>
-                        <div class="rect5"></div>
+    <!-- Modal -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p id="upload-tip">上传中...</p>
+                    <div id="f-loading">
+                        <div class="spinner">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
 </body>
 </html>

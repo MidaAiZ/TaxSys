@@ -1,0 +1,29 @@
+#context-menu {
+    position: absolute;
+    display: none;
+    z-index: 10000;
+    background: white;
+    min-width: 100px;
+    max-width: 300px;
+    width: auto;
+    border-radius: 3px;
+    box-shadow: #b9b9b9 3px 5px 5px;
+}
+.context {
+    padding: 5px 10px;
+    min-width: 30px;,
+    text-align: left;
+    display: block;
+    color: #3f413e;
+}
+
+.context.header {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.context.option {
+    cursor: pointer;
+}
+.context.option:hover {
+    background: #eee;
+}

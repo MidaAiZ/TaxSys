@@ -6,6 +6,7 @@ import com.taxsys.utils.TimeUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,22 +67,23 @@ public class IncomeDaoImpl implements IncomeDao{
      */
     public boolean updateIncomeInfo(Income income){
         Session session = sessionFactory.getCurrentSession();
-        String hql = "update Income income set income.inType = ?, income.money = ?, income.taxId = ?, income.taxDate = ?, income.created_at = ?, income.updated_at = ? where  income.id = ?";
+        String hql = "update Income income set income.inType = ?, income.money = ?, income.taxId = ?, income.taxDate = ?, income.updated_at = ? where  income.id = ?";
         Query query = session.createQuery(hql);
         query.setString(0, income.getInType());
         query.setFloat(1, income.getMoney());
         query.setString(2, income.getTaxId());
         query.setString(3, income.getTaxDate());
         query.setString(4, TimeUtil.now());
-        query.setString(5, TimeUtil.now());
-        query.setString(6, income.getId());
+        query.setString(5, income.getId());
 
-        out.println("我要跟新啦！");
-        if(query.executeUpdate() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return (query.executeUpdate() > 1);
+    }
+
+    public boolean deleteIncome(Income income) {
+        String hql = "delete Income income where income.id = ?";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        query.setString(0, income.getId());
+        return (query.executeUpdate() > 0);
     }
 
     public List searchIncomeList(Map<String, Object> params){

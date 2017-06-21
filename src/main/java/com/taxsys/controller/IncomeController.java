@@ -5,9 +5,6 @@ import com.taxsys.model.Income;
 import com.taxsys.model.User;
 import com.taxsys.service.impl.IncomeServiceImpl;
 import com.taxsys.service.impl.UserServiceImpl;
-import com.taxsys.utils.ExportExcel;
-import com.taxsys.utils.TimeUtil;
-import com.taxsys.utils.UUIDGeneratorUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.lang.System.out;
 
@@ -148,33 +146,37 @@ public class IncomeController {
 
     /**
      * 修改进项信息
-     * @param taxId 进项发票ID
-     * @param  inType 进项类型
-     * @param money 进项额
-     * @param created_at 进项日期
      * @return
      */
-    @RequestMapping(value = "/{id}/info", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Map<String, Object> modifyIncomeInfo(@PathVariable("id") String id,
-                                                @RequestParam String taxId,
-                                                @RequestParam String inType,
-                                                @RequestParam Float money,
-                                                @RequestParam String created_at) {
+    public Map<String, Object> modify(@PathVariable("id") String id,
+                                      HttpServletRequest request) {
 
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
+        try {
+            request.setCharacterEncoding("UTF-8");
+            String taxId = request.getParameter("taxId");
+            if(taxId != null && taxId.length() == 0) { taxId = null; }
+            String type = new String(request.getParameter("type").getBytes("ISO-8859-1"), "UTF-8");
+            Float money = Float.parseFloat(request.getParameter("money"));
+            String taxDate = request.getParameter("taxDate");
+            Income income = new Income(taxId, type, money, taxDate);
 
-        Income income = new Income(taxId, inType, money, created_at);
-        income.setId(id);
-        IncomeDto incomeDto = incomeService.modifyIncomeInfo(income);
-        if(incomeDto.isSuccess()){
-            returnMap.put("success", incomeDto.getIncome());
-        } else {
-            returnMap.put("error", incomeDto.getMessage());
+            income.setId(id);
+            IncomeDto incomeDto = incomeService.modifyIncomeInfo(income);
+            if(incomeDto.isSuccess()){
+                returnMap.put("income", incomeDto.getIncome());
+            } else {
+                returnMap.put("error", incomeDto.getMessage());
+            }
+        } catch (Exception e) {
+            returnMap.put("error", "数据错误！");
+        } finally {
+            return returnMap;
         }
 
-        return returnMap;
     }
 
     /**
@@ -238,6 +240,24 @@ public class IncomeController {
         } finally {
             return returnMap;
         }
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Map delete(@PathVariable("id") String id,
+                  HttpServletRequest request) {
+        Map returnMap = new HashMap();
+        Income income = incomeService.getIncome(id);
+        if(income == null) {
+            returnMap.put("error", "找不到记录！");
+        } else {
+            if (incomeService.deleteIncome(income)) {
+                returnMap.put("success", true);
+            } else {
+                returnMap.put("error", "删除失败！");
+            };
+        }
+        return returnMap;
     }
 
     @RequestMapping(value = "/types", method = RequestMethod.POST)

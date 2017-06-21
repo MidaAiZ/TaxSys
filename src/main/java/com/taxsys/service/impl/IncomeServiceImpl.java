@@ -158,8 +158,7 @@ public class IncomeServiceImpl implements IncomeService {
         oldIncome.setInType(income.getInType());
         oldIncome.setMoney(income.getMoney());
         oldIncome.setTaxDate(income.getTaxDate());
-        oldIncome.setCreated_at(income.getCreated_at());
-        oldIncome.setUpdated_at((income.getUpdated_at()));
+        oldIncome.setUpdated_at(TimeUtil.now());
         if(!incomeDao.updateIncomeInfo(oldIncome)) {
             return new IncomeDto(false, "更新进项信息失败");
         }
@@ -174,10 +173,15 @@ public class IncomeServiceImpl implements IncomeService {
         Income oldIncome = incomeDao.getIncomeByTaxId(income.getTaxId());
         if(oldIncome != null) {
             income.setId(oldIncome.getId());
+            income.setCreated_at(TimeUtil.now());
             return modifyIncomeInfo(income);
         } else {
             return createIncome(income);
         }
+    }
+
+    public boolean deleteIncome(Income income) {
+        return incomeDao.deleteIncome(income);
     }
 
     public List<String> searchIncomeList(HttpServletRequest request){
