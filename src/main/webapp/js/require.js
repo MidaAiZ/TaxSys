@@ -15,9 +15,9 @@ $(document).ready(function () {
                 for (var i in list) {
                     $tr = $(
                         "<tr><td>" +
-                        (list[i].created_at).substring(0, 4) +
+                        (list[i].taxDate).substring(0, 4) +
                         "</td><td>" +
-                        (list[i].created_at).substring(5, 7) +
+                        (list[i].taxDate).substring(5, 7) +
                         "</td><td>" +
                         list[i].inType +
                         "</td><td>" +
@@ -57,9 +57,9 @@ $(document).ready(function () {
     //             for(var i in list) {
     //                 $tr = $(
     //                     "<tr><td>" +
-    //                     (list[i].created_at).substring(0,4) +
+    //                     (list[i].taxDate).substring(0,4) +
     //                     "</td><td>" +
-    //                     (list[i].created_at).substring(5,7) +
+    //                     (list[i].taxDate).substring(5,7) +
     //                     "</td><td>" +
     //                     list[i].inType+
     //                     "</td><td>" +
@@ -148,7 +148,7 @@ $(document).ready(function () {
 //                                     "</td><td>" +
 //                                     list[i].money +
 //                                     "</td><td>" +
-//                                     list[i].created_at +
+//                                     list[i].taxDate +
 //                                     "</td></tr>"
 //                                 );
 //                                 console.log($tr);
@@ -195,7 +195,7 @@ $(document).ready(function () {
 //                                     "</td><td>" +
 //                                     list[i].money +
 //                                     "</td><td>" +
-//                                     list[i].created_at +
+//                                     list[i].taxDate +
 //                                     "</td></tr>"
 //                                 );
 //                                 console.log($tr);
@@ -277,7 +277,7 @@ $(document).ready(function () {
 //     //                         "</td><td>" +
 //     //                         list[i].money +
 //     //                         "</td><td>" +
-//     //                         list[i].created_at +
+//     //                         list[i].taxDate +
 //     //                         "</td></tr>"
 //     //                     );
 //     //                     console.log($tr);

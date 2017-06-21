@@ -3,7 +3,8 @@
  */
 LIMIT = 6;
 CONDITION = "2010-09-09"
-
+COUNT_income = 1;
+COUNT_outcome = 1;
 
 $(function() {
     var limit = 6;
@@ -22,8 +23,6 @@ function callb(data) {
     }
 }
 
-
-
 function OutputHtml_income(sites) {
 
     $content = $("#content");
@@ -38,7 +37,6 @@ function OutputHtml_income(sites) {
             + "</tr>")
     }
 }
-
 //进项
 // function getJson_income(page, limit,CONDITION) {
 //     var siteList={"incomeList":[]};
@@ -236,15 +234,15 @@ function OutputHtml_outcome(sites) {
     $("#content_outcome td").remove()
     for (var i in sites ) {
         $content.append("<tr>" +
-            "<td>" + sites[i].created_at.substring(0, 4) + "</td>"
-            + "<td>" + sites[i].created_at.substring(5, 7) + "</td>"
+            "<td>" + sites[i].taxDate.substring(0, 4) + "</td>"
+            + "<td>" + sites[i].taxDate.substring(5, 7) + "</td>"
             + "<td>" + sites[i].outType + "</td>"
             + "<td>" + "销项" + "</td>"
             + "<td>" + sites[i].money + "</td>"
             + "</tr>")
     }
 }
-//
+
 // function ChangeHtml_outcome() {
 //     $("#pagelist_outcome").empty();
 //     var str = $("select[name=year_form_outcome]").val();
@@ -257,8 +255,9 @@ function OutputHtml_outcome(sites) {
 // }
 
 
-
 $(document).ready(function() {
+    getCount_income(1, LIMIT, "2010-09-09");
+    getCount_outcome(1, LIMIT, "2010-09-09");
     getJson_income(1, LIMIT, "2010-09-09");
     createdPre_income(1, LIMIT, "2010-09-09");
     getJson_outcome(1, LIMIT, "2010-09-09");

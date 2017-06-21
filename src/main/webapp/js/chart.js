@@ -135,8 +135,8 @@ $(document).ready(function() {
     //         success: function(data) {
     //             var list = data.incomeList;
     //             $.each(list,function(i,p){
-    //                 // console.log(p.created_at);
-    //                 var  str = p.created_at;
+    //                 // console.log(p.taxDate);
+    //                 var  str = p.taxDate;
     //                 var  d   = new Date(str.replace(/-/, "/"));
     //                 // console.log(d.getMonth());
     //                 var  mm  = d.getMonth();
@@ -201,8 +201,8 @@ $(document).ready(function() {
     //         success: function(data) {
     //             var list = data.outcomeList;
     //             $.each(list,function(i,p){
-    //                 // console.log(p.created_at);
-    //                 var  str = p.created_at;
+    //                 // console.log(p.taxDate);
+    //                 var  str = p.taxDate;
     //                 var  d   = new Date(str.replace(/-/, "/"));
     //                 // console.log(d.getMonth());
     //                 var  mm  = d.getMonth();
@@ -423,8 +423,8 @@ $(document).ready(function() {
             success: function (data) {
                 var list = data.incomeList;
                 $.each(list, function (i, p) {
-                    // console.log(p.created_at);
-                    var str = p.created_at;
+                    // console.log(p.taxDate);
+                    var str = p.taxDate;
                     var d = new Date(str.replace(/-/, "/"));
                     // console.log(d.getMonth());
                     var mm = d.getMonth();
@@ -439,8 +439,8 @@ $(document).ready(function() {
             success: function (data) {
                 var list = data.outcomeList;
                 $.each(list, function (i, p) {
-                    // console.log(p.created_at);
-                    var str = p.created_at;
+                    // console.log(p.taxDate);
+                    var str = p.taxDate;
                     var d = new Date(str.replace(/-/, "/"));
                     // console.log(d.getMonth());
                     var mm = d.getMonth();
