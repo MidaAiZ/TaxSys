@@ -153,7 +153,7 @@ function setTr(obj, type, urlType) {
         obj.money +
         "</td><td data-role='tax-date' data-value='" + obj.taxDate + "'>" +
         obj.taxDate +
-        "</td><td data-role='created-at' data-value='>" +
+        "</td><td data-role='created-at'>" +
         obj.created_at.substr(0, 19) +
         "</td></tr>");
     return $tr;
