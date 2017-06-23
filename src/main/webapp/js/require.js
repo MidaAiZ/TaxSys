@@ -1,303 +1,134 @@
-/**
- * Created by Vodka on 2017/6/8.
- */
+LIMIT = 8;
+CONDITION = "beginTime=2011-01-01&"
 
-$(document).ready(function () {
+//下载
+function download_Income() {
+    var url = "/incomes/exportExcel?"+"getTaxId=true&getTaxDate=true&getMoney=true&getType=true&beginTime="+ $("select[name=year_form]").val()+ "-" + $("select[name=month_form]").val() + "-01&"
+        + "endTime="+ $("select[name=year_form]").val()+ "-" + $("select[name=month_form]").val() + "-31&"
+        +"type="+ $("select[name=type_form]").val()+"&";
+    document.download_income.action =url;
+    $("#download_income").submit();
+}
+function download_Outcome() {
+    var url = "/outcomes/exportExcel?"+"getTaxId=true&getTaxDate=true&getMoney=true&getType=true&beginTime="+ $("select[name=year_form_outcome]").val()+ "-" + $("select[name=month_form_outcome]").val() + "-01&"
+        + "endTime="+ $("select[name=year_form_outcome]").val()+ "-" + $("select[name=month_form_outcome]").val() + "-31&"
+        +"type="+ $("select[name=type_form_outcome]").val()+"&";
+    document.download_outcome.action = url;
+    $("#download_outcome").submit();
+}
+
+
+//进项
+function loadingIncome() {
+    var limit = 8;
+    var url = "/incomes/list?"+CONDITION;
+    var myPage = new myPaginate(limit, url, callb,"#pagelist");
+    myPage.init();
+}
+
+function callb(data) {
+    siteList = data.incomeList;
+    if (siteList) {
+        OutputHtml_income(siteList);
+    }
+    else {  // 沒有插入数据
+        alert("没有导入任何数据！");
+    }
+}
+
+function OutputHtml_income(sites) {
+
+    $content = $("#content");
+    $("#content").empty();
+    for (var i in sites ) {
+        $content.append("<tr>" +
+            "<td>" + sites[i].taxDate.substring(0, 4) + "</td>"
+            + "<td>" + sites[i].taxDate.substring(5, 7) + "</td>"
+            + "<td>" + sites[i].inType + "</td>"
+            + "<td>" + "进项" + "</td>"
+            + "<td>" + sites[i].money + "</td>"
+            + "</tr>")
+    }
+}
+
+//销项
+function loadingOutcome() {
+    var limit = 8;
+    var url = "/outcomes/list?"+CONDITION;
+    var myPage_outcome = new myPaginate(limit, url, callbb,"#pagelist_outcome");
+    myPage_outcome.init();
+}
+
+function callbb(data) {
+    siteList_outcome = data.outcomeList;
+    if (siteList_outcome) {
+        OutputHtml_outcome(siteList_outcome);
+    }
+    else {  // 沒有插入数据
+        alert("没有导入任何数据！");
+    }
+}
+
+function OutputHtml_outcome(sites) {
+
+    $content = $("#content_outcome");
+    $("#content_outcome").empty()
+    for (var i in sites ) {
+        $content.append("<tr>" +
+            "<td>" + sites[i].taxDate.substring(0, 4) + "</td>"
+            + "<td>" + sites[i].taxDate.substring(5, 7) + "</td>"
+            + "<td>" + sites[i].outType + "</td>"
+            + "<td>" + "销项" + "</td>"
+            + "<td>" + sites[i].money + "</td>"
+            + "</tr>")
+    }
+}
+
+$(document).ready(function() {
+    loadingIncome();
+    loadingOutcome();
 
     $.ajax({
-        type: "get",
-        url: "/incomes/list?beginTime=2015-01-01",
+        type: "POST",
+        url: "/incomes/types",
         dataType: "json",
-        success: function (data) {
-            var list = data.incomeList;
-            var type = "进项";
-            if (list) {
-                for (var i in list) {
-                    $tr = $(
-                        "<tr><td>" +
-                        (list[i].taxDate).substring(0, 4) +
-                        "</td><td>" +
-                        (list[i].taxDate).substring(5, 7) +
-                        "</td><td>" +
-                        list[i].inType +
-                        "</td><td>" +
-                        type +
-                        "</td><td>" +
-                        list[i].money +
-                        "</td></tr>"
-                    );
-                    // console.log($tr);
-                    $(list).append($tr);
+        success: function(data) {
+            var sites = data.types;
+            $.each(sites,function(i,p){
+                $content = $("select[name=type_form]");
+                $content.empty();
+                for (var i in sites ) {
+                    $content.append("<option value="+sites[i]+">"+sites[i]+"</option>>")
                 }
-            } else {  // 沒有插入数据
-                alert("没有导入任何数据！");
-            }
-        },
-        error: function () {
-            alert(result.error);
-        },
-        cache: false,
-        contentType: false,
-        processData: false
-        // });
-    })
+            });
+        }
+    });
+    $.ajax({
+        type: "POST",
+        url: "/outcomes/types",
+        dataType: "json",
+        success: function(data) {
+            var sites = data.types;
+            $.each(sites,function(i,p){
+                $content = $("select[name=type_form_outcome]");
+                $content.empty();
+                for (var i in sites ) {
+                    $content.append("<option value="+sites[i]+">"+sites[i]+"</option>>")
+                }
+            });
+        }
+    });
+
+    $("#require-outcome").on("click",function () {
+        CONDITION = "beginTime="+ $("select[name=year_form_outcome]").val()+ "-" + $("select[name=month_form_outcome]").val() + "-01&"
+            + "endTime="+ $("select[name=year_form_outcome]").val()+ "-" + $("select[name=month_form_outcome]").val() + "-31&"
+            +"type="+ $("select[name=type_form_outcome]").val()+"&";
+        loadingOutcome();
+    });
+    $("#require-income").on("click",function () {
+        CONDITION = "beginTime="+ $("select[name=year_form]").val()+ "-" + $("select[name=month_form]").val() + "-01&"
+            + "endTime="+ $("select[name=year_form]").val()+ "-" + $("select[name=month_form]").val() + "-31&"
+            +"type="+ $("select[name=type_form]").val()+"&";
+        loadingIncome();
+    });
 })
-
-    // $.ajax({
-    //     type: "get",
-    //     url: "/outcomes/list?beginTime=2015-01-01",
-    //     dataType: "json",
-    //     success : function(data) {
-    //         var $result = $("#result");
-    //         var $list = $result.find("tbody");
-    //         var list = data.outcomeList;
-    //         var type = "销项";
-    //         $result.show()
-    //         if (list) {
-    //             for(var i in list) {
-    //                 $tr = $(
-    //                     "<tr><td>" +
-    //                     (list[i].taxDate).substring(0,4) +
-    //                     "</td><td>" +
-    //                     (list[i].taxDate).substring(5,7) +
-    //                     "</td><td>" +
-    //                     list[i].inType+
-    //                     "</td><td>" +
-    //                     type +
-    //                     "</td><td>" +
-    //                     list[i].money +
-    //                     "</td></tr>"
-    //                 );
-    //                 console.log($tr);
-    //                 $list.append($tr);
-    //             }
-    //         } else {  // 沒有插入数据
-    //             alert("没有导入任何数据！");
-    //         }
-    //     },
-    //     error : function() {
-    //         alert( result.error);
-    //     },
-    //     cache : false,
-    //     contentType : false,
-    //     processData : false
-    // });
-
-    // $ele.on("click", "p", function() {
-    //     alert($(this).data("value"))
-    // })
-
-    // var page = $(".pagination");
-    // page.on("click", "a", function() {
-    //     alert(window.location.href + "&page=" + $(this).html());
-    // })
-// })
-//
-//
-// var User1 = function(){
-//
-//     var _ensure = $("input[name=submit]");
-//     $(_ensure).on("click", function(){
-//         alert("!!!")
-//         var url;
-//         var start_year="",end_year="",start_month="",end_month="",things_type="",start_time="",end_time="";
-//         var str4 = $("select[name=item]").val();//进销项
-//         var str3 = $("select[name=type]").val();//类型
-//         if(str3!=0)
-//         var str2 = $("select[name=month]").val();//月份
-//         if(str2!=0)start_month = str2;
-//         var str1 = $("select[name=year]").val();//年份
-//         if(str1!=0){
-//             start_year = str1;
-//             if(str2=0){
-//                 start_time = start_year + "-" + "01" + "-" + "01";
-//                 end_time   = start_year + "-" + "12" + "-" + "31";
-//             }
-//             else{
-//                 start_time = start_year + "-" + str2 + "-" + "01";
-//                 end_time   = start_year + "-" + str2 + "-" + "31";
-//             }
-//         }
-//         switch (str4){
-//             case 0:{// 进项和销项都有
-//                 str4 =
-//                 $.ajax({
-//                     url : url,
-//                     type : "get",
-//                     dataType : "json",
-//                     success : function(result) {
-//                         var $result = $("#result");
-//                         var $list = $result.find("tbody");
-//                         var list = result.incomes || result.outcomes;
-//                         var type = "";
-//                         $result.show()
-//                         if (list) {
-//                             for(var i in list) {
-//                                 if (result.incomes) {
-//                                     console.log(list[i]);
-//                                     type = list[i].inType;
-//                                 }else if (result.outcomes) {
-//                                     console.log(list[i]);
-//                                     type = list[i].outType;
-//                                 }
-//                                 $tr = $(
-//                                     "<tr><td>" +
-//                                     list[i].taxId +
-//                                     "</td><td>" +
-//                                     type        +
-//                                     "</td><td>" +
-//                                     list[i].money +
-//                                     "</td><td>" +
-//                                     list[i].taxDate +
-//                                     "</td></tr>"
-//                                 );
-//                                 console.log($tr);
-//                                 $list.append($tr);
-//                             }
-//                         } else {  // 沒有插入数据
-//                             alert("没有导入任何数据！");
-//                         }
-//                     },
-//                     error : function() {
-//                         alert( result.error);
-//                     },
-//                     cache : false,
-//                     contentType : false,
-//                     processData : false
-//                 });
-//             }
-//             case 1:{// 只有进项
-//                 url = "/incomes/list?beginTime="+start_time+"&endTime="+end_time;
-//                 $.ajax({
-//                     url : url,
-//                     type : 'get',
-//                     data : formData,
-//                     success : function(result) {
-//                         var $result = $("#result2");
-//                         var $list = $result.find("tbody");
-//                         var list = result.incomes || result.outcomes;
-//                         var type = "";
-//                         $result.show()
-//                         if (list) {
-//                             for(var i in list) {
-//                                 if (result.incomes) {
-//                                     console.log(list[i]);
-//                                     type = list[i].inType;
-//                                 }else if (result.outcomes) {
-//                                     console.log(list[i]);
-//                                     type = list[i].outType;
-//                                 }
-//                                 $tr = $(
-//                                     "<tr><td>" +
-//                                     list[i].taxId +
-//                                     "</td><td>" +
-//                                     type        +
-//                                     "</td><td>" +
-//                                     list[i].money +
-//                                     "</td><td>" +
-//                                     list[i].taxDate +
-//                                     "</td></tr>"
-//                                 );
-//                                 console.log($tr);
-//                                 $list.append($tr);
-//                             }
-//                         } else {  // 沒有插入数据
-//                             alert("没有导入任何数据！");
-//                         }
-//                     },
-//                     error : function() {
-//                         alert( result.error);
-//                     },
-//                     cache : false,
-//                     contentType : false,
-//                     processData : false
-//                 });
-//             }
-//             case 2:{
-//
-//             }
-//         }
-//
-//
-//     })
-//
-//
-//
-//
-//     // this.init = function(){
-//     //
-//     //     //模拟上传excel
-//     //     $("#uploadEventBtn1").unbind("click").bind("click",function(){
-//     //         $("#uploadEventFile1").click();
-//     //     });
-//     //     $("#uploadEventFile1").bind("change",function(){
-//     //         $("#uploadEventPath1").attr("value",$("#uploadEventFile1").val());
-//     //     });
-//     //
-//     // };
-//     // //点击上传按钮
-//     // this.uploadBtn = function(){
-//     //     var uploadEventFile = $("#uploadEventFile1").val();
-//     //     if(uploadEventFile == ''){
-//     //         alert("请选择excel,再上传");
-//     //     }else if(uploadEventFile.lastIndexOf(".xls")<0){//可判断以.xls和.xlsx结尾的excel
-//     //         alert("只能上传Excel文件");
-//     //     }else{
-//     //         var url = '/incomes/upload/';
-//     //         var formData = new FormData($('#form1-2')[0]);
-//     //         user1.sendAjaxRequest(url,'POST',formData);
-//     //     }
-//     // };
-//     //
-//     // this.sendAjaxRequest = function(url,type,data){
-//     //     $.ajax({
-//     //         url : url,
-//     //         type : type,
-//     //         data : data,
-//     //         success : function(result) {
-//     //             var $result = $("#result1");
-//     //             var $list = $result.find("tbody");
-//     //             var list = result.incomes || result.outcomes;
-//     //             var type = "";
-//     //             $result.show()
-//     //             if (list) {
-//     //                 for(var i in list) {
-//     //                     if (result.incomes) {
-//     //                         console.log(list[i]);
-//     //                         type = list[i].inType;
-//     //                     }else if (result.outcomes) {
-//     //                         console.log(list[i]);
-//     //                         type = list[i].outType;
-//     //                     }
-//     //                     $tr = $(
-//     //                         "<tr><td>" +
-//     //                         list[i].taxId +
-//     //                         "</td><td>" +
-//     //                         type        +
-//     //                         "</td><td>" +
-//     //                         list[i].money +
-//     //                         "</td><td>" +
-//     //                         list[i].taxDate +
-//     //                         "</td></tr>"
-//     //                     );
-//     //                     console.log($tr);
-//     //                     $list.append($tr);
-//     //                 }
-//     //             } else {  // 沒有插入数据
-//     //                 alert("没有导入任何数据！");
-//     //             }
-//     //         },
-//     //         error : function() {
-//     //             alert( result.error);
-//     //         },
-//     //         cache : false,
-//     //         contentType : false,
-//     //         processData : false
-//     //     });
-//     // };
-// }
-//
-// var user1;
-// $(function(){
-//     user1 = new User1();
-// });

@@ -96,8 +96,8 @@ function setFormtwo(_ele) {
 // 分页以及近期数据
 $(function() {
     var limit = 12;
-    var incomeUrl = '/incomes/list?orderBy=created_at&createdBegin=' + (getDate(-90)) + "&";
-    var outcomeUrl = '/outcomes/list?orderBy=created_at&createdBegin=' + (getDate(-90)) +"&";
+    var incomeUrl = '/incomes/list?orderBy=created_at&createdBegin=' + (new Date).toLocaleDateString() + "&";
+    var outcomeUrl = '/outcomes/list?orderBy=created_at&createdBegin=' + (new Date).toLocaleDateString() +"&";
     var inPage = new myPaginate(limit, incomeUrl, incomeCK, "#in-page");
     var outPage = new myPaginate(limit, outcomeUrl, outcomeCK, "#out-page");
     inPage.init();
@@ -106,13 +106,6 @@ $(function() {
     $("a[href=#incomeList], a[href=#home]").on("click", inPage.update)
     $("a[href=#outcomeList]").on("click", outPage.update)
 });
-function getDate(n)
-{
-    var uom = new Date();
-    uom.setDate(uom.getDate()+n);
-    uom = uom.getFullYear() + "-" + (uom.getMonth()+1) + "-" + uom.getDate();
-    return uom;
-}
 
 function incomeCK(res) {
     var list = res.incomeList
@@ -123,8 +116,19 @@ function incomeCK(res) {
     $tbody.empty();
     for (var i in list) {
         var type = list[i].inType;
-        var $tr = setTr(list[i], type, "incomes");
-
+        var $tr = $(
+            "<tr><td>" +
+            (list[i].taxId || "无") +
+            "</td><td>" +
+            type +
+            "</td><td>" +
+            list[i].money +
+            "</td><td>" +
+            list[i].taxDate +
+            "</td><td style='color: green'>" +
+            list[i].created_at.substr(0, 19) +
+            "</td></tr>"
+        );
         $tbody.append($tr);
     }
 }
@@ -138,24 +142,21 @@ function outcomeCK(res) {
     $tbody.empty();
     for (var i in list) {
         var type = list[i].outType;
-        var $tr = setTr(list[i], type, "outcomes");
+        var $tr = $(
+            "<tr><td>" +
+            (list[i].taxId || "无") +
+            "</td><td>" +
+            type +
+            "</td><td>" +
+            list[i].money +
+            "</td><td>" +
+            list[i].taxDate +
+            "</td><td style='color: green'>" +
+            list[i].created_at.substr(0, 19) +
+            "</td></tr>"
+        );
         $tbody.append($tr);
     }
 }
 
-function setTr(obj, type, urlType) {
-    var $tr =  $("<tr data-urltype='" + urlType + "' data-id='" + obj.id + "'>" +
-        "<td data-role='tax-id' data-value='" + obj.taxId + "'>" +
-        (obj.taxId || "无") +
-        "</td><td data-role='type' data-value='" + type + "'>" +
-        type +
-        "</td><td data-role='money' data-value='" + obj.money + "'>" +
-        obj.money +
-        "</td><td data-role='tax-date' data-value='" + obj.taxDate + "'>" +
-        obj.taxDate +
-        "</td><td data-role='created-at'>" +
-        obj.created_at.substr(0, 19) +
-        "</td></tr>");
-    return $tr;
-}
 

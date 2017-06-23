@@ -15,6 +15,12 @@
 <html class="no-js bit-html" dir="ltr" lang="zh-CN">
 <!--<![endif]-->
 <head>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/exportPOI.js"></script>
+    <script src="js/import.js"></script>
+    <script src="js/paginate.js"></script>
     <title>企业增值税发票数据分析系统 | 导入</title>
     <!--[if lt IE 9]>
     <![endif]-->
@@ -24,20 +30,15 @@
           href="http://57ea239cecea4.t73.qifeiye.com/qfy-content/cache/scripts/57ec8d9b352f33adc09c11ca94f4b7b0.css"
           type="text/css" media="all"/>
     <!-- Cache! -->
-    <link rel='stylesheet' id='dt-main-css'
-          href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/themes/qfy-01/css/main.css?ver=2.41' type='text/css'
-          media='all'/>
-    <link rel='stylesheet' id='dt-custom-less-css'
-          href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/wp-less/qfy-01/css/custom-6a3391fc76.css?ver=2.41'
-          type='text/css' media='all'/>
-    <link rel='stylesheet' id='dt-bit-custom-less-css'
-          href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/wp-less/qfy-01/css/bit-custom-6a3391fc76.css?ver=2.41'
-          type='text/css' media='all'/>
-    <link rel='stylesheet' id='qfy_dynamic_css-css'
-          href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/qfy-custom-style.css?m=1489546564?ver=2.41'
-          type='text/css' media='all'/>
-    <link rel="stylesheet" href="css/uploader.css">
-    <link rel="stylesheet" href="css/context.css">
+
+    <link rel="stylesheet" href="css/style1.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/style2.css" type="text/css" media="all" />
+    <link rel='stylesheet' id='dt-main-css'  href='css/style3.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-custom-less-css'  href='css/style4.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-bit-custom-less-css'  href='css/style5.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='qfy_dynamic_css-css'  href='css/style6.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="css/style7.css" type="text/css" media="all" />
+
     <!-- Cache! -->
     <style>
         .qfyuser-label label {
@@ -48,15 +49,9 @@
             background: #eee;
         }
     </style>
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/echarts.min.js"></script>
-    <script src="js/exportPOI.js"></script>
-    <script src="js/import.js"></script>
-    <script src="js/dataOpt.js"></script>
-    <script src="js/paginate.js"></script>
-    <script src="js/context.js"></script>
+    <link rel="icon" href="http://host/favicon.ico" type="image/x-icon" />
 
+    <link rel="shortcut icon" href="http://host/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -90,6 +85,8 @@
                             <a href="count.jsp"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
                             <a href="chart.jsp"><span>年度报表</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
+                            <a href="predict.jsp"><span>分析预测</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
@@ -122,7 +119,7 @@
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
                                     <a onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='#61b0ff'; this.style.color='#ffffff';"
                                        onmouseenter="this.style.backgroundColor='transparent'; this.style.borderColor='#61b0ff'; this.style.color='#61b0ff';"
-                                       style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
+                                       style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
                                        href="register.jsp" target="">注册</a>
                                 </div>
@@ -136,7 +133,7 @@
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
                                     <a  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
                                         onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
-                                        style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
+                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
                                         class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
                                         href="login.jsp" target="_self">登录</a>
                                 </div>
@@ -170,7 +167,7 @@
 <div class="file-box" style="text-align: center;margin-top: 0px">
     <div class="container">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">近期导入的数据</a></li>
+            <li class="active"><a data-toggle="tab" href="#home">最近导入的数据</a></li>
             <li><a data-toggle="tab" href="#up-income">导入进项数据</a></li>
             <li><a data-toggle="tab" href="#up-outcome">导入销项数据</a></li>
         </ul>
@@ -184,13 +181,13 @@
                     <div class="list-tab-content">
                         <div id="incomeList">
                             <div class="row">
-                                <div class="col-lg-10 col-lg-offset-1 col-md-12">
+                                <div class="col-lg-8 col-lg-offset-2 col-md-12">
                                     <br>
                                     <table class="table table-condensed table-striped" data-role="recent-list" id="recent-table-in">
                                         <thead>
                                             <tr>
                                                 <td width="20%">发票号</td>
-                                                <td width="20%">进项类型</td>
+                                                <td width="20%">类型</td>
                                                 <td width="20%">金额</td>
                                                 <td width="20%">进项日期</td>
                                                 <td width="20%">导入时间</td>
@@ -200,7 +197,7 @@
                                         </tbody>
                                     </table>
                                     <nav aria-label="Page navigation">
-                                        <ul class="pagination pagination-sm incomes" id="in-page">
+                                        <ul class="pagination pagination-sm" id="in-page">
 
                                         </ul>
                                     </nav>
@@ -209,13 +206,13 @@
                         </div>
                         <div id="outcomeList" style="display: none;">
                             <div class="row">
-                                <div class="col-lg-10 col-lg-offset-1 col-md-12">
+                                <div class="col-lg-8 col-lg-offset-2 col-md-12">
                                     <br>
                                     <table class="table table-condensed table-striped" data-role="recent-list" id="recent-table-out">
                                         <thead>
                                         <tr>
                                             <td width="20%">发票号</td>
-                                            <td width="20%">销项类型</td>
+                                            <td width="20%">类型</td>
                                             <td width="20%">金额</td>
                                             <td width="20%">进项日期</td>
                                             <td width="20%">导入时间</td>
@@ -226,7 +223,7 @@
                                         </tbody>
                                     </table>
                                     <nav aria-label="Page navigation">
-                                        <ul class="pagination pagination-sm outcomes" id="out-page">
+                                        <ul class="pagination pagination-sm" id="out-page">
 
                                         </ul>
                                     </nav>
@@ -401,24 +398,25 @@
     </div>
 </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <p id="upload-tip">上传中...</p>
-                    <div id="f-loading">
-                        <div class="spinner">
-                            <div class="rect1"></div>
-                            <div class="rect2"></div>
-                            <div class="rect3"></div>
-                            <div class="rect4"></div>
-                            <div class="rect5"></div>
-                        </div>
+<!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id="upload-tip">上传中...</p>
+                <div id="f-loading">
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 </body>
 </html>

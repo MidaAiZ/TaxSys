@@ -34,7 +34,7 @@ $(document).ready(function() {
             myChart.hideLoading();
             var option = {
                 title: {
-                    text: '当前月份进项数据'
+                    text: '当前月份进项数据（金额/万元）'
                 },
                 tooltip: {},
                 legend: {

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <!--[if IE 6]>
 <html id="ie6" class="ancient-ie old-ie no-js bit-html" dir="ltr" lang="zh-CN">
 <![endif]-->
@@ -17,11 +18,10 @@
 <head>
     <!-- for 360 -->
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/json.js"></script>
-    <script src="js/index.js"></script>
     <script src="js/require.js"></script>
-    <link href="css/alertify.css" media="screen" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="js/jquery.alertify.js"></script>
+    <script src="js/paginate.js"></script>
+    <script src="js/jquery.fullPage.min.js"></script>
+    <link rel="stylesheet" href="css/jquery.fullPage.css">
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
@@ -37,15 +37,19 @@
     <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/html5shiv.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/css/respond.css?ver=2.41" type="text/css" media="screen" />
-    <!--[if lt IE 9]>
+  <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/respond.min.js"></script>
     <![endif]-->
     <style type="text/css" id="static-stylesheet"></style>
-    <link rel='stylesheet' id='dt-main-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/themes/qfy-01/css/main.css?ver=2.41' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-custom-less-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/wp-less/qfy-01/css/custom-6a3391fc76.css?ver=2.41' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-bit-custom-less-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/wp-less/qfy-01/css/bit-custom-6a3391fc76.css?ver=2.41' type='text/css' media='all' />
-    <link rel='stylesheet' id='qfy_dynamic_css-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/qfy-custom-style.css?m=1489546564?ver=2.41' type='text/css' media='all' />
+
+    <link rel="stylesheet" href="css/style1.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/style2.css" type="text/css" media="all" />
+    <link rel='stylesheet' id='dt-main-css'  href='css/style3.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-custom-less-css'  href='css/style4.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-bit-custom-less-css'  href='css/style5.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='qfy_dynamic_css-css'  href='css/style6.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="css/style7.css" type="text/css" media="all" />
+
     <style type='text/css'>
         .ppstart{
             background:transparent !important;
@@ -126,6 +130,8 @@
                             <a href="count.jsp"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
                             <a href="chart.jsp"><span>年度报表</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
+                            <a href="predict.jsp"><span>分析预测</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
@@ -158,7 +164,7 @@
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
                                     <a onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='#61b0ff'; this.style.color='#ffffff';"
                                        onmouseenter="this.style.backgroundColor='transparent'; this.style.borderColor='#61b0ff'; this.style.color='#61b0ff';"
-                                       style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
+                                       style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
                                        href="register.jsp" target="">注册</a>
                                 </div>
@@ -172,7 +178,7 @@
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
                                     <a  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
                                         onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
-                                        style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
+                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
                                         class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
                                         href="login.jsp" target="_self">登录</a>
                                 </div>
@@ -201,41 +207,153 @@
     </header>
     <!-- #masthead -->
 </div>
-<div class="require-box" style="text-align: center;margin-top: 50px">
-    <form action="" method="post" enctype="multipart/form-data">
-        <select name="type">
-            <option value="1">鸡肉</option>
-            <option value="2">鱼肉</option>
-            <option value="3">玻璃</option>
-            <option value="4">铁皮</option>
-            <option value="5">纯净水</option>
-            <option value="6">花生油</option>
-        </select>
-        <input id="require-btn" type="button" name="submit" class="btn btn-primary" value="查询"  style="margin-bottom: 5px;"/>
-    </form>
-</div><br><br>
-<div class="container" id="result">
-    <div class="content col-lg-8 col-lg-offset-2 col-md-12">
-        <div class="table-responsive" style="text-align: center">
-            <table class="table table-bordered table-hover" style="text-align: center">
-                <thead>
-                <tr style="text-align: center">
-                    <th style="text-align: center">年份</th>
-                    <th style="text-align: center">月份</th>
-                    <th style="text-align: center">商品类型</th>
-                    <th style="text-align: center">进销项类型</th>
-                    <th style="text-align: center">金额（万元）</th>
-                </tr>
-                </thead>
-                <tbody class="tbody" id="content">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<div class="tab-content">
+    <div id="menu3" class="tab-pane fade in active">
+        <div id="dowebok">
+            <div class="section">
+                <div class="slide">
+                    <h3 style="float: left;margin-left: 13%">进项数据</h3>
+                    <div class="require-box" style="width:80%;text-align:center;margin-top: 50px;">
+                        <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
+                            <select name="year_form">
+                                <option value="2017">2017年</option>
+                                <option value="2016">2016年</option>
+                                <option value="2015">2015年</option>
+                                <option value="2014">2014年</option>
+                                <option value="2013">2013年</option>
+                                <option value="2012">2012年</option>
+                                <option value="2011">2011年</option>
+                                <option value="2010">2010年</option>
+                                <option value="2009">2009年</option>
+                                <option value="2008">2008年</option>
+                                <option value="2007">2007年</option>
+                                <option value="2006">2006年</option>
+                            </select>
+                            <select name="month_form">
+                                <option value="1">1月份</option>
+                                <option value="2">2月份</option>
+                                <option value="3">3月份</option>
+                                <option value="4">4月份</option>
+                                <option value="5">5月份</option>
+                                <option value="6">6月份</option>
+                                <option value="7">7月份</option>
+                                <option value="8">8月份</option>
+                                <option value="9">9月份</option>
+                                <option value="10">10月份</option>
+                                <option value="11">11月份</option>
+                                <option value="12">12月份</option>
+                            </select>
+                            <select name="type_form"></select>
+                            <a class="btn btn-primary" id="require-income">查询</a>
+                        </form>
+                        <form method="post" name="download_income" style="margin-left:80%">
+                            <input type="submit" class="btn btn-sm btn-success"id="download_income" value="下载" onclick="download_Income()"></input>
+                        </form>
+                    </div><br>
+                    <div class="container" style="padding-left: 15px; " id="result">
+                        <div class="content col-lg-8 col-lg-offset-2 col-md-12">
+                            <div class="table-responsive" style="text-align: center">
+                                <table class="table table-bordered table-hover" style="text-align: center">
+                                    <thead>
+                                    <tr style="text-align: center">
+                                        <th style="text-align: center">年份</th>
+                                        <th style="text-align: center">月份</th>
+                                        <th style="text-align: center">商品类型</th>
+                                        <th style="text-align: center">进销项类型</th>
+                                        <th style="text-align: center">金额（万元）</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tbody" id="content">
 
-                </tbody>
-            </table>
-            <nav class="pull-right">
-                <ul class="pagination" id="pagelist"></ul>
-            </nav>
-            <br><div id="total" style="float: left"></div>
+                                    </tbody>
+                                </table>
+                                <nav class="pull-right">
+                                    <ul class="pagination" id="pagelist"></ul>
+                                </nav>
+                                <br><div id="total" style="float: left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <h3 style="float: left;margin-left: 13%">销项数据</h3>
+                    <div class="require-box" style="width:80%;text-align:center;margin-top: 50px;">
+                        <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
+                            <select name="year_form_outcome">
+                                <option value="2017">2017年</option>
+                                <option value="2016">2016年</option>
+                                <option value="2015">2015年</option>
+                                <option value="2014">2014年</option>
+                                <option value="2013">2013年</option>
+                                <option value="2012">2012年</option>
+                                <option value="2011">2011年</option>
+                                <option value="2010">2010年</option>
+                                <option value="2009">2009年</option>
+                                <option value="2008">2008年</option>
+                                <option value="2007">2007年</option>
+                                <option value="2006">2006年</option>
+                            </select>
+                            <select name="month_form_outcome">
+                                <option value="1">1月份</option>
+                                <option value="2">2月份</option>
+                                <option value="3">3月份</option>
+                                <option value="4">4月份</option>
+                                <option value="5">5月份</option>
+                                <option value="6">6月份</option>
+                                <option value="7">7月份</option>
+                                <option value="8">8月份</option>
+                                <option value="9">9月份</option>
+                                <option value="10">10月份</option>
+                                <option value="11">11月份</option>
+                                <option value="12">12月份</option>
+                            </select>
+                            <select name="type_form_outcome"></select>
+                            <a class="btn btn-primary" id="require-outcome">查询</a>
+                        </form>
+                        <form method="post" name="download_outcome" style="margin-left:80%">
+                            <input type="submit" class="btn btn-sm btn-success"id="download_outcome" value="下载" onclick="download_Outcome()"></input>
+                        </form>
+                    </div><br>
+                    <div class="container" style="padding-left: 15px; " id="result_two">
+                        <div class="content col-lg-8 col-lg-offset-2 col-md-12">
+                            <div class="table-responsive" style="text-align: center">
+                                <table class="table table-bordered table-hover" style="text-align: center">
+                                    <thead>
+                                    <tr style="text-align: center">
+                                        <th style="text-align: center">年份</th>
+                                        <th style="text-align: center">月份</th>
+                                        <th style="text-align: center">商品类型</th>
+                                        <th style="text-align: center">进销项类型</th>
+                                        <th style="text-align: center">金额（万元）</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tbody" id="content_outcome">
+
+                                    </tbody>
+                                </table>
+                                <nav class="pull-right">
+                                    <ul class="pagination" id="pagelist_outcome"></ul>
+                                </nav>
+                                <br><div id="total_outcome" style="float: left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <script>
+            $(function(){
+                $('#dowebok').fullpage({
+                });
+            });
+        </script>
+        <style>
+            .fp-tableCell{
+                padding-top: 0px;
+                display: inline-block;
+            }
+        </style>
     </div>
 </div>
 </body>

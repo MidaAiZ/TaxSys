@@ -81,7 +81,7 @@ $(document).ready(function() {
             }()
             var option = {
                 "title": {
-                    "text": "近12月份进销项数据对比",
+                    "text": "近12月份进销项数据对比（金额/万元）",
                     x: "4%",
 
                 },

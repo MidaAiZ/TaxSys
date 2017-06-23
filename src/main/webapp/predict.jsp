@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: Vodka
+  Date: 2017/6/21
+  Time: 1:01
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <!--[if IE 6]>
 <html id="ie6" class="ancient-ie old-ie no-js bit-html" dir="ltr" lang="zh-CN">
 <![endif]-->
@@ -17,25 +25,29 @@
 <head>
     <!-- for 360 -->
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/chart.js"></script>
     <meta name="renderer" content="webkit">
+    <script src="js/echarts.min.js"></script>
+    <script src="js/predict.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.fullPage.min.js"></script>
+    <link rel="stylesheet" href="css/jquery.fullPage.css">
+    <script src="js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
     <meta name="MobileOptimized" content="width"/><!-- for baidu -->
     <meta name="HandheldFriendly" content="true"/><!-- for baidu -->
-
     <!-- start of customer header -->
     <!-- end of customer header -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="js/echarts.min.js"></script>
-    <title>企业增值税发票数据分析系统 | 年度报表</title>
+    <title>企业增值税发票数据分析系统 | 分析预测</title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php" />
     <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/html5shiv.min.js"></script>
     <![endif]-->
-    <!--[if lt IE 9]>
+   <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/respond.min.js"></script>
     <![endif]-->
     <style type="text/css" id="static-stylesheet"></style>
@@ -124,9 +136,9 @@
                             <a href="require.jsp"><span>查询</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-9556 menu-item-9557">
                             <a href="count.jsp"><span>月度统计</span></a></li>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116 act first">
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
                             <a href="chart.jsp"><span>年度报表</span></a></li>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117 act first">
                             <a href="predict.jsp"><span>分析预测</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
@@ -203,27 +215,64 @@
     </header>
     <!-- #masthead -->
 </div>
-<div id="niandu">
-    <div class="count-box" style="text-align: center;margin-top: 50px">
-        <form action="" method="post" enctype="multipart/form-data">
-            <select name="year_two">
-                <option value="2017">2017年</option>
-                <option value="2016">2016年</option>
-                <option value="2015">2015年</option>
-                <option value="2014">2014年</option>
-                <option value="2013">2013年</option>
-                <option value="2012">2012年</option>
-                <option value="2011">2011年</option>
-                <option value="2010">2010年</option>
-                <option value="2009">2009年</option>
-                <option value="2008">2008年</option>
-                <option value="2007">2007年</option>
-                <option value="2006">2006年</option>
-            </select>
-            <%--<input type="submit" name="submit_two" class="btn" value="确定" />--%>
-        </form><br><br>
-        <div id="baobiao2" style="width:1000px;height:400px;text-align: center;margin-left: 150px;float: left"></div>
-    </div>
+<div>
+        <ul class="nav nav-tabs" style="margin-top: 50px">
+            <li class="active" style="margin-left: 32%;"><a data-toggle="tab" href="#menu1">商品预测</a></li>
+            <li style="margin-left: 20%"><a data-toggle="tab" href="#menu2">利润预测</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="menu1" class="tab-pane fade  in active ">
+                <div id="dowebok">
+                    <div class="section">
+                        <div class="slide">
+                            <h3 style="float: left;margin-left: 13%">进项商品</h3>
+                            <div class="require-box" style="float:left;width:20%">
+                                <form style="height:30px" action="" method="post" enctype="multipart/form-data">
+                                    <select data-live-search="true" name="type_form_income"></select>
+                                </form>
+                            </div><br>
+                            <div class="count-box" style="margin-top: 50px;margin-left: 50px">
+                                <div id="baobiao_income" style="width:1000px;height:400px;text-align: center;margin-left: 150px;float: left"></div>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <h3 style="float: left;margin-left: 13%">销项商品</h3>
+                            <div class="require-box" style="float:left;width:20%">
+                                <form style="height:30px" action="" method="post" enctype="multipart/form-data">
+                                    <select style="" name="type_form_outcome"></select>
+                                </form>
+                            </div><br>
+                            <div class="count-box" style="margin-top: 50px;margin-left: 50px">
+                                <div id="baobiao_outcome" style="width:1000px;height:400px;text-align: center;margin-left: 150px;float: left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $(function(){
+                        $('#dowebok').fullpage({
+                        });
+                    });
+                </script>
+                <style>
+                    .fp-tableCell{
+                        padding-top: 0px;
+                        display: inline-block;
+                    }
+                </style>
+            </div>
+            <div id="menu2" class="tab-pane fade" >
+                <div class="count-box" style="margin-top: 50px;margin-left: 50px">
+                    <div id="baobiao2" style="width:1000px;height:400px;text-align: center;margin-left: 150px;float: left"></div>
+                </div>
+            </div>
+        </div>
 </div>
+<script>
+    $('.selectpicker').selectpicker({
+        style: 'btn-info',
+        size: 4,
+    });
+</script>
 </body>
 </html>
