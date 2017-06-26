@@ -1,5 +1,8 @@
 package com.taxsys.service.impl;
 
+import com.taxcal.Analysis.PlainDataAnalysis;
+import com.taxcal.Analysis.SeasonData;
+import com.taxcal.Analysis.SeasonDataAnalysis;
 import com.taxsys.dao.impl.IncomeDaoImpl;
 import com.taxsys.dto.IncomeDto;
 import com.taxsys.model.Income;
@@ -210,6 +213,39 @@ public class IncomeServiceImpl implements IncomeService {
         } finally {
             return incomeDao.searchIncomeList(paramsMap);
         }
+    }
+
+    public List calculate(HttpServletRequest request) {
+        // 第一步， 先根据条件获取进项数据
+        List incomeList = searchIncomeList(request);
+        // 第二步， 根据结果进行预测计算
+        PlainDataAnalysis analysis = new PlainDataAnalysis();           //建立一元线性回归预测模型
+
+        analysis.AddData(1,1);                              //填入数据，并自动优化模型
+        analysis.AddData(2,2);                              //填入数据，并自动优化模型
+
+        System.out.println(analysis.GetData(3));                  //获取预测值，第三年
+        System.out.println(analysis.GetR2());                           //获取线性相关系数
+
+        SeasonDataAnalysis analysis1 = new SeasonDataAnalysis();        //建立比例预测分析模型
+
+        try {
+            analysis1.AddData(new SeasonData(new float[]{1,2,1,1,1,1}));    //添加年度数据
+            analysis1.AddData(new SeasonData(new float[]{1,2,1,1,1,2}));    //添加年度数据
+
+            analysis1.CreateModel();                                    //建立预测分析模型
+            SeasonData sd = analysis1.GetData(1);                  //获取全年各季度数据
+
+
+            for(float i : sd)                                           //输出，支持迭代器
+                System.out.println(i);
+
+            System.out.println(analysis1.GetR2());                      //预测模型可信度，（尚未证明）
+        } catch (IllegalAccessException e) {                            //上下文数据不匹配
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public List<String> typeList() {

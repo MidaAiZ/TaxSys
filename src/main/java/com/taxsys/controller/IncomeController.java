@@ -242,6 +242,30 @@ public class IncomeController {
         }
     }
 
+    /**
+     * 传入条件搜索符合标准的进项
+     * @param: type, beginTime, endTime, taxId, minMoney, maxMoney
+     * @return
+     */
+    @RequestMapping(value = "calculate", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> calculate(HttpServletRequest request) {
+        // response返回的json内容
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        try{
+            request.setCharacterEncoding("UTF-8");
+            List<String> incomeList = incomeService.searchIncomeList(request);
+            returnMap.put("count", incomeList.get(0));
+            incomeList.remove(0);
+            returnMap.put("incomeList", incomeList);
+        } catch (Exception e) {
+            returnMap.put("error", e);
+        } finally {
+            return returnMap;
+        }
+    }
+
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public Map delete(@PathVariable("id") String id,
