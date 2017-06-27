@@ -13,12 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import static java.lang.System.out;
 
 public class ReadExcel {
     //总行数
@@ -63,7 +60,7 @@ public class ReadExcel {
     }
 
     /**
-     * 根据excel里面的内容读取客户信息
+     * 根据excel里面的内容读取进销项信息
      * @param is 输入流
      * @param isExcel2003 excel是2003还是2007版本
      * @return
@@ -95,7 +92,7 @@ public class ReadExcel {
     }
 
     /**
-     * 读取Excel里面客户的信息
+     * 读取Excel里面进项的信息
      * @param wb
      * @return
      */
@@ -122,30 +119,29 @@ public class ReadExcel {
                 Cell cell = row.getCell(c);
                 if (null != cell) {
                     if (c == 0) {
-                        //如果是纯数字,比如你写的是25,cell.getNumericCellValue()获得是25.0,通过截取字符串去掉.0获得25
                         if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
-                            String name = String.valueOf(cell.getNumericCellValue());
-                            income.setTaxId(name.substring(0, name.length()-2>0?name.length()-2:1));
-                        }else{
-                            income.setTaxId(cell.getStringCellValue());
-                        }
-                    } else if (c == 1) {
-                        if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
-                            String sex = String.valueOf(cell.getNumericCellValue());
-                            income.setInType(sex.substring(0, sex.length()-2>0?sex.length()-2:1));
+                            String type = String.valueOf(cell.getNumericCellValue());
+                            income.setInType(type.substring(0, type.length()-2>0 ? type.length()-2 : 1));
                         }else{
                             income.setInType(cell.getStringCellValue());
                         }
-                    } else if (c == 2){
+                    } else if (c == 1) {
                         if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
-                            String age = String.valueOf(cell.getNumericCellValue());
-                            income.setMoney(Integer.parseInt(age.substring(0, age.length()-2>0?age.length()-2:1)));
+                            String money = String.valueOf(cell.getNumericCellValue());
+                            income.setMoney(Float.parseFloat(money.substring(0, money.length()-2>0 ? money.length()-2 : 1)));
                         }else{
-                            income.setMoney(Integer.parseInt(cell.getStringCellValue()));
+                            income.setMoney(Float.parseFloat(cell.getStringCellValue()));
                         }
-                    }else if (c == 3){
+                    } else if (c == 2){
                         String date = TimeUtil.formatDate(cell.getDateCellValue());
                         income.setTaxDate(date);
+                    }else if (c == 3){
+                        if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
+                            String taxId = String.valueOf(cell.getNumericCellValue());
+                            income.setTaxId(taxId.substring(0, taxId.length()-2 > 0 ? taxId.length() - 2 : 1));
+                        }else{
+                            income.setTaxId(cell.getStringCellValue());
+                        }
                     }
                 }
             }
@@ -178,30 +174,29 @@ public class ReadExcel {
                 Cell cell = row.getCell(c);
                 if (null != cell) {
                     if (c == 0) {
-                        //如果是纯数字,比如你写的是25,cell.getNumericCellValue()获得是25.0,通过截取字符串去掉.0获得25
                         if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
-                            String name = String.valueOf(cell.getNumericCellValue());
-                            outcome.setTaxId(name.substring(0, name.length()-2>0?name.length()-2:1));
-                        }else{
-                            outcome.setTaxId(cell.getStringCellValue());
-                        }
-                    } else if (c == 1) {
-                        if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
-                            String sex = String.valueOf(cell.getNumericCellValue());
-                            outcome.setOutType(sex.substring(0, sex.length()-2>0?sex.length()-2:1));
+                            String type = String.valueOf(cell.getNumericCellValue());
+                            outcome.setOutType(type.substring(0, type.length()-2 > 0 ? type.length() - 2 : 1));
                         }else{
                             outcome.setOutType(cell.getStringCellValue());
                         }
-                    } else if (c == 2){
+                    } else if (c == 1) {
                         if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
-                            String age = String.valueOf(cell.getNumericCellValue());
-                            outcome.setMoney(Integer.parseInt(age.substring(0, age.length()-2>0?age.length()-2:1)));
+                            String money = String.valueOf(cell.getNumericCellValue());
+                            outcome.setMoney(Float.parseFloat(money.substring(0, money.length() - 2 > 0 ? money.length() - 2 : 1)));
                         }else{
-                            outcome.setMoney(Integer.parseInt(cell.getStringCellValue()));
+                            outcome.setMoney(Float.parseFloat(cell.getStringCellValue()));
                         }
-                    }else if (c == 3){
+                    } else if (c == 2){
                         String date = TimeUtil.formatDate(cell.getDateCellValue());
                         outcome.setTaxDate(date);
+                    }else if (c == 3){
+                        if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
+                            String taxId = String.valueOf(cell.getNumericCellValue());
+                            outcome.setTaxId(taxId.substring(0, taxId.length()-2 > 0 ? taxId.length() - 2 : 1));
+                        }else{
+                            outcome.setTaxId(cell.getStringCellValue());
+                        }
                     }
                 }
             }
