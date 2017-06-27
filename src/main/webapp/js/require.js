@@ -1,5 +1,7 @@
 LIMIT = 8;
-CONDITION = "beginTime=2011-01-01&"
+CONDITION = "beginTime=2011-01-01&orderBy=taxDate&"
+INCOMEURL = "/incomes/list?"
+OUTCOMEURL = "/outcomes/list?"
 
 //下载
 function download_Income() {
@@ -17,78 +19,88 @@ function download_Outcome() {
     $("#download_outcome").submit();
 }
 
-
 //进项
 function loadingIncome() {
     var limit = 8;
-    var url = "/incomes/list?"+CONDITION;
+    var url = INCOMEURL+CONDITION;
     var myPage = new myPaginate(limit, url, callb,"#pagelist");
     myPage.init();
+    return myPage;
 }
 
-function callb(data) {
-    siteList = data.incomeList;
-    if (siteList) {
-        OutputHtml_income(siteList);
+function callb(res) {
+    var list = res.incomeList;
+    var $tbody = $("#content");
+    $tbody.empty();
+    if (!list) {
+        return true;
     }
-    else {  // 沒有插入数据
-        alert("没有导入任何数据！");
-    }
-}
-
-function OutputHtml_income(sites) {
-
-    $content = $("#content");
-    $("#content").empty();
-    for (var i in sites ) {
-        $content.append("<tr>" +
-            "<td>" + sites[i].taxDate.substring(0, 4) + "</td>"
-            + "<td>" + sites[i].taxDate.substring(5, 7) + "</td>"
-            + "<td>" + sites[i].inType + "</td>"
-            + "<td>" + "进项" + "</td>"
-            + "<td>" + sites[i].money + "</td>"
-            + "</tr>")
+    for (var i in list) {
+        var type = list[i].inType;
+        var $tr = setTr(list[i], type, "incomes");
+        $tbody.append($tr);
     }
 }
 
 //销项
 function loadingOutcome() {
     var limit = 8;
-    var url = "/outcomes/list?"+CONDITION;
+    var url = OUTCOMEURL+CONDITION;
     var myPage_outcome = new myPaginate(limit, url, callbb,"#pagelist_outcome");
-    myPage_outcome.init();
+    setTimeout(myPage_outcome.init, 2000);
+    return myPage_outcome;
 }
 
-function callbb(data) {
-    siteList_outcome = data.outcomeList;
-    alert(data.outcomeList)
-    if (siteList_outcome) {
-        OutputHtml_outcome(siteList_outcome);
+function callbb(res) {
+    var list = res.outcomeList;
+    var $tbody = $("#content_outcome");
+    $tbody.empty();
+    if (!list) {
+        return true;
     }
-    else {  // 沒有插入数据
-        alert("没有导入任何数据！");
+    for (var i in list) {
+        var type = list[i].outType;
+        var $tr = setTr(list[i], type, "outcomes");
+        $tbody.append($tr);
     }
 }
 
-function OutputHtml_outcome(sites) {
-
-    $content = $("#content_outcome");
-    $("#content_outcome").empty()
-    for (var i in sites ) {
-        $content.append("<tr>" +
-            "<td>" + sites[i].taxDate.substring(0, 4) + "</td>"
-            + "<td>" + sites[i].taxDate.substring(5, 7) + "</td>"
-            + "<td>" + sites[i].outType + "</td>"
-            + "<td>" + "销项" + "</td>"
-            + "<td>" + sites[i].money + "</td>"
-            + "</tr>")
-    }
+function setTr(obj, type, urlType) {
+    var $tr =  $("<tr data-urltype='" + urlType + "' data-id='" + obj.id + "'>" +
+        "<td data-role='tax-date' data-value='" + obj.taxDate + "'>" +
+        obj.taxDate.substring(0, 4) +
+        "</td><td>" + obj.taxDate.substring(5, 7) + "</td>" +
+        "<td data-role='tax-id' data-value='" + obj.taxId + "'>" +
+        (obj.taxId || "无") +
+        "</td><td data-role='type' data-value='" + type + "'>" +
+        type +
+        "</td><td data-role='money' data-value='" + obj.money + "'>" +
+        obj.money +
+        "</td></tr>");
+    return $tr;
 }
 
 $(document).ready(function() {
-    loadingIncome();
-    loadingOutcome();
+    var incomePage = loadingIncome();
+    var outcomePage = loadingOutcome();
 
+    $("#require-outcome").on("click",function () {
+        var newCDT = "beginTime="+ $("select[name=year_form_outcome]").val()+ "-" + $("select[name=month_form_outcome]").val() + "-01&"
+            + "endTime="+ $("select[name=year_form_outcome]").val()+ "-" + $("select[name=month_form_outcome]").val() + "-31&"
+            +"type="+ $("select[name=type_form_outcome]").val()+"&";
+        outcomePage.changeUrl(OUTCOMEURL + newCDT)
+    });
+    $("#require-income").on("click",function () {
+        var newCDT = "beginTime="+ $("select[name=year_form]").val()+ "-" + $("select[name=month_form]").val() + "-01&"
+            + "endTime="+ $("select[name=year_form]").val()+ "-" + $("select[name=month_form]").val() + "-31&"
+            +"type="+ $("select[name=type_form]").val()+"&";
+        incomePage.changeUrl(INCOMEURL + newCDT);
+    });
+
+    setTimeout(initType, 3000);
+})
+
+function initType() {
     $.ajax({
         type: "POST",
         url: "/incomes/types",
@@ -119,17 +131,4 @@ $(document).ready(function() {
             });
         }
     });
-
-    $("#require-outcome").on("click",function () {
-        CONDITION = "beginTime="+ $("select[name=year_form_outcome]").val()+ "-" + $("select[name=month_form_outcome]").val() + "-01&"
-            + "endTime="+ $("select[name=year_form_outcome]").val()+ "-" + $("select[name=month_form_outcome]").val() + "-31&"
-            +"type="+ $("select[name=type_form_outcome]").val()+"&";
-        loadingOutcome();
-    });
-    $("#require-income").on("click",function () {
-        CONDITION = "beginTime="+ $("select[name=year_form]").val()+ "-" + $("select[name=month_form]").val() + "-01&"
-            + "endTime="+ $("select[name=year_form]").val()+ "-" + $("select[name=month_form]").val() + "-31&"
-            +"type="+ $("select[name=type_form]").val()+"&";
-        loadingIncome();
-    });
-})
+}

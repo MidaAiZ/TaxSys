@@ -224,7 +224,7 @@
             </select>
             <%--<input type="submit" name="submit_two" class="btn" value="确定" />--%>
         </form><br><br>
-        <div id="baobiao2" style="width:1000px;height:400px;text-align: center;margin-left: 150px;float: left"></div>
+        <div id="baobiao2" style="width:80%;height:400px;text-align: center;margin: auto;"></div>
     </div>
 </div>
 </body>

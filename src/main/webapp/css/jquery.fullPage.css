@@ -8,10 +8,13 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow:hidden;
-
+    /*overflow:hidden;*/
     /*Avoid flicker on slides transitions for mobile phones #336 */
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+* {
+    overflow-y: visible !important;
+    -ms-overflow-y: visible !important;
 }
 #superContainer {
     height: 100%;
@@ -72,21 +75,20 @@ html, body {
 .fp-controlArrow.fp-prev {
     left: 15px;
     width: 0;
-    margin-top: -50px;
-    border-width: 10px 10px 10px 0;
+    margin-top: -100px;
+    border-width: 25px 25px 25px 0;
     border-color: transparent #959FA9 transparent transparent;
     opacity: 0.4;
 }
 .fp-controlArrow.fp-next {
     right: 15px;
-    margin-top: -50px;
-    border-width: 10px 0 10px 10px;
+    margin-top: -100px;
+    border-width: 25px 0 25px 25px;
     border-color: transparent transparent transparent #959FA9;
     opacity: 0.4;
 }
 .fp-scrollable {
     overflow: scroll;
-
 }
 .fp-notransition {
     -webkit-transition: none !important;

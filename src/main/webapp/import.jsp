@@ -43,15 +43,15 @@
             background: #eee;
         }
     </style>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/echarts.min.js"></script>
     <script src="js/exportPOI.js"></script>
     <script src="js/import.js"></script>
     <script src="js/dataOpt.js"></script>
     <script src="js/paginate.js"></script>
-    <script src="js/context.js"></script>
-
 </head>
 
 <body>
@@ -164,8 +164,6 @@
     </header>
     <!-- #masthead -->
 </div><br><br>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<script src="js/bootstrap.min.js"></script>
 <div class="file-box" style="text-align: center;margin-top: 0px">
     <div class="container">
         <ul class="nav nav-tabs">

@@ -23,7 +23,8 @@ $(document).ready(function() {
     var option3 = {
         backgroundColor: '',
         title: {
-            text: '单月进项数据统计（金额/万元）'
+            text: '单月进项数据统计（金额/万元）',
+            left: '25%'
         },
         tooltip: {
             trigger: 'item',
@@ -108,7 +109,8 @@ $(document).ready(function() {
     var option4 = {
         backgroundColor: '',
         title: {
-            text: '单月销项数据统计（金额/万元）'
+            text: '单月销项数据统计（金额/万元）',
+            left: '25%'
         },
         tooltip: {
             trigger: 'item',
