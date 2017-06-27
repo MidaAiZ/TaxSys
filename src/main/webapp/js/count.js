@@ -1,6 +1,21 @@
 /**
  * Created by Vodka on 2017/6/7.
  */
+//下载
+function download_Income() {
+    var url = "/incomes/exportExcel?"+"getTaxId=true&getTaxDate=true&getMoney=true&getType=true&beginTime="+ $("select[name=year_form]").val()+ "-" + $("select[name=month_form]").val() + "-01&"
+        + "endTime="+ $("select[name=year_form]").val()+ "-" + $("select[name=month_form]").val() + "-31&";
+    document.download_income.action =url;
+    $("#download_income").submit();
+}
+function download_Outcome() {
+    var url = "/outcomes/exportExcel?"+"getTaxId=true&getTaxDate=true&getMoney=true&getType=true&beginTime="+ $("select[name=year_form_outcome]").val()+ "-" + $("select[name=month_form_outcome]").val() + "-01&"
+        + "endTime="+ $("select[name=year_form_outcome]").val()+ "-" + $("select[name=month_form_outcome]").val() + "-31&";
+    document.download_outcome.action = url;
+    $("#download_outcome").submit();
+}
+
+
 $(document).ready(function() {
 
     //月度进项扇形图
@@ -8,7 +23,7 @@ $(document).ready(function() {
     var option3 = {
         backgroundColor: '',
         title: {
-            text: '单月进项数据统计'
+            text: '单月进项数据统计（金额/万元）'
         },
         tooltip: {
             trigger: 'item',
@@ -93,7 +108,7 @@ $(document).ready(function() {
     var option4 = {
         backgroundColor: '',
         title: {
-            text: '单月销项数据统计'
+            text: '单月销项数据统计（金额/万元）'
         },
         tooltip: {
             trigger: 'item',
@@ -170,7 +185,7 @@ $(document).ready(function() {
     var oil=0,chicken=0,fish=0,glass=0,iron=0,water=0,chicken_can=0,fish_can=0,pork_can=0;
     var option = {
         title: {
-            text: '月度进销项统计图'
+            text: '月度进销项（金额/万元）'
         },
         tooltip: {},
         legend: {
@@ -198,11 +213,10 @@ $(document).ready(function() {
 
     var option1 = {
         title: {
-            text: '总额'
+            text: '总额（金额/万元）'
         },
         tooltip: {},
         legend: {
-            data: ['总额']
         },
         xAxis: {
             data: []
@@ -312,7 +326,7 @@ $(document).ready(function() {
                 //月度进销项图
                 var option = {
                     title: {
-                        text: '月度进销项统计图'
+                        text: '月度进销项（金额/万元）'
                     },
                     tooltip: {},
                     legend: {
@@ -344,11 +358,10 @@ $(document).ready(function() {
                 //进销项总额
                 option1 = {
                     title: {
-                        text: '总额'
+                        text: '总额（金额/万元）'
                     },
                     tooltip: {},
                     legend: {
-                        data: ['总额']
                     },
                     xAxis: {
                         data: ["进项","销项"]
@@ -459,7 +472,7 @@ $(document).ready(function() {
                     option3 = {
                         backgroundColor: '',
                         title: {
-                            text: '单月进项数据统计'
+                            text: '单月进项数据统计（金额/万元）'
                         },
                         tooltip: {
                             trigger: 'item',
@@ -521,7 +534,7 @@ $(document).ready(function() {
                     option3 = {
                         backgroundColor: '',
                         title: {
-                            text: '单月进项数据统计'
+                            text: '单月进项数据统计（金额/万元）'
                         },
                         tooltip: {
                             trigger: 'item',
@@ -592,7 +605,7 @@ $(document).ready(function() {
                     option4 = {
                         backgroundColor: '',
                         title: {
-                            text: '单月销项数据统计'
+                            text: '单月销项数据统计（金额/万元）'
                         },
                         tooltip: {
                             trigger: 'item',
@@ -662,7 +675,7 @@ $(document).ready(function() {
                     option4 = {
                         backgroundColor: '',
                         title: {
-                            text: '单月销项数据统计'
+                            text: '单月销项数据统计（金额/万元）'
                         },
                         tooltip: {
                             trigger: 'item',
@@ -824,7 +837,7 @@ $(document).ready(function() {
                 //月度进销项图
                 var option = {
                     title: {
-                        text: '月度进销项统计图'
+                        text: '月度进销项（金额/万元）'
                     },
                     tooltip: {},
                     legend: {
@@ -856,11 +869,10 @@ $(document).ready(function() {
                 //进销项总额
                 option1 = {
                     title: {
-                        text: '总额'
+                        text: '总额（金额/万元）'
                     },
                     tooltip: {},
                     legend: {
-                        data: ['总额']
                     },
                     xAxis: {
                         data: ["进项","销项"]
@@ -971,7 +983,7 @@ $(document).ready(function() {
                     option3 = {
                         backgroundColor: '',
                         title: {
-                            text: '单月进项数据统计'
+                            text: '单月进项数据统计（金额/万元）'
                         },
                         tooltip: {
                             trigger: 'item',
@@ -1033,7 +1045,7 @@ $(document).ready(function() {
                     option3 = {
                         backgroundColor: '',
                         title: {
-                            text: '单月进项数据统计'
+                            text: '单月进项数据统计（金额/万元）'
                         },
                         tooltip: {
                             trigger: 'item',
@@ -1104,7 +1116,7 @@ $(document).ready(function() {
                     option4 = {
                         backgroundColor: '',
                         title: {
-                            text: '单月销项数据统计'
+                            text: '单月销项数据统计（金额/万元）'
                         },
                         tooltip: {
                             trigger: 'item',
@@ -1174,7 +1186,7 @@ $(document).ready(function() {
                     option4 = {
                         backgroundColor: '',
                         title: {
-                            text: '单月销项数据统计'
+                            text: '单月销项数据统计（金额/万元）'
                         },
                         tooltip: {
                             trigger: 'item',

@@ -16,7 +16,7 @@
 <!--<![endif]-->
 <head>
     <script src="js/echarts.min.js"></script>
-    <title>企业增值税发票数据分析系统 | 主页</title>
+    <title>企业增值税发票数据分析系统 | 首页</title>
     <link rel="profile" href="http://gmpg.org/xfn/11"/>
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php"/>
     <!--[if lt IE 9]>
@@ -28,18 +28,16 @@
           href="http://57ea239cecea4.t73.qifeiye.com/qfy-content/cache/scripts/57ec8d9b352f33adc09c11ca94f4b7b0.css"
           type="text/css" media="all"/>
     <!-- Cache! -->
-    <link rel='stylesheet' id='dt-main-css'
-          href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/themes/qfy-01/css/main.css?ver=2.41' type='text/css'
-          media='all'/>
-    <link rel='stylesheet' id='dt-custom-less-css'
-          href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/wp-less/qfy-01/css/custom-6a3391fc76.css?ver=2.41'
-          type='text/css' media='all'/>
-    <link rel='stylesheet' id='dt-bit-custom-less-css'
-          href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/wp-less/qfy-01/css/bit-custom-6a3391fc76.css?ver=2.41'
-          type='text/css' media='all'/>
-    <link rel='stylesheet' id='qfy_dynamic_css-css'
-          href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/qfy-custom-style.css?m=1489546564?ver=2.41'
-          type='text/css' media='all'/>
+
+    <link rel="stylesheet" href="css/style1.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/style2.css" type="text/css" media="all" />
+    <link rel='stylesheet' id='dt-main-css'  href='css/style3.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-custom-less-css'  href='css/style4.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-bit-custom-less-css'  href='css/style5.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='qfy_dynamic_css-css'  href='css/style6.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="css/style7.css" type="text/css" media="all" />
+
+
     <style type='text/css'>
         .ppstart {
             background: transparent !important;
@@ -281,6 +279,8 @@
                             <a href="count.jsp"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
                             <a href="chart.jsp"><span>年度报表</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
+                            <a href="predict.jsp"><span>分析预测</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
@@ -313,7 +313,7 @@
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
                                     <a onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='#61b0ff'; this.style.color='#ffffff';"
                                        onmouseenter="this.style.backgroundColor='transparent'; this.style.borderColor='#61b0ff'; this.style.color='#61b0ff';"
-                                       style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
+                                       style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
                                        href="register.jsp" target="">注册</a>
                                 </div>
@@ -327,7 +327,7 @@
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
                                     <a  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
                                        onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
-                                       style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
+                                       style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
                                        href="login.jsp" target="_self">登录</a>
                                 </div>
@@ -382,7 +382,7 @@
                                                  style='margin-bottom:0px;border-radius:0px;border-top:1px solid #dddddd;border-bottom:0px solid #F9F9F9;border-left:0px solid #F9F9F9;border-right:0px solid #F9F9F9;color:#000000;'>
                                             <div data-time="3" data-imagebgs="" class="background-media  "
                                                  backgroundSize='true'
-                                                 style="background-image: url('http://static.qifeiye.com/caches/e9ef95eecba4dae95a41c96bc9c459e6/aHR0cDovLzU3ZWEyMzljZWNlYTQudDczLnFpZmVpeWUuY29tL3FmeS1jb250ZW50L3VwbG9hZHMvMjAxNi8xMC9lMzA1YzE4ZWY5YTE1MDQzZGI0NzA4NDEyMjE5NmVkYS5wbmc_p_p100_p_3D.png'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:0 0%;">
+                                                 style="background-image: url('image/bg.png'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:0 0%;">
                                             </div>
 
                                             <div class="section-background-overlay background-overlay grid-overlay-0 "
@@ -538,8 +538,7 @@
 
                                             <div class="container">
                                                 <div class="row wpb_row">
-                                                    <div data-animalename="qfyfadeInUp" data-delay=""
-                                                         class=" qfy-column-5-591beb7f8e668439254 qfy-column-inner vc_span_class vc_span6  text-default small-screen-undefined"
+                                                    <div data-animalename="qfyfadeInUp" data-delay="" class=" qfy-column-5-591beb7f8e668439254 qfy-column-inner vc_span_class vc_span6  text-default small-screen-undefined"
                                                          data-dw="1/2" data-fixheight="">
                                                         <div style=";position:relative;;" class="column_inner ">
                                                             <div class=" background-overlay grid-overlay-"
@@ -564,11 +563,18 @@
                                                                      qfyuuid="qfy_single_image_g8foe"
                                                                      class="qfy-element bitImageControlDiv">
                                                                     <div class="bitImageAhover ">
-                                                                        <div class="bitImageParentDiv wpb_single_image wpb_content_element vc_align_center" style="text-align: center;">
-                                                                            <div class="wpb_wrapper" style="margin-top: -40px"><span></span>
-                                                                                <div id="baobiao1" style="width:600px;height:400px;float: left;margin-left: 20px"></div>
-                                                                                <div id="baobiao2" style="width: 600px;height: 400px;float: left;margin-left:50px"></div>
-
+                                                                        <div class="bitImageParentDiv wpb_single_image wpb_content_element vc_align_center">
+                                                                            <div class="wpb_wrapper" style="margin-top: -100px;float: left;"><span></span>
+                                                                                <div id="baobiao1" style="width:1000px;height:400px;float: left;margin-left: 10%"></div>
+                                                                                <div style="float: left;margin-left: 0px"><span style="color:#3399FF;"><a href="count.jsp" style="font-size: 14px;" target="_self"><span
+                                                                                        style="font-family: 微软雅黑;">更多单月数据 &gt;</span></a></span>
+                                                                                </div>
+                                                                            </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                                                            <div class="wpb_wrapper" style="margin-top: 0px;float: left;"><span></span>
+                                                                                <div id="baobiao2" style="width: 1000px;height: 400px;float: left;margin-left:10%"></div>
+                                                                                <div style="float: left;margin-left: 0px" ><span style="color:#3399FF;"><a href="chart.jsp" style="font-size: 14px;" target="_self"><span
+                                                                                        style="font-family: 微软雅黑;">详细年度数据 &gt;</span></a></span>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -614,22 +620,6 @@
                                                     ;
                                                     }</style>
                                                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                                                    <div m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px"
-                                                         css_animation_delay="0" qfyuuid="qfy_column_text_yd75n"
-                                                         class="qfy-element qfy-text qfy-text-76092 wpb_text_column wpb_content_element  mobile_fontsize"
-                                                         style="position: relative;;;line-height:1.5em;;background-repeat: no-repeat;;margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;border-radius:0px;">
-                                                        <div class="wpb_wrapper">
-                                                            <div style="position: relative;">
-                                                                <div style="float: left;margin-left: 20px"><span style="color:#3399FF;"><a href="count.jsp" style="font-size: 14px;" target="_self"><span
-                                                                        style="font-family: 微软雅黑;">更多单月数据 &gt;</span></a></span>
-                                                                </div>
-                                                                <div style="float: left;margin-left: 45%" ><span style="color:#3399FF;"><a href="chart.jsp" style="font-size: 14px;" target="_self"><span
-                                                                        style="font-family: 微软雅黑;">详细年度数据 &gt;</span></a></span>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -870,7 +860,7 @@
                                 }</style>
                                 <div data-animalename="qfyfadeInUp" data-delay=""
                                      class=" qfy-column-41-591c74f04b086211126 qfy-column-inner vc_span_class vc_span3  text-Default small-screen-undefined"
-                                     data-dw="1/4" data-fixheight="" style="float: left;margin-left: 200px">
+                                     data-dw="1/4" data-fixheight="" style="float: left;margin-left: 150px">
                                     <div style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;border-radius:0px;;position:relative;;"
                                          class="column_inner ">
                                         <div class=" background-overlay grid-overlay-0"
@@ -953,7 +943,7 @@
                                 }</style>
                                 <div data-animalename="qfyfadeInUp" data-delay=""
                                      class=" qfy-column-42-591c74f04b541817729 qfy-column-inner vc_span_class vc_span3  text-Default small-screen-undefined"
-                                     data-dw="1/4" data-fixheight="" style="float: left;margin-left: 200px">
+                                     data-dw="1/4" data-fixheight="" style="float: left;margin-left: 150px">
                                     <div style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;border-radius:0px;;position:relative;;"
                                          class="column_inner ">
                                         <div class=" background-overlay grid-overlay-0"
@@ -1144,7 +1134,7 @@
                                                  class="qfy-element qfy-text qfy-text-9728 wpb_text_column wpb_content_element  mobile_fontsize"
                                                  style="position: relative;;;line-height:1.5em;;background-position:left top;background-repeat: no-repeat;;margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;border-radius:0px;">
                                                 <div class="wpb_wrapper">
-                                                    <div style="text-align: center;"><span style="font-size:13px;">&nbsp;版权所有 ©2017&nbsp;&nbsp; 地址：南京市江宁区佛城西路8号&nbsp;&nbsp;&nbsp;&nbsp; 苏ICP备000000号</span>
+                                                    <div style="text-align: center;"><span style="font-size:13px;">&nbsp;版权所有 ©2017&nbsp;&nbsp; 地址：xxxxxxxxxxxxxx&nbsp;&nbsp;&nbsp;&nbsp; xICP备000000号</span>
                                                     </div>
 
                                                 </div>

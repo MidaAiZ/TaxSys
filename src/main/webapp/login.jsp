@@ -18,8 +18,8 @@
 <head>
 
     <title>企业增值税发票数据管理系统| 登录</title>
-    <link rel="stylesheet" href="css/d068214fb974cd02e0a547e672733d3a.css" type="text/css" media="all" /> <!-- Cache! -->
-    <link rel='stylesheet' id='dt-main-css'  href='http://57ea237f1ddc0.t73.qifeiye.com/qfy-content/themes/qfy-01/css/main.css?ver=2.35' type='text/css' media='all' />
+    <link rel="stylesheet" href="css/login.css" type="text/css" media="all" /> <!-- Cache! -->
+    <link rel='stylesheet' id='dt-main-css'  href='css/loginstyle.css' type='text/css' media='all' />
      <script type='text/javascript'>
         /* <![CDATA[ */
         /* thickbox */

@@ -33,15 +33,19 @@
     <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/html5shiv.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/css/respond.css?ver=2.41" type="text/css" media="screen" />
-    <!--[if lt IE 9]>
+   <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/respond.min.js"></script>
     <![endif]-->
     <style type="text/css" id="static-stylesheet"></style>
-    <link rel='stylesheet' id='dt-main-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/themes/qfy-01/css/main.css?ver=2.41' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-custom-less-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/wp-less/qfy-01/css/custom-6a3391fc76.css?ver=2.41' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-bit-custom-less-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/wp-less/qfy-01/css/bit-custom-6a3391fc76.css?ver=2.41' type='text/css' media='all' />
-    <link rel='stylesheet' id='qfy_dynamic_css-css'  href='http://57ea239cecea4.t73.qifeiye.com/qfy-content/uploads/qfy-custom-style.css?m=1489546564?ver=2.41' type='text/css' media='all' />
+
+    <link rel="stylesheet" href="css/style1.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/style2.css" type="text/css" media="all" />
+    <link rel='stylesheet' id='dt-main-css'  href='css/style3.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-custom-less-css'  href='css/style4.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-bit-custom-less-css'  href='css/style5.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='qfy_dynamic_css-css'  href='css/style6.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="css/style7.css" type="text/css" media="all" />
+
     <style type='text/css'>
         .ppstart{
             background:transparent !important;
@@ -83,7 +87,7 @@
 
 
 
-<body class="home page page-id-2160 page-template-default image-blur btn-flat content-fullwidth wpb-js-composer js-comp-ver-4.0.1 vc_responsive" backgroundSize='true' data-pid="2160" data-pkey="43696bcdc4f8022776101003c5671fe2" style="background-image: url('http://static.qifeiye.com/caches/e9ef95eecba4dae95a41c96bc9c459e6/aHR0cDovLzU3ZWEyMzljZWNlYTQudDczLnFpZmVpeWUuY29tL3FmeS1jb250ZW50L3VwbG9hZHMvMjAxNi8xMC9lMzA1YzE4ZWY5YTE1MDQzZGI0NzA4NDEyMjE5NmVkYS5wbmc_p_p100_p_3D.png'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:0 0%;">
+<body class="home page page-id-2160 page-template-default image-blur btn-flat content-fullwidth wpb-js-composer js-comp-ver-4.0.1 vc_responsive" backgroundSize='true' data-pid="2160" data-pkey="43696bcdc4f8022776101003c5671fe2" style="background-image: url('image/bg.png'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:0 0%;">
 
 <div id="page" class=' breackall wide '>
 
@@ -122,6 +126,8 @@
                             <a href="count.jsp"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
                             <a href="chart.jsp"><span>年度报表</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
+                            <a href="predict.jsp"><span>分析预测</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297 act first">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
@@ -154,7 +160,7 @@
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
                                     <a onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='#61b0ff'; this.style.color='#ffffff';"
                                        onmouseenter="this.style.backgroundColor='transparent'; this.style.borderColor='#61b0ff'; this.style.color='#61b0ff';"
-                                       style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
+                                       style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
                                        href="register.jsp" target="">注册</a>
                                 </div>
@@ -168,7 +174,7 @@
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
                                     <a  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
                                         onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
-                                        style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
+                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
                                         class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
                                         href="login.jsp" target="_self">登录</a>
                                 </div>
@@ -198,7 +204,7 @@
     <!-- #masthead -->
 </div>
 <section data-fixheight="" class="qfy-row-1-592134b61cca9274984 section    full   section-text-no-shadow section-inner-no-shadow section-normal" id="bit_hcbgh" style="margin-bottom:0px;border-radius:0px;color:transparent;">
-    <div data-time="3" data-imagebgs="" class="background-media  " backgroundsize="true" style="background-image: url('http://static.qifeiye.com/caches/e9ef95eecba4dae95a41c96bc9c459e6/aHR0cDovLzU3ZWEyMzljZWNlYTQudDczLnFpZmVpeWUuY29tL3FmeS1jb250ZW50L3VwbG9hZHMvMjAxNi8wOS85YmEwNmU5MmI5YTZkMTc0ZTgyYTFkMTI5YzM4MmIxYy5qcGc_p_p100_p_3D.jpg'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:center center;">
+    <div data-time="3" data-imagebgs="" class="background-media  " backgroundsize="true" style="background-image: url('image/help_image.jpg'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:center center;">
     </div>
 
     <div class="section-background-overlay background-overlay grid-overlay-0 " style="background-color: rgba(255,255,255,0.5);"></div>
@@ -317,7 +323,7 @@
                                                  style="position: relative;;;line-height:1.5em;;background-color: transparent;background-repeat: no-repeat;;margin-top:20px;padding-top:0px;padding-bottom:16px;padding-right:0px;padding-left:0px;">
                                                 <div class="wpb_wrapper">
                                                     <div style="text-align: center;"><a
-                                                            href=""
+                                                            href="help_import.jsp"
                                                             rel="undefined" url-flag="0" url-flagtarget=""><span
                                                             style="font-size:13px;"><span
                                                             style="font-family: 微軟正黑體;"><span
@@ -451,7 +457,7 @@
                                                  style="position: relative;;;line-height:1.5em;;background-color: transparent;background-repeat: no-repeat;;margin-top:20px;padding-top:0px;padding-bottom:16px;padding-right:0px;padding-left:0px;">
                                                 <div class="wpb_wrapper">
                                                     <div style="text-align: center;"><a
-                                                            href=""
+                                                            href="help_require.jsp"
                                                             rel="undefined" url-flag="0" url-flagtarget=""><span
                                                             style="font-size:13px;"><span
                                                             style="font-family: 微軟正黑體;"><span
@@ -664,7 +670,7 @@
                                                  style="position: relative;;;line-height:1.5em;;background-color: transparent;background-repeat: no-repeat;;margin-top:20px;padding-top:0px;padding-bottom:16px;padding-right:0px;padding-left:0px;">
                                                 <div class="wpb_wrapper">
                                                     <div style="text-align: center;"><a
-                                                            href=""
+                                                            href="help_count.jsp"
                                                             rel="undefined" url-flag="0" url-flagtarget=""><span
                                                             style="font-size:13px;"><span
                                                             style="font-family: 微軟正黑體;"><span
@@ -798,7 +804,7 @@
                                                  style="position: relative;;;line-height:1.5em;;background-color: transparent;background-repeat: no-repeat;;margin-top:20px;padding-top:0px;padding-bottom:16px;padding-right:0px;padding-left:0px;">
                                                 <div class="wpb_wrapper">
                                                     <div style="text-align: center;"><a
-                                                            href=""
+                                                            href="help_predict.jsp"
                                                             rel="undefined" url-flag="0" url-flagtarget=""><span
                                                             style="font-size:13px;"><span
                                                             style="font-family: 微軟正黑體;"><span

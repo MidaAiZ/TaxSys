@@ -363,7 +363,7 @@ $(document).ready(function() {
     var myChart2 = echarts.init(document.getElementById('baobiao2'));
     var option2 = {
         title: {
-            text: '年度进销项统计'
+            text: '年度进销项统计表（金额/万元）'
         },
         tooltip: {},
         legend: {
@@ -455,7 +455,7 @@ $(document).ready(function() {
             success: function (data) {
                 option2 = {
                     title: {
-                        text: '年度进销项数据报表'
+                        text: '年度进销项统计表（金额/万元）'
                     },
                     tooltip: {},
                     legend: {
