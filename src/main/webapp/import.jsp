@@ -85,6 +85,10 @@
                             <a href="count.jsp"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
                             <a href="chart.jsp"><span>年度报表</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
+                            <a href="predict.jsp"><span>分析预测</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118">
+                            <a href="calculateTax.jsp"><span>计算增值税</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
@@ -295,12 +299,12 @@
                         </form>
                     </div>
                 </div>
-                <div id="result1" class="result" style="display: none">
+                <div id="result1" class="result" style="display:none;margin-left:17%;width: 60%;text-align: center">
                     <table class="table table-striped" data-type="income"  style="margin-top: 10px">
                         <thead>
                         <tr>
                             <td width="20%">发票号</td>
-                            <td width="15%">类型</td>
+                            <td width="20%">类型</td>
                             <td width="15%">金额</td>
                             <td width="20%">日期</td>
                             <td width="20%">导入结果</td>
@@ -371,12 +375,12 @@
                             </form>
                         </div>
                 </div>
-                <div id="result2" class="result" style="display: none">
-                    <table class="table table-striped" data-type="outcome" style="margin-top: 10px">
+                <div id="result2" class="result" style="display:none;margin-left:17%;width: 60%;text-align: center">
+                    <table class="table table-striped" data-type="outcome" style="margin-top: 10px;">
                         <thead>
                         <tr>
                             <td width="20%">发票号</td>
-                            <td width="15%">类型</td>
+                            <td width="20%">类型</td>
                             <td width="15%">金额</td>
                             <td width="20%">日期</td>
                             <td width="20%">导入结果</td>

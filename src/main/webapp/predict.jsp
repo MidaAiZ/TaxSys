@@ -25,6 +25,7 @@
 <head>
     <!-- for 360 -->
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/index.js"></script>
     <meta name="renderer" content="webkit">
     <script src="js/echarts.min.js"></script>
     <script src="js/predict.js"></script>
@@ -140,6 +141,8 @@
                             <a href="chart.jsp"><span>年度报表</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117 act first">
                             <a href="predict.jsp"><span>分析预测</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118">
+                            <a href="calculateTax.jsp"><span>计算增值税</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
@@ -178,7 +181,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="login" style="margin-top:0px;margin-bottom:0px; display: none;"
+                        <div id="login" style="margin-top:0px;margin-bottom:0px;display: none;"
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"

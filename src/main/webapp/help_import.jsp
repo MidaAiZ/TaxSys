@@ -25,6 +25,7 @@
 <head>
     <!-- for 360 -->
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/index.js"></script>
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
@@ -136,6 +137,8 @@
                             <a href="chart.jsp"><span>年度报表</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
                             <a href="predict.jsp"><span>分析预测</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118">
+                            <a href="calculateTax.jsp"><span>计算增值税</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297 act first">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
@@ -174,7 +177,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="login" style="margin-top:0px;margin-bottom:0px; display: none;"
+                        <div id="login" style="margin-top:0px;margin-bottom:0px;display: none; "
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
@@ -237,7 +240,7 @@
                                                 </div><br>
                                                 <div class="help_01"  style="text-indent: 2em">
                                                     <h4 class="search_title">3、Excel格式的文件有什么格式要求？</h4>
-                                                    <p style="text-indent: 4em">固定格式，第一列为发票号，第二列为类型，第三列为数值，第四列为日期。</p>
+                                                    <p style="text-indent: 4em">Excel文件内需按照固定格式输入，第一列为类型，第二列为数值，第三列为日期，第四列为发票号，。</p>
                                                 </div><br>
                                                 <div class="help_01" style="text-indent: 2em">
                                                     <h4 class="search_title">4、如何判断导入文件是否正确？</h4>

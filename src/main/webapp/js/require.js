@@ -61,6 +61,7 @@ function loadingOutcome() {
 
 function callbb(data) {
     siteList_outcome = data.outcomeList;
+    alert(data.outcomeList)
     if (siteList_outcome) {
         OutputHtml_outcome(siteList_outcome);
     }

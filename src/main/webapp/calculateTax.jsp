@@ -1,4 +1,12 @@
-﻿<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Vodka
+  Date: 2017/6/27
+  Time: 15:18
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <!--[if IE 6]>
 <html id="ie6" class="ancient-ie old-ie no-js bit-html" dir="ltr" lang="zh-CN">
@@ -17,12 +25,10 @@
 <!--<![endif]-->
 <head>
     <!-- for 360 -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/require.js"></script>
-    <script src="js/paginate.js"></script>
+    <script src="http://www.jq22.com/jquery/jquery-1.6.2.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/jquery.fullPage.min.js"></script>
-    <link rel="stylesheet" href="css/jquery.fullPage.css">
+    <script src="js/jquery.reveal.js"></script>
+    <link rel="stylesheet" href="css/reveal.css">
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
@@ -32,13 +38,13 @@
     <!-- start of customer header -->
     <!-- end of customer header -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>企业增值税发票数据分析系统 | 查询</title>
+    <title>企业增值税发票数据分析系统 | 计算增值税</title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php" />
     <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/html5shiv.min.js"></script>
     <![endif]-->
-  <!--[if lt IE 9]>
+    <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/respond.min.js"></script>
     <![endif]-->
     <style type="text/css" id="static-stylesheet"></style>
@@ -88,6 +94,13 @@
     </style>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <%--<script src="js/require.js"></script>--%>
+    <style type="text/css">
+
+        body { font-family: "HelveticaNeue","Helvetica-Neue", "Helvetica", "Arial", sans-serif; }
+
+        .big-link { display:block; margin-top: 100px; text-align: center; font-size: 70px; color: #06f; }
+
+    </style>
 </head>
 
 
@@ -125,7 +138,7 @@
                             <a href="index.jsp"><span>首页</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-7010 menu-item-7011">
                             <a href="import.jsp"><span>导入</span></a></li>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097 act first">
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097">
                             <a href="require.jsp"><span>查询</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-9556 menu-item-9557">
                             <a href="count.jsp"><span>月度统计</span></a></li>
@@ -133,19 +146,33 @@
                             <a href="chart.jsp"><span>年度报表</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
                             <a href="predict.jsp"><span>分析预测</span></a></li>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118">
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118 act first">
                             <a href="calculateTax.jsp"><span>计算增值税</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
 
-                </nav>
+                    <a href="#show-menu" data-padding='' data-top='8' data-right='8' rel="nofollow" id="mobile-menu"
+                       style="display:none;" class="glyphicon glyphicon-icon-align-justify dropCenterStyle center">
+                        <span class="menu-open  phone-text">首页</span>
+                        <span class="menu-close">关闭</span>
+                        <span class="menu-back">返回上一级</span>
+                        <span class="wf-phone-visible">&nbsp;</span>
+                    </a>
 
+                </nav>
+                <div style="display:none;" id="main-nav-slide">
+                    <div class="main-nav-slide-inner" data-class="align_center">
+                        <div class="floatmenu-bar-right bit_widget_more" bitdatamarker="bitHeader-3"
+                             bitdataaction="site_fix_container" bitdatacolor="white">
+                        </div>
+                    </div>
+                </div>
 
                 <div class="wf-td assistive-info " id="assistive-info-unlogin" role="complementary" style="">
                     <div class="top-bar-right right bit_widget_more" bitdatamarker="bitHeader-2"
                          bitdataaction="site_fix_container" bitdatacolor="white" style="">
-                        <div id="register" style="margin-top:0px;margin-bottom:0px;display: none; "
+                        <div id="register" style="margin-top:0px;margin-bottom:0px; display: none;"
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
@@ -159,7 +186,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="login" style="margin-top:0px;margin-bottom:0px; "
+                        <div id="login" style="margin-top:0px;margin-bottom:0px; display: none;"
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
@@ -173,7 +200,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="logout" style="margin-top:0px;margin-bottom:0px; display: none;display: none;"
+                        <div id="logout" style="margin-top:0px;margin-bottom:0px; display: none;"
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
@@ -196,153 +223,57 @@
     </header>
     <!-- #masthead -->
 </div>
-<link rel="stylesheet" href="css/bootstrap.min.css">
 <div class="tab-content">
-    <div id="menu3" class="tab-pane fade in active">
-        <div id="dowebok">
-            <div class="section">
-                <div class="slide">
-                    <h3 style="float: left;margin-left: 13%">进项数据</h3>
-                    <div class="require-box" style="width:80%;text-align:center;margin-top: 50px;">
-                        <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
-                            <select name="year_form">
-                                <option value="2017">2017年</option>
-                                <option value="2016">2016年</option>
-                                <option value="2015">2015年</option>
-                                <option value="2014">2014年</option>
-                                <option value="2013">2013年</option>
-                                <option value="2012">2012年</option>
-                                <option value="2011">2011年</option>
-                                <option value="2010">2010年</option>
-                                <option value="2009">2009年</option>
-                                <option value="2008">2008年</option>
-                                <option value="2007">2007年</option>
-                                <option value="2006">2006年</option>
-                            </select>
-                            <select name="month_form">
-                                <option value="1">1月份</option>
-                                <option value="2">2月份</option>
-                                <option value="3">3月份</option>
-                                <option value="4">4月份</option>
-                                <option value="5">5月份</option>
-                                <option value="6">6月份</option>
-                                <option value="7">7月份</option>
-                                <option value="8">8月份</option>
-                                <option value="9">9月份</option>
-                                <option value="10">10月份</option>
-                                <option value="11">11月份</option>
-                                <option value="12">12月份</option>
-                            </select>
-                            <select name="type_form"></select>
-                            <a class="btn btn-primary" id="require-income">查询</a>
-                        </form>
-                        <form method="post" name="download_income" style="margin-left:80%">
-                            <input type="submit" class="btn btn-sm btn-success"id="download_income" value="下载" onclick="download_Income()"></input>
-                        </form>
-                    </div><br>
-                    <div class="container" style="padding-left: 15px; " id="result">
-                        <div class="content col-lg-8 col-lg-offset-2 col-md-12">
-                            <div class="table-responsive" style="text-align: center">
-                                <table class="table table-bordered table-hover" style="text-align: center">
-                                    <thead>
-                                    <tr style="text-align: center">
-                                        <th style="text-align: center">年份</th>
-                                        <th style="text-align: center">月份</th>
-                                        <th style="text-align: center">商品类型</th>
-                                        <th style="text-align: center">进销项类型</th>
-                                        <th style="text-align: center">金额（万元）</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="tbody" id="content">
-
-                                    </tbody>
-                                </table>
-                                <nav class="pull-right">
-                                    <ul class="pagination" id="pagelist"></ul>
-                                </nav>
-                                <br><div id="total" style="float: left"></div>
-                            </div>
-                        </div>
+    <div class="container" style="text-align: center;">
+        <div style="margin-top: 100px">
+            <form id="form" action="" method="post" style="margin: auto; max-width: 200px; display: inline-block;">
+                <div class="qfyuser-field qfyuser-field-username_or_email " data-key="username_or_email">
+                    <div class="qfyuser-label">
+                        <label for="type">增值税计算方法:</label>
+                        <select id="type" class="qfyuser-label form-control">
+                            <option value="Standard">标准计算方法</option>
+                            <option value="Prepayment">预付计算方法</option>
+                            <option value="Simplified">简易计算方法</option>
+                        </select>
                     </div>
                 </div>
-                <div class="slide">
-                    <h3 style="float: left;margin-left: 13%">销项数据</h3>
-                    <div class="require-box" style="width:80%;text-align:center;margin-top: 50px;">
-                        <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
-                            <select name="year_form_outcome">
-                                <option value="2017">2017年</option>
-                                <option value="2016">2016年</option>
-                                <option value="2015">2015年</option>
-                                <option value="2014">2014年</option>
-                                <option value="2013">2013年</option>
-                                <option value="2012">2012年</option>
-                                <option value="2011">2011年</option>
-                                <option value="2010">2010年</option>
-                                <option value="2009">2009年</option>
-                                <option value="2008">2008年</option>
-                                <option value="2007">2007年</option>
-                                <option value="2006">2006年</option>
-                            </select>
-                            <select name="month_form_outcome">
-                                <option value="1">1月份</option>
-                                <option value="2">2月份</option>
-                                <option value="3">3月份</option>
-                                <option value="4">4月份</option>
-                                <option value="5">5月份</option>
-                                <option value="6">6月份</option>
-                                <option value="7">7月份</option>
-                                <option value="8">8月份</option>
-                                <option value="9">9月份</option>
-                                <option value="10">10月份</option>
-                                <option value="11">11月份</option>
-                                <option value="12">12月份</option>
-                            </select>
-                            <select name="type_form_outcome"></select>
-                            <a class="btn btn-primary" id="require-outcome">查询</a>
-                        </form>
-                        <form method="post" name="download_outcome" style="margin-left:80%">
-                            <input type="submit" class="btn btn-sm btn-success"id="download_outcome" value="下载" onclick="download_Outcome()"></input>
-                        </form>
-                    </div><br>
-                    <div class="container" style="padding-left: 15px; " id="result_two">
-                        <div class="content col-lg-8 col-lg-offset-2 col-md-12">
-                            <div class="table-responsive" style="text-align: center">
-                                <table class="table table-bordered table-hover" style="text-align: center">
-                                    <thead>
-                                    <tr style="text-align: center">
-                                        <th style="text-align: center">年份</th>
-                                        <th style="text-align: center">月份</th>
-                                        <th style="text-align: center">商品类型</th>
-                                        <th style="text-align: center">进销项类型</th>
-                                        <th style="text-align: center">金额（万元）</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="tbody" id="content_outcome">
-
-                                    </tbody>
-                                </table>
-                                <nav class="pull-right">
-                                    <ul class="pagination" id="pagelist_outcome"></ul>
-                                </nav>
-                                <br><div id="total_outcome" style="float: left"></div>
-                            </div>
-                        </div>
+                <div class="qfyuser-field qfyuser-field-username_or_email " data-key="username_or_email">
+                    <div class="qfyuser-label">
+                        <label for="income">进项金额:</label>
+                        <input type="text" class="form-control" placeholder="请输入进项金额" name="income" id="income">
                     </div>
                 </div>
+                <div class="qfyuser-field qfyuser-field-username_or_email " data-key="username_or_email">
+                    <div class="qfyuser-label">
+                        <label for="outcome">销项金额:</label>
+                        <input type="text" class="form-control" placeholder="请输入销项金额" name="outcome" id="outcome">
+                    </div>
+                </div>
+                <div class="" data-key="user_pass">
+                    <label for="tax" style="float:left;">税率:</label>
+                    <div class="qfyuser-label input-group">
+                        <input type="text" class="form-control" placeholder="请输入税率" name="tax" id="tax" value="17" >
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+                <div class="qfyuser-field qfyuser-field-user_pass " data-key="user_pass">
+                    <div class="qfyuser-label">
+                        <input type="radio" name="radio" value="1"> 含税
+                        <input type="radio" name="radio" value="0"> 不含税
+                    </div>
+                </div>
+                <br><br><br><br>
+                <input data-reveal-id="myModal" class="btn-xs btn-primary form-control" type="submit" value="计算">
+            </form>
+
+            <div id="myModal" class="reveal-modal">
+                <h3>计算所得增值税额为:</h3>
+                <p>This is a default modal in all its glory, but any of the styles here can easily be changed in the CSS.</p>
+                <a class="close-reveal-modal">&#215;</a>
             </div>
+
+            <%--<script src="http://www.jq22.com/js/jq.js"></script>--%>
         </div>
-        <script>
-            $(function(){
-                $('#dowebok').fullpage({
-                });
-            });
-        </script>
-        <style>
-            .fp-tableCell{
-                padding-top: 0px;
-                display: inline-block;
-            }
-        </style>
     </div>
 </div>
 </body>
