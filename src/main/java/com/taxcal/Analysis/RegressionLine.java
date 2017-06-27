@@ -200,18 +200,18 @@ public class RegressionLine // implements Evaluatable
 
         xy[0] = (int) dataPoint.x + "";
         xy[1] = (int) dataPoint.y + "";
-        if (dataPoint.x != 0 && dataPoint.y != 0) {
-            System.out.print(xy[0] + ",");
-            System.out.println(xy[1]);
-            listX.add(pn, xy[0]);
-            listY.add(pn, xy[1]);
-            ++pn;
-			/*
-			 * System.out.println("N:" + n); System.out.println("ArrayList
-			 * listX:"+ listX.get(n)); System.out.println("ArrayList listY:"+
-			 * listY.get(n));
-			 */
-        }
+
+        System.out.print(xy[0] + ",");
+        System.out.println(xy[1]);
+        listX.add(pn, xy[0]);
+        listY.add(pn, xy[1]);
+        ++pn;
+        /*
+         * System.out.println("N:" + n); System.out.println("ArrayList
+         * listX:"+ listX.get(n)); System.out.println("ArrayList listY:"+
+         * listY.get(n));
+         */
+
 
         coefsValid = false;
     }
@@ -284,8 +284,10 @@ public class RegressionLine // implements Evaluatable
         }
 
         sst = sumYY - (sumY * sumY) / pn;
-        // System.out.println("sst:" + sst);
-        E = 1 - sumDeltaY2 / sst;
+        if(sumDeltaY2 != 0)
+            E = 1 - sumDeltaY2 / sst;
+        else
+            E = 1;
 
         return round(E, 4);
     }
