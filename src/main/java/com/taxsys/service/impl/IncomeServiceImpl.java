@@ -3,9 +3,12 @@ package com.taxsys.service.impl;
 import com.taxcal.Analysis.PlainDataAnalysis;
 import com.taxcal.Analysis.SeasonData;
 import com.taxcal.Analysis.SeasonDataAnalysis;
+import com.taxcal.Method.TaxCalculator;
+import com.taxcal.Method.VATType;
 import com.taxsys.dao.impl.IncomeDaoImpl;
 import com.taxsys.dto.IncomeDto;
 import com.taxsys.model.Income;
+import com.taxsys.model.Outcome;
 import com.taxsys.model.User;
 import com.taxsys.service.IncomeService;
 import com.taxsys.utils.ExportExcel;
@@ -29,6 +32,10 @@ public class IncomeServiceImpl implements IncomeService {
 
     @Autowired
     IncomeDaoImpl incomeDao;
+
+    @Autowired
+    private OutcomeServiceImpl outcomeService;
+
 
     public HSSFWorkbook exportExcel(HttpServletRequest request) {
         //以下是从前台获取参数
@@ -271,6 +278,55 @@ public class IncomeServiceImpl implements IncomeService {
             }
         }
         return list;
+    }
+
+    public double getTax(HttpServletRequest request) {
+        //  Standard,Simplified,Prepayment
+        List incomeList = searchIncomeList(request);
+        List outcomeList = outcomeService.searchOutcomeList(request);
+        incomeList.remove(0);
+        outcomeList.remove(0);
+        double incomeMoney = getIncomeMoney(incomeList);
+        double outcomeMoney = getOutcomeMoney(outcomeList);
+
+        TaxCalculator taxc;
+        int TaxType = Integer.parseInt(request.getParameter("taxType") == null ? "0" : (String)request.getParameter("taxType"));
+        float taxRate = Float.parseFloat(request.getParameter("taxRate") == null ? "0.17" : (String)request.getParameter("taxRate"));
+        boolean hasTax = Boolean.parseBoolean(request.getParameter("hasTax"));
+        switch (TaxType) {
+            case 1: taxc = new TaxCalculator(VATType.Simplified, taxRate); break;
+            case 2: taxc = new TaxCalculator(VATType.Prepayment, taxRate); break;
+            default: taxc = new TaxCalculator(VATType.Standard, taxRate);
+        }
+        double tax = 0;
+        if(hasTax) {
+//            out.println("输出进项值--------------------------");
+//            out.println(incomeMoney);
+//            out.println("输出销项值--------------------------");
+//            out.println(outcomeMoney);
+            tax = taxc.getTax(incomeMoney, outcomeMoney);
+        } else {
+            tax = taxc.getTaxRawCost(incomeMoney, outcomeMoney);
+        }
+        return tax;
+    }
+
+    private double getIncomeMoney(List list) {
+        Iterator it = list.iterator();
+        double money = 0;
+        while(it.hasNext()) {
+            money += ((Income)it.next()).getMoney();
+        }
+        return  money;
+    }
+
+    private double getOutcomeMoney(List list) {
+        Iterator it = list.iterator();
+        double money = 0;
+        while(it.hasNext()) {
+            money += ((Outcome)it.next()).getMoney();
+        }
+        return  money;
     }
 }
 

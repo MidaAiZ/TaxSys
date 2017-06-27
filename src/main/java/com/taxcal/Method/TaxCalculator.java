@@ -9,13 +9,10 @@ import com.taxcal.taxStrategyImpl.StandardSimpleCalculator;
  * Created by ZZADD on 2017/5/27.
  */
 
-enum VATType{
-    Standard,Simplified,Prepayment
-}
 /**
  * 税率计算
  */
-public class TaxCalculator {
+public class    TaxCalculator {
 
     /**
      * 计算逻辑
@@ -26,7 +23,7 @@ public class TaxCalculator {
      * @param type  税额计算方法
      * @param rate0 税率
      */
-    TaxCalculator(VATType type,double rate0)
+    public TaxCalculator(VATType type,double rate0)
     {
         switch (type)
         {
@@ -42,20 +39,20 @@ public class TaxCalculator {
         }
         method.setVATRate(rate0);
     }
-    void SetVATTaxRate(double rate0)
+    public void setVATTaxRate(double rate0)
     {
         method.setVATRate(rate0);
     }
-    void SetVATTaxRate(double rate0,double rate1) throws IllegalAccessException
+    public void setVATTaxRate(double rate0,double rate1) throws IllegalAccessException
     {
         method.setVATRate(rate0);
         method.setVATRateSecondary(rate1);
     }
-    double GetTaxRawCost(double income, double outcome)
+    public double getTaxRawCost(double income, double outcome)
     {
         return method.getVAT(income,outcome);
     }
-    double GetTax(double income, double outcome)
+    public double getTax(double income, double outcome)
     {
         return method.getVAT(income,outcome,true);
     }
