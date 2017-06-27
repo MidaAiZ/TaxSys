@@ -85,6 +85,8 @@
                             <a href="count.jsp"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
                             <a href="chart.jsp"><span>年度报表</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118">
+                            <a href="calculateTax.jsp"><span>计算增值税</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
                             <a href="help.jsp"><span>帮助</span></a></li>
                     </ul>
