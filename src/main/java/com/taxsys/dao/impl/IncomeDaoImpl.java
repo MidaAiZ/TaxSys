@@ -76,7 +76,7 @@ public class IncomeDaoImpl implements IncomeDao{
         query.setString(4, TimeUtil.now());
         query.setString(5, income.getId());
 
-        return (query.executeUpdate() > 1);
+        return (query.executeUpdate() > 0);
     }
 
     public boolean deleteIncome(Income income) {

@@ -38,7 +38,7 @@ public class SeasonData{
     }
     public int getCount(){return this.data.size(); }
 
-    public List<Float> GetData()
+    public List<Float> getDataList()
     {
         return data;
     }

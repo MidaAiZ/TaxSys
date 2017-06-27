@@ -1,5 +1,8 @@
 package com.taxsys.service.impl;
 
+import com.taxcal.Analysis.PlainDataAnalysis;
+import com.taxcal.Analysis.SeasonData;
+import com.taxcal.Analysis.SeasonDataAnalysis;
 import com.taxsys.dao.impl.IncomeDaoImpl;
 import com.taxsys.dto.IncomeDto;
 import com.taxsys.model.Income;
@@ -16,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static java.lang.System.out;
@@ -212,8 +216,81 @@ public class IncomeServiceImpl implements IncomeService {
         }
     }
 
+    public List calculate(HttpServletRequest request) {
+        // 第一步， 先根据条件获取进项数据
+        List incomeList = searchIncomeList(request);
+
+        // 第二步， 处理返回的数据, 按月份划分...
+        incomeList.remove(0);
+        float[] list = splitData(incomeList);
+
+        // 第三步， 根据结果进行预测计算
+
+        PlainDataAnalysis analysis = new PlainDataAnalysis();           //建立一元线性回归预测模型
+
+        for(int i = 0; i < list.length; i ++) {
+            analysis.AddData(i + 1, list[i]); //填入数据，并自动优化模型
+        }
+
+        List returnist = new LinkedList();
+        for(int i = 0; i < list.length; i ++) {
+            out.println("第" + String.valueOf(i + 1) + "个月预测值---------------------------------");
+            double data = analysis.GetData(i + 12);
+            System.out.println(data);         //获取预测值
+//            out.println("输出预测准度----------------------------------");
+//            System.out.println(String.valueOf(analysis.GetR2()));                           //获取线性相关系数
+            returnist.add(i, data);
+        }
+
+//        SeasonDataAnalysis analysis1 = new SeasonDataAnalysis();        //建立比例预测分析模型
+//
+//        try {
+//            analysis1.AddData(new SeasonData(list));    //添加年度数据
+////            analysis1.AddData(new SeasonData(new float[]{1,2,1,1,1,2}));    //添加年度数据
+//
+//            analysis1.CreateModel();                                    //建立预测分析模型
+//
+//            int year = Integer.parseInt(request.getParameter("year"));
+//            SeasonData sd = analysis1.GetData(year);                  //获取全年各季度数据
+//
+//            out.println("输出预测准度----------------------------------");
+//            System.out.println(analysis1.GetR2());                      //预测模型可信度，（尚未证明）
+//            return sd.getDataList();
+//        } catch (IllegalAccessException e) {                            //上下文数据不匹配
+//            e.printStackTrace();
+//        }
+        return returnist;
+    }
+
     public List<String> typeList() {
         return incomeDao.typeList();
     };
 
+    private float[] splitData(List incomeList) {
+        float[] list = new float[12];
+        Date now =  new Date();
+        Income income = null;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        int month;
+
+        Iterator it = incomeList.iterator();
+        while(it.hasNext()) {
+            income = (Income)it.next();
+            try {
+                date = sdf.parse(income.getTaxDate());
+                month = date.getMonth();
+                list[((month-6)+12)%12 + 1] += income.getMoney(); // 进行月份映射
+                out.println("输出月份-------------------------------------------");
+                out.println(income.getTaxDate());
+                out.println(((month-6)+12)%12 + 1);
+            } catch(Exception e) {
+                out.println("输出报错-------------------------------------------");
+                out.println(e);
+            }
+        }
+        return list;
     }
+}
+
