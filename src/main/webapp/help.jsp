@@ -87,7 +87,7 @@
 
 
 
-<body class="home page page-id-2160 page-template-default image-blur btn-flat content-fullwidth wpb-js-composer js-comp-ver-4.0.1 vc_responsive" backgroundSize='true' data-pid="2160" data-pkey="43696bcdc4f8022776101003c5671fe2" style="background-image: url('http://static.qifeiye.com/caches/e9ef95eecba4dae95a41c96bc9c459e6/aHR0cDovLzU3ZWEyMzljZWNlYTQudDczLnFpZmVpeWUuY29tL3FmeS1jb250ZW50L3VwbG9hZHMvMjAxNi8xMC9lMzA1YzE4ZWY5YTE1MDQzZGI0NzA4NDEyMjE5NmVkYS5wbmc_p_p100_p_3D.png'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:0 0%;">
+<body class="home page page-id-2160 page-template-default image-blur btn-flat content-fullwidth wpb-js-composer js-comp-ver-4.0.1 vc_responsive" backgroundSize='true' data-pid="2160" data-pkey="43696bcdc4f8022776101003c5671fe2" style="background-image: url('image/bg.png'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:0 0%;">
 
 <div id="page" class=' breackall wide '>
 
@@ -204,7 +204,7 @@
     <!-- #masthead -->
 </div>
 <section data-fixheight="" class="qfy-row-1-592134b61cca9274984 section    full   section-text-no-shadow section-inner-no-shadow section-normal" id="bit_hcbgh" style="margin-bottom:0px;border-radius:0px;color:transparent;">
-    <div data-time="3" data-imagebgs="" class="background-media  " backgroundsize="true" style="background-image: url('http://static.qifeiye.com/caches/e9ef95eecba4dae95a41c96bc9c459e6/aHR0cDovLzU3ZWEyMzljZWNlYTQudDczLnFpZmVpeWUuY29tL3FmeS1jb250ZW50L3VwbG9hZHMvMjAxNi8wOS85YmEwNmU5MmI5YTZkMTc0ZTgyYTFkMTI5YzM4MmIxYy5qcGc_p_p100_p_3D.jpg'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:center center;">
+    <div data-time="3" data-imagebgs="" class="background-media  " backgroundsize="true" style="background-image: url('image/help_image.jpg'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:center center;">
     </div>
 
     <div class="section-background-overlay background-overlay grid-overlay-0 " style="background-color: rgba(255,255,255,0.5);"></div>
@@ -323,7 +323,7 @@
                                                  style="position: relative;;;line-height:1.5em;;background-color: transparent;background-repeat: no-repeat;;margin-top:20px;padding-top:0px;padding-bottom:16px;padding-right:0px;padding-left:0px;">
                                                 <div class="wpb_wrapper">
                                                     <div style="text-align: center;"><a
-                                                            href=""
+                                                            href="help_import.jsp"
                                                             rel="undefined" url-flag="0" url-flagtarget=""><span
                                                             style="font-size:13px;"><span
                                                             style="font-family: 微軟正黑體;"><span
@@ -457,7 +457,7 @@
                                                  style="position: relative;;;line-height:1.5em;;background-color: transparent;background-repeat: no-repeat;;margin-top:20px;padding-top:0px;padding-bottom:16px;padding-right:0px;padding-left:0px;">
                                                 <div class="wpb_wrapper">
                                                     <div style="text-align: center;"><a
-                                                            href=""
+                                                            href="help_require.jsp"
                                                             rel="undefined" url-flag="0" url-flagtarget=""><span
                                                             style="font-size:13px;"><span
                                                             style="font-family: 微軟正黑體;"><span
@@ -670,7 +670,7 @@
                                                  style="position: relative;;;line-height:1.5em;;background-color: transparent;background-repeat: no-repeat;;margin-top:20px;padding-top:0px;padding-bottom:16px;padding-right:0px;padding-left:0px;">
                                                 <div class="wpb_wrapper">
                                                     <div style="text-align: center;"><a
-                                                            href=""
+                                                            href="help_count.jsp"
                                                             rel="undefined" url-flag="0" url-flagtarget=""><span
                                                             style="font-size:13px;"><span
                                                             style="font-family: 微軟正黑體;"><span
@@ -804,7 +804,7 @@
                                                  style="position: relative;;;line-height:1.5em;;background-color: transparent;background-repeat: no-repeat;;margin-top:20px;padding-top:0px;padding-bottom:16px;padding-right:0px;padding-left:0px;">
                                                 <div class="wpb_wrapper">
                                                     <div style="text-align: center;"><a
-                                                            href=""
+                                                            href="help_predict.jsp"
                                                             rel="undefined" url-flag="0" url-flagtarget=""><span
                                                             style="font-size:13px;"><span
                                                             style="font-family: 微軟正黑體;"><span

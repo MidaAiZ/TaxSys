@@ -382,7 +382,7 @@
                                                  style='margin-bottom:0px;border-radius:0px;border-top:1px solid #dddddd;border-bottom:0px solid #F9F9F9;border-left:0px solid #F9F9F9;border-right:0px solid #F9F9F9;color:#000000;'>
                                             <div data-time="3" data-imagebgs="" class="background-media  "
                                                  backgroundSize='true'
-                                                 style="background-image: url('http://static.qifeiye.com/caches/e9ef95eecba4dae95a41c96bc9c459e6/aHR0cDovLzU3ZWEyMzljZWNlYTQudDczLnFpZmVpeWUuY29tL3FmeS1jb250ZW50L3VwbG9hZHMvMjAxNi8xMC9lMzA1YzE4ZWY5YTE1MDQzZGI0NzA4NDEyMjE5NmVkYS5wbmc_p_p100_p_3D.png'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:0 0%;">
+                                                 style="background-image: url('image/bg.png'); background-repeat:no-repeat; background-size:cover; background-attachment:scroll; background-position:0 0%;">
                                             </div>
 
                                             <div class="section-background-overlay background-overlay grid-overlay-0 "
