@@ -83,7 +83,7 @@ public class OutcomeDaoImpl implements OutcomeDao{
         HashSet<String> set = new HashSet<String>();
         StringBuffer sql = new StringBuffer();
 
-        if(params.get("type") != null) { set.add(" type = '" + params.get("type") + "'"); }
+        if(params.get("type") != null) { set.add(" outType = '" + params.get("type") + "'"); }
         if(params.get("taxId") != null) { set.add(" taxId = '" + params.get("taxId") + "'"); }
         if(params.get("minMoney") != null) { set.add(" money >= " + params.get("minMoney")); }
         if(params.get("maxMoney") != null) { set.add(" money <= " + params.get("maxMoney")); }
@@ -107,10 +107,12 @@ public class OutcomeDaoImpl implements OutcomeDao{
         Query countQuery = sessionFactory.getCurrentSession().createQuery(hqlCount);
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
 
-        int page = Integer.parseInt((String)params.get("page"));
-        int limit = Integer.parseInt((String)params.get("limit"));
-        query.setFirstResult((page - 1) * limit);
-        query.setMaxResults(limit);
+        if (params.get("limit") != null) {
+            int page = Integer.parseInt((String)params.get("page"));
+            int limit = Integer.parseInt((String)params.get("limit"));
+            query.setFirstResult((page - 1) * limit);
+            query.setMaxResults(limit);
+        }
 
         List list= query.list();
         int count= ((Number)countQuery.list().iterator().next()).intValue();

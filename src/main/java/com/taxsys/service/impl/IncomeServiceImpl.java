@@ -191,9 +191,7 @@ public class IncomeServiceImpl implements IncomeService {
     public List<String> searchIncomeList(HttpServletRequest request){
         Map<String, Object> paramsMap = new HashMap<String, Object>();
         String page = request.getParameter("page");
-        String limit = request.getParameter("limit");
         if (page == null) { page = "1"; }
-        if (limit == null) { limit = "100"; }
         try {
             if (request.getParameter("type") != null) {
                 paramsMap.put("type", new String(request.getParameter("type").getBytes("ISO-8859-1"), "UTF-8"));
@@ -207,9 +205,7 @@ public class IncomeServiceImpl implements IncomeService {
             paramsMap.put("createdEnd", request.getParameter("createdEnd"));
             paramsMap.put("userId", request.getParameter("userId"));
             paramsMap.put("orderBy", request.getParameter("orderBy"));
-            paramsMap.put("page", page);
-            paramsMap.put("limit", limit);
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         } finally {
             return incomeDao.searchIncomeList(paramsMap);
@@ -233,16 +229,18 @@ public class IncomeServiceImpl implements IncomeService {
         }
 
         List returnist = new LinkedList();
-        for(int i = 0; i < list.length; i ++) {
-            out.println("第" + String.valueOf(i + 1) + "个月预测值---------------------------------");
-            double data = analysis.GetData(i + 12);
-            System.out.println(data);         //获取预测值
-            out.println("输出预测准度----------------------------------");
-            System.out.println(analysis.GetR2());                           //获取线性相关系数
-            returnist.add(i, data);
+        try {
+            for(int i = 0; i < list.length; i ++) {
+                double data = analysis.GetData(i + 12);
+                if (String.valueOf(data) == "NaN" || data < 0) { data = 0; }
+                returnist.add(i, data);
+            }
+            returnist.add(12, analysis.GetR2());
+        } catch (Exception e) {
+
+        } finally {
+            return returnist;
         }
-        returnist.add(12, analysis.GetR2());
-        return returnist;
     }
 
     public List<String> typeList() {
@@ -250,7 +248,7 @@ public class IncomeServiceImpl implements IncomeService {
     };
 
     private float[] splitData(List incomeList) {
-        float[] list = new float[12];
+        float[] list = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};;
         Income income = null;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

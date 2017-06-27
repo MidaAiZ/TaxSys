@@ -113,10 +113,12 @@ public class IncomeDaoImpl implements IncomeDao{
 
         Query countQuery = sessionFactory.getCurrentSession().createQuery(hqlCount);
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        int page = Integer.parseInt((String)params.get("page"));
-        int limit = Integer.parseInt((String)params.get("limit"));
-        query.setFirstResult((page - 1) * limit);
-        query.setMaxResults(limit);
+        if (params.get("limit") != null) {
+            int page = Integer.parseInt((String)params.get("page"));
+            int limit = Integer.parseInt((String)params.get("limit"));
+            query.setFirstResult((page - 1) * limit);
+            query.setMaxResults(limit);
+        }
 
         List list= query.list();
         int count= ((Number)countQuery.list().iterator().next()).intValue();
