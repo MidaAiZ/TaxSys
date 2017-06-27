@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    var incomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
-    var outcomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
+    var incomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0);
+    var outcomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0);
     var date=new Date;
     var year = date.getFullYear();
     year = year-1;
@@ -15,16 +15,9 @@ $(document).ready(function() {
         url: "/incomes/calculate?beginTime="+startTime+"&endTime="+endTime,
         dataType: "json",
         success: function(data) {
-            incomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
-            outcomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
             var list = data.incomeList;
             $.each(list,function(i,p){
-                // console.log(p.taxDate);
-                var  str = p.taxDate;
-                var  d   = new Date(str.replace(/-/, "/"));
-                // console.log(d.getMonth());
-                var  mm  = d.getMonth();
-                incomeArray[mm]+=p.money;
+                incomeArray[i] += p;
             });
         }
     })
@@ -36,12 +29,7 @@ $(document).ready(function() {
         success: function(data) {
             var list = data.outcomeList;
             $.each(list,function(i,p){
-                // console.log(p.taxDate);
-                var  str = p.taxDate;
-                var  d   = new Date(str.replace(/-/, "/"));
-                // console.log(d.getMonth());
-                var  mm  = d.getMonth();
-                outcomeArray[mm]+=p.money;
+                outcomeArray[i] += p;
             });
         }
     })
@@ -55,19 +43,9 @@ $(document).ready(function() {
             var dataArr = new Array(12);//总额
             var dataArr_1 = new Array(12);//进项
             var dataArr_2 = new Array(12);//销项
-            for (var i = 11;i >=0; i--) {
-                if((((month-i)+12)%12)!=0){
-                    dataArr[11-i]=outcomeArray[(((month-i)+12)%12)-1]-incomeArray[(((month-i)+12)%12)-1];
-                    dataArr_1[11-i]=incomeArray[(((month-i)+12)%12)-1];
-                    dataArr_2[11-i]=outcomeArray[(((month-i)+12)%12)-1];
-                }
-                else{
-                    dataArr[11-i] = outcomeArray[11]-incomeArray[11];
-                    dataArr_1[11-i] = incomeArray[11];
-                    dataArr_2[11-i] = outcomeArray[11];
-                }
+            for (var i = 0;i <=11; i++) {
+                dataArr[i] = outcomeArray[i]-incomeArray[i];
             }
-
 
             var myChart2 = echarts.init(document.getElementById('baobiao2'));
             var xData = function () {
@@ -93,11 +71,11 @@ $(document).ready(function() {
                 series: [{
                     name: '进项',
                     type: 'bar',
-                    data: dataArr_1,
+                    data: incomeArray,
                 }, {
                     name: '销项',
                     type: 'bar',
-                    data: dataArr_2,
+                    data: outcomeArray,
                 },
                     {
                         name:'利润',
@@ -150,15 +128,10 @@ $(document).ready(function() {
             url: "/incomes/calculate?beginTime="+startTime+"&endTime="+endTime+"&type="+ $("select[name=type_form_income]").val()+"&",
             dataType: "json",
             success: function(data) {
-                incomeTypeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
+                incomeTypeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0);
                 var list = data.incomeList;
                 $.each(list,function(i,p){
-                    // console.log(p.taxDate);
-                    var  str = p.taxDate;
-                    var  d   = new Date(str.replace(/-/, "/"));
-                    // console.log(d.getMonth());
-                    var  mm  = d.getMonth();
-                    incomeTypeArray[mm]+=p.money;
+                    incomeTypeArray[i]+=p;
                 });
             }
         })
@@ -169,13 +142,8 @@ $(document).ready(function() {
             success: function(data) {
 
                 var dataArr_income = new Array(12);//进项
-                for (var i = 11;i >=0; i--) {
-                    if((((month-i)+12)%12)!=0){
-                        dataArr_income[11-i]=incomeTypeArray[(((month-i)+12)%12)-1];
-                    }
-                    else{
-                        dataArr_income[11-i] = incomeTypeArray[11];
-                    }
+                for (var i = 0;i <=11;i++) {
+                    dataArr_income[i]=incomeTypeArray[i];
                 }
 
 
@@ -221,15 +189,10 @@ $(document).ready(function() {
             url: "/outcomes/calculate?beginTime="+startTime+"&endTime="+endTime+"&type="+ $("select[name=type_form_outcome]").val()+"&",
             dataType: "json",
             success: function(data) {
-                outcomeTypeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
+                outcomeTypeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0);
                 var list = data.outcomeList;
                 $.each(list,function(i,p){
-                    // console.log(p.taxDate);
-                    var  str = p.taxDate;
-                    var  d   = new Date(str.replace(/-/, "/"));
-                    // console.log(d.getMonth());
-                    var  mm  = d.getMonth();
-                    outcomeTypeArray[mm]+=p.money;
+                    outcomeTypeArray[i]+=p;
                 });
             }
         })
@@ -240,13 +203,8 @@ $(document).ready(function() {
             success: function(data) {
 
                 var dataArr_outcome = new Array(12);//进项
-                for (var i = 11;i >=0; i--) {
-                    if((((month-i)+12)%12)!=0){
-                        dataArr_outcome[11-i]=outcomeTypeArray[(((month-i)+12)%12)-1];
-                    }
-                    else{
-                        dataArr_outcome[11-i] = outcomeTypeArray[11];
-                    }
+                for (var i = 0;i <=11; i++) {
+                    dataArr_outcome[i] = outcomeTypeArray[i];
                 }
 
 
@@ -286,8 +244,8 @@ $(document).ready(function() {
             }
         })
     }
-    // Predict_income();
-    // Predict_outcome();
+    Predict_income();
+    Predict_outcome();
 
     $("select[name=type_form_income]").on("change",function () {
         Predict_income();
