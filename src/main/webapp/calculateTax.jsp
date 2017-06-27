@@ -28,6 +28,7 @@
     <script src="http://www.jq22.com/jquery/jquery-1.6.2.js"></script>
     <script src="js/index.js"></script>
     <script src="js/jquery.reveal.js"></script>
+    <script src="js/calculateTax.js"></script>
     <link rel="stylesheet" href="css/reveal.css">
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
@@ -230,36 +231,62 @@
                 <div class="qfyuser-field qfyuser-field-username_or_email " data-key="username_or_email">
                     <div class="qfyuser-label">
                         <label for="type">增值税计算方法:</label>
-                        <select id="type" class="qfyuser-label form-control">
-                            <option value="Standard">标准计算方法</option>
-                            <option value="Prepayment">预付计算方法</option>
-                            <option value="Simplified">简易计算方法</option>
+                        <select name="taxType" id="type" class="qfyuser-label form-control">
+                            <option value="0">标准计算方法</option>
+                            <option value="1">简易计算方法</option>
+                            <option value="2">预付计算方法</option>
                         </select>
                     </div>
                 </div>
                 <div class="qfyuser-field qfyuser-field-username_or_email " data-key="username_or_email">
                     <div class="qfyuser-label">
-                        <label for="income">进项金额:</label>
-                        <input type="text" class="form-control" placeholder="请输入进项金额" name="income" id="income">
+                        <label for="year">年份:</label>
+                        <select name="year" id="year" class="qfyuser-label form-control">
+                            <option value="2017">2017年</option>
+                            <option value="2016">2016年</option>
+                            <option value="2015">2015年</option>
+                            <option value="2014">2014年</option>
+                            <option value="2013">2013年</option>
+                            <option value="2012">2012年</option>
+                            <option value="2011">2011年</option>
+                            <option value="2010">2010年</option>
+                            <option value="2009">2009年</option>
+                            <option value="2008">2008年</option>
+                            <option value="2007">2007年</option>
+                            <option value="2006">2006年</option>
+                        </select>
                     </div>
                 </div>
                 <div class="qfyuser-field qfyuser-field-username_or_email " data-key="username_or_email">
                     <div class="qfyuser-label">
-                        <label for="outcome">销项金额:</label>
-                        <input type="text" class="form-control" placeholder="请输入销项金额" name="outcome" id="outcome">
+                        <label for="month">月份:</label>
+                        <select id="month" name="month" class="qfyuser-label form-control">
+                            <option value="1">1月份</option>
+                            <option value="2">2月份</option>
+                            <option value="3">3月份</option>
+                            <option value="4">4月份</option>
+                            <option value="5">5月份</option>
+                            <option value="6">6月份</option>
+                            <option value="7">7月份</option>
+                            <option value="8">8月份</option>
+                            <option value="9">9月份</option>
+                            <option value="10">10月份</option>
+                            <option value="11">11月份</option>
+                            <option value="12">12月份</option>
+                        </select>
                     </div>
                 </div>
                 <div class="" data-key="user_pass">
                     <label for="tax" style="float:left;">税率:</label>
                     <div class="qfyuser-label input-group">
-                        <input type="text" class="form-control" placeholder="请输入税率" name="tax" id="tax" value="17" >
+                        <input type="text" class="form-control" placeholder="请输入税率" name="taxRate" id="tax" value="17" >
                         <span class="input-group-addon">%</span>
                     </div>
                 </div>
                 <div class="qfyuser-field qfyuser-field-user_pass " data-key="user_pass">
                     <div class="qfyuser-label">
-                        <input type="radio" name="radio" value="1"> 含税
-                        <input type="radio" name="radio" value="0"> 不含税
+                        <input type="radio" checked="true"  name="hasTax" value="1"> 含税
+                        <input type="radio" name="hasTax" value="0"> 不含税
                     </div>
                 </div>
                 <br><br><br><br>
@@ -268,7 +295,7 @@
 
             <div id="myModal" class="reveal-modal">
                 <h3>计算所得增值税额为:</h3>
-                <p>This is a default modal in all its glory, but any of the styles here can easily be changed in the CSS.</p>
+                <h4 id="output" style="text-align: center"></h4>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
 
