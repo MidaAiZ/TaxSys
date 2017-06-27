@@ -1,5 +1,6 @@
 package com.taxsys.service.impl;
 
+import com.taxcal.Analysis.PlainDataAnalysis;
 import com.taxsys.dao.impl.OutcomeDaoImpl;
 import com.taxsys.dto.OutcomeDto;
 import com.taxsys.model.Income;
@@ -17,10 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static java.lang.System.out;
 
@@ -216,7 +215,63 @@ public class OutcomeServiceImpl implements OutcomeService {
             return outcomeDao.searchOutcomeList(paramsMap);
         }
     }
+
+    public List calculate(HttpServletRequest request) {
+        // 第一步， 先根据条件获取进项数据
+        List outcomeList = searchOutcomeList(request);
+
+        // 第二步， 处理返回的数据, 按月份划分...
+        outcomeList.remove(0);
+        float[] list = splitData(outcomeList);
+
+        // 第三步， 根据结果进行预测计算
+
+        PlainDataAnalysis analysis = new PlainDataAnalysis();           //建立一元线性回归预测模型
+
+        for(int i = 0; i < list.length; i ++) {
+            analysis.AddData(i + 1, list[i]); //填入数据，并自动优化模型
+        }
+
+        List returnist = new LinkedList();
+        for(int i = 0; i < list.length; i ++) {
+            out.println("第" + String.valueOf(i + 1) + "个月预测值---------------------------------");
+            double data = analysis.GetData(i + 12);
+            System.out.println(data);         //获取预测值
+            out.println("输出预测准度----------------------------------");
+            System.out.println(analysis.GetR2());                           //获取线性相关系数
+            returnist.add(i, data);
+        }
+        returnist.add(12, analysis.GetR2());
+        return returnist;
+    }
+
     public List<String> typeList() {
         return outcomeDao.typeList();
     };
+
+    private float[] splitData(List outcomeList) {
+        float[] list = new float[12];
+        Outcome outcome = null;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        int month;
+
+        Iterator it = outcomeList.iterator();
+        while(it.hasNext()) {
+            outcome = (Outcome)it.next();
+            try {
+                date = sdf.parse(outcome.getTaxDate());
+                month = date.getMonth();
+                list[((month-6)+12)%12 + 1] += outcome.getMoney(); // 进行月份映射
+                out.println("输出月份-------------------------------------------");
+                out.println(outcome.getTaxDate());
+                out.println(((month-6)+12)%12 + 1);
+            } catch(Exception e) {
+                out.println("输出报错-------------------------------------------");
+                out.println(e);
+            }
+        }
+        return list;
+    }
 }

@@ -203,22 +203,16 @@ public class RegressionLine // implements Evaluatable
         if (dataPoint.x != 0 && dataPoint.y != 0) {
             System.out.print(xy[0] + ",");
             System.out.println(xy[1]);
-
-            try {
-                // System.out.println("n:"+n);
-                listX.add(pn, xy[0]);
-                listY.add(pn, xy[1]);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            listX.add(pn, xy[0]);
+            listY.add(pn, xy[1]);
+            ++pn;
 			/*
 			 * System.out.println("N:" + n); System.out.println("ArrayList
 			 * listX:"+ listX.get(n)); System.out.println("ArrayList listY:"+
 			 * listY.get(n));
 			 */
         }
-        ++pn;
+
         coefsValid = false;
     }
 
@@ -284,7 +278,7 @@ public class RegressionLine // implements Evaluatable
 			 * System.out.println("deltaY2:" + deltaY2);
 			 */
 
-            sumDeltaY2 += deltaY2;
+            sumDeltaY2 = deltaY2;
             // System.out.println("sumDeltaY2:" + sumDeltaY2);
 
         }

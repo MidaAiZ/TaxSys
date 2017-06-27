@@ -34,7 +34,5 @@ public interface IncomeService {
      */
     List<String> searchIncomeList(HttpServletRequest request);
     List calculate(HttpServletRequest request);
-
-
-        List<String> typeList();
+    List<String> typeList();
 }

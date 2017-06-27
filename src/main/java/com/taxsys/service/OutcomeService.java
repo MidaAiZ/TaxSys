@@ -35,6 +35,6 @@ public interface OutcomeService {
      * @return
      */
     List<String> searchOutcomeList(HttpServletRequest request);
-
+    List calculate(HttpServletRequest request);
     List<String> typeList();
 }

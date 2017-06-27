@@ -237,28 +237,11 @@ public class IncomeServiceImpl implements IncomeService {
             out.println("第" + String.valueOf(i + 1) + "个月预测值---------------------------------");
             double data = analysis.GetData(i + 12);
             System.out.println(data);         //获取预测值
-//            out.println("输出预测准度----------------------------------");
-//            System.out.println(String.valueOf(analysis.GetR2()));                           //获取线性相关系数
+            out.println("输出预测准度----------------------------------");
+            System.out.println(analysis.GetR2());                           //获取线性相关系数
             returnist.add(i, data);
         }
-
-//        SeasonDataAnalysis analysis1 = new SeasonDataAnalysis();        //建立比例预测分析模型
-//
-//        try {
-//            analysis1.AddData(new SeasonData(list));    //添加年度数据
-////            analysis1.AddData(new SeasonData(new float[]{1,2,1,1,1,2}));    //添加年度数据
-//
-//            analysis1.CreateModel();                                    //建立预测分析模型
-//
-//            int year = Integer.parseInt(request.getParameter("year"));
-//            SeasonData sd = analysis1.GetData(year);                  //获取全年各季度数据
-//
-//            out.println("输出预测准度----------------------------------");
-//            System.out.println(analysis1.GetR2());                      //预测模型可信度，（尚未证明）
-//            return sd.getDataList();
-//        } catch (IllegalAccessException e) {                            //上下文数据不匹配
-//            e.printStackTrace();
-//        }
+        returnist.add(12, analysis.GetR2());
         return returnist;
     }
 
@@ -268,7 +251,6 @@ public class IncomeServiceImpl implements IncomeService {
 
     private float[] splitData(List incomeList) {
         float[] list = new float[12];
-        Date now =  new Date();
         Income income = null;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
