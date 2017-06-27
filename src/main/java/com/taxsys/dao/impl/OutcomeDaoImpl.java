@@ -68,11 +68,7 @@ public class OutcomeDaoImpl implements OutcomeDao{
         query.setString(4, TimeUtil.now());
         query.setString(5, outcome.getId());
 
-        if(query.executeUpdate() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return (query.executeUpdate() > 0);
     }
 
     public boolean deleteOutcome(Outcome outcome) {

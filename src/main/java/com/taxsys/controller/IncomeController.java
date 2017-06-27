@@ -254,15 +254,13 @@ public class IncomeController {
         Map<String, Object> returnMap = new HashMap<String, Object>();
         try{
             request.setCharacterEncoding("UTF-8");
-            List<String> incomeList = incomeService.searchIncomeList(request);
-            returnMap.put("count", incomeList.get(0));
-            incomeList.remove(0);
-            returnMap.put("incomeList", incomeList);
         } catch (Exception e) {
             returnMap.put("error", e);
-        } finally {
-            return returnMap;
         }
+
+        List list = incomeService.calculate(request);
+        returnMap.put("incomeList", list);
+        return returnMap;
     }
 
 
