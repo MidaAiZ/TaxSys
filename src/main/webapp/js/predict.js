@@ -3,6 +3,7 @@ $(document).ready(function() {
     var outcomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
     var date=new Date;
     var year = date.getFullYear();
+    year = year-1;
     var month = date.getMonth()+1;
     var endTime = (year+1) +"-"+ month +"-31";
     var startTime;
@@ -11,7 +12,7 @@ $(document).ready(function() {
 
     $.ajax({
         type: "get",
-        url: "/incomes/list?beginTime="+startTime+"&endTime="+endTime,
+        url: "/incomes/calculate?beginTime="+startTime+"&endTime="+endTime,
         dataType: "json",
         success: function(data) {
             incomeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
@@ -30,7 +31,7 @@ $(document).ready(function() {
 
     $.ajax({
         type: "get",
-        url: "/outcomes/list?beginTime="+startTime+"&endTime="+endTime,
+        url: "/outcomes/calculate?beginTime="+startTime+"&endTime="+endTime,
         dataType: "json",
         success: function(data) {
             var list = data.outcomeList;
@@ -47,7 +48,7 @@ $(document).ready(function() {
 
     $.ajax({
         type: "get",
-        url: "/outcomes/list?beginTime="+startTime+"&endTime="+endTime,
+        url: "/outcomes/calculate?beginTime="+startTime+"&endTime="+endTime,
         dataType: "json",
         success: function(data) {
 
@@ -146,7 +147,7 @@ $(document).ready(function() {
     function Predict_income() {
         $.ajax({
             type: "get",
-            url: "/incomes/list?beginTime="+startTime+"&endTime="+endTime+"&type="+ $("select[name=type_form_income]").val()+"&",
+            url: "/incomes/calculate?beginTime="+startTime+"&endTime="+endTime+"&type="+ $("select[name=type_form_income]").val()+"&",
             dataType: "json",
             success: function(data) {
                 incomeTypeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
@@ -163,7 +164,7 @@ $(document).ready(function() {
         })
         $.ajax({
             type: "get",
-            url: "/incomes/list?beginTime="+startTime+"&endTime="+endTime,
+            url: "/incomes/calculate?beginTime="+startTime+"&endTime="+endTime,
             dataType: "json",
             success: function(data) {
 
@@ -217,7 +218,7 @@ $(document).ready(function() {
     function Predict_outcome() {
         $.ajax({
             type: "get",
-            url: "/outcomes/list?beginTime="+startTime+"&endTime="+endTime+"&type="+ $("select[name=type_form_outcome]").val()+"&",
+            url: "/outcomes/calculate?beginTime="+startTime+"&endTime="+endTime+"&type="+ $("select[name=type_form_outcome]").val()+"&",
             dataType: "json",
             success: function(data) {
                 outcomeTypeArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0);
@@ -234,7 +235,7 @@ $(document).ready(function() {
         })
         $.ajax({
             type: "get",
-            url: "/outcomes/list?beginTime="+startTime+"&endTime="+endTime,
+            url: "/outcomes/calculate?beginTime="+startTime+"&endTime="+endTime,
             dataType: "json",
             success: function(data) {
 
@@ -285,8 +286,8 @@ $(document).ready(function() {
             }
         })
     }
-    Predict_income();
-    Predict_outcome();
+    // Predict_income();
+    // Predict_outcome();
 
     $("select[name=type_form_income]").on("change",function () {
         Predict_income();
