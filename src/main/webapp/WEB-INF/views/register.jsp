@@ -289,7 +289,7 @@
 
                                                                                                     <div class="qfyuser-field qfyuser-submit qfyuser-column">
                                                                                                             <input id="register_btn" type="button" value="注册" class="qfyuser-button"/>
-                                                                                                            <input type="button" style='float:right;' value="已经有帐号了？请登录" class="qfyuser-button secondary" data-template="login" onclick="location.href='login.jsp'"/>                                                                                           
+                                                                                                            <input type="button" style='float:right;' value="已经有帐号了？请登录" class="qfyuser-button secondary" data-template="login" onclick="location.href='login'"/>                                                                                           
                                                                                                         <%--<img src="//fast.qifeiye.com/qfy-content/plugins/qfyuser/skins/elegant/img/loading.gif" alt="" class="qfyuser-loading"/>--%>
 
                                                                                                         <div class="qfyuser-clear"></div>

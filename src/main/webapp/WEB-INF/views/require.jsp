@@ -1,12 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Vodka
-  Date: 2017/6/27
-  Time: 15:18
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+﻿<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <!--[if IE 6]>
 <html id="ie6" class="ancient-ie old-ie no-js bit-html" dir="ltr" lang="zh-CN">
@@ -25,11 +17,16 @@
 <!--<![endif]-->
 <head>
     <!-- for 360 -->
-    <script src="http://www.jq22.com/jquery/jquery-1.6.2.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/require.js"></script>
+    <script src="js/paginate.js"></script>
+    <script src="js/dataOpt.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/jquery.reveal.js"></script>
-    <script src="js/calculateTax.js"></script>
-    <link rel="stylesheet" href="css/reveal.css">
+    <script src="js/jquery.fullPage.min.js"></script>
+    <%--<script src="js/context.js"></script>--%>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/jquery.fullPage.css">
+    <link rel="stylesheet" href="css/context.css">
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
@@ -39,28 +36,31 @@
     <!-- start of customer header -->
     <!-- end of customer header -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>企业增值税发票数据分析系统 | 计算增值税</title>
+    <title>企业增值税发票数据分析系统 | 查询</title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php" />
     <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/html5shiv.min.js"></script>
     <![endif]-->
-    <!--[if lt IE 9]>
+  <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/respond.min.js"></script>
     <![endif]-->
     <style type="text/css" id="static-stylesheet"></style>
 
     <link rel="stylesheet" href="css/style1.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/style2.css" type="text/css" media="all" />
-    <link rel='stylesheet' id='dt-main-css'  href='css/style3.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-custom-less-css'  href='css/style4.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-bit-custom-less-css'  href='css/style5.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='qfy_dynamic_css-css'  href='css/style6.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-main-css' href='css/style3.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-custom-less-css' href='css/style4.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-bit-custom-less-css' href='css/style5.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='qfy_dynamic_css-css' href='css/style6.css' type='text/css' media='all' />
     <link rel="stylesheet" href="css/style7.css" type="text/css" media="all" />
 
     <style type='text/css'>
         .ppstart{
             background:transparent !important;
+        }
+        .fp-controlArrow{
+            /*marg*/
         }
     </style>
     <script type='text/javascript'>
@@ -95,13 +95,6 @@
     </style>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <%--<script src="js/require.js"></script>--%>
-    <style type="text/css">
-
-        body { font-family: "HelveticaNeue","Helvetica-Neue", "Helvetica", "Arial", sans-serif; }
-
-        .big-link { display:block; margin-top: 100px; text-align: center; font-size: 70px; color: #06f; }
-
-    </style>
 </head>
 
 
@@ -121,7 +114,7 @@
 
                 <div id="branding" class="wf-td bit-logo-bar" style="">
                     <a class="bitem logo small" style="display: table-cell;"
-                       href="index.jsp"><span class="logospan"><img class="preload-me"
+                       href="index"><span class="logospan"><img class="preload-me"
                                                                     src="image/Aisino_1.jpg"
                                                                     width="675" height="220"
                                                                     alt=""/></span></a>
@@ -136,44 +129,30 @@
                         class="mainmenu fancy-rollovers wf-mobile-hidden bit-menu-default underline-hover"
                         data-bit-menu=underline-hover data-bit-float-menu=underline-hover>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-2160 current_page_item bit-menu-post-id-2160 menu-item-2319">
-                            <a href="index.jsp"><span>首页</span></a></li>
+                            <a href="index"><span>首页</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-7010 menu-item-7011">
-                            <a href="import.jsp"><span>导入</span></a></li>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097">
-                            <a href="require.jsp"><span>查询</span></a></li>
+                            <a href="import"><span>导入</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097 act first">
+                            <a href="require"><span>查询</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-9556 menu-item-9557">
-                            <a href="count.jsp"><span>月度统计</span></a></li>
+                            <a href="count"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
-                            <a href="chart.jsp"><span>年度报表</span></a></li>
+                            <a href="chart"><span>年度报表</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
-                            <a href="predict.jsp"><span>分析预测</span></a></li>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118 act first">
-                            <a href="calculateTax.jsp"><span>计算增值税</span></a></li>
+                            <a href="predict"><span>分析预测</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118">
+                            <a href="calculateTax"><span>计算增值税</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
-                            <a href="help.jsp"><span>帮助</span></a></li>
+                            <a href="help"><span>帮助</span></a></li>
                     </ul>
 
-                    <a href="#show-menu" data-padding='' data-top='8' data-right='8' rel="nofollow" id="mobile-menu"
-                       style="display:none;" class="glyphicon glyphicon-icon-align-justify dropCenterStyle center">
-                        <span class="menu-open  phone-text">首页</span>
-                        <span class="menu-close">关闭</span>
-                        <span class="menu-back">返回上一级</span>
-                        <span class="wf-phone-visible">&nbsp;</span>
-                    </a>
-
                 </nav>
-                <div style="display:none;" id="main-nav-slide">
-                    <div class="main-nav-slide-inner" data-class="align_center">
-                        <div class="floatmenu-bar-right bit_widget_more" bitdatamarker="bitHeader-3"
-                             bitdataaction="site_fix_container" bitdatacolor="white">
-                        </div>
-                    </div>
-                </div>
+
 
                 <div class="wf-td assistive-info " id="assistive-info-unlogin" role="complementary" style="">
                     <div class="top-bar-right right bit_widget_more" bitdatamarker="bitHeader-2"
                          bitdataaction="site_fix_container" bitdatacolor="white" style="">
-                        <div id="register" style="margin-top:0px;margin-bottom:0px; display: none;"
+                        <div id="register" style="margin-top:0px;margin-bottom:0px;display: none; "
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
@@ -183,25 +162,25 @@
                                        onmouseenter="this.style.backgroundColor='transparent'; this.style.borderColor='#61b0ff'; this.style.color='#61b0ff';"
                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                       href="register.jsp" target="">注册</a>
+                                       href="register" target="">注册</a>
                                 </div>
                             </div>
                         </div>
-                        <div id="login" style="margin-top:0px;margin-bottom:0px; display: none;"
+                        <div id="login" style="margin-top:0px;margin-bottom:0px; "
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
                                      m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px" css_animation_delay="0"
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
-                                    <a  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
-                                        onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
-                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
-                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                        href="login.jsp" target="_self">登录</a>
+                                    <a onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
+                                       onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
+                                       style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
+                                       class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
+                                       href="login" target="_self">登录</a>
                                 </div>
                             </div>
                         </div>
-                        <div id="logout" style="margin-top:0px;margin-bottom:0px; display: none;"
+                        <div id="logout" style="margin-top:0px;margin-bottom:0px; display: none;display: none;"
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
@@ -225,82 +204,151 @@
     <!-- #masthead -->
 </div>
 <div class="tab-content">
-    <div class="container" style="text-align: center;">
-        <div style="margin-top: 100px">
-            <form id="form" action="" method="post" style="margin: auto; max-width: 200px; display: inline-block;">
-                <div class="qfyuser-field qfyuser-field-username_or_email " data-key="username_or_email">
-                    <div class="qfyuser-label">
-                        <label for="type">增值税计算方法:</label>
-                        <select name="taxType" id="type" class="qfyuser-label form-control">
-                            <option value="0">标准计算方法</option>
-                            <option value="1">简易计算方法</option>
-                            <option value="2">预付计算方法</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="qfyuser-field qfyuser-field-username_or_email " data-key="username_or_email">
-                    <div class="qfyuser-label">
-                        <label for="year">年份:</label>
-                        <select name="year" id="year" class="qfyuser-label form-control">
-                            <option value="2017">2017年</option>
-                            <option value="2016">2016年</option>
-                            <option value="2015">2015年</option>
-                            <option value="2014">2014年</option>
-                            <option value="2013">2013年</option>
-                            <option value="2012">2012年</option>
-                            <option value="2011">2011年</option>
-                            <option value="2010">2010年</option>
-                            <option value="2009">2009年</option>
-                            <option value="2008">2008年</option>
-                            <option value="2007">2007年</option>
-                            <option value="2006">2006年</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="qfyuser-field qfyuser-field-username_or_email " data-key="username_or_email">
-                    <div class="qfyuser-label">
-                        <label for="month">月份:</label>
-                        <select id="month" name="month" class="qfyuser-label form-control">
-                            <option value="1">1月份</option>
-                            <option value="2">2月份</option>
-                            <option value="3">3月份</option>
-                            <option value="4">4月份</option>
-                            <option value="5">5月份</option>
-                            <option value="6">6月份</option>
-                            <option value="7">7月份</option>
-                            <option value="8">8月份</option>
-                            <option value="9">9月份</option>
-                            <option value="10">10月份</option>
-                            <option value="11">11月份</option>
-                            <option value="12">12月份</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="" data-key="user_pass">
-                    <label for="tax" style="float:left;">税率:</label>
-                    <div class="qfyuser-label input-group">
-                        <input type="text" class="form-control" placeholder="请输入税率" name="taxRate" id="tax" value="17" >
-                        <span class="input-group-addon">%</span>
-                    </div>
-                </div>
-                <div class="qfyuser-field qfyuser-field-user_pass " data-key="user_pass">
-                    <div class="qfyuser-label">
-                        <input type="radio" checked="true"  name="hasTax" value="1"> 含税
-                        <input type="radio" name="hasTax" value="0"> 不含税
-                    </div>
-                </div>
-                <br><br><br><br>
-                <input data-reveal-id="myModal" class="btn-xs btn-primary form-control" type="submit" value="计算">
-            </form>
+    <div id="menu3" class="tab-pane fade in active">
+        <div id="dowebok">
+            <div class="section">
+                <div class="slide">
+                    <div class="require-box" style="width:100%;text-align:center;margin-top: 30px;">
+                        <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
+                            <h3 style="margin-right: 10px;display: inline-block">进项数据 </h3>
+                            <select name="year_form">
+                                <option value="2017">2017年</option>
+                                <option value="2016">2016年</option>
+                                <option value="2015">2015年</option>
+                                <option value="2014">2014年</option>
+                                <option value="2013">2013年</option>
+                                <option value="2012">2012年</option>
+                                <option value="2011">2011年</option>
+                                <option value="2010">2010年</option>
+                                <option value="2009">2009年</option>
+                                <option value="2008">2008年</option>
+                                <option value="2007">2007年</option>
+                                <option value="2006">2006年</option>
+                            </select>
+                            <select name="month_form">
+                                <option value="1">1月份</option>
+                                <option value="2">2月份</option>
+                                <option value="3">3月份</option>
+                                <option value="4">4月份</option>
+                                <option value="5">5月份</option>
+                                <option value="6">6月份</option>
+                                <option value="7">7月份</option>
+                                <option value="8">8月份</option>
+                                <option value="9">9月份</option>
+                                <option value="10">10月份</option>
+                                <option value="11">11月份</option>
+                                <option value="12">12月份</option>
+                            </select>
+                            <select name="type_form"></select>
+                            <a class="btn btn-primary" id="require-income" style="margin-bottom: 4px;">查询</a>
+                        </form>
+                    </div><br>
+                    <div class="container" style="padding-left: 15px; " id="result">
+                        <div class="content col-lg-8 col-lg-offset-2 col-md-12">
+                            <div class="table-responsive" style="text-align: center">
+                                <table class="table table-bordered table-hover" style="text-align: center">
+                                    <thead>
+                                    <tr style="text-align: center">
+                                        <th style="text-align: center">年份</th>
+                                        <th style="text-align: center">月份</th>
+                                        <th style="text-align: center">发票号</th>
+                                        <th style="text-align: center">进销项类型</th>
+                                        <th style="text-align: center">金额（万元）</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tbody" id="content">
 
-            <div id="myModal" class="reveal-modal">
-                <h3>计算所得增值税额为:</h3>
-                <h4 id="output" style="text-align: center"></h4>
-                <a class="close-reveal-modal">&#215;</a>
+                                    </tbody>
+                                </table>
+                                <form method="post" name="download_income" style="float: left; margin: 15px 0;">
+                                    <input type="submit" class="btn btn-sm btn-primary"id="download_income" value="下载" onclick="download_Income()"></input>
+                                </form>
+                                <nav class="pull-right">
+                                    <ul class="pagination" id="pagelist"></ul>
+                                </nav>
+                                <br><div id="total" style="float: left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="require-box" style="width:100%;text-align:center;margin-top: 30px;">
+                        <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
+                            <h3 style="display: inline-block; margin-right: 10px;">销项数据</h3>
+                            <select name="year_form_outcome">
+                                <option value="2017">2017年</option>
+                                <option value="2016">2016年</option>
+                                <option value="2015">2015年</option>
+                                <option value="2014">2014年</option>
+                                <option value="2013">2013年</option>
+                                <option value="2012">2012年</option>
+                                <option value="2011">2011年</option>
+                                <option value="2010">2010年</option>
+                                <option value="2009">2009年</option>
+                                <option value="2008">2008年</option>
+                                <option value="2007">2007年</option>
+                                <option value="2006">2006年</option>
+                            </select>
+                            <select name="month_form_outcome">
+                                <option value="1">1月份</option>
+                                <option value="2">2月份</option>
+                                <option value="3">3月份</option>
+                                <option value="4">4月份</option>
+                                <option value="5">5月份</option>
+                                <option value="6">6月份</option>
+                                <option value="7">7月份</option>
+                                <option value="8">8月份</option>
+                                <option value="9">9月份</option>
+                                <option value="10">10月份</option>
+                                <option value="11">11月份</option>
+                                <option value="12">12月份</option>
+                            </select>
+                            <select name="type_form_outcome"></select>
+                            <a class="btn btn-primary" id="require-outcome" style="margin-bottom: 4px;">查询</a>
+                        </form>
+                    </div><br>
+                    <div class="container" style="padding-left: 15px; " id="result_two">
+                        <div class="content col-lg-8 col-lg-offset-2 col-md-12">
+                            <div class="table-responsive" style="text-align: center">
+                                <table class="table table-bordered table-hover" style="text-align: center">
+                                    <thead>
+                                    <tr style="text-align: center">
+                                        <th style="text-align: center">年份</th>
+                                        <th style="text-align: center">月份</th>
+                                        <th style="text-align: center">发票号</th>
+                                        <th style="text-align: center">进销项类型</th>
+                                        <th style="text-align: center">金额（万元）</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tbody" id="content_outcome">
+
+                                    </tbody>
+                                </table>
+                                <form method="post" name="download_outcome" style="float: left; margin: 20px 0;">
+                                    <input type="submit" class="btn btn-sm btn-primary"id="download_outcome" value="下载" onclick="download_Outcome()"></input>
+                                </form>
+                                <nav class="pull-right">
+                                    <ul class="pagination" id="pagelist_outcome"></ul>
+                                </nav>
+                                <br><div id="total_outcome" style="float: left"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <%--<script src="http://www.jq22.com/js/jq.js"></script>--%>
         </div>
+        <script>
+            $(function(){
+                $('#dowebok').fullpage({
+                });
+            });
+        </script>
+        <style>
+            .fp-tableCell{
+                padding-top: 0px;
+                display: inline-block;
+            }
+        </style>
     </div>
 </div>
 </body>

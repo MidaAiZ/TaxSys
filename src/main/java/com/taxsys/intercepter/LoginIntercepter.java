@@ -1,4 +1,4 @@
-package com.taxsys.Intercepter;
+package com.taxsys.intercepter;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,7 +25,7 @@ public class LoginIntercepter implements HandlerInterceptor {
             }
         }
         //没有登陆，转向登陆界面
-        httpServletResponse.sendRedirect("/login.html");
+        httpServletResponse.sendRedirect("/login");
         return true;
     }
 

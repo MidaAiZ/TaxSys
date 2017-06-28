@@ -16,7 +16,7 @@ $(document).ready(function() {
         ).done(function(res) {
             if(res.user) {
                 sessionStorage.setItem("userId",res.user.id);
-                window.location = 'index.jsp'
+                window.location = '/';
             } else {
                 alert(res.error);
             }

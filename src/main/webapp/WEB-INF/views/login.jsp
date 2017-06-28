@@ -19,7 +19,7 @@
 
     <title>企业增值税发票数据管理系统| 登录</title>
     <link rel="stylesheet" href="css/login.css" type="text/css" media="all" /> <!-- Cache! -->
-    <link rel='stylesheet' id='dt-main-css'  href='css/loginstyle.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-main-css' href='css/loginstyle.css' type='text/css' media='all' />
      <script type='text/javascript'>
         /* <![CDATA[ */
         /* thickbox */
@@ -352,7 +352,7 @@
                                                                                                 <div class="qfyuser-field qfyuser-submit qfyuser-column">
                                                                                                     <input id="login_btn" type="button" value="登录" class="qfyuser-button"/>
                                                                                                     <input type="button" id="register_btn" value="注册" class="qfyuser-button secondary" data-template="register" onclick=
-                                                                                                   "location.href='register.jsp'"/>
+                                                                                                   "location.href='register'"/>
                                                                                                     <img src="//fast.qifeiye.com/qfy-content/plugins/qfyuser/skins/elegant/img/loading.gif" alt="" class="qfyuser-loading"/>
                                                                                                     <a id="forget_pass" class="qfyuser-qfy-action" href="#" style="float:right;" data-template="reset">忘记密码？请联系管理员</a>
 

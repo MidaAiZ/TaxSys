@@ -19,8 +19,8 @@ $(document).ready(function() {
             }
         ).done(function(res) {
             if(res.logout) {
-                sessionStorage.removeItem("userId")
-                window.location = 'login.jsp'
+                sessionStorage.removeItem("userId");
+                window.location = '/login';
             }
         }).fail(function(err) {
             alert("系统错误！");

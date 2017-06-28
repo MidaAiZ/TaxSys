@@ -49,10 +49,10 @@
 
     <link rel="stylesheet" href="css/style1.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/style2.css" type="text/css" media="all" />
-    <link rel='stylesheet' id='dt-main-css'  href='css/style3.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-custom-less-css'  href='css/style4.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-bit-custom-less-css'  href='css/style5.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='qfy_dynamic_css-css'  href='css/style6.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-main-css' href='css/style3.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-custom-less-css' href='css/style4.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-bit-custom-less-css' href='css/style5.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='qfy_dynamic_css-css' href='css/style6.css' type='text/css' media='all' />
     <link rel="stylesheet" href="css/style7.css" type="text/css" media="all" />
 
     <style type='text/css'>
@@ -111,7 +111,7 @@
 
                 <div id="branding" class="wf-td bit-logo-bar" style="">
                     <a class="bitem logo small" style="display: table-cell;"
-                       href="index.jsp"><span class="logospan"><img class="preload-me"
+                       href="index"><span class="logospan"><img class="preload-me"
                                                                     src="image/Aisino_1.jpg"
                                                                     width="675" height="220"
                                                                     alt=""/></span></a>
@@ -126,21 +126,21 @@
                         class="mainmenu fancy-rollovers wf-mobile-hidden bit-menu-default underline-hover"
                         data-bit-menu=underline-hover data-bit-float-menu=underline-hover>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-2160 current_page_item bit-menu-post-id-2160 menu-item-2319 ">
-                            <a href="index.jsp"><span>首页</span></a></li>
+                            <a href="index"><span>首页</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-7010 menu-item-7011">
-                            <a href="import.jsp"><span>导入</span></a></li>
+                            <a href="import"><span>导入</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097">
-                            <a href="require.jsp"><span>查询</span></a></li>
+                            <a href="require"><span>查询</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-9556 menu-item-9557">
-                            <a href="count.jsp"><span>月度统计</span></a></li>
+                            <a href="count"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
-                            <a href="chart.jsp"><span>年度报表</span></a></li>
+                            <a href="chart"><span>年度报表</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
-                            <a href="predict.jsp"><span>分析预测</span></a></li>
+                            <a href="predict"><span>分析预测</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118">
-                            <a href="calculateTax.jsp"><span>计算增值税</span></a></li>
+                            <a href="calculateTax"><span>计算增值税</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297 act first">
-                            <a href="help.jsp"><span>帮助</span></a></li>
+                            <a href=""><span>帮助</span></a></li>
                     </ul>
 
                     <a href="#show-menu" data-padding='' data-top='8' data-right='8' rel="nofollow" id="mobile-menu"
@@ -163,7 +163,7 @@
                 <div class="wf-td assistive-info " id="assistive-info-unlogin" role="complementary" style="">
                     <div class="top-bar-right right bit_widget_more" bitdatamarker="bitHeader-2"
                          bitdataaction="site_fix_container" bitdatacolor="white" style="">
-                        <div id="register" style="margin-top:0px;margin-bottom:0px; display: none;"
+                        <div id="register" style="margin-top:0px;margin-bottom:0px;display: none;"
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
@@ -173,7 +173,7 @@
                                        onmouseenter="this.style.backgroundColor='transparent'; this.style.borderColor='#61b0ff'; this.style.color='#61b0ff';"
                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                       href="register.jsp" target="">注册</a>
+                                       href="register" target="">注册</a>
                                 </div>
                             </div>
                         </div>
@@ -183,11 +183,11 @@
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
                                      m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px" css_animation_delay="0"
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
-                                    <a  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
-                                        onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
-                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
-                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                        href="login.jsp" target="_self">登录</a>
+                                    <a onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
+                                       onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
+                                       style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
+                                       class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
+                                       href="login" target="_self">登录</a>
                                 </div>
                             </div>
                         </div>
@@ -231,28 +231,21 @@
                                             <div class="content"  style=";width: 100%">
                                                 <!--通用-->
                                                 <div class="help_01" style="text-indent: 2em">
-                                                    <h4 class="search_title">1、怎样选择上传方式？</h4>
-                                                    <p style="text-indent: 4em">在上传界面的右上角，可以点击下拉框进行选择是Excel导入还是手动输入上传。</p>
+                                                    <h4 class="search_title">1、查询服务提供哪些功能？</h4>
+                                                    <p style="text-indent: 4em">本系统查询模块可提供按月份查询、按种类查询、按进销项查询等条件查询功能。</p>
                                                 </div><br>
                                                 <div class="help_01" style="text-indent: 2em">
-                                                    <h4 class="search_title">2、应选择何种文件上传？</h4>
-                                                    <p style="text-indent: 4em">目前本系统仅支持Excel格式文件上传。</p>
+                                                    <h4 class="search_title">2、如何按照进销项查询？</h4>
+                                                    <p style="text-indent: 4em">在界面的左右边界各有一个小按钮，点击可在进项和销项数据查询界面进行切换。</p>
                                                 </div><br>
                                                 <div class="help_01"  style="text-indent: 2em">
-                                                    <h4 class="search_title">3、Excel格式的文件有什么格式要求？</h4>
-                                                    <p style="text-indent: 4em">Excel文件内需按照固定格式输入，第一列为类型，第二列为数值，第三列为日期，第四列为发票号，。</p>
+                                                    <h4 class="search_title">3、查询条件包括全部商品品种吗？</h4>
+                                                    <p style="text-indent: 4em">本系统经过预处理，保证查询可选项包括全部商品品种。</p>
                                                 </div><br>
                                                 <div class="help_01" style="text-indent: 2em">
-                                                    <h4 class="search_title">4、如何判断导入文件是否正确？</h4>
-                                                    <p style="text-indent: 4em">本系统导入模块会自动判断您上传的文件是否格式正确，若不正确会返回给您错误信息。</p>
-                                                </div><br>
-                                                <div class="help_01"  style="text-indent: 2em">
-                                                    <h4 class="search_title">5、手动输入应注意哪些事项？</h4>
-                                                    <p style="text-indent: 4em"> 注意保证每段信息都有相应的输入内容，并且格式正确。确认无误后方可提交上传。</p>
-                                                </div><br>
-                                                <div class="help_01" style="text-indent: 2em">
-                                                    <h4 class="search_title">6、如何查看近期导入的数据？</h4>
-                                                    <p style="text-indent: 4em">为方便用户进行查看，本系统可在导入界面的第一个子界面内查看近期导入的数据。</p>
+                                                    <h4 class="search_title">4、如何对查询到的信息进行下载？</h4>
+                                                    <p style="text-indent: 4em">您可点击当前界面的下载按钮，即可下载当前查询到的数据信息。</p>
+                                                </div><br><br><br><br><br><br><br><br>
                                                 </div>
                                             </div>
                                         </div>

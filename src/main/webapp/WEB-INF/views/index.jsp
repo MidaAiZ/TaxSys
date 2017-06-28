@@ -31,10 +31,10 @@
 
     <link rel="stylesheet" href="css/style1.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/style2.css" type="text/css" media="all" />
-    <link rel='stylesheet' id='dt-main-css'  href='css/style3.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-custom-less-css'  href='css/style4.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-bit-custom-less-css'  href='css/style5.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='qfy_dynamic_css-css'  href='css/style6.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-main-css' href='css/style3.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-custom-less-css' href='css/style4.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-bit-custom-less-css' href='css/style5.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='qfy_dynamic_css-css' href='css/style6.css' type='text/css' media='all' />
     <link rel="stylesheet" href="css/style7.css" type="text/css" media="all" />
 
 
@@ -255,7 +255,7 @@
 
                 <div id="branding" class="wf-td bit-logo-bar" style="">
                     <a class="bitem logo small" style="display: table-cell;"
-                       href="index.jsp"><span class="logospan"><img class="preload-me"
+                       href="index"><span class="logospan"><img class="preload-me"
                                                                     src="image/Aisino_1.jpg"
                                                                     width="675" height="220"
                                                                     alt=""/></span></a>
@@ -270,21 +270,21 @@
                         class="mainmenu fancy-rollovers wf-mobile-hidden bit-menu-default underline-hover"
                         data-bit-menu=underline-hover data-bit-float-menu=underline-hover>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-2160 current_page_item bit-menu-post-id-2160 menu-item-2319 act first">
-                            <a href="index.jsp"><span>首页</span></a></li>
+                            <a href="index"><span>首页</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-7010 menu-item-7011">
-                            <a href="import.jsp"><span>导入</span></a></li>
+                            <a href="import"><span>导入</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097">
-                            <a href="require.jsp"><span>查询</span></a></li>
+                            <a href="require"><span>查询</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-9556 menu-item-9557">
-                            <a href="count.jsp"><span>月度统计</span></a></li>
+                            <a href="count"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
-                            <a href="chart.jsp"><span>年度报表</span></a></li>
+                            <a href="chart"><span>年度报表</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
-                            <a href="predict.jsp"><span>分析预测</span></a></li>
+                            <a href="predict"><span>分析预测</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118">
-                            <a href="calculateTax.jsp"><span>计算增值税</span></a></li>
+                            <a href="calculateTax"><span>计算增值税</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
-                            <a href="help.jsp"><span>帮助</span></a></li>
+                            <a href="help"><span>帮助</span></a></li>
                     </ul>
 
                     <a href="#show-menu" data-padding='' data-top='8' data-right='8' rel="nofollow" id="mobile-menu"
@@ -317,7 +317,7 @@
                                        onmouseenter="this.style.backgroundColor='transparent'; this.style.borderColor='#61b0ff'; this.style.color='#61b0ff';"
                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                       href="register.jsp" target="">注册</a>
+                                       href="register" target="">注册</a>
                                 </div>
                             </div>
                         </div>
@@ -327,11 +327,11 @@
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
                                      m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px" css_animation_delay="0"
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
-                                    <a  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
+                                    <a onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
                                        onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                       href="login.jsp" target="_self">登录</a>
+                                       href="login" target="_self">登录</a>
                                 </div>
                             </div>
                         </div>
@@ -568,13 +568,13 @@
                                                                         <div class="bitImageParentDiv wpb_single_image wpb_content_element vc_align_center">
                                                                             <div class="wpb_wrapper" style="margin-top: -100px;float: left;"><span></span>
                                                                                 <div id="baobiao1" style="width:1000px;height:400px;float: left;margin-left: 10%"></div>
-                                                                                <div style="float: left;margin-left: 0px"><span style="color:#3399FF;"><a href="count.jsp" style="font-size: 14px;" target="_self"><span
+                                                                                <div style="float: left;margin-left: 0px"><span style="color:#3399FF;"><a href="count" style="font-size: 14px;" target="_self"><span
                                                                                         style="font-family: 微软雅黑;">更多单月数据 &gt;</span></a></span>
                                                                                 </div>
                                                                             </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                                                                             <div class="wpb_wrapper" style="margin-top: 0px;float: left;"><span></span>
                                                                                 <div id="baobiao2" style="width: 1000px;height: 400px;float: left;margin-left:10%"></div>
-                                                                                <div style="float: left;margin-left: 0px" ><span style="color:#3399FF;"><a href="chart.jsp" style="font-size: 14px;" target="_self"><span
+                                                                                <div style="float: left;margin-left: 0px" ><span style="color:#3399FF;"><a href="chart" style="font-size: 14px;" target="_self"><span
                                                                                         style="font-family: 微软雅黑;">详细年度数据 &gt;</span></a></span>
                                                                                 </div>
                                                                             </div>

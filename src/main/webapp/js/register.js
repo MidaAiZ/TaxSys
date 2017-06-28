@@ -12,7 +12,7 @@ $(document).ready(function() {
             }
         ).done(function(res) {
             if(res.user) {
-                window.location = 'login.jsp'
+                window.location = '/login'
             } else {
                 alert("注册失败！");
             }

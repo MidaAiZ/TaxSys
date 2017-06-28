@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Vodka
-  Date: 2017/6/21
-  Time: 1:01
+  Date: 2017/6/27
+  Time: 13:06
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -27,38 +27,32 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/index.js"></script>
     <meta name="renderer" content="webkit">
-    <script src="js/echarts.min.js"></script>
-    <script src="js/predict.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.fullPage.min.js"></script>
-    <link rel="stylesheet" href="css/jquery.fullPage.css">
-    <script src="js/bootstrap-select.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap-select.min.css">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
     <meta name="MobileOptimized" content="width"/><!-- for baidu -->
     <meta name="HandheldFriendly" content="true"/><!-- for baidu -->
+
     <!-- start of customer header -->
     <!-- end of customer header -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>企业增值税发票数据分析系统 | 分析预测</title>
+    <script src="js/echarts.min.js"></script>
+    <title>企业增值税发票数据分析系统 | 帮助</title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="pingback" href="http://57ea239cecea4.t73.qifeiye.com/xmlrpc.php" />
     <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/html5shiv.min.js"></script>
     <![endif]-->
-   <!--[if lt IE 9]>
+    <!--[if lt IE 9]>
     <script src="http://57ea239cecea4.t73.qifeiye.com/FeiEditor/bitSite/js/respond.min.js"></script>
     <![endif]-->
     <style type="text/css" id="static-stylesheet"></style>
 
     <link rel="stylesheet" href="css/style1.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/style2.css" type="text/css" media="all" />
-    <link rel='stylesheet' id='dt-main-css'  href='css/style3.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-custom-less-css'  href='css/style4.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='dt-bit-custom-less-css'  href='css/style5.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='qfy_dynamic_css-css'  href='css/style6.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-main-css' href='css/style3.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-custom-less-css' href='css/style4.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='dt-bit-custom-less-css' href='css/style5.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='qfy_dynamic_css-css' href='css/style6.css' type='text/css' media='all' />
     <link rel="stylesheet" href="css/style7.css" type="text/css" media="all" />
 
     <style type='text/css'>
@@ -96,6 +90,8 @@
         body {background-color: #ffffff;background-position:center top;background-repeat:repeat;background-size: cover;background-attachment: fixed;}
         #page{background-color: #ffffff;background-position:center top;background-repeat:repeat;background-size: auto;background-attachment: scroll;}
     </style>
+    <link rel="stylesheet" href="css/help.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
 
@@ -115,7 +111,7 @@
 
                 <div id="branding" class="wf-td bit-logo-bar" style="">
                     <a class="bitem logo small" style="display: table-cell;"
-                       href="index.jsp"><span class="logospan"><img class="preload-me"
+                       href="index"><span class="logospan"><img class="preload-me"
                                                                     src="image/Aisino_1.jpg"
                                                                     width="675" height="220"
                                                                     alt=""/></span></a>
@@ -130,21 +126,21 @@
                         class="mainmenu fancy-rollovers wf-mobile-hidden bit-menu-default underline-hover"
                         data-bit-menu=underline-hover data-bit-float-menu=underline-hover>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-2160 current_page_item bit-menu-post-id-2160 menu-item-2319 ">
-                            <a href="index.jsp"><span>首页</span></a></li>
+                            <a href="index"><span>首页</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-7010 menu-item-7011">
-                            <a href="import.jsp"><span>导入</span></a></li>
+                            <a href="import"><span>导入</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8330 menu-item-15097">
-                            <a href="require.jsp"><span>查询</span></a></li>
+                            <a href="require"><span>查询</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-9556 menu-item-9557">
-                            <a href="count.jsp"><span>月度统计</span></a></li>
+                            <a href="count"><span>月度统计</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8115 menu-item-8116">
-                            <a href="chart.jsp"><span>年度报表</span></a></li>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117 act first">
-                            <a href="predict.jsp"><span>分析预测</span></a></li>
+                            <a href="chart"><span>年度报表</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8116 menu-item-8117">
+                            <a href="predict"><span>分析预测</span></a></li>
                         <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-8117 menu-item-8118">
-                            <a href="calculateTax.jsp"><span>计算增值税</span></a></li>
-                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297">
-                            <a href="help.jsp"><span>帮助</span></a></li>
+                            <a href="calculateTax"><span>计算增值税</span></a></li>
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page bit-menu-post-id-17296 menu-item-17297 act first">
+                            <a href=""><span>帮助</span></a></li>
                     </ul>
 
                     <a href="#show-menu" data-padding='' data-top='8' data-right='8' rel="nofollow" id="mobile-menu"
@@ -167,7 +163,7 @@
                 <div class="wf-td assistive-info " id="assistive-info-unlogin" role="complementary" style="">
                     <div class="top-bar-right right bit_widget_more" bitdatamarker="bitHeader-2"
                          bitdataaction="site_fix_container" bitdatacolor="white" style="">
-                        <div id="register" style="margin-top:0px;margin-bottom:0px; display: none;"
+                        <div id="register" style="margin-top:0px;margin-bottom:0px;display: none; "
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
@@ -177,7 +173,7 @@
                                        onmouseenter="this.style.backgroundColor='transparent'; this.style.borderColor='#61b0ff'; this.style.color='#61b0ff';"
                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:#61b0ff; color:#ffffff;"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                       href="register.jsp" target="">注册</a>
+                                       href="register" target="">注册</a>
                                 </div>
                             </div>
                         </div>
@@ -187,11 +183,11 @@
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
                                      m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px" css_animation_delay="0"
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
-                                    <a  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
-                                        onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
-                                        style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
-                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                        href="login.jsp" target="_self">登录</a>
+                                    <a onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
+                                       onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
+                                       style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
+                                       class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
+                                       href="login" target="_self">登录</a>
                                 </div>
                             </div>
                         </div>
@@ -218,64 +214,49 @@
     </header>
     <!-- #masthead -->
 </div>
-<div>
-        <ul class="nav nav-tabs" style="margin-top: 50px">
-            <li class="active" style="margin-left: 32%;"><a data-toggle="tab" href="#menu1">商品预测</a></li>
-            <li style="margin-left: 20%"><a data-toggle="tab" href="#menu2">利润预测</a></li>
-        </ul>
-        <div class="tab-content">
-            <div id="menu1" class="tab-pane fade  in active ">
-                <div id="dowebok">
-                    <div class="section">
-                        <div class="slide">
-                            <h3 style="float: left;margin-left: 13%">进项商品</h3>
-                            <div class="require-box" style="float:left;width:20%">
-                                <form style="height:30px" action="" method="post" enctype="multipart/form-data">
-                                    <select data-live-search="true" name="type_form_income"></select>
-                                </form>
-                            </div><br>
-                            <div class="count-box" style="margin-top: 50px;margin-left: 50px">
-                                <div id="baobiao_income" style="width:1000px;height:400px;text-align: center;margin-left: 150px;float: left"></div>
+<div class="container"  style=";width: 100%">
+    <div class="row wpb_row"  style=";width: 100%">
+        <div data-animalename="qfyfadeInUp" data-delay=""
+             class=" qfy-column-2-592134b61e1ad788989 qfy-column-inner vc_span_class vc_span6  text-Default small-screen-undefined"
+             data-dw="1/2" data-fixheight=""  style=";width: 100%">
+            <div style=";width: 100%;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;border-radius:0px;;position:relative;;"
+                 class="column_inner ">
+                <div class="column_containter" style="z-index:3;position:relative;;width: 100%">
+                    <section data-fixheight="" class="qfy-row-3-592134b61e3b0564954 section     bothfull  section-text-no-shadow section-inner-no-shadow section-normal display_entire" style='margin-bottom:0px;border-radius:0px;color:#000000; ;width: 100%'>
+                        <div class="container"  style=";width: 100%">
+                            <div class="row wpb_row"   style=";width: 100%;margin-left: 3px;margin-top: 15px">
+                                <div  style=";width: 100%" data-animalename="qfyfadeInUp" data-delay="" class=" qfy-column-4-592134b61f274474529 qfy-column-inner vc_span_class vc_span6  text-Default small-screen-Default" data-dw="1/2" data-fixheight="">
+                                    <div style=";width: 100%;margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;border-radius:0px;border-top:1px solid #cecece;border-bottom:1px solid #cecece;border-left:1px solid #cecece;border-right:1px solid #cecece;;position:relative;;" class="column_inner ">
+                                        <div class="column_containter" style="z-index:3;position:relative; ;width: 100%">
+                                            <div class="content"  style=";width: 100%">
+                                                <!--通用-->
+                                                <div class="help_01" style="text-indent: 2em">
+                                                    <h4 class="search_title">1、如何获取预测报表？</h4>
+                                                    <p style="text-indent: 4em">用户可在分析预测界面查看预测图表。</p>
+                                                </div><br>
+                                                <div class="help_01" style="text-indent: 2em">
+                                                    <h4 class="search_title">2、系统支持对什么数据进行预测？</h4>
+                                                    <p style="text-indent: 4em">目前本系统支持根据商品类型和年度利润进行相关预测。</p>
+                                                </div><br>
+                                                <div class="help_01"  style="text-indent: 2em">
+                                                    <h4 class="search_title">3、预测数据可靠吗？准确度高不高？</h4>
+                                                    <p style="text-indent: 4em">本系统采用基于时间序列的预测算法，提供一元线性回归预测和基于季度占比的预测方法，预测准确率在95%左右。</p>
+                                                </div><br>
+                                                <div class="help_01" style="text-indent: 2em">
+                                                    <h4 class="search_title">4、获取到报表之后用户该如何操作？</h4>
+                                                    <p style="text-indent: 4em">用户可根据本系统提供的表格数据，观察出近期企业的进销项情况，有利于企业根据分析报表适时进行税收筹划，调整经营策略。</p>
+                                                </div><br><br><br><br><br><br><br><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="slide">
-                            <h3 style="float: left;margin-left: 13%">销项商品</h3>
-                            <div class="require-box" style="float:left;width:20%">
-                                <form style="height:30px" action="" method="post" enctype="multipart/form-data">
-                                    <select style="" name="type_form_outcome"></select>
-                                </form>
-                            </div><br>
-                            <div class="count-box" style="margin-top: 50px;margin-left: 50px">
-                                <div id="baobiao_outcome" style="width:1000px;height:400px;text-align: center;margin-left: 150px;float: left"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <script>
-                    $(function(){
-                        $('#dowebok').fullpage({
-                        });
-                    });
-                </script>
-                <style>
-                    .fp-tableCell{
-                        padding-top: 0px;
-                        display: inline-block;
-                    }
-                </style>
-            </div>
-            <div id="menu2" class="tab-pane fade" >
-                <div class="count-box" style="margin-top: 50px;margin-left: 50px">
-                    <div id="baobiao2" style="width:1000px;height:400px;text-align: center;margin-left: 150px;float: left"></div>
+                    </section>
                 </div>
             </div>
         </div>
+    </div>
 </div>
-<script>
-    $('.selectpicker').selectpicker({
-        style: 'btn-info',
-        size: 4,
-    });
-</script>
 </body>
 </html>
