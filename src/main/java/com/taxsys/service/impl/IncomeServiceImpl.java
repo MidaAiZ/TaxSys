@@ -197,11 +197,15 @@ public class IncomeServiceImpl implements IncomeService {
 
     public List<String> searchIncomeList(HttpServletRequest request){
         Map<String, Object> paramsMap = new HashMap<String, Object>();
-        String page = request.getParameter("page");
-        if (page == null) { page = "1"; }
         try {
             if (request.getParameter("type") != null) {
                 paramsMap.put("type", new String(request.getParameter("type").getBytes("ISO-8859-1"), "UTF-8"));
+            }
+            if (request.getParameter("limit") != null) {
+                String page = request.getParameter("page");
+                if (page == null) { page = "1"; }
+                paramsMap.put("page", page);
+                paramsMap.put("limit", request.getParameter("limit"));
             }
             paramsMap.put("beginTime", request.getParameter("beginTime"));
             paramsMap.put("endTime", request.getParameter("endTime"));

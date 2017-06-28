@@ -16,6 +16,7 @@ var myPaginate = function(limit, url, callBK, pageTag) {
 
     this.init = init;
     this.update = update;
+    this.changeUrl = changeUrl;
 
     function init() {
         paginate.on("click", "a", function () {
@@ -27,6 +28,11 @@ var myPaginate = function(limit, url, callBK, pageTag) {
 
     function update() {
         getLists(resUrl, paginate.find("li.active").find("a").data("value"));
+    }
+
+    function changeUrl(url) {
+        resUrl = url;
+        update();
     }
 
     function setPage(count, current) {

@@ -20,9 +20,13 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/require.js"></script>
     <script src="js/paginate.js"></script>
+    <script src="js/dataOpt.js"></script>
     <script src="js/index.js"></script>
     <script src="js/jquery.fullPage.min.js"></script>
+    <%--<script src="js/context.js"></script>--%>
+    <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/jquery.fullPage.css">
+    <link rel="stylesheet" href="css/context.css">
     <meta name="renderer" content="webkit">
     <meta name="applicable-device" content="pc,mobile"> <!-- for baidu -->
     <meta http-equiv="Cache-Control" content="no-transform" /> <!-- for baidu -->
@@ -54,6 +58,9 @@
     <style type='text/css'>
         .ppstart{
             background:transparent !important;
+        }
+        .fp-controlArrow{
+            /*marg*/
         }
     </style>
     <script type='text/javascript'>
@@ -196,15 +203,14 @@
     </header>
     <!-- #masthead -->
 </div>
-<link rel="stylesheet" href="css/bootstrap.min.css">
 <div class="tab-content">
     <div id="menu3" class="tab-pane fade in active">
         <div id="dowebok">
             <div class="section">
                 <div class="slide">
-                    <h3 style="float: left;margin-left: 13%">进项数据</h3>
-                    <div class="require-box" style="width:80%;text-align:center;margin-top: 50px;">
+                    <div class="require-box" style="width:100%;text-align:center;margin-top: 30px;">
                         <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
+                            <h3 style="margin-right: 10px;display: inline-block">进项数据 </h3>
                             <select name="year_form">
                                 <option value="2017">2017年</option>
                                 <option value="2016">2016年</option>
@@ -234,10 +240,7 @@
                                 <option value="12">12月份</option>
                             </select>
                             <select name="type_form"></select>
-                            <a class="btn btn-primary" id="require-income">查询</a>
-                        </form>
-                        <form method="post" name="download_income" style="margin-left:80%">
-                            <input type="submit" class="btn btn-sm btn-success"id="download_income" value="下载" onclick="download_Income()"></input>
+                            <a class="btn btn-primary" id="require-income" style="margin-bottom: 4px;">查询</a>
                         </form>
                     </div><br>
                     <div class="container" style="padding-left: 15px; " id="result">
@@ -248,7 +251,7 @@
                                     <tr style="text-align: center">
                                         <th style="text-align: center">年份</th>
                                         <th style="text-align: center">月份</th>
-                                        <th style="text-align: center">商品类型</th>
+                                        <th style="text-align: center">发票号</th>
                                         <th style="text-align: center">进销项类型</th>
                                         <th style="text-align: center">金额（万元）</th>
                                     </tr>
@@ -257,6 +260,9 @@
 
                                     </tbody>
                                 </table>
+                                <form method="post" name="download_income" style="float: left; margin: 15px 0;">
+                                    <input type="submit" class="btn btn-sm btn-primary"id="download_income" value="下载" onclick="download_Income()"></input>
+                                </form>
                                 <nav class="pull-right">
                                     <ul class="pagination" id="pagelist"></ul>
                                 </nav>
@@ -266,9 +272,9 @@
                     </div>
                 </div>
                 <div class="slide">
-                    <h3 style="float: left;margin-left: 13%">销项数据</h3>
-                    <div class="require-box" style="width:80%;text-align:center;margin-top: 50px;">
+                    <div class="require-box" style="width:100%;text-align:center;margin-top: 30px;">
                         <form style="width: 100%" action="" method="post" enctype="multipart/form-data">
+                            <h3 style="display: inline-block; margin-right: 10px;">销项数据</h3>
                             <select name="year_form_outcome">
                                 <option value="2017">2017年</option>
                                 <option value="2016">2016年</option>
@@ -298,10 +304,7 @@
                                 <option value="12">12月份</option>
                             </select>
                             <select name="type_form_outcome"></select>
-                            <a class="btn btn-primary" id="require-outcome">查询</a>
-                        </form>
-                        <form method="post" name="download_outcome" style="margin-left:80%">
-                            <input type="submit" class="btn btn-sm btn-success"id="download_outcome" value="下载" onclick="download_Outcome()"></input>
+                            <a class="btn btn-primary" id="require-outcome" style="margin-bottom: 4px;">查询</a>
                         </form>
                     </div><br>
                     <div class="container" style="padding-left: 15px; " id="result_two">
@@ -312,7 +315,7 @@
                                     <tr style="text-align: center">
                                         <th style="text-align: center">年份</th>
                                         <th style="text-align: center">月份</th>
-                                        <th style="text-align: center">商品类型</th>
+                                        <th style="text-align: center">发票号</th>
                                         <th style="text-align: center">进销项类型</th>
                                         <th style="text-align: center">金额（万元）</th>
                                     </tr>
@@ -321,6 +324,9 @@
 
                                     </tbody>
                                 </table>
+                                <form method="post" name="download_outcome" style="float: left; margin: 20px 0;">
+                                    <input type="submit" class="btn btn-sm btn-primary"id="download_outcome" value="下载" onclick="download_Outcome()"></input>
+                                </form>
                                 <nav class="pull-right">
                                     <ul class="pagination" id="pagelist_outcome"></ul>
                                 </nav>
