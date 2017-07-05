@@ -88,6 +88,12 @@ public class dispatchController {
         return "help/help_require";
     }
 
+    @RequestMapping(value="center", method = RequestMethod.GET)
+    public String center(HttpServletRequest request, HttpServletResponse response) {
+        checkLogin(request, response);
+        return "center";
+    }
+
     @RequestMapping(value="login", method = RequestMethod.GET)
     public String login() {
         return "login";

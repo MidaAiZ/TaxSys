@@ -98,11 +98,11 @@
                                                                             <div style="max-width:480px;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;border-radius:5px;;position:relative;overflow:hidden;;" class="column_inner ">
                                                                                 <div class=" background-overlay grid-overlay-0" style="background-color:#ffffff;"></div>
                                                                                 <div class="column_containter" style="z-index:3;position:relative;">
-                                                                                    <div m-padding="15px 0px 10px 0px" p-padding="15px 0px 10px 0px" css_animation_delay="0" qfyuuid="qfy_column_text_e5p3n" class="qfy-element qfy-text qfy-text-62910 wpb_text_column wpb_content_element " style="position: relative;;;line-height:1.5em;;background-color: #104f68;background-repeat: no-repeat;;margin-top:0px;margin-bottom:0px;padding-top:15px;padding-bottom:10px;padding-right:0px;padding-left:0px;border-radius:0px;">
+                                                                                    <div m-padding="10px 0px 10px 0px" p-padding="10px 0px 10px 0px" css_animation_delay="0" qfyuuid="qfy_column_text_e5p3n" class="qfy-element qfy-text qfy-text-62910 wpb_text_column wpb_content_element " style="position: relative;;;line-height:1.5em;;background-color: #104f68;background-repeat: no-repeat;;margin-top:0px;margin-bottom:0px;padding-top:10px;padding-bottom:5px;padding-right:0px;padding-left:0px;border-radius:0px;">
                                                                                         <div class="wpb_wrapper">
                                                                                             <div style="position: relative;">
                                                                                                 <div style="text-align: center;">
-                                                                                                    <img alt="" src="image/Aisino_1.jpg" title="" width="137" height="20">
+                                                                                                    <img alt="" src="image/Aisino_1.jpg" title="" width="100px" height="35px">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -304,14 +304,14 @@
                                                                                             <form method="post" id="login-form" class="qfyuser_login" data-action="login">
                                                                                                 <div class='qfyuser-field qfyuser-field-username_or_email ' data-key='username_or_email'>
                                                                                                     <div class='qfyuser-label'>
-                                                                                                        <label for='username_or_email-313'>用户名或者邮箱</label>
+                                                                                                        <label for='username_or_email-313'>用户名</label>
 
                                                                                                         <div class='required'>
                                                                                                             *
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class='qfyuser-input '>
-                                                                                                        <input type='text' name='number' id='username_or_email-313' value="" placeholder='' data-ajaxcheck='' data-help='' data-label='用户名或者邮箱' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='text' data-woo='0'/>
+                                                                                                        <input type='text' name='number' id='username_or_email-313' value="Admin" placeholder='' data-ajaxcheck='' data-help='' data-label='用户名或者邮箱' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='text' data-woo='0'/>
 
                                                                                                         <div class='qfyuser-clear'></div>
                                                                                                     </div>
@@ -326,7 +326,7 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class='qfyuser-input '>
-                                                                                                        <input type='password' class='password' name='password' id='user_pass-313' value='' placeholder='' data-ajaxcheck='' data-help='Your password must be 8 characters long at least.' data-label='密码' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='password' data-woo='0'/>
+                                                                                                        <input type='password' class='password' name='password' id='user_pass-313' value='root123123' placeholder='' data-ajaxcheck='' data-help='Your password must be 8 characters long at least.' data-label='密码' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='password' data-woo='0'/>
 
                                                                                                         <div class='qfyuser-clear'></div>
                                                                                                     </div>
