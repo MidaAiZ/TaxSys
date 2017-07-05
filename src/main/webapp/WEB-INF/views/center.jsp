@@ -38,11 +38,11 @@
             <div>
                 <form action="" class="qfyuser-label" style="margin-top: 125px;margin-left: 200px;">
                     <div style="font-size: medium;width: 120px;float: left;">原始密码：</div>
-                    <input class="form-control" type="text" style="font-size: medium;width: 200px;float: left;margin-left: 50px"><br><br><br>
+                    <input class="form-control" type="password" style="font-size: medium;width: 200px;float: left;margin-left: 50px"><br><br><br>
                     <div style="font-size: medium;width: 120px;float: left">新的密码：</div>
-                    <input class="form-control" type="text" style="font-size: medium;width: 200px;float: left;margin-left: 50px"><br><br><br>
+                    <input class="form-control" type="password" style="font-size: medium;width: 200px;float: left;margin-left: 50px"><br><br><br>
                     <div style="font-size: medium;width: 120px;float: left">确认密码：</div>
-                    <input class="form-control" type="text" style="font-size: medium;width: 200px;float: left;margin-left: 50px"><br><br><br>
+                    <input class="form-control" type="password" style="font-size: medium;width: 200px;float: left;margin-left: 50px"><br><br><br>
                     <input class="btn-xs btn-primary form-control" style="font-size: medium;width: 200px;float: left;margin-left: 50px" type="submit" value="确定">
                 </form>
             </div>
