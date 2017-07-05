@@ -216,6 +216,33 @@ public class UserController {
     }
 
     /**
+     * 得到用户个人详细信息
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/self", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> getUserPersonalInfo( HttpServletRequest request) {
+        // response返回的json内容
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        String id = (String)request.getSession().getAttribute("userId");
+        if(id == null){
+            returnMap.put("error", "非法访问,上帝正在注视你.");
+        }
+
+        User user = userService.getUser(id);
+        if(user != null){
+            returnMap.put("number", user.getNumber());
+            returnMap.put("phone", user.getCellphone());
+            returnMap.put("role", user.getRole());
+            returnMap.put("created_at", user.getCreated_at());
+        } else {
+            returnMap.put("error", "非法访问,上帝正在注视你.");
+        }
+        return returnMap;
+    }
+
+    /**
      * 获取用户列表
      * @param limit
      * @return
