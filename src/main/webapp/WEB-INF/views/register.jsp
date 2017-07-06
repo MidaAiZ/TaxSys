@@ -178,7 +178,7 @@
 
                                                                                                 <form id="register-form" class="qfyuser_register">
                                                                                                     <div class='qfyuser-section qfyuser-column qfyuser-collapsible-1 qfyuser-collapsed-0'>
-                                                                                                        基本信息
+                                                                                                        基本信息(默认角色为发票管理人员)
                                                                                                     </div>
 
                                                                                                     <div class='qfyuser-field qfyuser-field-user_login ' data-key='user_login'>
