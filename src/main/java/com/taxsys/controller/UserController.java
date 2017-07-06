@@ -169,6 +169,7 @@ public class UserController {
      * @param id 用户id
      * @param gender 用户性别
      * @param avatar 用户头像
+     * @param cellphone  用户手机号
      * @return
      */
     @RequestMapping(value = "/{id}/info", method = RequestMethod.PUT)
@@ -176,12 +177,14 @@ public class UserController {
     public Map<String, Object> modifyUserInfo(@PathVariable("id") String id,
                                               @RequestParam(required=false) Integer gender,
                                               @RequestParam(required=false) String nickname,
-                                              @RequestParam(required=false) String avatar) {
+                                              @RequestParam(required=false) String avatar,
+                                              @RequestParam(required=false) String cellphone) {
 
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
 
         User user = new User(gender, avatar);
+        user.setCellphone(cellphone);
         user.setId(id);
         UserDto userDto = userService.modifyUserInfo(user);
         if(userDto.isSuccess()){
