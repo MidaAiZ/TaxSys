@@ -62,6 +62,7 @@
 
 <body style="background-image: url(image/bg.png)">
 <h3 style="margin-left: 100px;margin-top: 50px">个人中心</h3>
+<a href="/index" style="float: right;margin-right: 50px;"><h4>返回</h4></a>
 <div class="container" style="margin-top: 20px;">
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#information" aria-expanded="true">个人信息</a></li>
