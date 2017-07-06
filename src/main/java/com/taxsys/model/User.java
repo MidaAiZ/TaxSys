@@ -1,12 +1,8 @@
 package com.taxsys.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 /**
  * 此类为User实体类
@@ -127,6 +123,13 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public User(String id, int gender, String avatar, String cellphone) {
+		this.id = id;
+		this.gender = gender;
+		this.avatar = avatar;
+		this.cellphone = cellphone;
 	}
 
 	public User(String number, String cellphone, String password) {

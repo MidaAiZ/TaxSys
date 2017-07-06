@@ -11,12 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Timer;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -124,14 +120,23 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDto modifyUserInfo(User user) {
-        User oldUser = userDao.getUser(user.getId());
+        User oldUser = userDao.getUserByCellphone(user.getCellphone());
+        if(oldUser != null) {
+            return new UserDto(false, "该手机号已注册");
+        }
+
+        oldUser = userDao.getUser(user.getId());
+
         if(oldUser == null) {
             return new UserDto(false, "用户不存在");
         }
-        if(oldUser.getGender() != user.getGender()) {
+        if(user.getGender() != -1 && oldUser.getGender() != user.getGender()) {
             oldUser.setGender(user.getGender());
         }
-        if(oldUser.getAvatar() != null && !oldUser.getAvatar().equals(user.getAvatar())) {
+        if(user.getCellphone() != null && !oldUser.getCellphone().equals(user.getCellphone())) {
+            oldUser.setCellphone(user.getCellphone());
+        }
+        if(user.getAvatar() != null && !oldUser.getAvatar().equals(user.getAvatar())) {
             oldUser.setAvatar(user.getAvatar());
         }
         if(!userDao.updateUserInfo(oldUser)) {
