@@ -3,12 +3,9 @@ package com.taxsys.controller;
 import com.taxsys.dto.UserDto;
 import com.taxsys.model.User;
 import com.taxsys.service.impl.UserServiceImpl;
-import com.taxsys.utils.MD5Util;
-import com.taxsys.utils.UUIDGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.lang.System.out;
 
 
 @Controller
@@ -175,17 +170,16 @@ public class UserController {
     @RequestMapping(value = "/{id}/info", method = RequestMethod.PUT)
     @ResponseBody
     public Map<String, Object> modifyUserInfo(@PathVariable("id") String id,
-                                              @RequestParam(required=false) Integer gender,
-                                              @RequestParam(required=false) String nickname,
-                                              @RequestParam(required=false) String avatar,
-                                              @RequestParam(required=false) String cellphone) {
+                                              HttpServletRequest request) {
 
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
-
-        User user = new User(gender, avatar);
-        user.setCellphone(cellphone);
-        user.setId(id);
+        int gender = -1;
+        if(request.getParameter("gender") != null)
+            gender = Integer.parseInt(request.getParameter("gender"));
+        String avatar = request.getParameter("avatar");
+        String cellphone = request.getParameter("cellphone");
+        User user = new User(id, gender, avatar, cellphone);
         UserDto userDto = userService.modifyUserInfo(user);
         if(userDto.isSuccess()){
             userDto.getUser().setPassword("");
@@ -194,27 +188,6 @@ public class UserController {
             returnMap.put("error", userDto.getMessage());
         }
 
-        return returnMap;
-    }
-
-    /**
-     * 得到用户信息
-     * @param id 用户id
-     * @return
-     */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Map<String, Object> modifyUserInfo(@PathVariable("id") String id) {
-        // response返回的json内容
-        Map<String, Object> returnMap = new HashMap<String, Object>();
-
-        User user = userService.getUser(id);
-        if(user != null){
-            user.setPassword("");
-            returnMap.put("success", user);
-        } else {
-            returnMap.put("error", "用户不存在");
-        }
         return returnMap;
     }
 
