@@ -180,17 +180,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="logout" style="margin-top:0px;margin-bottom:0px; display: none;display: none;"
+                        <div id="center" style="margin-top:0px;margin-bottom:0px; display: none;"
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
                                      m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px" css_animation_delay="0"
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
-                                    <a id="logout_btn"  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
-                                       onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
-                                       style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
+                                    <a style="font-family:微软雅黑; font-size:15px; color:#61b0ff;padding: 0 10px 0 0"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                    >退出</a>
+                                       href="/center" target="_self">个人中心</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="logout" style="margin-top:0px;margin-bottom:0px; display: none;"
+                             class="mobileHidden headerWidget_1 widget_text site_tooler">
+                            <div class="bitWidgetFrame ">
+                                <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;" m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px" css_animation_delay="0" qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
+                                    <a id="logout_btn" onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';" onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';" style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;" class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom">退出</a>
                                 </div>
                             </div>
                         </div>

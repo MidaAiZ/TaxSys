@@ -3,9 +3,9 @@ $(document).ready(function() {
         var isLogin = sessionStorage.getItem("userId");
         if (isLogin) {
             $("#register,#login").remove();
-            $("#logout").css("display", "inline-block");
+            $("#logout,#center").css("display", "inline-block");
         } else {
-            $("#logout").remove();
+            $("#logout,#center").remove();
             $("#register,#login").css("display", "inline-block");
         }
 
