@@ -141,17 +141,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="logout" style="margin-top:0px;margin-bottom:0px; display: none;"
+                        <div id="center" style="margin-top:0px;margin-bottom:0px; display: none;"
                              class="mobileHidden headerWidget_1 widget_text site_tooler">
                             <div class="bitWidgetFrame ">
                                 <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;"
                                      m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px" css_animation_delay="0"
                                      qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
-                                    <a id="logout_btn"  onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';"
-                                       onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';"
-                                       style="font-family:微软雅黑; font-size:14px; padding-left:22px;padding-right:22px; padding-top:6px;padding-bottom:6px; border-width:1px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;"
+                                    <a style="font-family:微软雅黑; font-size:15px; color:#61b0ff;padding: 0 10px 0 0"
                                        class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom"
-                                    >退出</a>
+                                       href="/center" target="_self">个人中心</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="logout" style="margin-top:0px;margin-bottom:0px; display: none;"
+                             class="mobileHidden headerWidget_1 widget_text site_tooler">
+                            <div class="bitWidgetFrame ">
+                                <div style="margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;padding-right:0px;padding-left:0px;" m-padding="0px 0px 0px 0px" p-padding="0px 0px 0px 0px" css_animation_delay="0" qfyuuid="0" class="qfy-element vc_btn3-container vc_btn3-center">
+                                    <a id="logout_btn" onmouseleave="this.style.borderColor='#61b0ff'; this.style.backgroundColor='transparent'; this.style.color='#61b0ff';" onmouseenter="this.style.backgroundColor='#61b0ff'; this.style.borderColor='#61b0ff'; this.style.color='#ffffff';" style="font-family:微软雅黑; font-size:14px; border-color:#61b0ff; background-color:transparent; color:#61b0ff;" class="vc_general vc_btn3 vc_btn3-size-sm vc_btn3-shape-round vc_btn3-style-qfy-custom">退出</a>
                                 </div>
                             </div>
                         </div>
@@ -243,7 +249,7 @@
                 })
             </script>
             <div id="up-income" class="tab-pane fade in"><br>
-                <div class="require-box" style="text-align: center; margin: auto; display: inline-block; float: right;">
+                <div class="require-box" style="text-align: center; margin: auto; display: inline-block;">
                     <form action="" method="post" enctype="multipart/form-data" style=";float:left">
                         <label style="display: block">请选择导入方式</label>
                         <select name="item1" >
@@ -319,7 +325,7 @@
                 </div>
             </div>
             <div id="up-outcome" class="tab-pane fade"><br>
-                <div class="require-box" style="text-align: center; margin: auto; display: inline-block; float: right;">
+                <div class="require-box" style="text-align: center; margin: auto; display: inline-block; ">
                     <form action="" method="post" enctype="multipart/form-data" style=";float:left">
                         <label style="display: block">请选择导入方式</label>
                         <select name="item2" >
@@ -330,7 +336,7 @@
                 </div>
                 <div>
                     <%--手动上传--%>
-                    <form  id="form2-1" action="/incomes/createIncome" method="post" style="margin: auto; max-width: 400px;">
+                    <form  id="form2-1" action="/outcomes/createOutcome" method="post" style="margin: auto; max-width: 400px;">
                         <div class='qfyuser-field qfyuser-field-username_or_email ' data-key='username_or_email'>
                             <div class='qfyuser-label'>
                                 <label for='tax2-1'>发票号:</label>
@@ -347,8 +353,8 @@
                         <div class="qfyuser-clear"></div>
                         <div class='qfyuser-field qfyuser-field-user_pass ' data-key='user_pass'>
                             <div class='qfyuser-label'>
-                                <label for='money2-1'>进项额:</label>
-                                <input type='text' class="form-control" placeholder='请输入进项额' name='money' id='money2-1' value='' placeholder='' data-ajaxcheck='' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='password' data-woo='0'/>
+                                <label for='money2-1'>销项额:</label>
+                                <input type='text' class="form-control" placeholder='请输入销项额' name='money' id='money2-1' value='' placeholder='' data-ajaxcheck='' data-placeholder='' data-_builtin='1' data-hidden='0' data-hideable='0' data-html='0' data-locked='0' data-private='0' data-required='1' data-type='password' data-woo='0'/>
                             </div>
                         </div>
                         <div class="qfyuser-clear"></div>

@@ -3,12 +3,9 @@ package com.taxsys.controller;
 import com.taxsys.dto.UserDto;
 import com.taxsys.model.User;
 import com.taxsys.service.impl.UserServiceImpl;
-import com.taxsys.utils.MD5Util;
-import com.taxsys.utils.UUIDGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.lang.System.out;
 
 
 @Controller
@@ -169,20 +164,22 @@ public class UserController {
      * @param id 用户id
      * @param gender 用户性别
      * @param avatar 用户头像
+     * @param cellphone  用户手机号
      * @return
      */
     @RequestMapping(value = "/{id}/info", method = RequestMethod.PUT)
     @ResponseBody
     public Map<String, Object> modifyUserInfo(@PathVariable("id") String id,
-                                              @RequestParam(required=false) Integer gender,
-                                              @RequestParam(required=false) String nickname,
-                                              @RequestParam(required=false) String avatar) {
+                                              HttpServletRequest request) {
 
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
-
-        User user = new User(gender, avatar);
-        user.setId(id);
+        int gender = -1;
+        if(request.getParameter("gender") != null)
+            gender = Integer.parseInt(request.getParameter("gender"));
+        String avatar = request.getParameter("avatar");
+        String cellphone = request.getParameter("cellphone");
+        User user = new User(id, gender, avatar, cellphone);
         UserDto userDto = userService.modifyUserInfo(user);
         if(userDto.isSuccess()){
             userDto.getUser().setPassword("");
@@ -195,22 +192,28 @@ public class UserController {
     }
 
     /**
-     * 得到用户信息
-     * @param id 用户id
+     * 得到用户个人详细信息
+     * @param request
      * @return
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/self", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> modifyUserInfo(@PathVariable("id") String id) {
+    public Map<String, Object> getUserPersonalInfo( HttpServletRequest request) {
         // response返回的json内容
         Map<String, Object> returnMap = new HashMap<String, Object>();
+        String id = (String)request.getSession().getAttribute("userId");
+        if(id == null){
+            returnMap.put("error", "非法访问,上帝正在注视你.");
+        }
 
         User user = userService.getUser(id);
         if(user != null){
-            user.setPassword("");
-            returnMap.put("success", user);
+            returnMap.put("number", user.getNumber());
+            returnMap.put("phone", user.getCellphone());
+            returnMap.put("role", user.getRole());
+            returnMap.put("created_at", user.getCreated_at());
         } else {
-            returnMap.put("error", "用户不存在");
+            returnMap.put("error", "非法访问,上帝正在注视你.");
         }
         return returnMap;
     }

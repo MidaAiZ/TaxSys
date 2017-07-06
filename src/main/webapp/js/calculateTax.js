@@ -14,7 +14,7 @@ $('input[data-reveal-id]').live('click', function(e) {
         dataType: "json",
         success: function(data) {
             var list = data.tax;
-            if(list<0)$("#output").text("该月为亏损状态，无需缴纳增值税");
+            if(list<0)$("#output").text("该月无需缴纳增值税");
             else $("#output").text(Math.round(list*100)/100+" 万元");
             e.preventDefault();
             var modalLocation = $(this).attr('data-reveal-id');

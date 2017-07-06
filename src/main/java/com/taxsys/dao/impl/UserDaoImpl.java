@@ -56,36 +56,38 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+
+    public User getUserByCellphone(String cellphone) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM User u WHERE u.cellphone = ?";
+        Query query = session.createQuery(hql);
+        query.setString(0, cellphone);
+        User user = (User)query.uniqueResult();
+        return user;
+    }
+
     public boolean updatePassword(String id, String md5NewPassword) {
         Session session = sessionFactory.getCurrentSession();
-        String hql = "update User u set u.password = ? u.updated_at = ? where u.id = ?";
+        String hql = "update User u set u.password = ?, u.updated_at = ? where u.id = ?";
         Query query = session.createQuery(hql);
         query.setString(0, md5NewPassword);
         query.setString(1, TimeUtil.now());
         query.setString(2, id);
 
-        if(query.executeUpdate() == 1) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return query.executeUpdate() > 0;
     }
 
     public boolean updateUserInfo(User user) {
         Session session = sessionFactory.getCurrentSession();
-        String hql = "update User u set u.gender = ?, u.avatar = ?, u.updated_at = ? where u.id = ?";
+        String hql = "update User u set u.gender = ?, u.avatar = ?, u.cellphone = ?, u.updated_at = ? where u.id = ?";
         Query query = session.createQuery(hql);
         query.setInteger(0, user.getGender());
         query.setString(1, user.getAvatar());
-        query.setString(2, TimeUtil.now());
-        query.setString(3, user.getId());
+        query.setString(2, user.getCellphone());
+        query.setString(3, TimeUtil.now());
+        query.setString(4, user.getId());
 
-        if(query.executeUpdate() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return query.executeUpdate() > 0;
     }
 
     public List<String> getUserList(Integer offset, Integer limit) {
