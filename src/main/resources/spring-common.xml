@@ -25,7 +25,7 @@
 		<property name="user" value="${jdbc.user}"></property>
 		<property name="password" value="${jdbc.password}"></property>
 		<property name="driverClass" value="${jdbc.driverClass}"></property>
-		<property name="jdbcUrl" value="${jdbc.jdbcUrl}?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
 		<property name="initialPoolSize" value="${jdbc.initPoolSize}"></property>
 		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
 		<!--<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/taxsys?useUnicode=true&amp;characterEncoding=UTF8"></property>-->
@@ -37,8 +37,9 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.DmDialect</prop>
+				<prop key="hibernate.show_s
+				ql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 			</props>
 		</property>
